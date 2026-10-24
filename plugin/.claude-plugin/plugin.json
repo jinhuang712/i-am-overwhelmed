@@ -1,8 +1,8 @@
 {
   "name": "i-am-overwhelmed",
   "displayName": "i-am-overwhelmed",
-  "description": "A reply rule that keeps answers easy to read, stays honest, and avoids overwhelming you.",
-  "version": "0.1.2",
+  "description": "A reply rule that keeps answers easy to read and structured, stays honest, and avoids overwhelming you.",
+  "version": "0.1.3",
   "author": {
     "name": "Jin Huang",
     "url": "https://github.com/jinhuang712"

@@ -4,13 +4,13 @@
     "name": "Jin Huang"
   },
   "metadata": {
-    "description": "A reply rule that keeps answers easy to read, stays honest, and avoids overwhelming you."
+    "description": "A reply rule that keeps answers easy to read and structured, stays honest, and avoids overwhelming you."
   },
   "plugins": [
     {
       "name": "i-am-overwhelmed",
       "source": "./plugin",
-      "description": "A reply rule that keeps answers easy to read, stays honest, and avoids overwhelming you.",
+      "description": "A reply rule that keeps answers easy to read and structured, stays honest, and avoids overwhelming you.",
       "category": "productivity",
       "tags": [
         "preferences",

@@ -2,7 +2,7 @@
 
 [English](README.md) · [简体中文](README.zh-CN.md)
 
-**A reply rule that keeps answers easy to read, stays honest, and avoids overwhelming you.**
+**A reply rule that keeps answers easy to read and structured, stays honest, and avoids overwhelming you.**
 
 ![license](https://img.shields.io/badge/license-MIT-green) ![version](https://img.shields.io/github/v/tag/jinhuang712/i-am-overwhelmed?label=version)
 

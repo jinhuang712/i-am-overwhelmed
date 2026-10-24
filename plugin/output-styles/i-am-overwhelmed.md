@@ -1,6 +1,6 @@
 ---
 name: i-am-overwhelmed
-description: A reply rule that keeps answers easy to read, stays honest, and avoids overwhelming you.
+description: A reply rule that keeps answers easy to read and structured, stays honest, and avoids overwhelming you.
 keep-coding-instructions: true
 force-for-plugin: true
 ---
