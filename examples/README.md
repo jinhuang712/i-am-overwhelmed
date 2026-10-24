@@ -30,7 +30,9 @@ The raw outputs behind the before-and-after in the main README. Nothing is edite
 
 ## Misses
 
-- **A reply in the wrong language.** In the first batch, the Chinese prompt with the plugin on got an English answer ([`first-batch/fix-test-zh-on.md`](first-batch/fix-test-zh-on.md)). The next 5 runs, and the earlier runs of a similar task, answered in Chinese. That is 1 miss in 6 runs with the plugin on. The style file is in English, which is my guess at the cause, and I have not confirmed it.
+- **A reply in the wrong language.** In the first batch, the Chinese prompt with the plugin on got an English answer ([`first-batch/fix-test-zh-on.md`](first-batch/fix-test-zh-on.md)). The next 5 runs of that task answered in Chinese, so that is 1 miss in 6 runs with the plugin on. The style file is in English, which is my guess at the cause, and I have not confirmed it.
+  - To check chat prompts, I ran `claude plugin eval` with the Chinese cache question (10 runs with the plugin, 10 without, a `regex` grader for 5 or more Chinese characters in a row). All 20 replies were in Chinese. So I found no language problem in chat, and the one miss was an agent task. I did not add a language rule.
+  - I have not run the eval on the agent task, and its cases are not in this repo.
 - **An earlier run, with the older 0.5 version of the plugin, committed a fix without being asked** and claimed that the repo's main branch is `main`. It did not repeat in 20 runs here, and I could not verify the claim.
 
 ## Caveats
