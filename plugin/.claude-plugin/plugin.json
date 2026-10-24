@@ -1,8 +1,8 @@
 {
   "name": "i-am-overwhelmed",
   "displayName": "i-am-overwhelmed",
-  "description": "Claude Code for a tired, multitasking reader: short or thorough replies, honest by default, one question at the end.",
-  "version": "0.1.1",
+  "description": "A reply rule that keeps answers easy to read, stays honest, and avoids overwhelming you.",
+  "version": "0.1.2",
   "author": {
     "name": "Jin Huang",
     "url": "https://github.com/jinhuang712"

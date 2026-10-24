@@ -2,8 +2,7 @@
 
 [English](README.md) · [简体中文](README.zh-CN.md)
 
-**Same answers. Much easier to skim.**
-A Claude Code plugin for a tired reader who is doing five other things: a clear verdict first, guesses marked, and one question at the very end.
+**A reply rule that keeps answers easy to read, stays honest, and avoids overwhelming you.**
 
 ![license](https://img.shields.io/badge/license-MIT-green) ![version](https://img.shields.io/github/v/tag/jinhuang712/i-am-overwhelmed?label=version)
 

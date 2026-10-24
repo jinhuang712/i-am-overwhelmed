@@ -1,6 +1,6 @@
 ---
 name: i-am-overwhelmed
-description: My personal preferences, appended to the system prompt in every session.
+description: A reply rule that keeps answers easy to read, stays honest, and avoids overwhelming you.
 keep-coding-instructions: true
 force-for-plugin: true
 ---

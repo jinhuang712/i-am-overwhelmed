@@ -2,8 +2,7 @@
 
 [English](README.md) · [简体中文](README.zh-CN.md)
 
-**答案不变，读起来轻松得多。**
-给一个同时在做五件事的疲惫读者用的 Claude Code 插件：先给结论，猜测会标出来，问题只放在最后一个。
+**一条回复规则：让回答好读，保持诚实，不让你过载。**
 
 ![license](https://img.shields.io/badge/license-MIT-green) ![version](https://img.shields.io/github/v/tag/jinhuang712/i-am-overwhelmed?label=version)
 

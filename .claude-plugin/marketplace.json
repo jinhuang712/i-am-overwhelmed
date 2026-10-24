@@ -4,13 +4,13 @@
     "name": "Jin Huang"
   },
   "metadata": {
-    "description": "Claude Code for a tired, multitasking reader: short or thorough replies, honest by default, one question at the end."
+    "description": "A reply rule that keeps answers easy to read, stays honest, and avoids overwhelming you."
   },
   "plugins": [
     {
       "name": "i-am-overwhelmed",
       "source": "./plugin",
-      "description": "Claude Code for a tired, multitasking reader: short or thorough replies, honest by default, one question at the end.",
+      "description": "A reply rule that keeps answers easy to read, stays honest, and avoids overwhelming you.",
       "category": "productivity",
       "tags": [
         "preferences",
