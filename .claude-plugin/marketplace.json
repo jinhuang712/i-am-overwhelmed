@@ -1,0 +1,25 @@
+{
+  "name": "i-am-overwhelmed",
+  "owner": {
+    "name": "Jin Huang"
+  },
+  "metadata": {
+    "description": "Claude Code for a tired, multitasking reader: short or thorough replies, honest by default, one question at the end."
+  },
+  "plugins": [
+    {
+      "name": "i-am-overwhelmed",
+      "source": "./plugin",
+      "description": "Claude Code for a tired, multitasking reader: short or thorough replies, honest by default, one question at the end.",
+      "category": "productivity",
+      "tags": [
+        "preferences",
+        "output-style",
+        "system-prompt",
+        "honesty",
+        "skim-reading",
+        "claude-code"
+      ]
+    }
+  ]
+}

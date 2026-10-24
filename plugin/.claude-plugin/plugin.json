@@ -1,0 +1,21 @@
+{
+  "name": "i-am-overwhelmed",
+  "displayName": "i-am-overwhelmed",
+  "description": "Claude Code for a tired, multitasking reader: short or thorough replies, honest by default, one question at the end.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Jin Huang",
+    "url": "https://github.com/jinhuang712"
+  },
+  "homepage": "https://github.com/jinhuang712/i-am-overwhelmed",
+  "repository": "https://github.com/jinhuang712/i-am-overwhelmed",
+  "license": "MIT",
+  "keywords": [
+    "preferences",
+    "output-style",
+    "system-prompt",
+    "honesty",
+    "skim-reading",
+    "claude-code"
+  ]
+}
