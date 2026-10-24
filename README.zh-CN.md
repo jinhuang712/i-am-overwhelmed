@@ -118,9 +118,7 @@ claude plugin install i-am-overwhelmed@i-am-overwhelmed
 | 😴 **关于我** | 假设我很累、在同时做几件事、只想扫一眼。 |
 | 🤝 **诚实** | 藏着问题比问题本身更糟。不作弊让东西通过。猜的时候说出来。有异议就反驳。 |
 | 💬 **回复** | 总结做过的事。要么简单，要么详细。每个编号旁边写上标题。 |
-| ❓ **提问** | 不弹提问框。只问一个问题，放最后，选项 A / B，带推荐。 |
-| 🔎 **调研** | 多上网搜。先复用开源方案。 |
-| 🌱 **开发** | 小步提交。正经的开发用 worktree。 |
+| ❓ **提问** | 不弹提问框。有问题放最后问，选项 A / B，带推荐。 |
 
 全部规则在一个文件里：[`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md)（英文原文）。它是插件的输出风格，带 `force-for-plugin` 和 `keep-coding-instructions`，所以压缩上下文后依然有效，也保留了 Claude Code 自己的指令。
 

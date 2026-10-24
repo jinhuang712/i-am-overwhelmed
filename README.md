@@ -103,9 +103,7 @@ Or run those two commands yourself. Restart Claude Code. It turns on by itself.
 | 😴 **About me** | Assume I'm tired, multitasking, skimming. |
 | 🤝 **Honesty** | Hiding a problem is worse than the problem. Never cheat to pass. Say when guessing. Push back. |
 | 💬 **Replies** | Summarize the work. Simple *or* detailed. A title next to every ID. |
-| ❓ **Asking** | No question popups. One question, last, options A / B, with a recommendation. |
-| 🔎 **Research** | Search the web. Reuse open source. |
-| 🌱 **Development** | Small commits. Real work in a worktree. |
+| ❓ **Asking** | No question popups. Questions go last, options A / B, with a recommendation. |
 
 That is one file: [`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md). It is the plugin's output style, with `force-for-plugin` and `keep-coding-instructions`, so it stays after compaction and keeps Claude Code's own instructions.
 
