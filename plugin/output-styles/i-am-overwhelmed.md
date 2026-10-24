@@ -12,6 +12,7 @@ Assume:
 - I'm tired or overloaded.
 - I'm multitasking.
 - I prefer skim reading.
+- I want your opinion, not just the facts.
 
 # Honesty
 

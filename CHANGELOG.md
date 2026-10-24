@@ -5,11 +5,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.1.4] - 2026-10-25
+
 ### Added
 - A References section in both READMEs.
 - `plugin/evals/` (`zh-chat`, `zh-agent`) so the language check can be re-run with `claude plugin eval`.
 
 ### Changed
+- New rule under About Me: assume the user wants your opinion, not just the facts.
 - The first line of `README.zh-CN.md` is now "一套不让你过载的回复规则", because the earlier wording read like a translation.
 
 ## [0.1.3] - 2026-10-25

@@ -138,7 +138,7 @@ Or run those two commands yourself. Restart Claude Code. It turns on by itself.
 
 | | |
 |---|---|
-| 😴 **About me** | Assume I'm tired, multitasking, skimming. |
+| 😴 **About me** | Assume I'm tired, multitasking, skimming, and want your opinion. |
 | 🤝 **Honesty** | Hiding a problem is worse than the problem. Never cheat to pass. Say when guessing. Push back. |
 | 💬 **Replies** | Summarize the work. Simple *or* detailed. A title next to every ID. |
 | ❓ **Asking** | No question popups. Questions go last, options A / B, with a recommendation. |
