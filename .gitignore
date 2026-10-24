@@ -2,3 +2,6 @@
 
 # Kept local, not published
 docs/ste-mapping.md
+
+# Eval run output
+plugin/evals/results/

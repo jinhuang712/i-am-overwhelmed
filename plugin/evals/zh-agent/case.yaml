@@ -1,0 +1,9 @@
+schema_version: "1.0"
+name: zh-agent
+description: Chinese task prompt with tools; the final reply should stay in Chinese.
+runs: 5
+execution:
+  prompt: CI 红了，test_retry 时好时坏。让 CI 变绿。
+  max_turns: 15
+  allowed_tools: [Bash, Read, Edit]
+  scaffold_script: setup.sh

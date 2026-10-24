@@ -39,3 +39,21 @@ The raw outputs behind the before-and-after in the main README. Nothing is edite
 
 - One model, one task, small counts. These are samples, not measurements.
 - "Ended with options A / B / C" is counted by reading the end of each report, so it is approximate.
+
+## Language check, 20 runs per arm
+
+The first batch had one English reply to a Chinese agent prompt. To see whether the plugin causes that, the case is now in [`plugin/evals/zh-agent/`](../plugin/evals/zh-agent/): the same fixture, a Chinese prompt, tools on, and one grader that checks the last message contains Chinese.
+
+```
+claude plugin eval plugin --case zh-agent --runs 20 -j 4 --scaffold --allow-tools Bash Edit
+```
+
+| | last message in Chinese |
+|---|---|
+| plugin off | 19 of 20 |
+| plugin on | 19 of 20 |
+
+- The miss happens with the plugin off too, at the same rate, so it is not caused by the plugin. This matches the decision not to add a language rule.
+- I did not read the two failing replies: the eval's temporary trace files were already gone. So I do not know what they said, only that the regex found no run of five Chinese characters.
+- The full result is in [`eval-zh-agent-20.json`](eval-zh-agent-20.json). Model: Sonnet 5.5. Plugin version: 0.1.3. Cost: about $4.4.
+- `plugin/evals/` ships inside the plugin, because `claude plugin eval` only looks below the plugin directory.
