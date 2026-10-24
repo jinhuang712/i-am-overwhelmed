@@ -1,0 +1,31 @@
+name: plugin loads in Claude Code
+
+# Installs the plugin from this checkout into a scratch config and fails if it
+# does not reach "enabled". Catches a wrong "source" path or manifest error.
+on:
+  pull_request:
+    paths:
+      - .claude-plugin/**
+      - plugin/**
+      - .github/workflows/plugin-load-check.yml
+  push:
+    branches: [master]
+
+jobs:
+  load:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+      - name: Install the plugin from this checkout
+        run: |
+          export CLAUDE_CONFIG_DIR="$RUNNER_TEMP/claude-scratch"
+          mkdir -p "$CLAUDE_CONFIG_DIR"
+          claude plugin marketplace add "$GITHUB_WORKSPACE"
+          claude plugin install i-am-overwhelmed@i-am-overwhelmed
+          claude plugin list | tee plugin-list.txt
+          grep -q "enabled" plugin-list.txt || {
+            echo "::error::plugin did not load; see the plugin list above"
+            exit 1
+          }
