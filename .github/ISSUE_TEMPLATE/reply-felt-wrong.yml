@@ -1,0 +1,26 @@
+name: A reply felt wrong
+description: A reply was hard to read, too long, dishonest, or ignored a rule.
+labels: [feedback]
+body:
+  - type: textarea
+    id: prompt
+    attributes:
+      label: What you asked
+    validations:
+      required: true
+  - type: textarea
+    id: reply
+    attributes:
+      label: The reply (paste it as is)
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you wanted instead
+      description: One line is enough.
+  - type: input
+    id: version
+    attributes:
+      label: Plugin version and model
+      placeholder: "0.1.3, Sonnet 5.5"
