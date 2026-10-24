@@ -5,7 +5,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
-- Add `plugin/evals/` (`zh-chat`, `zh-agent`) so the language check can be re-run with `claude plugin eval`.
+### Added
+- `plugin/evals/` (`zh-chat`, `zh-agent`) so the language check can be re-run with `claude plugin eval`.
 
 ### Changed
 - The first line of `README.zh-CN.md` is now "一套不让你过载的回复规则", because the earlier wording read like a translation.
