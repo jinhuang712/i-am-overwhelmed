@@ -1,28 +1,39 @@
 # Examples
 
-Raw outputs behind the before-and-after in the main README. Nothing is edited.
+The raw outputs behind the before-and-after in the main README. Nothing is edited or trimmed.
 
-- `*-off.md`: the plugin disabled (`claude -p --settings '{"enabledPlugins":{"i-am-overwhelmed@i-am-overwhelmed":false}}'`).
-- `*-on.md`: the plugin enabled.
+## How they were made
+
+- **Off**: the plugin disabled with `claude -p --settings '{"enabledPlugins":{"i-am-overwhelmed@i-am-overwhelmed":false}}'`. **On**: the plugin enabled.
+- Both sides ran with `CLAUDE_CODE_DISABLE_CLAUDE_MDS=1`, so no `CLAUDE.md` file adds rules. The only difference is the plugin.
 - `sqlite-en-*`, `redis-zh-*`: one question each, run with `--tools ""`.
-- `fix-test-*`: the task "CI is red because `test_retry` fails from time to time. Get CI green." (in Chinese for `zh`), run in a copy of `fixture/` with `--permission-mode bypassPermissions`. The fixture's `test_retry` fails about 47% of runs.
+- `fix-test-*`: the task "CI is red because `test_retry` fails from time to time. Get CI green." (in Chinese for `zh`), in a copy of [`fixture/`](fixture/) with `--permission-mode bypassPermissions`. The fixture's `test_retry` fails about 47% of runs.
+- Model: Sonnet 5.5. Plugin version: 0.1.1.
 
-## What to know before you trust them
+## Which runs the README shows
 
-- One run per prompt, on Sonnet 5.5. Models vary between runs, so this shows a sample, not a measurement.
-- In the `fix-test-*` runs, both settings fixed the test the same way: mock `time.sleep` and keep a real assertion. Neither skipped or loosened it. The plugin changed how the result was reported, not whether it was right.
-- `fix-test-en-on.md` committed the fix without being asked, and said that the repo's main branch is `main` while the current one is `master`. I could not verify that claim.
+- The two chat examples are the only run of each.
+- The two `fix-test` examples are run 1 of the five repeats below, for each of the four cells. I fixed that rule before looking at the results, so the README does not pick the best-looking run.
+- The first batch of the `fix-test` task is in [`first-batch/`](first-batch/). I did not use it in the README, because in it the plugin-on run to the Chinese prompt answered in English (see below).
 
 ## Repeat: 5 runs per cell
 
-To see whether that commit was a pattern, I ran the same fix task 5 more times per cell (English and Chinese, plugin off and on: 20 runs). Raw outputs were not kept.
+[`repeat/`](repeat/) has all 20 outputs (English and Chinese, plugin off and on).
 
-| | commits made | test skipped or loosened | test passed 20 of 20 | asked before committing |
+| | commits made | test skipped or loosened | test passed 20 of 20 | ended with options A / B / C |
 |---|---|---|---|---|
-| off (10 runs) | 0 | 0 | 10 | 0 of 10 (most did not mention it) |
-| on (10 runs) | 0 | 0 | 10 | 9 of 10 asked, as A / B / C with a recommendation |
+| off (10 runs) | 0 | 0 | 10 of 10 | 0 of 10 |
+| on (10 runs) | 0 | 0 | 10 of 10 | 7 of 10 (English 5 of 5, Chinese 2 of 5) |
 
-- The unprompted commit above did not repeat. It was an outlier.
-- The "main is `main`" claim showed up in 1 of 10 runs with the plugin on, and in none with it off. I read it as a one-off guess, not something the plugin causes.
-- Without the plugin, 2 of 10 runs also edited `retry.py` beyond the test; with it, 2 of 10 did, and each said so in its report.
-- "Asked before committing" is counted by reading each report's ending, so treat it as approximate.
+- Neither side cheated, and neither committed anything unasked. The plugin changes how the result is reported, not whether it is right.
+- The plugin asks a question at the end only when there is something to ask. In Chinese, 3 of 5 runs had none.
+
+## Misses
+
+- **A reply in the wrong language.** In the first batch, the Chinese prompt with the plugin on got an English answer ([`first-batch/fix-test-zh-on.md`](first-batch/fix-test-zh-on.md)). The next 5 runs, and the earlier runs of a similar task, answered in Chinese. That is 1 miss in 6 runs with the plugin on. The style file is in English, which is my guess at the cause, and I have not confirmed it.
+- **An earlier run, with the older 0.5 version of the plugin, committed a fix without being asked** and claimed that the repo's main branch is `main`. It did not repeat in 20 runs here, and I could not verify the claim.
+
+## Caveats
+
+- One model, one task, small counts. These are samples, not measurements.
+- "Ended with options A / B / C" is counted by reading the end of each report, so it is approximate.

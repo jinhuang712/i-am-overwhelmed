@@ -1,26 +1,22 @@
 **SQLite.**
 
-For about 100 users, a URL shortener is a read-heavy workload: lots of redirects and few writes. SQLite handles that easily.
+For about 100 users, a URL shortener is a read-heavy workload with tiny rows. SQLite handles that easily.
 
-- **Performance:** In WAL mode, SQLite serves thousands of reads per second and hundreds of writes per second. That is far more than 100 users will generate.
-- **Operations:** It's a single file, so there's no server to run, patch or secure. Backups are a file copy, or you can use Litestream for continuous replication.
-- **Cost and complexity:** You don't need a separate database host, connection pooling or network credentials.
+- **Simplicity:** There's no server to run, secure, or back up separately. The database is one file.
+- **Performance:** Redirect lookups by primary key on a short code take microseconds. With WAL mode on, SQLite handles thousands of reads per second and enough writes for 100 users.
+- **Cost:** It needs no extra process or memory, so a small VPS is plenty.
 
-Settings to use:
-```sql
-PRAGMA journal_mode = WAL;
-PRAGMA synchronous = NORMAL;
-PRAGMA busy_timeout = 5000;
-PRAGMA foreign_keys = ON;
-```
-Put a unique index on the short code.
+**Setup tips**
+- Enable WAL: `PRAGMA journal_mode=WAL;`
+- Set `PRAGMA busy_timeout=5000;` and `PRAGMA synchronous=NORMAL;`
+- Make the short code the primary key or put a unique index on it.
+- Record click counts in a separate table, or batch the updates. That keeps write contention off the redirect path.
+- Back it up with `sqlite3 db ".backup file"` or Litestream, and don't copy the live file.
 
-Choose Postgres instead if:
-- You need to run multiple app servers that share one database. SQLite wants a single host with local disk.
-- You expect heavy concurrent writes, such as high-volume click-tracking inserts.
-- Your platform has no persistent disk, as with many serverless or ephemeral-container setups.
-- You already run Postgres and want to reuse it.
+**When to pick Postgres**
+- You expect to run multiple app servers writing to the same database.
+- You expect heavy concurrent writes, such as high-volume click analytics.
+- Your platform has no persistent disk, as with some serverless setups.
+- You want Postgres-specific features or a managed database with built-in backups.
 
-If you write the data layer with a thin abstraction or a portable query builder (or ORM), moving to Postgres later is a modest migration. Starting with SQLite doesn't lock you in.
-
-If you log every click, write those inserts through a single queue or batch them. That keeps write contention low.
+If you outgrow SQLite, migrating a table this simple is easy. Start with SQLite.

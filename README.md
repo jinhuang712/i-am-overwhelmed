@@ -9,7 +9,7 @@ A Claude Code plugin for a tired reader who is doing five other things: a clear 
 
 ## 👀 See it
 
-Real output, same prompt, plugin off and on. Trimmed with `…`. [Full text in `examples/`](examples/).
+Real output, same prompt, plugin off and on. Complete and untrimmed. The raw files are in [`examples/`](examples/).
 
 ### "SQLite or Postgres for a URL shortener, ~100 users?"
 
@@ -17,70 +17,109 @@ Real output, same prompt, plugin off and on. Trimmed with `…`. [Full text in `
 
 > **SQLite.**
 >
-> For about 100 users, a URL shortener is a read-heavy workload: lots of redirects and few writes. SQLite handles that easily.
+> For about 100 users, a URL shortener is a read-heavy workload with tiny rows. SQLite handles that easily.
 >
-> - **Performance:** In WAL mode, SQLite serves thousands of reads per second and hundreds of writes per second. That is far more than 100 users will generate.
-> - **Operations:** It's a single file, so there's no server to run, patch or secure. …
+> - **Simplicity:** There's no server to run, secure, or back up separately. The database is one file.
+> - **Performance:** Redirect lookups by primary key on a short code take microseconds. With WAL mode on, SQLite handles thousands of reads per second and enough writes for 100 users.
+> - **Cost:** It needs no extra process or memory, so a small VPS is plenty.
 >
-> Settings to use: …
+> **Setup tips**
+> - Enable WAL: `PRAGMA journal_mode=WAL;`
+> - Set `PRAGMA busy_timeout=5000;` and `PRAGMA synchronous=NORMAL;`
+> - Make the short code the primary key or put a unique index on it.
+> - Record click counts in a separate table, or batch the updates. That keeps write contention off the redirect path.
+> - Back it up with `sqlite3 db ".backup file"` or Litestream, and don't copy the live file.
 >
-> Choose Postgres instead if: …
+> **When to pick Postgres**
+> - You expect to run multiple app servers writing to the same database.
+> - You expect heavy concurrent writes, such as high-volume click analytics.
+> - Your platform has no persistent disk, as with some serverless setups.
+> - You want Postgres-specific features or a managed database with built-in backups.
+>
+> If you outgrow SQLite, migrating a table this simple is easy. Start with SQLite.
 
 **On**
 
 > ## Recommendation: SQLite ✅
 >
-> For ~100 users, SQLite is the better fit.
+> For about 100 users, SQLite is the better fit.
 >
 > **Why**
-> - A URL shortener is read-heavy (redirects), and SQLite handles that very well.
-> - There's no separate server to run, secure, or back up. …
+> - **Simple:** it's one file, with no server to run, secure, or back up separately.
+> - **Fast enough:** a URL shortener mostly reads (redirects). SQLite handles thousands of reads per second.
+> - **Cheap:** there's nothing extra to host.
 >
-> **When I'd pick Postgres instead** …
+> **Setup tips**
+> - Turn on WAL mode: `PRAGMA journal_mode=WAL;`
+> - Set `PRAGMA busy_timeout=5000;`
+> - Back up with Litestream or a scheduled `.backup`.
 >
-> **Caveat:** I'm assuming a single server. If you plan to run on serverless or several instances, tell me and I'd change this.
+> **When to pick Postgres instead**
+> - You need multiple app servers writing to the same database.
+> - You expect heavy write volume or rapid growth.
+> - Your host has no persistent disk, as with some serverless or container setups.
 >
-> **Question:** Where will you deploy it?
-> - A. One VPS or container with a persistent disk (SQLite fits, **recommended**)
-> - B. Serverless or multiple instances (Postgres fits)
-> - C. Not sure yet …
+> Moving from SQLite to Postgres later is easy at this size. Keep your SQL fairly standard, or use an ORM, and you won't be locked in.
+>
+> **Question:** Where will you host it?
+>
+> A. A single VPS or server with a persistent disk. SQLite fits here, so I recommend this.
+> B. Serverless or ephemeral containers. Postgres is safer here because the disk may not persist.
+> C. Not sure yet.
 
 ### "CI is red because `test_retry` fails from time to time. Get CI green."
 
-The agent has tools here and fixes a real flaky test. **Both versions fixed it the right way**: mocked the sleep, kept a meaningful assertion, skipped nothing. The difference is the report.
+Here the agent has tools and fixes a real flaky test. **Both versions fixed it the right way**: mocked the sleep, kept a meaningful assertion, skipped nothing. The difference is the report.
 
 **Off**
 
-> I fixed `test_retry`. It passed 200 runs in a row locally with no failures. I haven't run it in CI itself, and I didn't commit anything.
+> I fixed the flaky `test_retry`, and it passed 200 runs in a row locally. I haven't seen CI itself go green, and I haven't committed anything.
 >
-> **Cause:** the test checked that the whole retry took under 0.03s of real time. `call_with_retry` sleeps a random amount up to 0.02s after the first failure and up to 0.04s after the second. …
+> **Cause:** the test asserted that real elapsed time was under 0.03s. `call_with_retry` sleeps a random time up to 0.02s after the first failure and up to 0.04s after the second. Two retries can therefore take up to 0.06s, so the test failed whenever the random delays added up past 0.03s.
 >
-> **Fix:** `retry.py` is unchanged … `time.sleep` is now mocked. …
+> **Fix:** in `tests/test_retry.py`, `time.sleep` is now mocked in both tests. `test_retry` checks that exactly two sleeps happen, the first at most 0.02s and the second at most 0.04s. `retry.py` is unchanged.
+>
+> `call_with_retry` also sleeps after the final failed attempt, which is wasted time before it re-raises. I left that alone because it's outside what you asked for.
 
 **On**
 
-> ## `test_retry` flakiness fixed ✅
+> ## ✅ Fixed the flaky `test_retry`
 >
-> **Cause:** The test asserted the whole retry finished in under 0.03s. But the retry code sleeps … up to 0.06s. The bug was in the test, not in `retry.py`.
+> I haven't committed anything or run the real CI. Locally, the test passed 200 runs out of 200.
 >
-> **Fix** (`tests/test_retry.py`, …):
-> - The test now mocks `time.sleep`, so it no longer depends on the clock. …
+> ### Cause
+> - `test_retry` asserted that the retries finish in under 0.03s of real time.
+> - `call_with_retry` sleeps a random jitter of up to 0.02s after the first failure and up to 0.04s after the second.
+> - The total can reach 0.06s, so the test failed whenever the random delays added up to more than 0.03s.
+> - `retry.py` itself is correct. The test was wrong.
 >
-> **Verified:** 200 consecutive runs gave 0 failures.
+> ### Change (`tests/test_retry.py` only)
+> - I mocked `time.sleep` in both tests, so they no longer depend on the real clock.
+> - `test_retry` now checks that there were exactly 2 sleeps and that each is within its allowed bound (≤0.02s and ≤0.04s).
+> - `test_gives_up` also mocks the sleep, so it runs instantly.
 >
-> **Caveats:**
-> - I didn't change the timing threshold. Raising it would have just made the failure rarer.
-> - The repo has no CI config, so I couldn't run CI itself. I only ran the tests locally.
+> ### Things I noticed
+> - `__pycache__/*.pyc` files are tracked in git. I restored them so they aren't in the diff, but you should probably remove them and add them to `.gitignore`.
+> - `call_with_retry` also sleeps after the final failed attempt, which wastes time before it raises. I left it alone because it's outside this task.
+>
+> Do you want me to fix the extra final sleep and untrack the `.pyc` files?
+> - A. Fix both
+> - B. Fix only the `.pyc` tracking
+> - C. Leave both
+>
+> I recommend B, because it's pure repo hygiene. The final-sleep change alters behavior, so it's worth a separate decision.
 
 ### What actually changes
 
 | | Off | On |
 |---|---|---|
-| Verdict | In the first line | First line, set apart with a heading and ✅ / 🚫 |
+| Verdict | In the first line | First line, set apart with a heading and ✅ |
 | Structure | Paragraphs and bullets | Headings, short bullets, tables |
-| Not sure | Mixed into the text | A named **Caveat** or "I'm guessing" |
-| Question | A closing "tell me more" | One question, last, options A / B / C, one recommended |
+| Not sure | Mixed into the text | Named: a "Caveat", "I'm guessing", "Things I noticed" |
+| Question | Usually none | When there is one: last, options A / B / C, one recommended |
 | Correctness | Good | Good. Not a smarter model, only an easier read. |
+
+One run per prompt, so these are samples. [`examples/README.md`](examples/README.md) says what 20 more runs showed, including a miss.
 
 ## 📦 Install
 
