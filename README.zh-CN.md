@@ -6,6 +6,20 @@
 
 ![license](https://img.shields.io/badge/license-MIT-green) ![version](https://img.shields.io/github/v/tag/jinhuang712/i-am-overwhelmed?label=version)
 
+## 📦 安装
+
+把下面这段粘贴给 Claude Code：
+
+```text
+Install the plugin from github.com/jinhuang712/i-am-overwhelmed:
+claude plugin marketplace add jinhuang712/i-am-overwhelmed
+claude plugin install i-am-overwhelmed@i-am-overwhelmed
+```
+
+也可以自己运行这两条命令。重启 Claude Code，它会自动生效。
+
+⚠️ 它会替换你选的输出风格（比如 Explanatory），因为 Claude Code 同一时间只允许一个。想退回去：`claude plugin disable i-am-overwhelmed@i-am-overwhelmed`。
+
 ## 👀 看效果
 
 真实输出，同一个提示，分别关掉和打开插件。完整，没有删减。原始文件在 [`examples/`](examples/)。
@@ -116,20 +130,6 @@
 | 正确性 | 不错 | 不错。不是更聪明，只是更好读。 |
 
 每个提示只跑了一次，所以这些是样本。再跑 20 次的结果（包括一次失误）见 [`examples/README.md`](examples/README.md)。
-
-## 📦 安装
-
-把下面这段粘贴给 Claude Code：
-
-```text
-Install the plugin from github.com/jinhuang712/i-am-overwhelmed:
-claude plugin marketplace add jinhuang712/i-am-overwhelmed
-claude plugin install i-am-overwhelmed@i-am-overwhelmed
-```
-
-也可以自己运行这两条命令。重启 Claude Code，它会自动生效。
-
-⚠️ 它会替换你选的输出风格（比如 Explanatory），因为 Claude Code 同一时间只允许一个。想退回去：`claude plugin disable i-am-overwhelmed@i-am-overwhelmed`。
 
 ## 📏 规则
 

@@ -6,6 +6,20 @@
 
 ![license](https://img.shields.io/badge/license-MIT-green) ![version](https://img.shields.io/github/v/tag/jinhuang712/i-am-overwhelmed?label=version)
 
+## 📦 Install
+
+Paste this to Claude Code:
+
+```text
+Install the plugin from github.com/jinhuang712/i-am-overwhelmed:
+claude plugin marketplace add jinhuang712/i-am-overwhelmed
+claude plugin install i-am-overwhelmed@i-am-overwhelmed
+```
+
+Or run those two commands yourself. Restart Claude Code. It turns on by itself.
+
+⚠️ It replaces any output style you picked, such as Explanatory, because Claude Code allows one at a time. To go back, run `claude plugin disable i-am-overwhelmed@i-am-overwhelmed`.
+
 ## 👀 See it
 
 Real output, same prompt, plugin off and on. Complete and untrimmed. The raw files are in [`examples/`](examples/).
@@ -119,20 +133,6 @@ Here the agent has tools and fixes a real flaky test. **Both versions fixed it t
 | Correctness | Good | Good. Not a smarter model, only an easier read. |
 
 One run per prompt, so these are samples. [`examples/README.md`](examples/README.md) says what 20 more runs showed, including a miss.
-
-## 📦 Install
-
-Paste this to Claude Code:
-
-```text
-Install the plugin from github.com/jinhuang712/i-am-overwhelmed:
-claude plugin marketplace add jinhuang712/i-am-overwhelmed
-claude plugin install i-am-overwhelmed@i-am-overwhelmed
-```
-
-Or run those two commands yourself. Restart Claude Code. It turns on by itself.
-
-⚠️ It replaces any output style you picked, such as Explanatory, because Claude Code allows one at a time. To go back, run `claude plugin disable i-am-overwhelmed@i-am-overwhelmed`.
 
 ## 📏 The rules
 
