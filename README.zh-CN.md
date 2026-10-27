@@ -8,7 +8,21 @@
 
 ## 📦 安装
 
-Claude Code 和 Codex 的安装方法见 [INSTALL.zh-CN.md](INSTALL.zh-CN.md)。
+把下面这段粘贴给 Claude Code：
+
+```text
+Install the plugin from github.com/jinhuang712/i-am-overwhelmed:
+claude plugin marketplace add jinhuang712/i-am-overwhelmed
+claude plugin install i-am-overwhelmed@i-am-overwhelmed
+```
+
+或者把这段粘贴给 Codex：
+
+```text
+把 https://raw.githubusercontent.com/jinhuang712/i-am-overwhelmed/master/codex/AGENTS.md 的内容追加到 ~/.codex/AGENTS.md，然后提醒我开一个新会话。
+```
+
+细节、注意事项和卸载方法见 [INSTALL.zh-CN.md](INSTALL.zh-CN.md)。
 
 ## 👀 看效果
 

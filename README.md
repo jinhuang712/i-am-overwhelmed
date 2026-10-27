@@ -8,7 +8,21 @@
 
 ## 📦 Install
 
-See [INSTALL.md](INSTALL.md) for Claude Code and Codex.
+Paste this to Claude Code:
+
+```text
+Install the plugin from github.com/jinhuang712/i-am-overwhelmed:
+claude plugin marketplace add jinhuang712/i-am-overwhelmed
+claude plugin install i-am-overwhelmed@i-am-overwhelmed
+```
+
+Or paste this to Codex:
+
+```text
+Append the contents of https://raw.githubusercontent.com/jinhuang712/i-am-overwhelmed/master/codex/AGENTS.md to ~/.codex/AGENTS.md, then tell me to start a new session.
+```
+
+Details, caveats and how to remove it: [INSTALL.md](INSTALL.md).
 
 ## 👀 See it
 
