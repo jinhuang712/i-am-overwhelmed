@@ -20,6 +20,16 @@ Or run those two commands yourself. Restart Claude Code. It turns on by itself.
 
 ⚠️ It replaces any output style you picked, such as Explanatory, because Claude Code allows one at a time. To go back, run `claude plugin disable i-am-overwhelmed@i-am-overwhelmed`.
 
+### Codex
+
+Paste this to Codex:
+
+```text
+Append the contents of https://raw.githubusercontent.com/jinhuang712/i-am-overwhelmed/master/codex/AGENTS.md to ~/.codex/AGENTS.md, then tell me to start a new session.
+```
+
+If you have `~/.codex/AGENTS.override.md`, Codex reads that instead of `AGENTS.md`, so add the rules there. To remove, delete the appended section.
+
 ## 👀 See it
 
 Real output, same prompt, plugin off and on. Complete and untrimmed. The raw files are in [`examples/`](examples/).
