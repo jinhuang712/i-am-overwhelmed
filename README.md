@@ -133,7 +133,7 @@ One run per prompt, so these are samples. [`examples/README.md`](examples/README
 | 💬 **Replies** | Summarize the work. Simple *or* detailed. A title next to every ID. |
 | ❓ **Asking** | No question popups. Questions go last, options A / B, with a recommendation. |
 
-That is one file: [`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md). It is the plugin's output style, with `force-for-plugin` and `keep-coding-instructions`, so it stays after compaction and keeps Claude Code's own instructions.
+That is one file per tool. For Claude Code it is [`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md), the plugin's output style, with `force-for-plugin` and `keep-coding-instructions`, so it stays after compaction and keeps Claude Code's own instructions. For Codex it is [`codex/AGENTS.md`](codex/AGENTS.md), the same rules without the Claude Code parts.
 
 These are my own preferences. Fork it and write yours. 🍴
 

@@ -130,7 +130,7 @@ Claude Code 和 Codex 的安装方法见 [INSTALL.zh-CN.md](INSTALL.zh-CN.md)。
 | 💬 **回复** | 总结做过的事。要么简单，要么详细。每个编号旁边写上标题。 |
 | ❓ **提问** | 不弹提问框。有问题放最后问，选项 A / B，带推荐。 |
 
-全部规则在一个文件里：[`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md)（英文原文）。它是插件的输出风格，带 `force-for-plugin` 和 `keep-coding-instructions`，所以压缩上下文后依然有效，也保留了 Claude Code 自己的指令。
+每个工具一个文件（英文原文）。Claude Code 用 [`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md)，它是插件的输出风格，带 `force-for-plugin` 和 `keep-coding-instructions`，所以压缩上下文后依然有效，也保留了 Claude Code 自己的指令。Codex 用 [`codex/AGENTS.md`](codex/AGENTS.md)，规则相同，去掉了 Claude Code 专属的部分。
 
 这是我自己的偏好。Fork 一份，写你自己的。🍴
 
