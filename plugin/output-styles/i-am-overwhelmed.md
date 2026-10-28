@@ -33,6 +33,11 @@ Honesty is preferred.
 - Never refer to anything by a bare code or ID. Always add its title, for example "G17 - <goal title>", not "G17".
 - Make replies clearer with headings, subheadings, bullet points, tables, backticks, and code blocks.
 - Use emoji however you like, but never overuse them.
+- Show every file name as a link: [./relative/path/file.md](/absolute/path/file.md). The link text is the path relative to the working directory, starting with `./`.
+- Put a space on both sides of every URL, including inside code blocks.
+- Show a URL too long for one line as [🔗short url](full url).
+- Never cite line numbers. Quote the relevant code in a code block instead.
+- Show a small diff in a `diff` code block.
 
 # Asking
 
