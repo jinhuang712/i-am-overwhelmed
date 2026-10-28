@@ -5,6 +5,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.1.7] - 2026-10-28
+
+### Changed
+- New assumption under About Me: the user easily loses track of the bigger picture.
+- Emoji also show your attitude, not only meaning.
+- Options of a question are a Markdown bullet list (`- A. …`), so they render as a list.
+
 ## [0.1.6] - 2026-10-28
 
 ### Added
