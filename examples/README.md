@@ -8,12 +8,19 @@ The raw outputs behind the before-and-after in the main README. Nothing is edite
 - Both sides ran with `CLAUDE_CODE_DISABLE_CLAUDE_MDS=1`, so no `CLAUDE.md` file adds rules. The only difference is the plugin.
 - `sqlite-en-*`, `redis-zh-*`: one question each, run with `--tools ""`.
 - `fix-test-*`: the task "CI is red because `test_retry` fails from time to time. Get CI green." (in Chinese for `zh`), in a copy of [`fixture/`](fixture/) with `--permission-mode bypassPermissions`. The fixture's `test_retry` fails about 47% of runs.
-- Model: Sonnet 5.5. Plugin version: 0.1.1.
+- Model and plugin version, by file:
+
+| Files | Model | Plugin version | Runs |
+|---|---|---|---|
+| `*-off.md` (the four off samples) | Sonnet 5.5 (`claude-sonnet-5-5`) | plugin disabled | 1 each |
+| `sqlite-en-on.md`, `redis-zh-on.md`, `fix-test-en-on.md`, `fix-test-zh-on.md` | Sonnet 5.5 (`claude-sonnet-5-5`), the default `sonnet` alias, checked with `--output-format json` | 0.1.7 | 1 each, re-recorded after the reply rules changed |
+| `repeat/`, `first-batch/` | Sonnet 5.5 | 0.1.1 | see below |
 
 ## Which runs the README shows
 
-- The two chat examples are the only run of each.
-- The two `fix-test` examples are run 1 of the five repeats below, for each of the four cells. I fixed that rule before looking at the results, so the README does not pick the best-looking run.
+- Each of the four plugin-on examples is a single run with 0.1.7, re-recorded after the rules changed. The off examples are the earlier single runs.
+- The `repeat/` and `first-batch/` files below were recorded with 0.1.1 and not re-run.
+- The plugin-on `fix-test` files contain links into the temporary folder the run used, so those links do not open.
 - The first batch of the `fix-test` task is in [`first-batch/`](first-batch/). I did not use it in the README, because in it the plugin-on run to the Chinese prompt answered in English (see below).
 
 ## Repeat: 5 runs per cell

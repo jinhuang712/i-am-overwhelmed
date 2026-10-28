@@ -26,7 +26,7 @@ Details, caveats and how to remove it: [INSTALL.md](INSTALL.md).
 
 ## 👀 See it
 
-Real output, same prompt, plugin off and on. Complete and untrimmed. The raw files are in [`examples/`](examples/).
+Real output, same prompt, plugin off and on. Complete and untrimmed. Every example ran on Sonnet 5.5 (`claude-sonnet-5-5`); the plugin-on ones used plugin 0.1.7. The raw files are in [`examples/`](examples/).
 
 ### "SQLite or Postgres for a URL shortener, ~100 users?"
 
@@ -57,32 +57,28 @@ Real output, same prompt, plugin off and on. Complete and untrimmed. The raw fil
 
 **On**
 
-> ## Recommendation: SQLite ✅
+> # ✅ SQLite
 >
-> For about 100 users, SQLite is the better fit.
+> At ~100 users, a URL shortener is a read-heavy workload with tiny rows. SQLite handles that easily.
 >
-> **Why**
-> - **Simple:** it's one file, with no server to run, secure, or back up separately.
-> - **Fast enough:** a URL shortener mostly reads (redirects). SQLite handles thousands of reads per second.
-> - **Cheap:** there's nothing extra to host.
+> ## Why SQLite
+> - **Zero ops:** no server, no credentials, no connection pool. Backup is copying one file (or Litestream).
+> - **Fast reads:** redirects are simple key lookups, in-process with no network hop.
+> - **Enough write capacity:** with `PRAGMA journal_mode=WAL`, it handles thousands of writes per second. Click counters at 100 users won't come close.
 >
-> **Setup tips**
-> - Turn on WAL mode: `PRAGMA journal_mode=WAL;`
-> - Set `PRAGMA busy_timeout=5000;`
-> - Back up with Litestream or a scheduled `.backup`.
+> ## When I'd pick Postgres instead
+> - ⚠️ You need **multiple app servers** writing to the same DB.
+> - ⚠️ Your host has an **ephemeral disk** (some PaaS, serverless), so a local file won't survive.
+> - You expect to grow **100x** soon, or want managed backups and replicas.
 >
-> **When to pick Postgres instead**
-> - You need multiple app servers writing to the same database.
-> - You expect heavy write volume or rapid growth.
-> - Your host has no persistent disk, as with some serverless or container setups.
+> ## 💡 Tip
+> Keep your queries standard and use an ORM or query builder. Moving to Postgres later is then a config change plus a data copy, not a rewrite.
 >
-> Moving from SQLite to Postgres later is easy at this size. Keep your SQL fairly standard, or use an ORM, and you won't be locked in.
+> 🤔 Postgres for 100 users is over-engineering, unless you already run it and it costs you nothing extra.
 >
-> **Question:** Where will you host it?
->
-> A. A single VPS or server with a persistent disk. SQLite fits here, so I recommend this.
-> B. Serverless or ephemeral containers. Postgres is safer here because the disk may not persist.
-> C. Not sure yet.
+> Where will this be deployed (single VPS, container with a volume, or serverless)? That's the one thing that could change my answer.
+> - A. Single VPS or container with a persistent volume → SQLite (recommended)
+> - B. Serverless or ephemeral disk → Postgres
 
 ### "CI is red because `test_retry` fails from time to time. Get CI green."
 
@@ -100,39 +96,30 @@ Here the agent has tools and fixes a real flaky test. **Both versions fixed it t
 
 **On**
 
-> ## ✅ Fixed the flaky `test_retry`
+> 🎉 `test_retry` is fixed. It passed 30 runs out of 30.
 >
-> I haven't committed anything or run the real CI. Locally, the test passed 200 runs out of 200.
+> ## Cause
+> - [./retry.py](/private/tmp/claude-501/-Users-jin-huang-dev-projects-i-am-overwhelmed/ad842afa-f550-4cfd-b1a9-dce5446f54db/scratchpad/work-fix-test-en-on.md/retry.py) sleeps a random time between 0 and `0.02 * 2**i` seconds. Two retries can add up to 0.06s.
+> - The test asserted that the whole call took under 0.03s, so it failed whenever the jitter came out high. The failure was in the test, not in the retry code.
 >
-> ### Cause
-> - `test_retry` asserted that the retries finish in under 0.03s of real time.
-> - `call_with_retry` sleeps a random jitter of up to 0.02s after the first failure and up to 0.04s after the second.
-> - The total can reach 0.06s, so the test failed whenever the random delays added up to more than 0.03s.
-> - `retry.py` itself is correct. The test was wrong.
->
-> ### Change (`tests/test_retry.py` only)
-> - I mocked `time.sleep` in both tests, so they no longer depend on the real clock.
-> - `test_retry` now checks that there were exactly 2 sleeps and that each is within its allowed bound (≤0.02s and ≤0.04s).
+> ## Fix
+> I changed only [./tests/test_retry.py](/private/tmp/claude-501/-Users-jin-huang-dev-projects-i-am-overwhelmed/ad842afa-f550-4cfd-b1a9-dce5446f54db/scratchpad/work-fix-test-en-on.md/tests/test_retry.py):
+> - `time.sleep` is now mocked, so the test no longer depends on real time.
+> - The timing assertion is replaced by a check that the two sleeps stay within their backoff bounds: `[0, 0.02]` and `[0, 0.04]`.
 > - `test_gives_up` also mocks the sleep, so it runs instantly.
 >
-> ### Things I noticed
-> - `__pycache__/*.pyc` files are tracked in git. I restored them so they aren't in the diff, but you should probably remove them and add them to `.gitignore`.
-> - `call_with_retry` also sleeps after the final failed attempt, which wastes time before it raises. I left it alone because it's outside this task.
->
-> Do you want me to fix the extra final sleep and untrack the `.pyc` files?
-> - A. Fix both
-> - B. Fix only the `.pyc` tracking
-> - C. Leave both
->
-> I recommend B, because it's pure repo hygiene. The final-sleep change alters behavior, so it's worth a separate decision.
+> ## Notes
+> - 💡 I didn't just raise the 0.03s threshold. A looser time limit would still be flaky and would not check the backoff behaviour.
+> - ⚠️ I couldn't see your CI config. I ran the tests locally with `PYTHONPATH=. python3 -m unittest tests.test_retry`. If CI runs them differently, such as `discover`, the import of `retry` may need a different path.
 
 ### What actually changes
 
 | | Off | On |
 |---|---|---|
-| Verdict | In the first line | First line, set apart with a heading and ✅ |
+| Verdict | In the first line | First line, set apart with a heading and ✅ or 🎉 |
 | Structure | Paragraphs and bullets | Headings, short bullets, tables |
-| Not sure | Mixed into the text | Named: a "Caveat", "I'm guessing", "Things I noticed" |
+| Not sure | Mixed into the text | Named and marked: ⚠️ warning, 🤔 doubt, 💡 tip |
+| Attitude | Only in the words | Also in the emoji, such as 🤔 for doubt |
 | Question | Usually none | When there is one: last, options A / B / C, one recommended |
 | Correctness | Good | Good. Not a smarter model, only an easier read. |
 

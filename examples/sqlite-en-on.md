@@ -1,26 +1,22 @@
-## Recommendation: SQLite ✅
+# ✅ SQLite
 
-For about 100 users, SQLite is the better fit.
+At ~100 users, a URL shortener is a read-heavy workload with tiny rows. SQLite handles that easily.
 
-**Why**
-- **Simple:** it's one file, with no server to run, secure, or back up separately.
-- **Fast enough:** a URL shortener mostly reads (redirects). SQLite handles thousands of reads per second.
-- **Cheap:** there's nothing extra to host.
+## Why SQLite
+- **Zero ops:** no server, no credentials, no connection pool. Backup is copying one file (or Litestream).
+- **Fast reads:** redirects are simple key lookups, in-process with no network hop.
+- **Enough write capacity:** with `PRAGMA journal_mode=WAL`, it handles thousands of writes per second. Click counters at 100 users won't come close.
 
-**Setup tips**
-- Turn on WAL mode: `PRAGMA journal_mode=WAL;`
-- Set `PRAGMA busy_timeout=5000;`
-- Back up with Litestream or a scheduled `.backup`.
+## When I'd pick Postgres instead
+- ⚠️ You need **multiple app servers** writing to the same DB.
+- ⚠️ Your host has an **ephemeral disk** (some PaaS, serverless), so a local file won't survive.
+- You expect to grow **100x** soon, or want managed backups and replicas.
 
-**When to pick Postgres instead**
-- You need multiple app servers writing to the same database.
-- You expect heavy write volume or rapid growth.
-- Your host has no persistent disk, as with some serverless or container setups.
+## 💡 Tip
+Keep your queries standard and use an ORM or query builder. Moving to Postgres later is then a config change plus a data copy, not a rewrite.
 
-Moving from SQLite to Postgres later is easy at this size. Keep your SQL fairly standard, or use an ORM, and you won't be locked in.
+🤔 Postgres for 100 users is over-engineering, unless you already run it and it costs you nothing extra.
 
-**Question:** Where will you host it?
-
-A. A single VPS or server with a persistent disk. SQLite fits here, so I recommend this.
-B. Serverless or ephemeral containers. Postgres is safer here because the disk may not persist.
-C. Not sure yet.
+Where will this be deployed (single VPS, container with a volume, or serverless)? That's the one thing that could change my answer.
+- A. Single VPS or container with a persistent volume → SQLite (recommended)
+- B. Serverless or ephemeral disk → Postgres
