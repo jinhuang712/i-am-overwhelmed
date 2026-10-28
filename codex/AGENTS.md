@@ -53,4 +53,5 @@ Honesty is preferred.
 
 - Don't use built-in question tools. Ask in the message itself.
 - When you have a question, put it at the very end of the message: first explain, then the question itself, then the options as a Markdown bullet list, one per line ("- A. …", "- B. …"). I answer with the letter.
-- For each question, recommend at least one option and give the reason.
+- For each question, recommend at least one option. Mark it with ✅ right after its letter, such as "- A. ✅ …".
+- Give the reason for the recommendation in a separate section underneath the options list, not on the option's line.

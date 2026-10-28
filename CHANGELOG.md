@@ -5,6 +5,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.1.8] - 2026-10-28
+
+### Changed
+- The recommended option of a question is marked with ✅ right after its letter. The reason goes in a separate section underneath the options list.
+
 ## [0.1.7] - 2026-10-28
 
 ### Changed
