@@ -142,6 +142,7 @@ claude plugin install i-am-overwhelmed@i-am-overwhelmed
 | 😴 **关于我** | 假设我很累、在同时做几件事、只想扫一眼，并且想听你的看法。 |
 | 🤝 **诚实** | 藏着问题比问题本身更糟。不作弊让东西通过。猜的时候说出来。有异议就反驳。 |
 | 💬 **回复** | 总结做过的事。要么简单，要么详细。每个编号旁边写上标题。 |
+| 🎨 **格式** | 标题、表格、代码块。表情符号有固定含义。文件用链接，URL 两侧加空格，用引用代码代替行号，小改动用 `diff` 块。 |
 | ❓ **提问** | 不弹提问框。有问题放最后问，选项 A / B，带推荐。 |
 
 每个工具一个文件（英文原文）。Claude Code 用 [`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md)，它是插件的输出风格，带 `force-for-plugin` 和 `keep-coding-instructions`，所以压缩上下文后依然有效，也保留了 Claude Code 自己的指令。Codex 用 [`codex/AGENTS.md`](codex/AGENTS.md)，规则相同，去掉了 Claude Code 专属的部分。

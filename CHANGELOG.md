@@ -8,7 +8,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 ## [0.1.6] - 2026-10-28
 
 ### Added
+- A Formatting section, split out of Replies, in the rule file and the Codex copy.
 - Reply rules for file names (linked), URLs (spaced, long ones as short links), line numbers (quote code instead) and small diffs (`diff` blocks).
+- Emoji with fixed meanings (✅ recommended, ❌ error, ⚠️ ❗ 🚨 by strength, and more).
+- A Formatting row in the rules table of both READMEs.
 
 ## [0.1.5] - 2026-10-25
 
