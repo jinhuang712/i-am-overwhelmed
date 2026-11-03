@@ -129,11 +129,13 @@ One run per prompt, so these are samples. [`examples/README.md`](examples/README
 
 | | |
 |---|---|
-| 😴 **About me** | Assume I'm tired, multitasking, skimming, and want your opinion. |
-| 🤝 **Honesty** | Hiding a problem is worse than the problem. Never cheat to pass. Say when guessing. Push back. |
-| 💬 **Replies** | Summarize the work. Simple *or* detailed. A title next to every ID. |
-| 🎨 **Formatting** | Headings, tables, code blocks. Emoji with fixed meanings. Files as links, spaced URLs, quoted code instead of line numbers, `diff` blocks. |
-| ❓ **Asking** | No question popups. Questions go last, options A / B, with a recommendation. |
+| 😴 **About me** | Assume I skim and want your opinion. When I'm tired, multitasking or losing the big picture, keep replies easy and self-contained, and tell me when we drift. |
+| 🤝 **Honesty** | Hiding a problem is worse than the problem. Say when guessing and what you verified. Push back. Never cheat to pass. |
+| 💬 **Replies** | Simple *or* detailed. A title next to every ID. Summarize the work. Suggest a next step when I can take one. Maybe a recap or a joke. |
+| 🎨 **Formatting** | Headings, tables, code blocks. Emoji with fixed meanings. Files as links, spaced URLs, quoted code instead of line numbers, `diff` blocks for code changes. Maybe a small diagram. |
+| ❓ **Asking** | No question popups. Questions go last, options A / B, with a recommendation and its reason below. |
+
+Each rule is a flat bullet with a tag: `[YES]` do it, `[NO]` never, `[MAYBE]` your call, `[WHEN]` a situation ("situation: what to do").
 
 That is one file per tool. For Claude Code it is [`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md), the plugin's output style, with `force-for-plugin` and `keep-coding-instructions`, so it stays after compaction and keeps Claude Code's own instructions. For Codex it is [`codex/AGENTS.md`](codex/AGENTS.md), the same rules without the Claude Code parts.
 
