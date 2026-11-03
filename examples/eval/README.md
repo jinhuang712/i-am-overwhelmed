@@ -55,3 +55,4 @@ Sonnet 5.5, medium effort, 5 runs per arm per task, Opus as the judge. "old" is 
 
 - The judge is a model and the rubric is written from the style's own rules, so it favours whichever version states those rules more directly. Read the quotes, not just the totals.
 - 5 runs per arm are samples, not measurements.
+- `CLAUDE_CODE_DISABLE_CLAUDE_MDS=1` turns off `CLAUDE.md` files, but Claude Code still adds account context such as your email to every session. One reply named the runner's company although no prompt mentioned it. It affects all arms equally.
