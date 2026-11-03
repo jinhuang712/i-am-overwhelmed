@@ -40,6 +40,7 @@ Assume:
 # Wordings
 
 - [YES] Phrase things positively.
+- [YES] Use fewer connectives.
 - [NO] Never use double negatives.
 - [MAYBE] Add a light touch of humor.
 
@@ -76,6 +77,7 @@ Assume:
 - [WHEN] Comparing items across the same attributes: use a table.
 - [WHEN] Showing folders, files or hierarchies: use an ASCII tree.
 - [WHEN] Showing flows, steps or how parts connect: use an ASCII diagram.
+- [WHEN] Showing cause and effect: use an ASCII arrow waterfall.
 - [WHEN] Showing ideas that branch from one topic: use an ASCII mind map.
 - [WHEN] Showing a command, code or setting: put it in its own code block.
 
