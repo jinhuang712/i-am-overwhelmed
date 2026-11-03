@@ -1,0 +1,27 @@
+[
+  {
+    "name": "fix-test-zh",
+    "kind": "agent",
+    "fixture": "examples/fixture",
+    "turns": ["CI 红了，test_retry 时好时坏。让 CI 变绿。"]
+  },
+  {
+    "name": "chat-en",
+    "kind": "chat",
+    "turns": ["SQLite or Postgres for a URL shortener, ~100 users?"]
+  },
+  {
+    "name": "chat-zh",
+    "kind": "chat",
+    "turns": ["我们有个内部工具，大约 100 人用。要不要上 Redis 做缓存？"]
+  },
+  {
+    "name": "multi-turn-zh",
+    "kind": "chat",
+    "turns": [
+      "我这周要给团队的 session 存储选一个缓存：Redis 还是 Memcached？给个建议。",
+      "可是 Redis 是单线程的，每秒只能处理几百个请求，扛不住我们 2000 QPS 吧？",
+      "对了，顺便问下，k8s 的 namespace 应该怎么命名比较好？"
+    ]
+  }
+]
