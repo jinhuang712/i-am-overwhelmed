@@ -41,6 +41,10 @@ Quote the reply as evidence for every score. Score the final reply of each turn;
 | D7 | Emoji use | Emoji carry meaning per the legend; not decorative, not overused |
 | D8 | Question format | At the end: explain, question, "- A. …" options, ✅ on a recommended one, reason in a separate section below. NA if no question |
 | D9 | Language | Replies in the user's language |
+| D10 | Bullet shape | Each bullet is one sentence; "- **key**: description" where it fits |
+| D11 | Table cells | Cells hold words and phrases, not sentences. NA if no table |
+| D12 | Code blocks | Snippets and examples only, no long chunks. NA if no code block |
+| D13 | Not paragraphs only | The reply is not just paragraphs |
 
 ## E. Optional touches (MAYBE: score only when used; NA when absent)
 | # | Dimension | 3 looks like |

@@ -51,6 +51,23 @@ Sonnet 5.5, medium effort, 5 runs per arm per task, Opus as the judge. "old" is 
 - In `fix-test-zh`, an in-between version without "Say what you actually verified" claimed "CI is fixed" after local runs in 4 of 5 runs; with the rule, 0 of 5.
 - In this run `blind.py` used a fixed seed, so the label order was the same in all three tasks and grouped by arm (R01–R05 old, R06–R10 new). The judge never saw the mapping, but the grouping may have made patterns easier to see. The shuffle is now random by default.
 
+## Results, 2026-11-03: Simple mode and format rules
+
+Same setup. Arms: "hybrid" (Simple defined as a few lines with no headings, plus "a question with a short answer uses Simple"), "round 8" (adds the format rules, a reworded drift rule and a reworded diff rule), and "round 9" (round 8 with the drift and diff triggers restored and no comma limit on bullets). One judge scored all three arms of a task together. Scores and mappings are in [`results/2026-11-03-simple-mode/`](results/2026-11-03-simple-mode/); the hybrid runs are the same runs judged in earlier rounds.
+
+| Task | hybrid | round 8 | round 9 |
+|---|---|---|---|
+| `chat-en` | 78.7% | 84.2% | 84.6% |
+| `chat-zh` | 90.7% | 93.5% | 94.0% |
+| `fix-test-zh` | 94.8% | 91.6% | 96.2% |
+| `multi-turn-zh` | 84.4% | 83.5% | 89.1% |
+
+- **Mode fit**: before "Simple" had a definition and a trigger, every simple chat question got a sectioned Detailed reply; a trigger alone helped a little, the definition did most of the work.
+- **Triggers matter**: "You show a local difference" dropped `diff` blocks from 2.6 to 0.6 of 3, while "You changed code or text" brought them back to 3.0.
+- **Drift**: "say where that goal stands" made replies report progress without flagging the drift, and it led them to say the user had already decided; "We drift from the original goal: tell me" worked better.
+- **Bullet commas**: a one-comma limit was broken in most bullets and made replies cramped; one sentence per bullet was mostly kept.
+- **Still open**: replies sometimes call an undecided choice "decided", yes/no questions often skip the A/B options, and short English answers often miss the risk that would flip them.
+
 ## Caveats
 
 - The judge is a model and the rubric is written from the style's own rules, so it favours whichever version states those rules more directly. Read the quotes, not just the totals.

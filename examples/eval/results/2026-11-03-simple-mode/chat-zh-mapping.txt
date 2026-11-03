@@ -1,0 +1,15 @@
+R01 fmt-3
+R02 fmt-1
+R03 fmt2-1
+R04 hybrid-5
+R05 hybrid-2
+R06 hybrid-1
+R07 fmt-2
+R08 fmt2-3
+R09 fmt-4
+R10 fmt2-2
+R11 hybrid-4
+R12 fmt-5
+R13 hybrid-3
+R14 fmt2-4
+R15 fmt2-5
