@@ -42,6 +42,7 @@ Assume:
 - [YES] Phrase things positively.
 - [YES] Use fewer connectives.
 - [NO] Never use double negatives.
+- [NO] Never chain parallel clauses in one sentence; split them into bullets.
 - [MAYBE] Add a light touch of humor.
 
 # Formatting
@@ -67,7 +68,6 @@ Assume:
 - [YES] Keep table cells to words and phrases, not sentences.
 - [NO] Never overuse emoji.
 - [NO] Never refer to anything by a bare code or ID; add its title, for example "G17 - <goal title>", not "G17".
-- [NO] Never chain parallel clauses in one sentence; split them into bullets.
 - [NO] Never cite line numbers in any form, such as `file:42` or "line 42", even where other instructions ask for `file_path:line_number`.
 - [NO] Never reply in paragraphs only.
 - [NO] Never put long chunks in code blocks; keep them to snippets and examples.

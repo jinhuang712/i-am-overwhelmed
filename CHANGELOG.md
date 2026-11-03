@@ -8,9 +8,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 ## [0.1.10] - 2026-11-03
 
 ### Added
-- Wordings: a new section. Phrase things positively, use fewer connectives, never use double negatives. The light touch of humor moves here.
+- Wordings: a new section. Phrase things positively, use fewer connectives, never use double negatives, never chain parallel clauses in one sentence. The light touch of humor moves here.
 - Honesty: report finished work truthfully. It replaces "summarize the work".
-- Formatting: never chain parallel clauses in one sentence. Each tool gets a `[WHEN]` case: bullets, tables, ASCII trees, diagrams, arrow waterfalls for cause and effect, mind maps. Commands, code and settings go in their own code block.
+- Formatting: each tool gets a `[WHEN]` case: bullets, tables, ASCII trees, diagrams, arrow waterfalls for cause and effect, mind maps. Commands, code and settings go in their own code block.
 - Asking: one question per reply, explained first. Four types: multiple choice with 2 to 4 options, open, ranking, yes/no.
 
 ### Changed
