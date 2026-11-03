@@ -5,6 +5,19 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.1.10] - 2026-11-03
+
+### Added
+- Wordings: a new section. Phrase things positively, use fewer connectives, never use double negatives. The light touch of humor moves here.
+- Honesty: report finished work truthfully. It replaces "summarize the work".
+- Formatting: never chain parallel clauses in one sentence. Each tool gets a `[WHEN]` case: bullets, tables, ASCII trees, diagrams, arrow waterfalls for cause and effect, mind maps. Commands, code and settings go in their own code block.
+- Asking: one question per reply, explained first. Four types: multiple choice with 2 to 4 options, open, ranking, yes/no.
+
+### Changed
+- Replies: Simple is a very simple explanation; Detailed covers one thing only.
+- Formatting: one point per bullet instead of one sentence. Folders become links too. Line numbers are banned in any form, even where other instructions ask for them. The bare-ID rule moves here from Replies.
+- Asking: only multiple choice carries a recommendation; its reasons are bullets.
+
 ## [0.1.9] - 2026-11-03
 
 ### Added

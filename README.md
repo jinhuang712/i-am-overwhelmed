@@ -130,10 +130,11 @@ One run per prompt, so these are samples. [`examples/README.md`](examples/README
 | | |
 |---|---|
 | 😴 **About me** | Assume I'm tired, multitasking, skimming, want your opinion, and lose the big picture. |
-| 🤝 **Honesty** | Hiding a problem is worse than the problem. Say when guessing and what you verified. Push back. Never cheat to pass. |
-| 💬 **Replies** | Simple (a few lines) for short answers, detailed with headings otherwise. A title next to every ID. Say when we drift. Summarize the work. Suggest a next step when I can take one. Maybe a joke. |
-| 🎨 **Formatting** | Never only paragraphs. One sentence per bullet, `- **key**: description`. Table cells are phrases. Short code snippets, ASCII diagrams. Emoji with fixed meanings. Files as links, spaced URLs, quoted code instead of line numbers, `diff` blocks for changes. |
-| ❓ **Asking** | No question popups. Questions go last, options A / B, with a recommendation and its reason below. |
+| 🤝 **Honesty** | Hiding a problem is worse than the problem. Say when guessing and what you verified. Push back. Never cheat to pass. Report finished work truthfully. |
+| 💬 **Replies** | Simple (very simple, a few lines) for short answers. Detailed (one thing only, with headings) otherwise. Say when we drift. Suggest a next step when I can take one. |
+| ✍️ **Wordings** | Positive phrasing. Fewer connectives. No double negatives. Maybe a joke. |
+| 🎨 **Formatting** | Never only paragraphs. One point per bullet, `- **key**: description`, no chained parallel clauses. Each tool for its case: bullets, tables, ASCII trees, diagrams, arrow waterfalls, mind maps. Commands and code in their own code block. Emoji with fixed meanings. Files and folders as links, a title next to every ID, spaced URLs, no line numbers, `diff` blocks for changes. |
+| ❓ **Asking** | No question popups. One question per reply, last, after the explanation: multiple choice (2 to 4 options), open, ranking or yes/no. Multiple choice carries a recommendation, with reasons as bullets below. |
 
 Most rules are flat bullets with a tag: `[YES]` do it, `[NO]` never, `[MAYBE]` your call, `[WHEN]` a situation ("situation: what to do").
 
