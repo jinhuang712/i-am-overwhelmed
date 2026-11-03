@@ -7,12 +7,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 - Honesty: say what you actually verified.
-- Replies: suggest a next step at the end when there is one the user can take. Maybe a one-line recap, maybe a light touch of humor.
-- Formatting: when you changed code, show the key change in a `diff` block. Maybe a small diagram or table.
+- Replies: when we drift from the original goal, say so. Suggest a next step at the end when there is one the user can take. Maybe a light touch of humor.
+- Replies: questions with a short answer use Simple mode, defined as a few lines with no headings. Detailed mode uses headings.
+- Formatting: never reply in paragraphs only. One sentence per bullet, preferably `- **key**: description`. Table cells are words and phrases. Code blocks hold snippets, not chunks. ASCII diagrams, trees and mind maps are listed as tools.
+- Formatting: when you changed code or text, show the key change in a `diff` block.
+- An A/B eval in `examples/eval/`: tasks, a rubric, and scripts to run, blind and score versions.
 
 ### Changed
-- The rule file and the Codex copy are rewritten as flat bullets tagged `[YES]`, `[NO]`, `[MAYBE]` or `[WHEN]`, in that order within each section. `[WHEN]` lines read "situation: what to do".
-- The About Me assumptions are now `[WHEN]` situations.
+- The rules (not About Me) and the Codex copy are rewritten as flat bullets tagged `[YES]`, `[NO]`, `[MAYBE]` or `[WHEN]`, in that order within each section. `[WHEN]` lines read "situation: what to do".
 - Asking is split into three `[WHEN]` rules: where the question goes, recommending an option, and giving the reason.
 
 ## [0.1.8] - 2026-10-28

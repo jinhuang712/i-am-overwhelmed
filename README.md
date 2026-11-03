@@ -129,13 +129,13 @@ One run per prompt, so these are samples. [`examples/README.md`](examples/README
 
 | | |
 |---|---|
-| 😴 **About me** | Assume I skim and want your opinion. When I'm tired, multitasking or losing the big picture, keep replies easy and self-contained, and tell me when we drift. |
+| 😴 **About me** | Assume I'm tired, multitasking, skimming, want your opinion, and lose the big picture. |
 | 🤝 **Honesty** | Hiding a problem is worse than the problem. Say when guessing and what you verified. Push back. Never cheat to pass. |
-| 💬 **Replies** | Simple *or* detailed. A title next to every ID. Summarize the work. Suggest a next step when I can take one. Maybe a recap or a joke. |
-| 🎨 **Formatting** | Headings, tables, code blocks. Emoji with fixed meanings. Files as links, spaced URLs, quoted code instead of line numbers, `diff` blocks for code changes. Maybe a small diagram. |
+| 💬 **Replies** | Simple (a few lines) for short answers, detailed with headings otherwise. A title next to every ID. Say when we drift. Summarize the work. Suggest a next step when I can take one. Maybe a joke. |
+| 🎨 **Formatting** | Never only paragraphs. One sentence per bullet, `- **key**: description`. Table cells are phrases. Short code snippets, ASCII diagrams. Emoji with fixed meanings. Files as links, spaced URLs, quoted code instead of line numbers, `diff` blocks for changes. |
 | ❓ **Asking** | No question popups. Questions go last, options A / B, with a recommendation and its reason below. |
 
-Each rule is a flat bullet with a tag: `[YES]` do it, `[NO]` never, `[MAYBE]` your call, `[WHEN]` a situation ("situation: what to do").
+Most rules are flat bullets with a tag: `[YES]` do it, `[NO]` never, `[MAYBE]` your call, `[WHEN]` a situation ("situation: what to do").
 
 That is one file per tool. For Claude Code it is [`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md), the plugin's output style, with `force-for-plugin` and `keep-coding-instructions`, so it stays after compaction and keeps Claude Code's own instructions. For Codex it is [`codex/AGENTS.md`](codex/AGENTS.md), the same rules without the Claude Code parts.
 
