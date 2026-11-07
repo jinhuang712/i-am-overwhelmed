@@ -39,7 +39,7 @@ examples/                                  raw outputs behind the README
 
 # Eval
 
-- [YES] Run `python3 eval/eval.py --dry-run` before a real run.
+- [YES] Run `python3 eval/eval.py --old <ref> --dry-run` before a real run.
 - [YES] Run `python3 -m unittest discover eval/tests` after changing the eval. It costs nothing.
 - [YES] Treat eval scores as samples. Read the judge's quotes as well as the totals.
 - [NO] Never spend on a real run without an approved budget.
