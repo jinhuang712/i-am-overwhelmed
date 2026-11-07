@@ -163,6 +163,19 @@ class EndToEnd(unittest.TestCase):
             self.assertEqual(mapping.read_text(), before)
             self.assertEqual(sum(e["kind"] == "judge" for e in ledger(tmp)), 1)
 
+    def test_a_failed_judge_retries_on_resume_with_a_share_by_size(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            evaluate(tmp, 20, "--runs", "2", "--tasks", "chat-en,many-items-zh", cost="0.01", judge_cost="0.01")
+            out = Path(tmp) / "out"
+            (out / "raw" / "chat-en" / "blind" / "scores.csv").unlink()
+            (out / "raw" / "many-items-zh" / "blind" / "R01.md").write_text("x" * 900)
+            before = len(calls(tmp))
+            (out / "raw" / "many-items-zh" / "blind" / "scores.csv").unlink()
+            evaluate(tmp, 20, "--runs", "2", "--tasks", "chat-en,many-items-zh", cost="0.01", judge_cost="0.01")
+            caps = [float(c[c.index("--max-budget-usd") + 1]) for c in calls(tmp)[before:]]
+            self.assertEqual(len(caps), 2)
+            self.assertGreater(caps[1], caps[0])
+
     def test_new_runs_replace_stale_scores(self):
         with tempfile.TemporaryDirectory() as tmp:
             evaluate(tmp, 2, cost="0.40", judge_cost="0.10")

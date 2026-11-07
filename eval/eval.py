@@ -47,6 +47,14 @@ def export_arm(ref, dest):
     return dest / "plugin"
 
 
+def judge_caps(raw, names, left):
+    """Share what is left among the unjudged tasks, by the size of their samples."""
+    sizes = {n: sum(s.stat().st_size for s in (raw / n / "blind").glob("R*.md"))
+             for n in names if not (raw / n / "blind" / "scores.csv").exists()}
+    total = sum(sizes.values()) or 1
+    return {n: left * size / total for n, size in sizes.items()}
+
+
 def parse_args():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--old", required=True, help="git ref of the baseline")
@@ -94,7 +102,6 @@ def main():
     out = Path(a.out) if a.out else HERE / "results" / name
     raw = out / "raw"
     budget = Budget(a.budget, out / "ledger.jsonl")
-    judge_cap = a.budget * JUDGE_SHARE / len(tasks)
     arms = {arm: export_arm(ref, raw / "arms" / arm) for arm, ref in refs.items()}
 
     # Whole rounds come first, so a stop leaves the arms balanced.
@@ -109,13 +116,17 @@ def main():
     counts = {s: statuses.count(s) for s in sorted(set(statuses))}
     print("runs:", counts, f"spent ${budget.spent:.2f}", flush=True)
 
+    finished = {t["name"] for t in tasks
+                if (raw / t["name"]).exists() and blind_task(raw / t["name"], t["turns"], a.seed)}
+    caps = judge_caps(raw, finished, a.budget - budget.spent)
+
     sections = []
     for t in tasks:
         root = raw / t["name"]
-        if not root.exists() or blind_task(root, t["turns"], a.seed) == 0:
+        if t["name"] not in finished:
             sections.append(f"## {t['name']}\n\nNo finished runs.")
             continue
-        verdict = judge_task(root, a.judge_model, a.judge_effort, budget, judge_cap)
+        verdict = judge_task(root, a.judge_model, a.judge_effort, budget, caps.get(t["name"], 0))
         print(f"judge {t['name']}: {verdict}", flush=True)
         text = check_summary(root)
         if (root / "blind" / "scores.csv").exists():

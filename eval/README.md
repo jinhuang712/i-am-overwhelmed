@@ -30,7 +30,7 @@ Results go to `eval/results/<date>-<old>-vs-<new>-<model>/`: `report.md`, `ledge
 - **Unknown spend counts in full**: a call that reports no cost counts as its whole cap.
 - **Estimates improve with use**: `--dry-run` reads past ledgers. Until a model has history it uses a rough default and says so.
 - **The limit is as exact as `--max-budget-usd`**: a call can overrun its cap. On 2026-11-07 the worst overrun was about 50%, so keep a margin.
-- **A judge that hits its cap returns nothing**: on 2026-11-07 three tasks lost their scores this way at $0.33 per judge call.
+- **A judge that hits its cap returns nothing**: on 2026-11-07 three tasks lost their scores this way at $0.33 per judge call. What is left now goes to the unjudged tasks by the size of their samples, so a resume with a higher `--budget` judges them again.
 
 ## Files
 

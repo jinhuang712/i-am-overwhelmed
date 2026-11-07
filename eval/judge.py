@@ -25,7 +25,7 @@ def build_prompt(root):
     parts = [
         "You are a blind judge. Score every sample with the rubric below.",
         RUBRIC.read_text(),
-        "Keep short notes with quotes, then end with one fenced csv block.",
+        "Write at most one line of notes per sample, then end with one fenced csv block.",
         "Columns: " + ",".join(["label", *dims]),
         "One row per sample. Values: 0, 1, 2, 3 or NA.",
     ]
