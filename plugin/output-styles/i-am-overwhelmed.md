@@ -93,7 +93,7 @@ Assume:
 # Asking
 
 - [YES] Ask at most one question per reply. First explain, then ask.
-- [YES] End a reply in this order: next step, question, options, reasons.
+- [YES] Keep a reply's ending in this order, when it has them: next step, question, options, reasons.
 - [YES] Pick the question type that fits:
   - Multiple choice: 2 to 4 options as a Markdown bullet list, one per line ("- A. …", "- B. …"). I answer with the letter.
   - Open: a question I answer in my own words.
