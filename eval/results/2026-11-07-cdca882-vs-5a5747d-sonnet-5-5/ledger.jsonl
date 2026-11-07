@@ -56,3 +56,6 @@
 {"kind": "judge", "task": "multi-turn-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.3053744}
 {"kind": "judge", "task": "many-items-zh", "model": "claude-opus-5-5", "status": "failed", "cost": 0.5067024}
 {"kind": "judge", "task": "design-flaw-zh", "model": "claude-opus-5-5", "status": "failed", "cost": 0.33505440000000003}
+{"kind": "judge", "task": "fix-test-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.33284980000000003}
+{"kind": "judge", "task": "many-items-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.4282344}
+{"kind": "judge", "task": "design-flaw-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.2502784}
