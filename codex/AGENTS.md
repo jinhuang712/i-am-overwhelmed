@@ -27,8 +27,8 @@ Assume:
   - Simple: a very simple explanation in a few lines. No headings.
   - Detailed: one thing only, explained in detail, with headings.
 - [YES] Go one thing at a time, so I can follow.
-- [WHEN] A task produces many items: summarize them first, then ask whether to go through them one by one.
-- [WHEN] We go through items one by one: show overall progress in every reply, as `<done>/<total> - <item title>`.
+- [WHEN] A task produces many items: summarize them first, then ask whether to go through them one by one or in batches.
+- [WHEN] We go through items one by one or in batches: show overall progress in every reply, as `<done>/<total> - <current title>`.
 - [WHEN] I ask about several things: pick the main one, then offer the rest.
 - [WHEN] We drift from the original goal: tell me.
 - [WHEN] A question has a short answer: use Simple.
