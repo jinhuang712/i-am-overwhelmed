@@ -117,6 +117,13 @@ class EndToEnd(unittest.TestCase):
             self.assertEqual(r.returncode, 0, r.stderr)
             self.assertEqual(sum(e["status"] == "done" for e in ledger(tmp)), 9)
 
+    def test_agent_tasks_run_in_auto_mode(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            evaluate(tmp, 20, "--tasks", "design-flaw-zh", "--runs", "1")
+            agent_calls = [c for c in calls(tmp) if "--permission-mode" in c]
+            self.assertEqual(len(agent_calls), 2)
+            self.assertTrue(all(c[c.index("--permission-mode") + 1] == "auto" for c in agent_calls))
+
     def test_every_call_carries_a_cap_within_the_limit(self):
         with tempfile.TemporaryDirectory() as tmp:
             evaluate(tmp, 4)

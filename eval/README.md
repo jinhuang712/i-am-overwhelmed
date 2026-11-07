@@ -47,7 +47,7 @@ Results go to `eval/results/<date>-<old>-vs-<new>-<model>/`: `report.md`, `ledge
 | [`fixtures/`](fixtures/) | `many-bugs/`, `free-text-due/`, and their answer keys, kept outside them |
 | [`tests/`](tests/) | Tests with a stub `claude`, so they cost nothing: `python3 -m unittest discover eval/tests` |
 
-Every run has `CLAUDE.md` files off and the installed plugin disabled, so the only difference between arms is the plugin directory.
+Every run has `CLAUDE.md` files off and the installed plugin disabled, so the only difference between arms is the plugin directory. Agent tasks run in auto mode, so the permission classifier reviews their calls.
 
 ## Results, 2026-11-03: 0.1.8 vs the tagged rewrite
 

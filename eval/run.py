@@ -35,7 +35,7 @@ def run_one(task, arm, plugin_dir, i, raw, model, effort, budget, cap, limit):
                 "--settings", DISABLE_INSTALLED, "--plugin-dir", str(plugin_dir),
                 "--output-format", "stream-json", "--verbose"]
         if task["kind"] == "agent":
-            base += ["--permission-mode", "bypassPermissions"]
+            base += ["--permission-mode", "auto"]
         else:
             base += ["--tools", ""]
         session = None
