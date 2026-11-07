@@ -1,9 +1,60 @@
 # i-am-overwhelmed
 
-Writing rules for coding agents. Claude Code comes first, so keep the rules agent-neutral for other hosts.
+A reply rule for coding agents: answers stay honest, structured and easy to skim. Claude Code comes first, then Codex.
 
-- Rules are inspired by ASD-STE100 and written in our own words. Keep the standard's text out of the repo.
-- Private material stays in the git-ignored `.local/`.
-- Rule text defines formats with placeholder templates, not sample values.
-- Lead with the principle and its reason, then a few concrete rules.
-- Write Chinese natively, in a technical register. Translated Chinese fails review.
+Tags, in this order: `[YES]` do it. `[NO]` never do it. `[MAYBE]` your call, when it fits. `[WHEN]` a situation, written as "situation: what to do".
+
+# Map
+
+```
+plugin/output-styles/i-am-overwhelmed.md   the rule, the source of truth
+plugin/.claude-plugin/plugin.json          the version
+plugin/evals/                              `claude plugin eval` cases
+codex/AGENTS.md                            the rule for Codex
+eval/                                      the A/B tool, with a budget
+examples/                                  raw outputs behind the README
+.local/                                    private, git-ignored
+```
+
+# Writing Rules
+
+- [YES] Keep one rule per line, with its tag.
+- [YES] Keep rules agent-neutral, except where a host needs its own line.
+- [YES] Write rules in our own words. ASD-STE100 is the inspiration.
+- [YES] Define formats with placeholder templates, such as `<done>/<total>`.
+- [YES] Name a concrete trigger in every `[WHEN]`. Past evals show the trigger's wording decides whether a rule is followed.
+- [YES] Fit a new rule into an existing one when you can.
+- [YES] Phrase rules positively. The rule file follows its own rules.
+- [NO] Never copy the standard's text into the repo.
+- [NO] Never remove a rule only to shorten the file. Show with the eval that it has no effect.
+- [WHEN] A rule needs Chinese: write it natively, in a technical register.
+- [WHEN] Two rules conflict: fix their scope first, then consider a new rule.
+
+# Changing Rules
+
+- [YES] Change the output style and `codex/AGENTS.md` together. They differ only in the frontmatter and the question-tools line.
+- [YES] Record every change under `[Unreleased]` in `CHANGELOG.md`.
+- [WHEN] A change alters what a section promises: update "The rules" in both READMEs.
+- [WHEN] A change alters the eval's scope: update `eval/rubric.md` and `eval/tasks.json`.
+
+# Eval
+
+- [YES] Run `python3 eval/eval.py --dry-run` before a real run.
+- [YES] Run `python3 -m unittest discover eval/tests` after changing the eval. It costs nothing.
+- [YES] Treat eval scores as samples. Read the judge's quotes as well as the totals.
+- [NO] Never spend on a real run without an approved budget.
+- [WHEN] A release changes rules: run the eval on them first.
+- [WHEN] A model has no cost history: start with a small smoke run.
+
+# Release
+
+- [YES] Bump `plugin/.claude-plugin/plugin.json`, then move `[Unreleased]` to the new version in `CHANGELOG.md`.
+- [YES] Name the commit `Release <version>: <summary>`.
+- [YES] Keep one description across `plugin.json`, `marketplace.json` and the output style.
+- [WHEN] A change touches `plugin/` or `.claude-plugin/`: expect the plugin load check in CI.
+
+# Privacy
+
+- [YES] Keep private material in `.local/`.
+- [YES] Keep `docs/ste-mapping.md` git-ignored.
+- [NO] Never quote `.local/` content in a public file.
