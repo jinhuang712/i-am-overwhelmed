@@ -16,8 +16,9 @@ from checks import measure  # noqa: E402
 from judge import dimensions, parse_scores  # noqa: E402
 
 STUB = r'''#!/usr/bin/env python3
-import json, os, re, sys
+import json, os, re, sys, time
 prompt = sys.stdin.read()
+time.sleep(float(os.environ.get("STUB_SLEEP", "0")))
 with open(os.environ["STUB_LOG"], "a") as f:
     f.write(json.dumps(sys.argv[1:]) + "\n")
 if "json" in sys.argv and "stream-json" not in sys.argv:
@@ -32,13 +33,13 @@ else:
 '''
 
 
-def evaluate(tmp, budget, *extra, cost="0.10", judge_cost="0.10"):
+def evaluate(tmp, budget, *extra, cost="0.10", judge_cost="0.10", sleep="0"):
     stub = Path(tmp) / "bin"
     stub.mkdir(exist_ok=True)
     (stub / "claude").write_text(STUB)
     (stub / "claude").chmod(stat.S_IRWXU)
     env = {**os.environ, "PATH": f"{stub}:{os.environ['PATH']}", "STUB_LOG": str(Path(tmp) / "log"),
-           "STUB_COST": cost, "STUB_JUDGE_COST": judge_cost}
+           "STUB_COST": cost, "STUB_JUDGE_COST": judge_cost, "STUB_SLEEP": sleep}
     cmd = [sys.executable, str(HERE / "eval.py"), "--old", "HEAD", "--new", "HEAD", "--tasks", "chat-en",
            "--runs", "4", "-j", "1", "--out", str(Path(tmp) / "out"), *extra]
     if budget is not None:
@@ -61,6 +62,7 @@ class BudgetUnit(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             b = Budget(1.0, Path(tmp) / "l")
             self.assertTrue(b.hold(0.6))
+            b.settle(0.6, 0.6, kind="run")
             self.assertFalse(b.hold(0.6))
 
     def test_settle_releases_the_hold_and_survives_a_restart(self):
@@ -108,6 +110,12 @@ class EndToEnd(unittest.TestCase):
             self.assertTrue((out / "chat-en-scores.csv").exists())
             self.assertEqual(len(calls(tmp)), 9)
             self.assertTrue(all("--max-budget-usd" in c for c in calls(tmp)))
+
+    def test_parallel_runs_wait_for_a_hold_instead_of_stopping(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            r = evaluate(tmp, 1, "-j", "6", cost="0.01", judge_cost="0.01", sleep="0.1")
+            self.assertEqual(r.returncode, 0, r.stderr)
+            self.assertEqual(sum(e["status"] == "done" for e in ledger(tmp)), 9)
 
     def test_every_call_carries_a_cap_within_the_limit(self):
         with tempfile.TemporaryDirectory() as tmp:

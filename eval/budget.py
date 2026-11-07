@@ -17,17 +17,20 @@ class Budget:
     def __init__(self, total, ledger):
         self.total = total
         self.ledger = Path(ledger)
-        self.lock = threading.Lock()
+        self.lock = threading.Condition()
         self.held = 0.0
         self.spent = 0.0
         if self.ledger.exists():
             self.spent = sum(json.loads(line)["cost"] for line in self.ledger.read_text().splitlines())
 
     def hold(self, amount, limit=None):
+        """Wait while running calls hold the money. Refuse once the money is spent."""
         limit = self.total if limit is None else limit
         with self.lock:
-            if self.spent + self.held + amount > limit:
-                return False
+            while self.spent + self.held + amount > limit:
+                if self.spent + amount > limit:
+                    return False
+                self.lock.wait()
             self.held += amount
             return True
 
@@ -35,6 +38,7 @@ class Budget:
         with self.lock:
             self.held -= held
             self.spent += cost
+            self.lock.notify_all()
             self.ledger.parent.mkdir(parents=True, exist_ok=True)
             with self.ledger.open("a") as f:
                 f.write(json.dumps({**record, "cost": cost}, ensure_ascii=False) + "\n")
