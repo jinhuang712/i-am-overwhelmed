@@ -8,3 +8,7 @@ plugin/evals/results/
 
 # Kept local, not published (experiment archive)
 .local/
+
+# Eval raw output: runs, arms, blind samples
+eval/results/*/raw/
+__pycache__/

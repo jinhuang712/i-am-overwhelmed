@@ -1,37 +1,53 @@
 # Eval: compare versions of the style
 
-A small, repeatable A/B: run the same tasks against two or more versions of the plugin, blind the replies, have a judge score them with [`rubric.md`](rubric.md), then unblind.
+A repeatable A/B, kept as a tool: run the same tasks against two versions of the plugin, blind the replies, have a model judge score them with [`rubric.md`](rubric.md), then unblind.
+
+## Run it
+
+See the plan and the estimate first. This spends nothing:
+
+```bash
+python3 eval/eval.py --old <git ref> --dry-run
+```
+
+Then run with a limit:
+
+```bash
+python3 eval/eval.py --old <git ref> --new HEAD --budget <usd>
+```
+
+`--budget` is required. `--model`, `--effort`, `--judge-model`, `--runs`, `--tasks` and `-j` are optional; `--help` lists them.
+
+Results go to `eval/results/<date>-<old>-vs-<new>-<model>/`: `report.md`, `ledger.jsonl`, and scores and mappings per task. `raw/` holds the runs and is git-ignored.
+
+## Budget
+
+- **The limit covers everything**: runs and judging. A quarter is kept back for judging.
+- **Every call has a cap**: each `claude -p` gets `--max-budget-usd`, and it holds that cap before it starts.
+- **A stop stays usable**: whole rounds run first, so the arms stay balanced. Finished runs still get judged, and the report says the eval is incomplete.
+- **Resume is the same command**: finished runs are kept. Their cost stays in `ledger.jsonl`, so the limit applies across both sessions.
+- **More money is a higher `--budget`**: new runs join the old ones, and the task is judged again.
+- **Unknown spend counts in full**: a call that reports no cost counts as its whole cap.
+- **Estimates improve with use**: `--dry-run` reads past ledgers. Until a model has history it uses a rough default and says so.
+- **The limit is as exact as `--max-budget-usd`**: a call may overrun its cap a little.
 
 ## Files
 
 | File | What it is |
 |---|---|
-| [`tasks.json`](tasks.json) | The tasks. `agent` tasks run with tools in a copy of a fixture; `chat` tasks run with no tools. A task with several `turns` continues one session. |
-| [`rubric.md`](rubric.md) | 28 dimensions in six groups: task outcome, honesty, skimmability, reply rules, optional touches, multi-turn. |
-| [`run.py`](run.py) | Runs every task × arm × run with `claude -p`. |
-| [`blind.py`](blind.py) | Shuffles one task's runs into `blind/RNN.md` and writes `mapping.txt`. |
-| [`score.py`](score.py) | Joins the judge's `blind/scores.csv` with `mapping.txt` and prints per-arm results. |
+| [`eval.py`](eval.py) | The one command |
+| [`budget.py`](budget.py) | The limit, the ledger and the estimate |
+| [`run.py`](run.py) | One run of a task |
+| [`blind.py`](blind.py) | Blind samples and the label mapping |
+| [`judge.py`](judge.py) | The model judge |
+| [`score.py`](score.py) | Unblinds and summarises the scores |
+| [`checks.py`](checks.py) | Mechanical checks: line references, negations, paragraph-only replies. Free |
+| [`tasks.json`](tasks.json) | The tasks. A task with several `turns` continues one session |
+| [`rubric.md`](rubric.md) | The dimensions |
+| [`fixtures/`](fixtures/) | `many-bugs/` and its answer key, kept outside it |
+| [`tests/`](tests/) | Tests with a stub `claude`, so they cost nothing: `python3 -m unittest discover eval/tests` |
 
-## Run it
-
-```bash
-# 1. An arm is NAME=PLUGIN_DIR. Export the old version from git:
-mkdir -p /tmp/arms/old && git archive master plugin | tar -x -C /tmp/arms/old
-
-# 2. Run (5 runs per task per arm, 6 at a time)
-python3 examples/eval/run.py /tmp/out old=/tmp/arms/old/plugin new=plugin --runs 5 -j 6
-
-# 3. Blind one task
-python3 examples/eval/blind.py /tmp/out multi-turn-zh
-
-# 4. Give a judge (another model session) rubric.md and /tmp/out/<task>/blind/ only.
-#    It writes /tmp/out/<task>/blind/scores.csv: label + one column per dimension (0-3 or NA).
-
-# 5. Unblind
-python3 examples/eval/score.py /tmp/out multi-turn-zh
-```
-
-Every run has `CLAUDE.md` files off and the installed plugin disabled, so the only difference between arms is the plugin directory. Model and effort default to `claude-sonnet-5-5` and `medium`.
+Every run has `CLAUDE.md` files off and the installed plugin disabled, so the only difference between arms is the plugin directory.
 
 ## Results, 2026-11-03: 0.1.8 vs the tagged rewrite
 

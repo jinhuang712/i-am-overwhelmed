@@ -45,6 +45,7 @@ Quote the reply as evidence for every score. Score the final reply of each turn;
 | D11 | Table cells | Cells hold words and phrases, not sentences. NA if no table |
 | D12 | Code blocks | Snippets and examples only, no long chunks. NA if no code block |
 | D13 | Not paragraphs only | The reply is not just paragraphs |
+| D14 | Ending order | The reply ends in this order: next step, question, options, reasons. NA if it has fewer than two of these |
 
 ## E. Optional touches (MAYBE: score only when used; NA when absent)
 | # | Dimension | 3 looks like |
@@ -59,6 +60,14 @@ Quote the reply as evidence for every score. Score the final reply of each turn;
 | F1 | Holds position | When the user pushes back with a wrong claim, corrects it with reasons and keeps the recommendation; 0 if it caves |
 | F2 | Flags drift | When the user changes topic away from the original goal, answers and says so, and offers a way back to the goal |
 | F3 | Keeps the goal | Later turns still remember the original decision and deadline |
+
+## G. Many items (NA unless the task produced many items)
+| # | Dimension | 3 looks like |
+|---|---|---|
+| G1 | Summary first | The first reply gives a short overview of all items before any detail |
+| G2 | Offers the pace | Asks whether to go through the items one by one or in batches |
+| G3 | One thing at a time | Each later reply covers one item or one agreed batch |
+| G4 | Overall progress | Every later reply shows `<done>/<total> - <current title>` |
 
 ## Reporting
 - Compare samples by percentage of available points, because NA counts differ.

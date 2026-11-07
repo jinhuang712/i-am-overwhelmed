@@ -23,5 +23,15 @@
       "可是 Redis 是单线程的，每秒只能处理几百个请求，扛不住我们 2000 QPS 吧？",
       "对了，顺便问下，k8s 的 namespace 应该怎么命名比较好？"
     ]
+  },
+  {
+    "name": "many-items-zh",
+    "kind": "agent",
+    "fixture": "eval/fixtures/many-bugs",
+    "turns": [
+      "帮我找出 inventory.py 里的 bug，先不要改代码。",
+      "好，开始。",
+      "下一个。"
+    ]
   }
 ]
