@@ -81,7 +81,7 @@ def main():
     print(f"estimate: ${cost:.2f} for the runs, judging extra ({'from past runs' if known else 'rough default, no history'})")
     if a.budget is not None:
         run_pool = a.budget * (1 - JUDGE_SHARE)
-        run_cap = min(run_pool, CAP_FACTOR * run_pool / calls)
+        run_cap = run_pool / calls * (CAP_FACTOR if calls > CAP_FACTOR else 1)
         print(f"limit: ${a.budget:.2f}, ${a.budget * JUDGE_SHARE:.2f} of it kept for judging, ${run_cap:.2f} cap per run")
         if cost > run_pool:
             print("warning: the estimate is above the limit, so some runs will be stopped")
