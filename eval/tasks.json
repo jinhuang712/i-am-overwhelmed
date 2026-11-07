@@ -37,6 +37,7 @@
   {
     "name": "design-flaw-zh",
     "kind": "agent",
-    "turns": ["帮我写一个命令行待办工具。它必须完全离线，运行时不连任何网络；同时每条修改都要实时同步到云端，让我的其他设备马上看到。"]
+    "fixture": "eval/fixtures/free-text-due",
+    "turns": ["给 todo.py 加一个 sort 命令，按截止日期从近到远列出待办。"]
   }
 ]

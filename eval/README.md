@@ -44,7 +44,7 @@ Results go to `eval/results/<date>-<old>-vs-<new>-<model>/`: `report.md`, `ledge
 | [`checks.py`](checks.py) | Mechanical checks: line references, negations, paragraph-only replies. Free |
 | [`tasks.json`](tasks.json) | The tasks. A task with several `turns` continues one session |
 | [`rubric.md`](rubric.md) | The dimensions |
-| [`fixtures/`](fixtures/) | `many-bugs/` and its answer key, kept outside it |
+| [`fixtures/`](fixtures/) | `many-bugs/`, `free-text-due/`, and their answer keys, kept outside them |
 | [`tests/`](tests/) | Tests with a stub `claude`, so they cost nothing: `python3 -m unittest discover eval/tests` |
 
 Every run has `CLAUDE.md` files off and the installed plugin disabled, so the only difference between arms is the plugin directory.
