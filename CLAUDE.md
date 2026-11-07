@@ -26,7 +26,6 @@ examples/                                  raw outputs behind the README
 - [YES] Fit a new rule into an existing one when you can.
 - [YES] Phrase rules positively. The rule file follows its own rules.
 - [NO] Never copy the standard's text into the repo.
-- [NO] Never remove a rule only to shorten the file. Show with the eval that it has no effect.
 - [WHEN] A rule needs Chinese: write it natively, in a technical register.
 - [WHEN] Two rules conflict: fix their scope first, then consider a new rule.
 

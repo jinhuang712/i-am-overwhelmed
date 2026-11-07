@@ -16,7 +16,7 @@ CSV_BLOCK = re.compile(r"```csv\n(.*?)```", re.S)
 
 
 def dimensions():
-    return re.findall(r"^\| ([A-G]\d+) \|", RUBRIC.read_text(), re.M)
+    return re.findall(r"^\| ([A-H]\d+) \|", RUBRIC.read_text(), re.M)
 
 
 def build_prompt(root):

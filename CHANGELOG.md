@@ -8,10 +8,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 ### Added
 - Eval: `eval/eval.py` compares two versions in one command, with automatic blind judging, free mechanical checks, a new many-items task, and rubric items for the new reply rules.
 - Eval: a required `--budget` covers runs and judging, with a cap on every call, a ledger, `--dry-run`, and resume. Results stay usable when the budget stops a run.
+- Challenge: a new section. List the premises the work relies on, yours and mine, check each one, and show the ones that matter.
+- Eval: a `design-flaw-zh` task and a rubric item for raising a flawed premise first.
 - Replies: go one thing at a time. Many items get a summary first, then an offer to go through them one by one or in batches, with overall progress in every reply. Several questions at once: pick the main one and offer the rest.
 
 ### Changed
 - Eval moved from `examples/eval/` to `eval/`.
+- Pushing back, holding a position and opening a discussion move from Honesty to Challenge.
 - `CLAUDE.md`: rewritten in the rule's own tagged format, with a map and rules for writing, changing, testing and releasing.
 
 ### Fixed

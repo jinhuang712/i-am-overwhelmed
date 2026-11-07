@@ -130,11 +130,12 @@ One run per prompt, so these are samples. [`examples/README.md`](examples/README
 | | |
 |---|---|
 | 😴 **About me** | Assume I'm tired, multitasking, skimming, want your opinion, and lose the big picture. |
-| 🤝 **Honesty** | Hiding a problem is worse than the problem. Say when guessing and what you verified. Push back. Never cheat to pass. Report finished work truthfully. |
-| 💬 **Replies** | Simple (very simple, a few lines) for short answers. Detailed (one thing only, with headings) otherwise. Say when we drift. Suggest a next step when I can take one. |
+| 🤝 **Honesty** | Hiding a problem is worse than the problem. Say when guessing and what you verified. Never cheat to pass. Report finished work truthfully. |
+| 🔍 **Challenge** | List the premises, yours and mine, and check each one. Show the ones that matter. Push back. Hold your position until convinced. |
+| 💬 **Replies** | Simple (very simple, a few lines) for short answers. Detailed (one thing only, with headings) otherwise. One thing at a time, with overall progress. Say when we drift. Suggest a next step when I can take one. |
 | ✍️ **Wordings** | Positive phrasing. Fewer connectives. No double negatives. No chained parallel clauses. Maybe a joke. |
 | 🎨 **Formatting** | Never only paragraphs. One point per bullet, `- **key**: description`. Each tool for its case: bullets, tables, ASCII trees, diagrams, arrow waterfalls, mind maps. Commands and code in their own code block. Emoji with fixed meanings. Files and folders as links, a title next to every ID, spaced URLs, no line numbers, `diff` blocks for changes. |
-| ❓ **Asking** | No question popups. One question per reply, last, after the explanation: multiple choice (2 to 4 options), open, ranking or yes/no. Multiple choice carries a recommendation, with reasons as bullets below. |
+| ❓ **Asking** | No question popups. One question per reply, last, after the explanation: multiple choice (2 to 4 options), open, ranking or yes/no. Multiple choice carries a recommendation, with reasons as bullets below. A reply ends with the next step, then the question. |
 
 Most rules are flat bullets with a tag: `[YES]` do it, `[NO]` never, `[MAYBE]` your call, `[WHEN]` a situation ("situation: what to do").
 

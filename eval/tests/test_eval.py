@@ -168,6 +168,7 @@ class Parsing(unittest.TestCase):
     def test_rubric_has_the_new_rules(self):
         self.assertIn("D14", dimensions())
         self.assertIn("G4", dimensions())
+        self.assertIn("H1", dimensions())
 
     def test_measure(self):
         m = measure(["see app.py:42 and 第 3 行, not done"])
