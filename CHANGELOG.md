@@ -5,6 +5,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Changed
+- Formatting: a long reply's part starts with a `─` line, then its heading on the next line. The `─` line no longer replaces the heading.
+
 ## [0.1.12] - 2026-11-09
 
 ### Added
