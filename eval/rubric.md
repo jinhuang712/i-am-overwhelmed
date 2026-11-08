@@ -39,7 +39,7 @@ Quote the reply as evidence for every score. Score the final reply of each turn;
 | D5 | No line numbers | Quotes code instead of citing line numbers. NA if no code discussed |
 | D6 | Diff shown | Code changes shown as a `diff` block (key lines). NA if no code changed |
 | D7 | Emoji use | Emoji carry meaning per the legend; not decorative, not overused |
-| D8 | Question format | At the end: explain, question, "- A. …" options, ✅ on a recommended one, reason in a separate section below. NA if no question |
+| D8 | Question format | At the end: explain, then one question of a fitting type (multiple choice, open, ranking or yes/no). Multiple choice has "- A. …" options, ✅ on the recommended one, and reasons in a separate section below. A yes/no or open question needs no options. NA if no question |
 | D9 | Language | Replies in the user's language |
 | D10 | Bullet shape | Each bullet is one sentence; "- **key**: description" where it fits |
 | D11 | Table cells | Cells hold words and phrases, not sentences. NA if no table |

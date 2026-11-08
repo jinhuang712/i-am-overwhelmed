@@ -5,9 +5,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.1.13] - 2026-11-09
+
 ### Added
 - Replies: when the big picture changes, the reply opens with `📍 <goal> · decided: <list> · open: <list>`. Drift points back to the goal.
 - Wordings: a coined term or short name is defined the first time it appears.
+- Eval: rubric D8 accepts yes/no and open questions without options, as the rule allows.
 - Eval: a `long-discussion-zh` task with a mid-way reversal, rubric items F4 (📍 anchor) and D15 (terms defined), and an `anchors` mechanical check.
 
 ### Changed
