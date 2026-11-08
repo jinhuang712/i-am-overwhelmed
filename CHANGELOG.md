@@ -11,7 +11,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Eval: a `long-discussion-zh` task with a mid-way reversal, rubric items F4 (📍 anchor) and D15 (terms defined), and an `anchors` mechanical check.
 
 ### Changed
-- Formatting: each part of a long reply has a heading, with a short `─` line (12 characters, so it fits a phone screen) above each heading after the first. The `─` line no longer replaces the heading.
+- Formatting: each part of a long reply has a heading, with a Markdown `---` line above each heading after the first, after a blank line. This replaces the `─` title line: a long `─` line wraps on a phone, and it took the heading's place.
 
 ## [0.1.12] - 2026-11-09
 
