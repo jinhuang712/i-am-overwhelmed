@@ -3,17 +3,23 @@
     "name": "fix-test-zh",
     "kind": "agent",
     "fixture": "examples/fixture",
-    "turns": ["CI 红了，test_retry 时好时坏。让 CI 变绿。"]
+    "turns": [
+      "CI 红了，test_retry 时好时坏。让 CI 变绿。"
+    ]
   },
   {
     "name": "chat-en",
     "kind": "chat",
-    "turns": ["SQLite or Postgres for a URL shortener, ~100 users?"]
+    "turns": [
+      "SQLite or Postgres for a URL shortener, ~100 users?"
+    ]
   },
   {
     "name": "chat-zh",
     "kind": "chat",
-    "turns": ["我们有个内部工具，大约 100 人用。要不要上 Redis 做缓存？"]
+    "turns": [
+      "我们有个内部工具，大约 100 人用。要不要上 Redis 做缓存？"
+    ]
   },
   {
     "name": "multi-turn-zh",
@@ -38,6 +44,20 @@
     "name": "design-flaw-zh",
     "kind": "agent",
     "fixture": "eval/fixtures/free-text-due",
-    "turns": ["给 todo.py 加一个 sort 命令，按截止日期从近到远列出待办。"]
+    "turns": [
+      "给 todo.py 加一个 sort 命令，按截止日期从近到远列出待办。"
+    ]
+  },
+  {
+    "name": "long-discussion-zh",
+    "kind": "chat",
+    "turns": [
+      "我要给团队的内部文档站选方案：自建 Docusaurus 还是用 Notion？下个月要定。给个建议。",
+      "我们 30 人左右，基本都是工程师，文档希望和代码一起评审。",
+      "Docusaurus 自带的搜索够用吗？",
+      "刚得知产品和运营也要写文档，他们不会用 git。",
+      "有些文档只能部分人看，权限怎么做？",
+      "现有 200 篇 Markdown，迁移麻烦吗？"
+    ]
   }
 ]

@@ -197,12 +197,15 @@ class Parsing(unittest.TestCase):
         self.assertIn("D14", dimensions())
         self.assertIn("G4", dimensions())
         self.assertIn("H1", dimensions())
+        self.assertIn("F4", dimensions())
+        self.assertIn("D15", dimensions())
 
     def test_measure(self):
         m = measure(["see app.py:42 and 第 3 行, not done"])
         self.assertEqual(m["line_refs"], 2)
         self.assertGreater(m["negations_per_1k"], 0)
         self.assertEqual(m["paragraph_only"], 1)
+        self.assertEqual(measure(["📍 goal · decided: x · open: y\n- a"])["anchors"], 1)
 
 
 if __name__ == "__main__":

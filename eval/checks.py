@@ -12,6 +12,7 @@ from pathlib import Path
 LINE_REF = re.compile(r"[\w./-]+\.\w+:\d+|\b[Ll]ines? \d+|第\s*\d+\s*行")
 NEGATION = re.compile(r"[不没别未]|\b(?:not|no|never|without|cannot)\b|n't\b", re.I)
 STRUCTURE = re.compile(r"^\s*(?:[-*#|]|\d+\.|```)", re.M)
+ANCHOR = re.compile(r"^\s*📍", re.M)
 
 
 def final_replies(run_dir):
@@ -31,6 +32,7 @@ def measure(replies):
         "line_refs": sum(len(LINE_REF.findall(r)) for r in replies),
         "negations_per_1k": 1000 * sum(len(NEGATION.findall(r)) for r in replies) / chars,
         "paragraph_only": sum(1 for r in replies if r.strip() and not STRUCTURE.search(r)),
+        "anchors": sum(1 for r in replies if ANCHOR.search(r)),
     }
 
 

@@ -5,6 +5,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Added
+- Replies: a discussion past 5 turns, or a reply that overturns a decision, opens with `📍 <goal> · decided: <list> · open: <list>`. Drift points back to the 📍 goal.
+- Wordings: a coined term or short name is defined the first time it appears.
+- Eval: a `long-discussion-zh` task with a mid-way reversal, rubric items F4 (📍 anchor) and D15 (terms defined), and an `anchors` mechanical check.
+
 ### Changed
 - Formatting: a long reply's part starts with a `─` line, then its heading on the next line. The `─` line no longer replaces the heading.
 
