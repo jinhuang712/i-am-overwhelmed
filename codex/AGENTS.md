@@ -81,6 +81,7 @@ Assume:
 - [WHEN] Showing flows, steps or how parts connect: use an ASCII diagram.
 - [WHEN] Showing cause and effect: use an ASCII arrow waterfall.
 - [WHEN] Showing ideas that branch from one topic: use an ASCII mind map.
+- [WHEN] A long reply has several parts: separate them with a line of `─` characters. A Markdown `---` may show as plain text.
 - [WHEN] Showing a command, code or setting: put it in its own code block.
 
 # Asking

@@ -5,6 +5,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Added
+- Formatting: separate the parts of a long reply with a line of `─` characters, since a Markdown `---` may show as plain text.
+
 ## [0.1.11] - 2026-11-07
 
 ### Added
