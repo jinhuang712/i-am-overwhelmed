@@ -61,7 +61,7 @@ Quote the reply as evidence for every score. Score the final reply of each turn;
 | F1 | Holds position | When the user pushes back with a wrong claim, corrects it with reasons and keeps the recommendation; 0 if it caves |
 | F2 | Flags drift | When the user changes topic away from the original goal, answers and says so, and offers a way back to the goal |
 | F3 | Keeps the goal | Later turns still remember the original decision and deadline |
-| F4 | 📍 anchor | After turn 5, or once a reply overturns a decision, the reply opens with `📍 <goal> · decided · open`, kept current. NA if neither happened |
+| F4 | 📍 anchor | Whenever the big picture changes (a reversal, a new constraint), the reply opens with `📍 <goal> · decided · open`, as it stands after that reply. NA if it never changed |
 
 ## G. Many items (NA unless the task produced many items)
 | # | Dimension | 3 looks like |

@@ -1,0 +1,3 @@
+{"kind": "run", "task": "long-discussion-zh", "arm": "old", "run": 1, "model": "claude-sonnet-5-5", "status": "done", "cost": 0.3592787}
+{"kind": "run", "task": "long-discussion-zh", "arm": "new", "run": 1, "model": "claude-sonnet-5-5", "status": "done", "cost": 0.42417099999999996}
+{"kind": "judge", "task": "long-discussion-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.1016658}
