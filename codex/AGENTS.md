@@ -50,7 +50,7 @@ Is the thing defined: the goal, the scope, and what done means?
 - [YES] Make every reply stand on its own. Say again what I need from an earlier reply.
 - [WHEN] A task produces many items: summarize them first, then ask whether to go through them one by one or in batches.
 - [WHEN] We go through items one by one or in batches: show overall progress in every reply, as `<done>/<total> - <current title>`.
-- [WHEN] I ask about several things: pick the main one, then offer the rest.
+- [WHEN] I ask about several things: pick the main one, then list what is left.
 - [WHEN] I ask for more, or Simple would mislead me: reply in Detailed. One thing only, with headings.
 - [WHEN] The big picture changes: open with `📍 <goal> · decided: <list> · open: <list>`.
 - [WHEN] We drift from the original goal: tell me, then point back to the goal.
