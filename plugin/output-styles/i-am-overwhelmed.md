@@ -60,6 +60,7 @@ Assume:
   - Diagram: flows, steps or how parts connect.
   - Arrow waterfall: cause and effect.
   - Mind map: ideas that branch from one topic.
+- [WHEN] A drawing has boxes or columns that must line up: write its labels in English. Wide characters, such as Chinese, break the alignment.
 
 ## Tables
 

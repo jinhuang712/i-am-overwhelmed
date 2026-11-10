@@ -6,28 +6,25 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 ## [Unreleased]
 
 ### Added
+- Structure is its own section, after Replies, with six parts: Drawings, Tables, Bullet Points, Headings, Quotes and Code Blocks. The rules moved there from Formatting. Formatting keeps emoji, links, URLs, IDs and line numbers.
+- Structure: simplify first, then give structure to what is left.
+- Structure: draw the content whenever it has a shape. Bullet points are the fallback for content without a shape. A tree also covers branching decisions.
+- Structure: a drawing with boxes or columns that must line up has English labels, because wide characters such as Chinese break the alignment.
+- Structure: a blockquote holds quoted text and reminders that need no emphasis.
+- About Me: "I take in a drawing faster than a list."
+- Asking: a clear answer is decided and reported, not asked. One question holds one decision. Anything that needs confirmation is asked as a question.
+- Challenge: a premise that is a fact only the user knows is asked before it is built on.
 - Install: `install-claude.sh` installs the Claude Code plugin, or updates it when it is already there. Then it checks that the plugin is installed and enabled. `--check` runs only the check.
+- Eval: rubric items D16 (shape drawn), D17 (one decision), D18 (needed question) and D19 (blockquotes); a `shape-zh` chat task; mechanical checks that count drawings, tables, quotes, headings, replies that end asking, and lines.
 
 ### Changed
-- Install: the README shows two ways. For Claude Code, the two CLI commands or one curl line. For any agent, one line to paste, which sends it to `INSTALL.md`. `INSTALL.md` is now written for the agent: Claude Code runs the script, and Codex or another agent reads the rules and decides how to add them to the user's instructions.
-- Formatting: the shape rules are now one principle with examples: draw the content whenever it has a shape (table, ASCII tree, diagram, arrow waterfall, mind map). Bullet points are the fallback for content without a shape. The tree also covers branching decisions.
-- About Me: "I take in a drawing faster than a list."
-- Asking: three principles on when to ask. A clear answer is decided and reported, not asked. One question holds one decision. Every reply ends with one way forward: a question when a decision is needed, otherwise the next step. This replaces the "suggest a next step" rule in Replies, and the ending-order rule now covers only question, options, reasons.
-- Replies: the Simple and Detailed modes are replaced by one principle: go deep on one thing only, keep several things brief. The rule no longer sets line counts or headings, and the separate "short answer: use Simple" rule is removed.
-- Replies: the default is the simplest reply that keeps what matters. Detail comes when the user asks for more, or when the simple version would mislead. The 2026-11-10 eval showed short questions growing from 8 lines to 40 without this.
+- Replies: Simple is the default: a few lines, no headings. Detailed comes when the user asks for more, or when Simple would mislead: one thing only, with headings and drawings. Before, a short answer picked Simple. Three evals on 2026-11-10 showed that a principle alone ("as simple as you can") left short questions three to five times longer.
 - Asking: the limit of one question per reply is gone. A reply asks as many as it needs, numbered Q1, Q2, each of a fixed type: multiple choice, multi-select, yes/no, quick or ranking. The open type is replaced by quick. A strict limit made the model squeeze several questions into one.
-- Asking: anything that needs confirmation is asked as a question. Only a choice that asks for a decision carries a recommendation.
-- Challenge: a premise that is a fact only the user knows is asked before it is built on.
-- Eval: rubric C2 is now "Depth fit" and checks that principle.
-- Eval: rubric D8 and D18 follow the new asking rules.
-- Eval: rubric items D16 (shape drawn), D17 (one decision), D18 (needed question) and D19 (blockquotes). E2 is removed, since drawing is now required. C4 follows the Structure section.
-- Eval: a `shape-zh` chat task whose answer has a flow and branches.
-- Eval: mechanical checks count drawings, tables, quotes, headings, replies that end asking, and lines.
-- Structure is its own section, after Replies: the structure, shape, bullet, table-cell and heading rules move there from Formatting, word for word. Formatting keeps the written conventions: emoji, links, URLs, IDs, line numbers and code blocks. Structure has six parts: Drawings, Tables, Bullet Points, Headings, Quotes and Code Blocks. The code-block rules move there from Formatting.
-- Structure: simplify first, then give structure to what is left. A second eval on 2026-11-10 showed the simple-by-default rule losing to the structure rules on short questions.
-- Structure: every part of a reply gets a heading; the "long reply" condition is gone.
-- Structure: a blockquote holds quoted text and reminders that need no emphasis.
-- Formatting: "Never reply in paragraphs only" is now a positive `[YES]` rule: every reply has some structure, such as bullets, a table or headings.
+- Asking: only a choice that asks for a decision carries a recommendation.
+- Asking: every reply ends with one way forward: questions when an answer is needed, otherwise the next step. This replaces the "suggest a next step" rule in Replies.
+- Formatting: "Never reply in paragraphs only" is now a positive `[YES]` rule in Structure: give every reply some structure.
+- Install: the README shows two ways. For Claude Code, the two CLI commands or one curl line. For any agent, one line to paste, which sends it to `INSTALL.md`. `INSTALL.md` is now written for the agent: Claude Code runs the script, and Codex or another agent reads the rules and decides how to add them to the user's instructions.
+- Eval: rubric C2 is "Depth fit", C4 follows the Structure section, D2 is "Way forward", D8 and D14 follow the asking rules. E2 is removed, since drawing is now required.
 
 ## [0.1.13] - 2026-11-09
 

@@ -25,7 +25,7 @@ Quote the reply as evidence for every score. Score the final reply of each turn;
 | C1 | Gist in 5 seconds | The answer or outcome is obvious from the first line or headings |
 | C2 | Depth fit | Goes deep on one thing only; several things stay brief |
 | C3 | Length fit | No padding; every section earns its place |
-| C4 | Structure | Each part of the reply has a heading; drawings, tables, bullets, quotes and code blocks are each used for what they fit |
+| C4 | Structure | A Simple reply has no headings and a Detailed reply has one per part; drawings, tables, bullets, quotes and code blocks are each used for what they fit |
 | C5 | Self-contained | Understandable without scrolling back |
 | C6 | Big-picture anchoring | Ties the answer back to the user's goal |
 
