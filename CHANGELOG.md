@@ -22,6 +22,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Eval: a compound task, `session-zh`, with four turns on the fixture: fix the flaky test, explain it simply, make the retry count configurable with a default the agent picks, and answer a question that rests on a fact only the user knows.
 - Eval: the tasks no longer do a rule's work for it. "Give me a recommendation" is gone from `multi-turn-zh` and `long-discussion-zh`, and "by the way" is gone from the off-topic turn of `multi-turn-zh`. Results from before this change were run with those hints.
 - Eval: `--none` adds a third arm that runs with no plugin, the second benchmark of the release bar.
+- Challenge: say what you would do and what you would not, and tell the user when you see a better way. Before, the section only defended: it doubted and pushed back, and never offered.
+- `PHILOSOPHY.md`: Opinionated also works on "my blind spot", since a better way the agent sees is something the user does not know.
+- Eval: rubric D23 (better way), B3 also asks what the reply would not do, and a `better-way-zh` task asks for a CSV reader built on `split`.
 - `PHILOSOPHY.md`: "One rule per line" is now "Discrete rules". A rule with a shape is a drawing.
 - Eval: rubric D2 follows the tree, D18 also fails a question about going on with a clear step, and a `fact-zh` chat task asks a plain fact.
 

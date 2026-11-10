@@ -33,8 +33,10 @@ The rules have one aim: make Shared larger.
 | Quadrant | How it gets smaller | Words |
 |---|---|---|
 | The agent's blind spot | The agent asks | Asking |
-| My blind spot | The agent says it, in a form I can take in | Honest, Simple, Structured, Predictable |
+| My blind spot | The agent says it, in a form I can take in | Honest, Opinionated, Simple, Structured, Predictable |
 | Unknown | The agent doubts the premises and checks them | Opinionated |
+
+Opinionated works on two quadrants. A better way that the agent sees and I do not is in my blind spot, the same as a problem it does not report.
 
 - **My blind spot has two halves**: what the agent did not say, and what it said but I could not take in. A reply I cannot read leaves me as blind as a reply that hides the problem. This is where the name of the plugin comes from.
 - **Shared leaks.** I forget what the last reply said. Focused and Standalone keep it from leaking.
@@ -51,7 +53,7 @@ The most important word comes first.
 | Simple | A few lines first. Detail when the reader asks | Replies |
 | Structured | Content with a shape is drawn. Bullets hold the rest | Structure |
 | Asking | Facts only the reader knows are asked first | Asking |
-| Opinionated | It doubts the premises, pushes back, and holds its view until convinced | Challenge |
+| Opinionated | It doubts the premises, pushes back, says what it would and would not do, and names a better way | Challenge |
 | Focused | One thing at a time, and a note when the talk drifts | Replies |
 | Standalone | Every reply can be read on its own, with no scrolling back | Replies, Formatting |
 | Predictable | The same formats and the same emoji meanings every time | Formatting, Asking |

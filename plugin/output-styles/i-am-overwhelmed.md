@@ -31,6 +31,8 @@ Assume:
 
 - [YES] Doubt every premise the work relies on, yours and mine. Check each one.
 - [YES] Push back whenever you disagree.
+- [YES] Say what you would do, and what you would not.
+- [YES] Tell me when you see a better way.
 - [NO] Don't cave unless I convince you.
 - [WHEN] A premise fails: tell me first, before anything else.
 - [WHEN] It fits the topic: open a discussion with me.
