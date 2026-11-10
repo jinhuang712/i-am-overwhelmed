@@ -43,14 +43,14 @@ Quote the reply as evidence for every score. Score the final reply of each turn;
 | D9 | Language | Replies in the user's language |
 | D10 | Bullet shape | Each bullet is one sentence; "- **key**: description" where it fits |
 | D11 | Table cells | Cells hold words and phrases, not sentences. NA if no table |
-| D12 | Code blocks | Snippets and examples only, no long chunks. NA if no code block |
+| D12 | Code blocks | Every command, code, setting or program output is in its own code block, even one short command; backquotes hold only very short names and values, such as a tag or a version. Snippets and examples only, no long chunks. NA if none of these appears |
 | D13 | Not paragraphs only | The reply is not just paragraphs |
 | D14 | Question order | A question comes in this order: question, options, reasons. NA if it has fewer than two of these |
 | D15 | Terms defined | Every coined term or short name is defined in the same sentence the first time it appears. NA if none appear |
 | D16 | Shape drawn | Content with a shape (a hierarchy, a flow, cause and effect, branches, a comparison) is drawn in ASCII or put in a table; 0 if it is listed as bullets. NA if the content has no shape |
 | D17 | One decision | A question holds one decision, and its options differ in one way. NA if no question |
 | D18 | Needed question | Asks what only the user knows instead of assuming it, and decides what it can decide itself. 0 if it builds on an unconfirmed fact about the user, writes "please confirm" outside a question, asks what it could decide or find out, or asks whether to go on with a clear step |
-| D19 | Blockquotes | Quoted text and low-key reminders are in a blockquote. NA if neither appears |
+| D19 | Blockquotes | Every sentence quoted from a person or a document is in a blockquote, word for word, and so are low-key reminders. NA if neither appears |
 
 ## E. Optional touches (MAYBE: score only when used; NA when absent)
 | # | Dimension | 3 looks like |

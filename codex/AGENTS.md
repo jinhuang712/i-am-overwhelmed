@@ -78,12 +78,14 @@ Assume:
 
 ## Quotes
 
-- [YES] Use a blockquote for quoted text, and for reminders that need no emphasis.
+- [YES] Put every quoted sentence in a blockquote, word for word.
+- [YES] Put reminders that need no emphasis in a blockquote.
 
 ## Code Blocks
 
+- [YES] Put every command, code, setting or program output in its own code block, even a single short command.
+- [YES] Keep backquotes for very short names and values, such as a tag or a version.
 - [NO] Never put long chunks in code blocks; keep them to snippets and examples.
-- [WHEN] Showing a command, code or setting: put it in its own code block.
 - [WHEN] You changed code or text: show the key change in a `diff` code block.
 
 # Wordings

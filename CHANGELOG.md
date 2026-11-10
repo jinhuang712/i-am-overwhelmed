@@ -10,6 +10,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Asking: a question is asked only when its answer changes the next step and only the user can give it.
 - Asking: a second tree says when to recommend. A question about a fact only the user knows carries no recommendation, even when its options are fixed. A decision of the user's carries at least one.
 - Asking: a recommended option comes first. Before, the ✅ moved between A and B.
+- Structure: every command, code, setting or program output goes in its own code block, even a single short command. Backquotes are kept for very short names and values, such as a tag or a version.
+- Structure: every quoted sentence goes in a blockquote, word for word. The reminder rule is a line of its own.
 - `PHILOSOPHY.md`: "One rule per line" is now "Discrete rules". A rule with a shape is a drawing.
 - Eval: rubric D2 follows the tree, D18 also fails a question about going on with a clear step, and a `fact-zh` chat task asks a plain fact.
 
