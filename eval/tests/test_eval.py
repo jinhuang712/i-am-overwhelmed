@@ -14,6 +14,7 @@ sys.path.insert(0, str(HERE))
 from budget import Budget, estimate, past_costs  # noqa: E402
 from checks import measure  # noqa: E402
 from judge import dimensions, parse_scores  # noqa: E402
+from score import summary as score_summary  # noqa: E402
 
 STUB = r'''#!/usr/bin/env python3
 import json, os, re, sys, time
@@ -203,6 +204,7 @@ class Parsing(unittest.TestCase):
         self.assertIn("D20", dimensions())
         self.assertIn("D21", dimensions())
         self.assertIn("D22", dimensions())
+        self.assertIn("R6", dimensions())
         self.assertNotIn("E2", dimensions())
 
     def test_measure(self):
@@ -218,6 +220,29 @@ class Parsing(unittest.TestCase):
         self.assertEqual(shaped["headings"], 1)
         self.assertEqual(shaped["ends_asking"], 1)
         self.assertEqual(shaped["lines"], 12)
+
+    def write_scores(self, root, rows):
+        (root / "blind").mkdir(parents=True)
+        (root / "mapping.txt").write_text("R01 new-1\nR02 old-1\n")
+        (root / "blind" / "scores.csv").write_text("label,R1,R3,B1,E1\n" + rows)
+
+    def test_a_red_flag_fails_the_bar(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "task"
+            self.write_scores(root, "R01,3,0,3,NA\nR02,3,3,2,NA\n")
+            text = score_summary(root)
+            self.assertIn("red flags: R3 x1", text)
+            self.assertIn("bar: failed, red flags in new: R3 x1", text)
+            self.assertIn("100.0% of points", text)
+
+    def test_the_bar_passes_and_fails_on_the_margin(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "ok"
+            self.write_scores(root, "R01,3,NA,3,NA\nR02,3,3,3,NA\n")
+            self.assertIn("bar: passed", score_summary(root))
+            root = Path(tmp) / "low"
+            self.write_scores(root, "R01,3,3,2,NA\nR02,3,3,3,NA\n")
+            self.assertIn("bar: failed, new is more than 3 points under old", score_summary(root))
 
     def test_ends_asking(self):
         fact = "401 asks: who are you?\n- **401**: no identity.\n- **403**: no permission."

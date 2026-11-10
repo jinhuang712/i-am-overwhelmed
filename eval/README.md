@@ -20,6 +20,16 @@ python3 eval/eval.py --old <git ref> --new HEAD --budget <usd>
 
 Results go to `eval/results/<date>-<old>-vs-<new>-<model>/`: `report.md`, `ledger.jsonl`, and scores and mappings per task. `raw/` holds the runs and is git-ignored.
 
+## Reading a report
+
+The rubric has three layers: red flags, items, and a release bar. For each task the report prints, per arm:
+
+- the share of points, with the red flags and the optional items left out
+- the red flags that were hit, such as `R3 x1`
+- `bar: passed` or `bar: failed`, with the reason. The bar is in [`rubric.md`](rubric.md): no red flag in the new arm, and a share of points at most 3 points under the old arm's
+
+A report from before 2026-11-10 has no red flag columns, so it shows `red flags: none` for every arm.
+
 ## Budget
 
 - **The limit covers everything**: runs and judging. A quarter is kept back for judging.
