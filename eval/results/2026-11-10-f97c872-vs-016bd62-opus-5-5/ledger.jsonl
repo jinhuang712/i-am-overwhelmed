@@ -1,0 +1,20 @@
+{"kind": "run", "task": "fact-zh", "arm": "old", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.053417000000000006}
+{"kind": "run", "task": "fact-zh", "arm": "new", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.056705000000000005}
+{"kind": "judge", "task": "fact-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.07078580000000001}
+{"kind": "run", "task": "chat-zh", "arm": "old", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.0458196}
+{"kind": "run", "task": "chat-zh", "arm": "new", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.0491276}
+{"kind": "run", "task": "design-flaw-zh", "arm": "old", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.1537846}
+{"kind": "run", "task": "design-flaw-zh", "arm": "new", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.16843219999999998}
+{"kind": "run", "task": "chat-zh", "arm": "new", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.03746479999999999}
+{"kind": "run", "task": "shape-zh", "arm": "old", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.04796}
+{"kind": "run", "task": "chat-zh", "arm": "old", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.0345568}
+{"kind": "run", "task": "fact-zh", "arm": "old", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.03612}
+{"kind": "run", "task": "shape-zh", "arm": "new", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.0491564}
+{"kind": "run", "task": "fact-zh", "arm": "new", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.0336024}
+{"kind": "run", "task": "shape-zh", "arm": "old", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.06994840000000001}
+{"kind": "run", "task": "shape-zh", "arm": "new", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.11941639999999999}
+{"kind": "run", "task": "design-flaw-zh", "arm": "new", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.1543898}
+{"kind": "judge", "task": "chat-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.07541819999999999}
+{"kind": "judge", "task": "design-flaw-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.10214219999999999}
+{"kind": "judge", "task": "shape-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.0982142}
+{"kind": "judge", "task": "fact-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.0700342}
