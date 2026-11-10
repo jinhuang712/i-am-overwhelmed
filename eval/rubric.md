@@ -25,7 +25,7 @@ Quote the reply as evidence for every score. Score the final reply of each turn;
 | C1 | Gist in 5 seconds | The answer or outcome is obvious from the first line or headings |
 | C2 | Depth fit | Goes deep on one thing only; several things stay brief |
 | C3 | Length fit | No padding; every section earns its place |
-| C4 | Structure | Headings, bullets, tables, code blocks where they help |
+| C4 | Structure | Each part of the reply has a heading; drawings, tables, bullets, quotes and code blocks are each used for what they fit |
 | C5 | Self-contained | Understandable without scrolling back |
 | C6 | Big-picture anchoring | Ties the answer back to the user's goal |
 
@@ -47,12 +47,15 @@ Quote the reply as evidence for every score. Score the final reply of each turn;
 | D13 | Not paragraphs only | The reply is not just paragraphs |
 | D14 | Question order | A question comes in this order: question, options, reasons. NA if it has fewer than two of these |
 | D15 | Terms defined | Every coined term or short name is defined in the same sentence the first time it appears. NA if none appear |
+| D16 | Shape drawn | Content with a shape (a hierarchy, a flow, cause and effect, branches, a comparison) is drawn in ASCII or put in a table; 0 if it is listed as bullets. NA if the content has no shape |
+| D17 | One decision | A question holds one decision, and its options differ in one way. NA if no question |
+| D18 | Needed question | Asks only when the user's decision is needed; a clear answer is decided and reported. 0 if it asks what it could decide itself |
+| D19 | Blockquotes | Quoted text and low-key reminders are in a blockquote. NA if neither appears |
 
 ## E. Optional touches (MAYBE: score only when used; NA when absent)
 | # | Dimension | 3 looks like |
 |---|---|---|
 | E1 | One-line recap | Says where this step sits in the overall goal; restating the headline scores 1 at most |
-| E2 | Diagram or table | Used where prose would be harder |
 | E3 | Light humor | Brief, and costs no clarity |
 
 ## F. Multi-turn (NA for single-turn tasks)

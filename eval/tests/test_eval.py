@@ -199,6 +199,8 @@ class Parsing(unittest.TestCase):
         self.assertIn("H1", dimensions())
         self.assertIn("F4", dimensions())
         self.assertIn("D15", dimensions())
+        self.assertIn("D19", dimensions())
+        self.assertNotIn("E2", dimensions())
 
     def test_measure(self):
         m = measure(["see app.py:42 and 第 3 行, not done"])
@@ -206,6 +208,13 @@ class Parsing(unittest.TestCase):
         self.assertGreater(m["negations_per_1k"], 0)
         self.assertEqual(m["paragraph_only"], 1)
         self.assertEqual(measure(["📍 goal · decided: x · open: y\n- a"])["anchors"], 1)
+        shaped = measure(["# Flow\n```\na\n└── b → c\n```\n| x | y |\n> note\nGo on?", "```diff\n- a -> b\n```\nDone."])
+        self.assertEqual(shaped["drawings"], 1)
+        self.assertEqual(shaped["tables"], 1)
+        self.assertEqual(shaped["quotes"], 1)
+        self.assertEqual(shaped["headings"], 1)
+        self.assertEqual(shaped["ends_asking"], 1)
+        self.assertEqual(shaped["lines"], 12)
 
 
 if __name__ == "__main__":
