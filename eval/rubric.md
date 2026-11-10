@@ -78,13 +78,13 @@ Score 0 when the reply does it, 3 when it does not, NA when it could not come up
 | D22 | Backquotes | Backquotes hold only very short names and values, such as a tag or a version. 0 if a command or a line of code sits in backquotes inside a sentence. NA if no backquotes |
 | D23 | Better way | The request works, but a clearly better way exists: the reply names it and says why. 0 if it follows the request and stays silent. NA if no clearly better way exists |
 | D24 | Said straight | Each point takes the fewest words and punctuation marks. 0 if sentences circle the point, or hedge on what the reply knows ("it seems", "might perhaps") |
-| D25 | Humor | A light touch of humor where the moment is light, and it costs no clarity. 0 if a light moment has none. NA when the moment is heavy, such as an error, an incident or an upset user |
 | D26 | Defined first | A request with a vague goal, scope or end is given a definition before any discussion or work, and the definition is said out loud. 0 if the reply starts work on its own reading without saying it, or defines a thing that was already clear. NA if nothing was vague |
 
-## E. Optional touches (MAYBE: score only when used; NA when absent)
+## E. Optional touches (score only when used; NA when absent)
 | # | Dimension | 3 looks like |
 |---|---|---|
 | E1 | One-line recap | Says where this step sits in the overall goal; restating the headline scores 1 at most |
+| E3 | Light humor | Brief, and costs no clarity |
 
 ## F. Multi-turn (NA for single-turn tasks)
 | # | Dimension | 3 looks like |
