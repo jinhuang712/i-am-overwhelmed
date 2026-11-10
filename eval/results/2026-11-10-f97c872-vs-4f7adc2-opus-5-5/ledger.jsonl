@@ -13,3 +13,6 @@
 {"kind": "judge", "task": "your-step-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.0792822}
 {"kind": "judge", "task": "only-you-know-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.1057342}
 {"kind": "judge", "task": "shape-en", "model": "claude-opus-5-5", "status": "done", "cost": 0.0938822}
+{"kind": "run", "task": "session-zh", "arm": "old", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 1.2740398000000002}
+{"kind": "run", "task": "session-zh", "arm": "new", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 1.2218078}
+{"kind": "judge", "task": "session-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.2710702}

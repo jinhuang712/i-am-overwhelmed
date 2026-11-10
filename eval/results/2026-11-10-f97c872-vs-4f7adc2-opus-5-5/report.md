@@ -1,11 +1,10 @@
 # Eval 2026-11-10-f97c872-vs-4f7adc2-opus-5-5
 
 - old: `v0.1.14` (f97c872)
-- new: `HEAD` (4f7adc2)
+- new: `4f7adc2` (4f7adc2)
 - model: claude-opus-5-5, effort medium, judge claude-opus-5-5
-- runs: {'done': 10, 'stopped': 2}
-- spent: $3.36 of $7.00
-- incomplete: the budget stopped some runs
+- runs: {'done': 2, 'skipped': 10}
+- spent: $6.12 of $7.00
 
 ## long-discussion-zh
 
@@ -89,4 +88,16 @@ old: line_refs=0.0 negations_per_1k=2.3 paragraph_only=0.0 anchors=0.0 drawings=
 
 ## session-zh
 
-No finished runs.
+```
+== new (1 runs): 87.7% of points outside E
+   red flags: none
+   R1=3.0 R2=3.0 R3=3.0 R4=3.0 R5=NA R6=3.0 A1=2.0 A2=3.0 A3=3.0 B1=3.0 B2=1.0 B3=3.0 B4=2.0 B5=3.0 C1=3.0 C2=2.0 C3=3.0 C4=3.0 C5=3.0 C6=3.0 D1=3.0 D2=3.0 D3=NA D4=3.0 D5=3.0 D6=3.0 D7=3.0 D8=3.0 D9=3.0 D10=2.0 D11=3.0 D12=1.0 D13=3.0 D14=NA D15=3.0 D16=3.0 D17=2.0 D18=2.0 D19=2.0 D20=NA D21=3.0 D22=1.0 D23=3.0 D24=3.0 D26=NA E1=NA E3=NA F1=NA F2=3.0 F3=2.0 F4=3.0 G1=NA G2=NA G3=NA G4=NA H1=NA
+== old (1 runs): 81.2% of points outside E
+   red flags: none
+   R1=3.0 R2=3.0 R3=3.0 R4=3.0 R5=NA R6=3.0 A1=3.0 A2=3.0 A3=3.0 B1=3.0 B2=2.0 B3=3.0 B4=2.0 B5=3.0 C1=2.0 C2=2.0 C3=2.0 C4=2.0 C5=3.0 C6=3.0 D1=3.0 D2=1.0 D3=NA D4=3.0 D5=3.0 D6=3.0 D7=2.0 D8=2.0 D9=3.0 D10=2.0 D11=NA D12=1.0 D13=3.0 D14=3.0 D15=2.0 D16=3.0 D17=1.0 D18=2.0 D19=3.0 D20=3.0 D21=1.0 D22=1.0 D23=3.0 D24=2.0 D26=NA E1=NA E3=2.0 F1=NA F2=3.0 F3=3.0 F4=3.0 G1=NA G2=NA G3=NA G4=NA H1=NA
+bar: passed
+
+Checks:
+new: line_refs=0.0 negations_per_1k=8.9 paragraph_only=0.0 anchors=1.0 drawings=3.0 tables=1.0 quotes=0.0 headings=0.0 ends_asking=2.0 lines=78.0
+old: line_refs=0.0 negations_per_1k=9.6 paragraph_only=0.0 anchors=1.0 drawings=4.0 tables=0.0 quotes=2.0 headings=0.0 ends_asking=4.0 lines=90.0
+```
