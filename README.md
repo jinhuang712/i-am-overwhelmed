@@ -126,7 +126,7 @@ Real output, same prompt, plugin off and on. Complete and untrimmed. Every examp
 > - Click analytics produce heavy concurrent writes
 > - You plan to grow well beyond 100 users
 >
-> Q1. Will this run on a single server with a persistent disk? (yes/no)
+> Q1. Will this run on a single server with a persistent disk?
 
 ### "After a user clicks 'Sign in with GitHub' on our site, how do the browser, our backend and GitHub talk to each other, step by step?"
 

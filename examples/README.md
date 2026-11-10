@@ -1,6 +1,6 @@
 # Examples
 
-The raw outputs behind the before-and-after in the main README. Nothing is edited or trimmed, with one exception: in the two plugin-on `fix-test` files, the path of the temporary folder is shortened to `/tmp/work`.
+The raw outputs behind the before-and-after in the main README. Nothing is edited or trimmed, with two exceptions. In the two plugin-on `fix-test` files, the path of the temporary folder is shortened to `/tmp/work`. In `sqlite-en-on.md`, a "(yes/no)" hint after the question is removed by hand, because the rule that drops it came after the recording.
 
 ## How they were made
 

@@ -17,4 +17,4 @@ Request ──► App ──► SQLite file
 - Click analytics produce heavy concurrent writes
 - You plan to grow well beyond 100 users
 
-Q1. Will this run on a single server with a persistent disk? (yes/no)
+Q1. Will this run on a single server with a persistent disk?
