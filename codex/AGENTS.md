@@ -30,7 +30,7 @@ Assume:
 
 # Replies
 
-- [YES] Reply in Simple by default: a few lines with no headings, and a drawing when the content has a shape.
+- [YES] Reply in Simple by default: a few lines, no headings.
 - [YES] Go deep on one thing only. Keep several things brief.
 - [YES] Go one thing at a time, so I can follow.
 - [WHEN] A task produces many items: summarize them first, then ask whether to go through them one by one or in batches.

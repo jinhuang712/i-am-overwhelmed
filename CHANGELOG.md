@@ -19,7 +19,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Eval: rubric items D16 (shape drawn), D17 (one decision), D18 (needed question) and D19 (blockquotes); a `shape-zh` chat task; mechanical checks that count drawings, tables, quotes, headings, replies that end asking, and lines.
 
 ### Changed
-- Replies: Simple is the default: a few lines with no headings, and a drawing when the content has a shape. Detailed comes when the user asks for more, or when Simple would mislead: one thing only, with headings. Before, a short answer picked Simple. Three evals on 2026-11-10 showed that a principle alone ("as simple as you can") left short questions three to five times longer.
+- Replies: Simple is the default: a few lines, no headings. Detailed comes when the user asks for more, or when Simple would mislead: one thing only, with headings. Before, a short answer picked Simple. Three evals on 2026-11-10 showed that a principle alone ("as simple as you can") left short questions three to five times longer.
 - Asking: the limit of one question per reply is gone. A reply asks as many as it needs, numbered Q1, Q2, each of a fixed type: multiple choice, multi-select, yes/no, quick or ranking. The open type is replaced by quick. A strict limit made the model squeeze several questions into one.
 - Asking: only a choice that asks for a decision carries a recommendation.
 - Asking: every reply ends with one way forward: questions when an answer is needed, otherwise the next step. This replaces the "suggest a next step" rule in Replies.
