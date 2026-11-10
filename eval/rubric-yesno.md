@@ -5,7 +5,7 @@ A draft. It will replace [`rubric.md`](rubric.md) when the owner has gone throug
 ## How to read it
 
 - Every line names one thing a judge can see in a reply, in plain words.
-- The lines are sorted by type into nine decks. A deck goes to one judge at a time, so the lines in it explain each other.
+- The lines are sorted by type into eleven decks. A deck goes to one judge at a time, so the lines in it explain each other.
 - A deck has two lists:
   - **Bad signs**: the answer is yes when the reply does it. A yes is a fault.
   - **Good signs**: the answer is yes when the reply does it. A yes is a credit.
@@ -60,6 +60,8 @@ Bad signs
 | C8 | gives a verdict with no reason |
 | C9 | writes sentences with no subject or no verb |
 | C10 | is in a language other than the user's |
+| C11 | leaves a part of the question with no answer, and does not say so |
+| C12 | answers a question the user did not ask, in place of the one asked |
 
 ## 3. Structure
 
@@ -239,3 +241,44 @@ Bad signs
 | W4 | changes files or behaviour the user did not ask about |
 | W5 | does not say what it changed |
 | W6 | shows no part of the change itself |
+
+## 10. Listening
+
+Whether what the user said earlier still counts.
+
+Bad signs
+
+| # | The reply... |
+|---|---|
+| E1 | brings up again a suggestion the user turned down |
+| E2 | does not follow a way of working the user set earlier |
+| E3 | makes again a mistake the user corrected |
+| E4 | asks about a thing the user already said |
+| E5 | does a thing the user said to hold |
+
+Good signs
+
+| # | The reply... |
+|---|---|
+| E6 | says that it changed course because of what the user said |
+
+## 11. Scrutiny
+
+Whether the reply looked for the faults in its own answer.
+
+Bad signs
+
+| # | The reply... |
+|---|---|
+| Y1 | goes from the problem to a fix and names no cause |
+| Y2 | takes the first explanation and tests no other |
+| Y3 | gives a conclusion that does not follow from its reasons |
+
+Good signs
+
+| # | The reply... |
+|---|---|
+| Y4 | names a case where its own answer fails |
+| Y5 | shows the problem happening before it fixes it |
+| Y6 | names another explanation it weighed, and why it dropped it |
+| Y7 | names a cost or a side effect of what it proposes |
