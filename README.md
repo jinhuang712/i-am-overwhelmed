@@ -15,6 +15,7 @@ You are tired, you are doing three other things, and you skim. This plugin makes
 - **Structured**: a drawing when the content has a shape, bullets otherwise.
 - **Predictable**: the same formats and the same emoji meanings every time, so you know where to look.
 - **Focused**: one thing at a time, and a note when the talk drifts from the goal.
+- **Standalone**: every reply can be read on its own, with no scrolling back.
 - **Asking**: the facts only you know are asked first, not assumed.
 - **Opinionated**: it gives a view, pushes back, and holds it until you convince it.
 
