@@ -44,6 +44,46 @@ def asks(reply):
     return any(line.rstrip("*_ ").endswith(("?", "？")) for line in lines[-2:])
 
 
+REPLY_MARK = re.compile(r"=== FINAL REPLY \(turn-\d+\) ===\n")
+TOOL_MARK = re.compile(r"\n\nTOOL (?:CALL|RESULT):\n")
+BULLET = re.compile(r"^\s*(?:[-*]|\d+\.) +(.*)$", re.M)
+INLINE = re.compile(r"`[^`\n]*`")
+LINK = re.compile(r"\[[^\]\n]*\]\([^)\n]*\)")
+SENTENCE_END = re.compile(r"[。！？]|[.!?](?=\s|$)")
+FILE_NAME = re.compile(r"(?<![\w/.-])[\w./-]*\w\.(?:py|md|json|js|ts|tsx|sh|txt|ya?ml|toml|conf|csv|html|css)\b")
+
+
+def sample_replies(sample):
+    """The final replies in a blind sample, without the tool calls and results around them."""
+    return [TOOL_MARK.split(part)[0].strip() for part in REPLY_MARK.split(sample)[1:]]
+
+
+def long_bullet(reply):
+    """True when a bullet point outside code blocks holds two sentences or more."""
+    for body in BULLET.findall(FENCE.sub("", reply)):
+        text = LINK.sub("x", INLINE.sub("x", body))
+        if len(SENTENCE_END.findall(text)) >= 2:
+            return True
+    return False
+
+
+def unlinked_file(reply):
+    """True when a file name stands outside code blocks and is not part of a Markdown link."""
+    return bool(FILE_NAME.search(LINK.sub(" ", FENCE.sub("", reply))))
+
+
+# The rubric lines marked ⚙️, by their text. A sample fails a line when any of its replies does.
+SCRIPTED = {
+    "has a bullet point of two sentences or more": long_bullet,
+    "names a file or a folder with no link": unlinked_file,
+}
+
+
+def scripted_answer(line_text, sample):
+    check = SCRIPTED[line_text.replace("⚙️", "").replace("🚩", "").strip()]
+    return "Y" if any(check(r) for r in sample_replies(sample)) else "N"
+
+
 def final_replies(run_dir):
     replies = []
     for turn in sorted(run_dir.glob("turn-*.jsonl")):

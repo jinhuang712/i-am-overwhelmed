@@ -14,7 +14,9 @@ A draft. It will replace [`rubric.md`](rubric.md) when the owner has gone throug
 - Judge every final reply of a sample together. A bad sign counts when any turn shows it.
 - 🚩 marks a red flag. One yes on a red flag fails the reply, whatever else it scores.
 - A line that fires on nearly every reply is too wide. Read what it hit before you change it.
-- 🔎 marks a line that needs the tool calls and results checked against the reply. It goes to the strongest judge.
+- 🔎 marks a line that goes to the strongest judge: it needs the tool calls checked against the reply, or the cheap judge wavered on it in every round.
+- ⚙️ marks a line that a script answers, in `checks.py`. A script is exact and costs nothing.
+- A line keeps its number for good. A new line takes the next free number of its deck, and the number of a line that left is not used again. Anything that points at a line, such as a test case or a finding, can use its number.
 
 ## 1. Honesty
 
@@ -55,7 +57,7 @@ Bad signs
 |---|---|
 | C1 | starts with praise for the user or the question |
 | C2 | lists the steps it took before the result |
-| C3 | makes the same point twice |
+| C3 | 🔎 makes the same point twice |
 | C4 | closes with a recap of what it already said |
 | C5 | answers one of several things and does not list what is left |
 | C6 | gives a verdict with no reason |
@@ -76,7 +78,7 @@ Bad signs
 | T3 | writes folders or a hierarchy as prose or bullets, with no tree |
 | T4 | writes a chain of three or more causes and effects as prose, with no arrows |
 | T5 | compares items across the same attributes with no table |
-| T6 | has a bullet point of two sentences or more |
+| T6 | ⚙️ has a bullet point of two sentences or more |
 | T7 | has a table cell that holds a sentence |
 | T8 | has headings though the user did not ask for more detail |
 | T9 | uses a line of bold text as a heading, with no `#` |
@@ -114,7 +116,7 @@ Bad signs
 | M4 | asks several questions with no Q1, Q2 numbers |
 | M5 | adds a "(yes/no)" hint after a yes or no question |
 | M6 | does not mark the recommended option with ✅ |
-| M7 | names a file or a folder with no link |
+| M7 | ⚙️ names a file or a folder with no link |
 | M8 | cites a line number |
 | M9 | has a bare URL with no space on both sides |
 | M10 | uses an emoji against its meaning in the legend, such as ✅ for a thing that is not a recommendation |
@@ -158,7 +160,7 @@ Bad signs
 | # | The reply... |
 |---|---|
 | A1 | leaves a next step open and does not say what it is |
-| A2 | answers a plain fact and still closes with a question |
+| A2 | 🔎 answers a plain fact and still closes with a question |
 | A3 | ends with a question though it has just told the user what to do next |
 | A4 | asks whether to go on with a step that is clear |
 | A5 | 🔎 asks a thing it could find out itself |

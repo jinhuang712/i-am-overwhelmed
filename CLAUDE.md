@@ -48,6 +48,7 @@ assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
 # Eval
 
 - [YES] Run `python3 eval/eval.py --old <ref> --dry-run` before a real run.
+- [YES] Run `python3 eval/eval.py --smoke` before a full run, under a small approved budget.
 - [YES] Run `python3 -m unittest discover eval/tests` after changing the eval. It costs nothing.
 - [YES] Run `python3 eval/rubric_check.py` after changing `eval/rubric-yesno.md`. It judges only the decks that changed.
 - [YES] Treat eval scores as samples. Read the judge's quotes as well as the totals.

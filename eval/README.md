@@ -39,6 +39,9 @@ python3 eval/eval.py --old v0.1.14 --rubric yesno --budget 10
 ```
 
 - **Decks**: the rubric is cut by type into decks of at most 14 lines, so the lines in one call explain each other.
+- **Three kinds of line**: most go to the cheap judge. A line marked 🔎 goes to the strong judge. A line marked ⚙️ is answered by a script in `checks.py`, which is exact and free.
+- **A line keeps its number for good**, so a result or a finding can point at it.
+- **The judge's notes are kept** next to its answers, in the cache of the task's `blind/` folder.
 - **The bar**: no red flag in the new arm, and "clean" at most 2 points under the old arm. Two points is what one pass of the judge moves a reply by.
 - **Read a deck, not a line**: one line's answer moves between runs. A deck's count and the whole score are steady.
 - **Check the rubric itself** with `python3 eval/rubric_check.py --dry-run`. It judges replies that are already on disk, several times, and reports for every line how stable it is and how often it fires.
@@ -53,6 +56,14 @@ The rubric has three layers: red flags, items, and a release bar. For each task 
 - `bar: passed` or `bar: failed`, with the reason. The bar is in [`rubric.md`](rubric.md): no red flag in the new arm, and a share of points at most 3 points under the old arm's
 
 A report from before 2026-11-10 has no red flag columns, so it shows `red flags: none` for every arm.
+
+## Try the tool first
+
+```
+python3 eval/eval.py --smoke --budget 2
+```
+
+`--smoke` runs every task once, the new arm only, on the cheap model, and judges nothing. It says which runs did not come through. Run it before a full run: on 2026-11-10 a wrong path, a task that ran away and a plugin that did not load cost $17.79, and none of the three had to do with how good the model was.
 
 ## Budget
 

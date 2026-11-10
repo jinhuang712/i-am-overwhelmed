@@ -6,17 +6,17 @@ The order of work, agreed on 2026-11-11: first make the rubric something we can 
 
 ## The rubric, `eval/rubric-yesno.md`
 
-Found by reading the replies four lines hit
+Sent to the strong judge, not yet run
 
-- [ ] Two lines can be a script, free and exact: "a bullet point of two sentences or more" and "a file or a folder with no link". A script agreed with the judge on 17 of 20 replies for each.
-- [ ] Three lines stayed weak in every round, on Haiku. Try them on the strong judge before parking them, because each names a fault that matters:
-  - "states a guess or an inference as a fact": 15 of 20, twice. Already marked 🔎.
+- [ ] Three lines stayed weak in every round on Haiku, and each names a fault that matters. They are marked 🔎 now. See how steady Opus is on them:
+  - "states a guess or an inference as a fact": 15 of 20, twice.
   - "answers a plain fact and still closes with a question": 14 of 20, twice. This is the line behind the ending tree.
   - "makes the same point twice": 13, then 12 of 20. The owner wants the wording kept as it is.
 
 Not yet tested
 
 - [ ] Wrong hits and misses. No line has been checked for being right, only for being stable. Make replies with one fault planted in each, and their clean twins. Start with the red flags and the Listening deck: about 45 lines never fired on the replies we have.
+  - The agent began to write these replies by hand on 2026-11-11 and that step was stopped, so none exist. Decide how to get them: written by the owner, or produced by a model run under a budget.
 - [ ] The 10 lines marked 🔎 have never been answered by the strong judge. Check how stable Opus is on them.
 - [ ] Three lines a judge may lack the facts for: "hedges on a thing it knows", "takes the first explanation and tests no other", "states a guess or an inference as a fact".
 - [ ] One real run of `--rubric yesno` from end to end. The cheapest way: judge again the 12 replies of `results/2026-11-10-f97c872-vs-4f7adc2-opus-5-5`, about $1.50 to $2.50 by estimate.
@@ -26,7 +26,6 @@ Later
 
 - [ ] The four parked lines: find a wording that holds, or a stronger judge.
 - [ ] "three or more" in the line on chains of cause and effect is a number the agent picked.
-- [ ] Keep the judge's notes in `rubric_check.py`, so the reason for an answer can be read.
 - [ ] Make `yesno` the default rubric once the lines are checked.
 
 ## The rules, for when the rubric is ready
@@ -61,7 +60,6 @@ Open questions
 - [ ] The two trap tasks, `conflict-zh` and `conflict-agent-zh`, and the `system` field have never run.
 - [ ] The cap of 16,000 output tokens a reply has not been seen to stop a reply.
 - [ ] A task with a `CLAUDE.md` that collides with the plugin. The tool turns `CLAUDE.md` off today.
-- [ ] A smoke mode: every task once on a cheap model, no judging, to catch a broken path or a runaway task before a full run.
 - [ ] A watch on `raw/progress.log` that reports each quarter of a run to the owner.
 
 ## Release and upkeep

@@ -1,8 +1,8 @@
 """Judge blind samples with the rubric of yes or no questions, rubric-yesno.md.
 
 The rubric is cut into decks of related lines. A deck goes to a cheap judge several
-times, and the majority answer counts. Lines marked 🔎 need the tool calls checked
-against the reply, so they go to a strong judge.
+times, and the majority answer counts. Lines marked 🔎 go to a strong judge, and
+lines marked ⚙️ are answered by a script in checks.py.
 
 N and NA both mean "the reply did not do it", so an answer is stored as Y or N.
 Every call is cached in the task's blind/ folder: a resume asks only what is missing.
@@ -16,6 +16,7 @@ import subprocess
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
+from checks import scripted_answer
 from run import CLEAN_ENV, DISABLE_INSTALLED
 
 RUBRIC = Path(__file__).parent / "rubric-yesno.md"
@@ -45,7 +46,8 @@ def read_decks(text):
             m = ROW.match(line)
             if m:
                 lines.append({"id": m.group(1), "text": m.group(2), "kind": kind, "deck": name.strip(),
-                              "flag": "🚩" in m.group(2), "strong": "🔎" in m.group(2)})
+                              "flag": "🚩" in m.group(2), "strong": "🔎" in m.group(2),
+                              "script": "⚙️" in m.group(2)})
         decks.append({"name": name.strip(), "about": about, "who": who, "lines": lines})
     return decks
 
@@ -65,11 +67,12 @@ def split_decks(decks, limit=DECK_MAX):
 
 
 def for_judges(decks):
-    """Return (decks for the cheap judge, decks for the strong judge)."""
-    cheap = [{**d, "lines": [line for line in d["lines"] if not line["strong"]]} for d in decks]
+    """Return (decks for the cheap judge, decks for the strong judge). Lines for a script go to neither."""
+    cheap = [{**d, "lines": [line for line in d["lines"] if not line["strong"] and not line["script"]]}
+             for d in decks]
     strong = [{"name": STRONG_DECK, "who": "reply",
                "about": "Each line needs the tool calls and results checked against what the reply says.",
-               "lines": [line for d in decks for line in d["lines"] if line["strong"]]}]
+               "lines": [line for d in decks for line in d["lines"] if line["strong"] and not line["script"]]}]
     return split_decks(cheap), split_decks(strong)
 
 
@@ -117,7 +120,7 @@ def ask(deck, samples, k, model, cap, cache, budget):
         got = json.loads(hit.read_text())
         if isinstance(got, list):  # Written before 2026-11-11: one row per sample, in order.
             got = {s[0]: row for s, row in zip(samples, got)}
-        return "cached", got
+        return "cached", got.get("answers", got)  # Newer files also keep the judge's notes.
     if budget is None:
         return "planned", None
     if not budget.hold(cap):
@@ -136,7 +139,8 @@ def ask(deck, samples, k, model, cap, cache, budget):
         answers = parse(data.get("result"), [line["id"] for line in deck["lines"]], [s[0] for s in samples])
         if answers is None:
             return "failed", None
-        hit.write_text(json.dumps(answers))
+        notes = CSV_BLOCK.sub("", data.get("result") or "").strip()
+        hit.write_text(json.dumps({"answers": answers, "notes": notes, "deck": deck["name"]}, ensure_ascii=False))
         return "done", answers
     finally:
         budget.settle(cap, cost, kind="judge", deck=deck["name"], model=model, status="done" if answers else "failed")
@@ -178,6 +182,11 @@ def judge_task(root, cheap, strong, passes, strong_passes, budget, jobs=8):
         for label, row in (answers or {}).items():
             for line_id, v in row.items():
                 votes[(label, line_id)].append(v)
+    for d in decks:  # The lines a script answers: exact, and free.
+        for line in d["lines"]:
+            if line["script"]:
+                for label, text in samples:
+                    votes[(label, line["id"])] = [scripted_answer(line["text"], text)]
     ids = [line["id"] for d in decks for line in d["lines"]]
     rows = [",".join(["label", *ids])]
     rows += [",".join([label, *(majority(votes[(label, i)]) for i in ids)]) for label, _ in samples]

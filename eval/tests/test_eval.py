@@ -116,6 +116,22 @@ class EndToEnd(unittest.TestCase):
             self.assertEqual(len(paths), 2)
             self.assertTrue(all(os.path.isabs(p) for p in paths))
 
+    def test_smoke_runs_every_task_once_and_judges_nothing(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            stub = Path(tmp) / "bin"
+            stub.mkdir()
+            (stub / "claude").write_text(STUB)
+            (stub / "claude").chmod(stat.S_IRWXU)
+            env = {**os.environ, "PATH": f"{stub}:{os.environ['PATH']}", "STUB_LOG": str(Path(tmp) / "log"),
+                   "STUB_COST": "0.01", "STUB_JUDGE_COST": "0.01", "STUB_SLEEP": "0"}
+            cmd = [sys.executable, str(HERE / "eval.py"), "--smoke", "--tasks", "chat-en,chat-zh",
+                   "--budget", "5", "--out", str(Path(tmp) / "out")]
+            r = subprocess.run(cmd, env=env, capture_output=True, text=True)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            self.assertIn("every run came through", r.stdout)
+            self.assertEqual(len(calls(tmp)), 2)
+            self.assertTrue(all(c[c.index("--model") + 1] == "claude-haiku-5-5" for c in calls(tmp)))
+
     def test_dry_run_calls_nothing(self):
         with tempfile.TemporaryDirectory() as tmp:
             r = evaluate(tmp, None, "--dry-run")
@@ -224,6 +240,26 @@ class YesNo(unittest.TestCase):
         self.assertTrue(all(0 < len(d["lines"]) <= yesno.DECK_MAX for d in cheap + strong))
         self.assertTrue(all(line["strong"] for d in strong for line in d["lines"]))
         self.assertFalse(any(line["strong"] for d in cheap for line in d["lines"]))
+
+    def test_every_scripted_line_has_its_script(self):
+        from checks import SCRIPTED, long_bullet, scripted_answer, unlinked_file
+        lines = [line for d in yesno.read_decks(yesno.RUBRIC.read_text()) for line in d["lines"] if line["script"]]
+        self.assertEqual(len(lines), len(SCRIPTED))
+        for line in lines:
+            self.assertIn(scripted_answer(line["text"], "=== FINAL REPLY (turn-1) ===\nfine"), ("Y", "N"))
+        self.assertTrue(long_bullet("- **A**: one. Two."))
+        self.assertTrue(long_bullet("1. 第一句。第二句。"))
+        self.assertFalse(long_bullet("- **A**: only one, in `a.b()`"))
+        self.assertFalse(long_bullet("```\n- one. two.\n```"))
+        self.assertTrue(unlinked_file("see retry.py"))
+        self.assertFalse(unlinked_file("see [./retry.py](/w/retry.py)"))
+        self.assertFalse(unlinked_file("```\ncat retry.py\n```"))
+
+    def test_a_sample_gives_its_replies_without_the_tool_calls(self):
+        from checks import sample_replies
+        sample = ("USER TURN 1: hi\n\nTOOL CALL:\n{}\n\n=== FINAL REPLY (turn-1) ===\none\n\n"
+                  "TOOL RESULT:\nretry.py\n\n=== FINAL REPLY (turn-2) ===\ntwo\n")
+        self.assertEqual(sample_replies(sample), ["one", "two"])
 
     def test_majority_counts_na_as_no(self):
         self.assertEqual(yesno.majority(["Y", "Y", "N"]), "Y")

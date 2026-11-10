@@ -3,6 +3,7 @@
 Usage:
   python3 eval/eval.py --old REF [--new REF] --budget USD [options]
   python3 eval/eval.py --old REF --dry-run
+  python3 eval/eval.py --smoke --budget USD            (try the tool first: every task once, cheap model, no judging)
   python3 eval/eval.py --old REF --none --budget USD   (adds an arm with no plugin)
 
 Every task in tasks.json names the most one run of it may cost, and the limits add
@@ -63,7 +64,10 @@ def judge_caps(raw, names, left):
 
 def parse_args():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--old", required=True, help="git ref of the baseline")
+    p.add_argument("--old", help="git ref of the baseline")
+    p.add_argument("--smoke", action="store_true",
+                   help="try the tool before a full run: every task once, the new arm only, on the cheap model, "
+                        "with no judging. It catches a plugin that does not load, a task that runs away, a bad path")
     p.add_argument("--new", default="HEAD", help="git ref to compare (default HEAD)")
     p.add_argument("--none", action="store_true", help="add a third arm that runs with no plugin")
     p.add_argument("--budget", type=float, help="USD limit for the whole eval")
@@ -84,6 +88,10 @@ def parse_args():
     p.add_argument("--seed", type=int, help="fixed shuffle for the blind labels")
     p.add_argument("--out", help="results folder (default derived from refs and model)")
     a = p.parse_args()
+    if a.smoke:
+        a.old, a.runs, a.model, a.none = a.new, 1, a.cheap_judge, False
+    if not a.old:
+        p.error("--old is required, except with --smoke")
     if a.budget is None and not a.dry_run:
         p.error("--budget is required for a real run; use --dry-run to see the estimate")
     return a
@@ -94,7 +102,7 @@ def main():
     tasks = json.loads((HERE / "tasks.json").read_text())
     if a.tasks:
         tasks = [t for t in tasks if t["name"] in a.tasks.split(",")]
-    refs = {"old": a.old, "new": a.new}
+    refs = {"new": a.new} if a.smoke else {"old": a.old, "new": a.new}
     shas = {arm: short_sha(ref) for arm, ref in refs.items()}
     n_arms = len(refs) + (1 if a.none else 0)
     cost, known = estimate(tasks, a.model, n_arms, a.runs, past_costs(HERE / "results"))
@@ -115,7 +123,7 @@ def main():
     if a.dry_run:
         return
 
-    name = f"{date.today()}-{shas['old']}-vs-{shas['new']}-{a.model.removeprefix('claude-')}"
+    name = f"{date.today()}-{shas.get('old', 'smoke')}-vs-{shas['new']}-{a.model.removeprefix('claude-')}"
     # Absolute, because each run starts in its own folder: a relative --plugin-dir would point nowhere.
     out = (Path(a.out) if a.out else HERE / "results" / name).resolve()
     raw = out / "raw"
@@ -158,6 +166,14 @@ def main():
         statuses = list(ex.map(job, jobs))
     counts = {s: statuses.count(s) for s in sorted(set(statuses))}
     print("runs:", counts, f"spent ${budget.spent:.2f}", flush=True)
+
+    if a.smoke:  # No blind samples and no judge: the point is only whether every run comes through.
+        bad = [f"{t['name']} {arm}-{i}: {s}" for (t, arm, _, i), s in zip(jobs, statuses) if s != "done"]
+        print("smoke: " + ("every run came through" if not bad else "these runs did not come through"))
+        for line in bad:
+            print("  " + line)
+        print(f"spent ${budget.spent:.2f} of ${a.budget:.2f}. Raw output: {raw}")
+        sys.exit(1 if bad else 0)
 
     finished = {t["name"] for t in tasks
                 if (raw / t["name"]).exists() and blind_task(raw / t["name"], t["turns"], a.seed, t.get("system"))}
