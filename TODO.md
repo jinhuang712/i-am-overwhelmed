@@ -32,8 +32,8 @@ Later
 
 Faults the rubric check showed, on 20 replies
 
-- [ ] Three or more things in one sentence: 14 of 20, with and without the plugin. The rule "never chain parallel clauses; split them into bullets" is not followed.
-- [ ] File and folder names as links: nearly never followed.
+- [ ] Three or more things in one sentence: 14 of 20, with and without the plugin. The owner read the rule "never chain parallel clauses; split them into bullets" and its wording is right. It is not followed. Look again after an eval.
+- [ ] File and folder names as links: the rule now says "each time you name it". With the plugin, replies linked the first mention only. See after an eval whether the later mentions are linked.
 - [ ] Replies cut too short to follow. The rules ask for few lines and few words, and no line says that saving words must not cost the meaning.
 
 Carried over from the evals of 2026-11-10

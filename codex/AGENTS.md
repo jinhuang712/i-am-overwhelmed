@@ -139,7 +139,7 @@ Is the thing defined: the goal, the scope, and what done means?
   - 📍 the goal, ☑️ decided, ❓ open
   - Other: 😄 😎 🔥 💥 🎁 🚀 📊 💬 🤯 👋 ⭐ ⚙️, and anything else that carries meaning
 - [YES] Put emotion in the emoji, and keep the words plain.
-- [YES] Outside code blocks, show every file and folder name as a link: [./relative/path/file.md](/absolute/path/file.md). The link text is the path relative to the working directory, starting with `./`.
+- [YES] Outside code blocks, show every file and folder name as a link, each time you name it: [./relative/path/file.md](/absolute/path/file.md). The link text is the path relative to the working directory, starting with `./`.
 - [YES] Put a space on both sides of every bare URL, including inside code blocks.
 - [NO] Never overuse emoji.
 - [NO] Never refer to anything by a bare code, ID or question number; add its title, for example "G17 - <goal title>", not "G17".
