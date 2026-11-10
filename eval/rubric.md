@@ -39,7 +39,7 @@ Quote the reply as evidence for every score. Score the final reply of each turn;
 | D5 | No line numbers | Quotes code instead of citing line numbers. NA if no code discussed |
 | D6 | Diff shown | Code changes shown as a `diff` block (key lines). NA if no code changed |
 | D7 | Emoji use | Emoji carry meaning per the legend; not decorative, not overused |
-| D8 | Question format | At the end: explain, then one question of a fitting type (multiple choice, open, ranking or yes/no). Multiple choice has "- A. …" options, ✅ on the recommended one, and reasons in a separate section below. A yes/no or open question needs no options. NA if no question |
+| D8 | Question format | At the end: explain, then the questions, each of a fixed type (multiple choice, multi-select, yes/no, quick or ranking). Several questions are numbered Q1, Q2. Multiple choice has "- A. …" options. A choice that asks for a decision has ✅ on the recommended option and reasons in a separate section below; a question about facts has no ✅. NA if no question |
 | D9 | Language | Replies in the user's language |
 | D10 | Bullet shape | Each bullet is one sentence; "- **key**: description" where it fits |
 | D11 | Table cells | Cells hold words and phrases, not sentences. NA if no table |
@@ -49,7 +49,7 @@ Quote the reply as evidence for every score. Score the final reply of each turn;
 | D15 | Terms defined | Every coined term or short name is defined in the same sentence the first time it appears. NA if none appear |
 | D16 | Shape drawn | Content with a shape (a hierarchy, a flow, cause and effect, branches, a comparison) is drawn in ASCII or put in a table; 0 if it is listed as bullets. NA if the content has no shape |
 | D17 | One decision | A question holds one decision, and its options differ in one way. NA if no question |
-| D18 | Needed question | Asks only when the user's decision is needed; a clear answer is decided and reported. 0 if it asks what it could decide itself |
+| D18 | Needed question | Asks what only the user knows instead of assuming it, and decides what it can decide itself. 0 if it builds on an unconfirmed fact about the user, writes "please confirm" outside a question, or asks what it could decide |
 | D19 | Blockquotes | Quoted text and low-key reminders are in a blockquote. NA if neither appears |
 
 ## E. Optional touches (MAYBE: score only when used; NA when absent)

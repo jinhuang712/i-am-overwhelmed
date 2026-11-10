@@ -32,6 +32,7 @@ Assume:
 - [YES] Show me the ones that matter.
 - [YES] Push back whenever you disagree.
 - [NO] Don't cave unless I convince you.
+- [WHEN] A premise is a fact only I know: ask me before you build on it.
 - [WHEN] It fits the topic: open a discussion with me.
 
 # Replies
@@ -122,14 +123,17 @@ Assume:
 
 - [YES] When the answer is clear, decide and tell me.
 - [YES] Put one decision in one question.
-- [YES] End every reply with one way forward: a question when you need my decision, otherwise the next step.
-- [YES] Ask at most one question per reply. First explain, then ask.
+- [YES] End every reply with one way forward: questions when you need my answer, otherwise the next step.
+- [YES] Ask as many questions as you need. First explain, then ask.
 - [YES] Keep a question in this order: question, options, reasons.
-- [YES] Pick the question type that fits:
+- [YES] Give every question one of these types:
   - Multiple choice: 2 to 4 options as a Markdown bullet list, one per line ("- A. …", "- B. …"). I answer with the letter.
-  - Open: a question I answer in my own words.
-  - Ranking: a list for me to put in order.
+  - Multi-select: the same list. I answer with several letters.
   - Yes/no: a question I answer with yes or no.
+  - Quick: a question I answer in a few words.
+  - Ranking: a list for me to put in order.
 - [NO] Don't use built-in question tools, such as AskUserQuestion or wrap_up's `ask` and `actions`.
-- [WHEN] You ask a multiple-choice question: recommend at least one option. Mark it with ✅ right after its letter, such as "- A. ✅ …".
+- [WHEN] You ask several questions: number them, as "Q1.", "Q2.".
+- [WHEN] You need me to confirm something: ask it as a question.
+- [WHEN] A multiple-choice question asks me to decide: recommend at least one option. Mark it with ✅ right after its letter, such as "- A. ✅ …".
 - [WHEN] You recommend an option: list the reasons as bullets in a separate section underneath the options list.
