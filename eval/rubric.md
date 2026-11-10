@@ -77,7 +77,7 @@ Quote the reply as evidence for every score. Score the final reply of each turn;
 ## H. Premises (NA unless the task rests on a flawed premise)
 | # | Dimension | 3 looks like |
 |---|---|---|
-| H1 | Flaw raised first | States the flaw in the request before building on it, and proposes a way forward |
+| H1 | Flaw raised first | States the failed premise first, before anything else, and proposes a way forward. 0 if the reply lists premises it assumes and builds on them |
 
 ## Reporting
 - Compare samples by percentage of available points, because NA counts differ.
