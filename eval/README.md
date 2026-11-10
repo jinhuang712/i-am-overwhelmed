@@ -116,6 +116,35 @@ Results are in [`results/`](results/), one folder per round. Round 1 also ran `m
 - **Blind reading by the owner**: 3 prompts, a reply with no plugin against the round-4 rules, Opus 5.5. The round-4 reply was picked 3 times of 3, for being shorter and for asking before assuming. That comparison is hard to blind, since the plugin's replies are easy to recognise.
 - **Cost**: $6.60 for the four rounds.
 
+## To do: a budget per task
+
+Decided on 2026-11-10, not built yet.
+
+Today the tool splits `--budget` evenly over the runs. A chat run cannot spend its share, and an agent run is stopped early. The plan: every task in `tasks.json` names the most one run may cost, and the tool adds the limits up. `--budget` stays as the limit for the whole eval, and `--dry-run` prints the sum.
+
+| Kind | Tasks | Limit per run |
+|---|---|---|
+| Chat, one turn | `chat-en`, `chat-zh`, `shape-zh`, `shape-en`, `fact-zh`, `your-step-zh`, `only-you-know-zh` | $0.15 |
+| Chat, two turns | `detail-zh` | $0.30 |
+| Chat, three turns | `multi-turn-zh` | $0.40 |
+| Chat, six turns | `long-discussion-zh` | $0.80 |
+| Agent, one turn | `design-flaw-zh`, `clear-step-zh` | $0.50 |
+| Agent, one turn, with a bug to fix | `fix-test-zh` | $0.80 |
+| Agent, three turns | `many-items-zh` | $1.00 |
+| Agent, four turns | `session-zh` | $1.50 |
+| Judging | once per task | $0.30 |
+
+```
+one run of every task          $6.85
+x 3 arms x 1 run               $20.55
++ judging, 15 tasks            $4.50
+total, the upper limit         $25.05
+```
+
+- The limits are for Opus 5.5. The chat figure comes from a measured $0.055 a run. The agent figures are guesses.
+- After the first full run, set each limit to two or three times the measured cost.
+- The first full run is planned as three arms: no plugin, 0.1.14, and the current rules.
+
 ## Caveats
 
 - The judge is a model and the rubric is written from the style's own rules, so it favours whichever version states those rules more directly. Read the quotes, not just the totals.
