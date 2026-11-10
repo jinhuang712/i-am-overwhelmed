@@ -8,6 +8,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 ### Changed
 - Asking: the end of a reply is a decision tree, drawn in the rule file. No next step left: the reply ends with no question. The next step is the user's: it is stated. The next step is the agent's: a clear step is taken, and a step that needs the user's answer is asked. This replaces "end every reply with one way forward" and "when the answer is clear, decide and tell me". Before, a reply to a plain fact question still closed with a question.
 - Asking: a question is asked only when its answer changes the next step and only the user can give it.
+- Asking: a second tree says when to recommend. A question about a fact only the user knows carries no recommendation, even when its options are fixed. A decision of the user's carries at least one.
+- Asking: a recommended option comes first. Before, the ✅ moved between A and B.
 - `PHILOSOPHY.md`: "One rule per line" is now "Discrete rules". A rule with a shape is a drawing.
 - Eval: rubric D2 follows the tree, D18 also fails a question about going on with a clear step, and a `fact-zh` chat task asks a plain fact.
 

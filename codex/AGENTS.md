@@ -142,8 +142,16 @@ Is a next step left?
   - Yes/no: a question I answer with yes or no. Write the question alone, with no "(yes/no)" hint after it.
   - Quick: a question I answer in a few words.
   - Ranking: a list for me to put in order.
+- [YES] Recommend by this tree:
+
+```
+What does the question ask for?
+├── A fact only I know      list the options when they are fixed, with no recommendation
+└── A decision of mine      recommend at least one option
+```
+
 - [NO] Don't use built-in question tools; ask in the message itself.
 - [WHEN] You ask several questions: number them, as "Q1.", "Q2.".
 - [WHEN] You need me to confirm something: ask it as a question.
-- [WHEN] A multiple-choice question asks me to decide: recommend at least one option. Mark it with ✅ right after its letter, such as "- A. ✅ …".
+- [WHEN] You recommend an option: put it first, and mark it with ✅ right after its letter, such as "- A. ✅ …".
 - [WHEN] You recommend an option: list the reasons as bullets in a separate section underneath the options list.
