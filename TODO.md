@@ -17,7 +17,6 @@ Not yet tested
 
 - [ ] Wrong hits and misses. No line has been checked for being right, only for being stable. Make replies with one fault planted in each, and their clean twins. Start with the red flags and the Listening deck: about 45 lines never fired on the replies we have.
 - [ ] The 10 lines marked 🔎 have never been answered by the strong judge. Check how stable Opus is on them.
-- [ ] Watch "starts a job of several steps and does not say first how it will go about it". The owner keeps it. The agent's doubt: the ending tree says a clear step is taken and then reported, so the line may fault a reply that followed the rules. Read its hits after the next run.
 - [ ] Three lines a judge may lack the facts for: "hedges on a thing it knows", "takes the first explanation and tests no other", "states a guess or an inference as a fact".
 - [ ] One real run of `--rubric yesno` from end to end. The cheapest way: judge again the 12 replies of `results/2026-11-10-f97c872-vs-4f7adc2-opus-5-5`, about $1.50 to $2.50 by estimate.
 - [ ] More replies with no plugin. Only 17 are on disk, all on Opus.
@@ -37,6 +36,10 @@ Faults the rubric check showed, on 20 replies
 - [ ] File and folder names as links: nearly never followed.
 - [ ] Emoji that carry no meaning appear with the plugin only.
 - [ ] Replies cut too short to follow. The rules ask for few lines and few words, and no line says that saving words must not cost the meaning.
+
+From the owner, 2026-11-11
+
+- [ ] Say what you are about to do before a job of several steps. The rubric has the line; the rules do not. Today "the step is clear" is the agent's own call, so it starts, and a wrong reading shows only when the work is done. This is alignment between the user and the agent, not the model's skill. Telling is not asking: one line of plan, then the work, and the user can stop it.
 
 Carried over from the evals of 2026-11-10
 
