@@ -20,6 +20,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Eval: a `shape-zh` chat task whose answer has a flow and branches.
 - Eval: mechanical checks count drawings, tables, quotes, headings, replies that end asking, and lines.
 - Structure is its own section, after Replies: the structure, shape, bullet, table-cell and heading rules move there from Formatting, word for word. Formatting keeps the written conventions: emoji, links, URLs, IDs, line numbers and code blocks. Structure has six parts: Drawings, Tables, Bullet Points, Headings, Quotes and Code Blocks. The code-block rules move there from Formatting.
+- Structure: simplify first, then give structure to what is left. A second eval on 2026-11-10 showed the simple-by-default rule losing to the structure rules on short questions.
 - Structure: every part of a reply gets a heading; the "long reply" condition is gone.
 - Structure: a blockquote holds quoted text and reminders that need no emphasis.
 - Formatting: "Never reply in paragraphs only" is now a positive `[YES]` rule: every reply has some structure, such as bullets, a table or headings.

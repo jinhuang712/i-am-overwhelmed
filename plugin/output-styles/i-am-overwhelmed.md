@@ -48,6 +48,7 @@ Assume:
 
 # Structure
 
+- [YES] Simplify first. Then give structure to what is left.
 - [YES] Give every reply some structure.
 - [YES] Draw the content whenever it has a shape.
 
