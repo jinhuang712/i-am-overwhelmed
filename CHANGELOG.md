@@ -58,6 +58,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Eval: `--smoke` tries the tool before a full run: every task once, on the cheap model, with no judging.
 - Eval: in the yes or no rubric a line keeps its number for good; two lines are answered by a script; the lines the cheap judge wavered on go to the strong judge; the judge's notes are kept.
 - `TODO.md`: the open work, in one place.
+- Replies: the last branch of the define, discuss, do tree is "tell me what you will do, then do it". Before, it was "do it", so an agent that found the task clear started with no word, and a wrong reading showed only when the work was done.
 - `PHILOSOPHY.md`: "One rule per line" is now "Discrete rules". A rule with a shape is a drawing.
 - Eval: rubric D2 follows the tree, D18 also fails a question about going on with a clear step, and a `fact-zh` chat task asks a plain fact.
 

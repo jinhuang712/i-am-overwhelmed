@@ -50,7 +50,7 @@ Is the thing defined: the goal, the scope, and what done means?
 ├── No                         define it first, and tell me your definition
 └── Yes
     ├── Open points are left   discuss them with me
-    └── None are left          do it
+    └── None are left          tell me what you will do, then do it
 ```
 
 - [YES] Go deep on one thing only. Keep several things brief.

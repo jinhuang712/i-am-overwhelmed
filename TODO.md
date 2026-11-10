@@ -36,10 +36,6 @@ Faults the rubric check showed, on 20 replies
 - [ ] File and folder names as links: nearly never followed.
 - [ ] Replies cut too short to follow. The rules ask for few lines and few words, and no line says that saving words must not cost the meaning.
 
-From the owner, 2026-11-11
-
-- [ ] Say what you are about to do before a job of several steps. The rubric has the line; the rules do not. Today "the step is clear" is the agent's own call, so it starts, and a wrong reading shows only when the work is done. This is alignment between the user and the agent, not the model's skill. Telling is not asking: one line of plan, then the work, and the user can stop it.
-
 Carried over from the evals of 2026-11-10
 
 - [ ] "Anything you did not check is a guess" held in part: the next run still stated two inferences as facts.
