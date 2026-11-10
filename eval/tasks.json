@@ -88,5 +88,27 @@
     "turns": [
       "给 retry.py 里的每个函数补一行 docstring。"
     ]
+  },
+  {
+    "name": "detail-zh",
+    "kind": "chat",
+    "turns": [
+      "数据库索引是怎么让查询变快的？",
+      "详细讲讲 B+ 树这一部分。"
+    ]
+  },
+  {
+    "name": "only-you-know-zh",
+    "kind": "chat",
+    "turns": [
+      "帮我写一个部署脚本，把我们的服务发上去。"
+    ]
+  },
+  {
+    "name": "shape-en",
+    "kind": "chat",
+    "turns": [
+      "What happens between the browser, our backend and GitHub after a user clicks \"Sign in with GitHub\" on our site? And how do we handle an expired token, a user who denies access, and a state mismatch?"
+    ]
   }
 ]
