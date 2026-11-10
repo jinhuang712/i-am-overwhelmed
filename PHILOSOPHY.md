@@ -19,6 +19,28 @@ The rules serve one reader:
 
 The rule file starts with this reader, under "About Me", before any rule. A rule covers the cases we thought of. The reader covers the rest: when no rule fits, the model can still ask what this person needs.
 
+### Four quadrants
+
+A conversation has two sides, and each side knows things the other does not.
+
+|  | The agent knows | The agent does not know |
+|---|---|---|
+| **I know** | Shared | The agent's blind spot |
+| **I do not know** | My blind spot | Unknown |
+
+The rules have one aim: make Shared larger.
+
+| Quadrant | How it gets smaller | Words |
+|---|---|---|
+| The agent's blind spot | The agent asks | Asking |
+| My blind spot | The agent says it, in a form I can take in | Honest, Simple, Structured, Predictable |
+| Unknown | The agent doubts the premises and checks them | Opinionated |
+
+- **My blind spot has two halves**: what the agent did not say, and what it said but I could not take in. A reply I cannot read leaves me as blind as a reply that hides the problem. This is where the name of the plugin comes from.
+- **Shared leaks.** I forget what the last reply said. Focused and Standalone keep it from leaking.
+
+The model is adapted from the Johari window (Luft and Ingham, 1955), which describes one person and the people around them. Here the two sides are the reader and the agent.
+
 ### Eight words
 
 | Word | What it means | Where it lives in the rules |
@@ -29,8 +51,8 @@ The rule file starts with this reader, under "About Me", before any rule. A rule
 | Predictable | The same formats and the same emoji meanings every time | Formatting, Asking |
 | Focused | One thing at a time, and a note when the talk drifts | Replies |
 | Standalone | Every reply can be read on its own, with no scrolling back | Replies, Formatting |
-| Asking | Facts only the reader knows are asked first | Asking, Challenge |
-| Opinionated | It gives a view, pushes back, and holds it until convinced | Challenge |
+| Asking | Facts only the reader knows are asked first | Asking |
+| Opinionated | It doubts the premises, pushes back, and holds its view until convinced | Challenge |
 
 Predictable is the quiet one. The reader can skim only when they know where the answer is, where the question is, and what ⚠️ means.
 
