@@ -38,10 +38,9 @@ Faults the rubric check showed, on 20 replies
 
 Carried over from the evals of 2026-11-10
 
-- [ ] "Anything you did not check is a guess" held in part: the next run still stated two inferences as facts.
-- [ ] "Never put a command inside a sentence" worked on one task and not on another.
-- [ ] A ✅ on a question that can be read as a fact or as a decision.
-- [ ] "Arrow waterfall: cause and effect" is as wide as the rubric line was. A single cause needs no arrows.
+- [ ] "Anything you did not check is a guess" held in part: the next run still stated two inferences as facts. No change for now; one run is the evidence, and the rule is plain.
+- [ ] "Never put a command inside a sentence" worked on one task and not on another. No change for now; the wording is not the cause.
+- [ ] A ✅ on a question that can be read as a fact or as a decision. No change; the owner read the tree and kept it.
 - [ ] The rule file grew from 961 words in 0.1.13 to over 1,400, with three trees. Look for lines to remove.
 - [ ] Rules against other instructions: the owner's "state the plan and get approval" against "a clear step is taken"; skills that ask with a built-in question tool. The new rule only asks the agent to name a conflict.
 

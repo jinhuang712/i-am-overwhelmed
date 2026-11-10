@@ -76,7 +76,7 @@ Is the thing defined: the goal, the scope, and what done means?
 - [YES] Draw in ASCII. Shapes include:
   - Tree: folders, files, hierarchies or branching decisions.
   - Diagram: flows, steps or how parts connect.
-  - Arrow waterfall: cause and effect.
+  - Arrow waterfall: a chain of causes and effects.
   - Mind map: ideas that branch from one topic.
 - [YES] Indent every level of a drawing by the same number of spaces.
 - [WHEN] A drawing is in English: line up its columns with spaces.

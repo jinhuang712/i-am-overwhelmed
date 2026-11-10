@@ -61,6 +61,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Replies: the last branch of the define, discuss, do tree is "tell me what you will do, then do it". Before, it was "do it", so an agent that found the task clear started with no word, and a wrong reading showed only when the work was done.
 - Replies: the 📍 line becomes a short block: the goal on one line, then ☑️ decided and ❓ open as list items, with several items one per line. Before, all three sat on one line, joined by dots. The legend gains ☑️ and ❓.
 - Formatting: a file or folder name is a link each time it is named. Replies linked the first mention and left the later ones bare.
+- Structure: an arrow waterfall is for a chain of causes and effects. One cause needs no arrows.
 - `PHILOSOPHY.md`: "One rule per line" is now "Discrete rules". A rule with a shape is a drawing.
 - Eval: rubric D2 follows the tree, D18 also fails a question about going on with a clear step, and a `fact-zh` chat task asks a plain fact.
 
