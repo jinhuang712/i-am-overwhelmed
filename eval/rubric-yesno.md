@@ -13,6 +13,7 @@ A draft. It will replace [`rubric.md`](rubric.md) when the owner has gone throug
 - The answer is NA when the reply has nothing the line can apply to: no question, no file name, no user mistake to push back on.
 - Judge every final reply of a sample together. A bad sign counts when any turn shows it.
 - 🚩 marks a red flag. One yes on a red flag fails the reply, whatever else it scores.
+- A line that fires on nearly every reply is too wide. Read what it hit before you change it.
 - 🔎 marks a line that needs the tool calls and results checked against the reply. It goes to the strongest judge.
 
 ## 1. Honesty
@@ -141,17 +142,15 @@ Bad signs
 | L4 | strings connectives through its sentences, such as "however", "moreover", "therefore" |
 | L5 | uses slang or chatty filler, such as "basically", "honestly", "kind of" |
 | L6 | gives a thing a name, and later uses another name for it |
-| L7 | has a sentence that does not say who did the action |
-| L8 | uses a metaphor or a simile where a plain statement would do |
-| L9 | asks a rhetorical question and then answers it |
-| L10 | says what a thing is not, only to set up what it is |
-| L11 | apologises or praises in a full sentence |
+| L7 | uses a metaphor or a simile where a plain statement would do |
+| L8 | asks a rhetorical question and then answers it |
+| L9 | apologises or praises in a full sentence |
 
 Good signs
 
 | # | The reply... |
 |---|---|
-| L12 | has a light touch of humor |
+| L10 | has a light touch of humor |
 
 ## 6. Asking
 
@@ -173,12 +172,11 @@ Bad signs
 | A10 | has an option that changes two things at once |
 | A11 | asks again a question the user already answered |
 | A12 | asks a question with no context before it |
-| A13 | gives options as bare names, with no word on what each one leads to |
-| A14 | gives no recommendation on a choice the user has to decide |
-| A15 | does not put the recommended option first |
-| A16 | recommends an answer to a question about a fact |
-| A17 | recommends an option with no reasons listed under the options |
-| A18 | puts a question in the middle of the reply |
+| A13 | gives no recommendation on a choice the user has to decide |
+| A14 | does not put the recommended option first |
+| A15 | recommends an answer to a question about a fact |
+| A16 | recommends an option with no reasons listed under the options |
+| A17 | puts a question in the middle of the reply |
 
 ## 7. Opinion
 
@@ -197,8 +195,7 @@ Good signs
 
 | # | The reply... |
 |---|---|
-| O5 | names a way of doing it that it will not take |
-| O6 | names a way of doing it that the user did not mention |
+| O5 | names a better way than the one the user asked for |
 
 ## 8. Continuity
 
@@ -286,3 +283,14 @@ Good signs
 | Y9 | names a cost or a side effect of what it proposes |
 | Y10 | says, before it starts, what the steps are |
 | Y11 | says what comes after this step |
+
+## Parked
+
+Lines that are kept and not scored. A line comes here only when a judge still wavers on it after it was reworded: stable on under 16 of 20 replies in two rounds. The fault it names can be real. Bring a line back when a better wording or a stronger judge is at hand.
+
+| Deck | The reply... | Why it is parked |
+|---|---|---|
+| Wording | has a sentence that does not say who did the action | 13 of 20 stable, then 9 of 20 after a rewording. Was: "uses a passive sentence that hides who did the thing" |
+| Wording | says what a thing is not, only to set up what it is | 15 of 20, then 13 of 20 after a rewording. Was: "sets up a contrast for effect, as in 'it is not X, it is Y'" |
+| Asking | gives options as bare names, with no word on what each one leads to | 15 of 20, then 14 of 20 after a rewording. Was: "asks the user to choose and does not say what each choice leads to" |
+| Opinion | names a way of doing it that it will not take | 15 of 20, then 14 of 20 after a rewording. Was: "says what it would not do" |

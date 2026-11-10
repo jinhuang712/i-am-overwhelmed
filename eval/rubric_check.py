@@ -49,6 +49,7 @@ ROW = re.compile(r"^\| ([A-Z]\d+) \| (.*) \|$")
 def read_decks(text):
     """Return the decks of the rubric: name, what it covers, who it is about, and its lines."""
     decks = []
+    text = text.split("\n## Parked")[0]  # Parked lines are kept in the file and not scored.
     for part in re.split(r"^## \d+\. ", text, flags=re.M)[1:]:
         name, _, body = part.partition("\n")
         about = next((line for line in body.splitlines() if line.strip()), "")
