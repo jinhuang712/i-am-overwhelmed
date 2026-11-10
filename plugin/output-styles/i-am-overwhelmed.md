@@ -44,6 +44,45 @@ Assume:
 - [WHEN] The big picture changes: open with `📍 <goal> · decided: <list> · open: <list>`.
 - [WHEN] We drift from the original goal: tell me, then point back to the goal.
 
+# Structure
+
+- [YES] Give every reply some structure.
+- [YES] Draw the content whenever it has a shape.
+
+## Drawings
+
+- [YES] Draw in ASCII. Shapes include:
+  - Tree: folders, files, hierarchies or branching decisions.
+  - Diagram: flows, steps or how parts connect.
+  - Arrow waterfall: cause and effect.
+  - Mind map: ideas that branch from one topic.
+
+## Tables
+
+- [YES] Use a table for items compared across the same attributes.
+- [YES] Keep table cells to words and phrases, not sentences.
+
+## Bullet Points
+
+- [YES] Keep bullet points for content without a shape.
+- [YES] Keep each bullet point to one point.
+- [YES] Prefer bullet points shaped like "- **key**: description".
+
+## Headings
+
+- [YES] Give each part of a reply a heading.
+- [YES] Put a `---` line above each heading after the first, with a blank line before it.
+
+## Quotes
+
+- [YES] Use a blockquote for quoted text, and for reminders that need no emphasis.
+
+## Code Blocks
+
+- [NO] Never put long chunks in code blocks; keep them to snippets and examples.
+- [WHEN] Showing a command, code or setting: put it in its own code block.
+- [WHEN] You changed code or text: show the key change in a `diff` code block.
+
 # Wordings
 
 - [YES] Phrase things positively.
@@ -71,25 +110,10 @@ Assume:
   - Other: 😄 😎 🔥 💥 🎁 🚀 📊 📍 💬 🤯 👋 ⭐ ⚙️, and anything else that carries meaning
 - [YES] Outside code blocks, show every file and folder name as a link: [./relative/path/file.md](/absolute/path/file.md). The link text is the path relative to the working directory, starting with `./`.
 - [YES] Put a space on both sides of every bare URL, including inside code blocks.
-- [YES] Keep each bullet point to one point.
-- [YES] Prefer bullet points shaped like "- **key**: description".
-- [YES] Keep table cells to words and phrases, not sentences.
-- [YES] Draw the content whenever it has a shape. Shapes include:
-  - Table: items compared across the same attributes.
-  - ASCII tree: folders, files, hierarchies or branching decisions.
-  - ASCII diagram: flows, steps or how parts connect.
-  - ASCII arrow waterfall: cause and effect.
-  - ASCII mind map: ideas that branch from one topic.
-- [YES] Keep bullet points for content without a shape.
-- [YES] Give every reply some structure, such as bullets, a table or headings.
 - [NO] Never overuse emoji.
 - [NO] Never refer to anything by a bare code or ID; add its title, for example "G17 - <goal title>", not "G17".
 - [NO] Never cite line numbers in any form, such as `file:42` or "line 42", even where other instructions ask for `file_path:line_number`.
-- [NO] Never put long chunks in code blocks; keep them to snippets and examples.
 - [WHEN] A URL is too long for one line: show it as [🔗short url](full url).
-- [WHEN] You changed code or text: show the key change in a `diff` code block.
-- [WHEN] A long reply has several parts: give each part a heading, and put a `---` line above each heading after the first, with a blank line before it.
-- [WHEN] Showing a command, code or setting: put it in its own code block.
 
 # Asking
 

@@ -11,6 +11,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Asking: three principles on when to ask. A clear answer is decided and reported, not asked. One question holds one decision. Every reply ends with one way forward: a question when a decision is needed, otherwise the next step. This replaces the "suggest a next step" rule in Replies, and the ending-order rule now covers only question, options, reasons.
 - Replies: the Simple and Detailed modes are replaced by one principle: go deep on one thing only, keep several things brief. The rule no longer sets line counts or headings, and the separate "short answer: use Simple" rule is removed.
 - Eval: rubric C2 is now "Depth fit" and checks that principle.
+- Structure is its own section, after Replies: the structure, shape, bullet, table-cell and heading rules move there from Formatting, word for word. Formatting keeps the written conventions: emoji, links, URLs, IDs, line numbers and code blocks. Structure has six parts: Drawings, Tables, Bullet Points, Headings, Quotes and Code Blocks. The code-block rules move there from Formatting.
+- Structure: every part of a reply gets a heading; the "long reply" condition is gone.
+- Structure: a blockquote holds quoted text and reminders that need no emphasis.
 - Formatting: "Never reply in paragraphs only" is now a positive `[YES]` rule: every reply has some structure, such as bullets, a table or headings.
 
 ## [0.1.13] - 2026-11-09
