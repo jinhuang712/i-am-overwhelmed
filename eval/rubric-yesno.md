@@ -50,18 +50,17 @@ Bad signs
 
 | # | The reply... |
 |---|---|
-| C1 | starts with a greeting or an acknowledgement |
-| C2 | starts with praise for the user or the question |
-| C3 | lists the steps it took before the result |
-| C4 | makes the same point twice |
-| C5 | closes with a recap of what it already said |
-| C6 | explains two or more things in detail in one reply |
-| C7 | answers one of several things and does not list what is left |
-| C8 | gives a verdict with no reason |
-| C9 | writes sentences with no subject or no verb |
-| C10 | is in a language other than the user's |
-| C11 | leaves a part of the question with no answer, and does not say so |
-| C12 | answers a question the user did not ask, in place of the one asked |
+| C1 | starts with praise for the user or the question |
+| C2 | lists the steps it took before the result |
+| C3 | makes the same point twice |
+| C4 | closes with a recap of what it already said |
+| C5 | explains two or more things in detail in one reply |
+| C6 | answers one of several things and does not list what is left |
+| C7 | gives a verdict with no reason |
+| C8 | writes sentences with no subject or no verb |
+| C9 | is in a language other than the user's |
+| C10 | leaves a part of the question with no answer, and does not say so |
+| C11 | answers a question the user did not ask, in place of the one asked |
 
 ## 3. Structure
 
@@ -125,7 +124,7 @@ Good signs
 
 | # | The reply... |
 |---|---|
-| M12 | marks a warning with ⚠️, a recommendation with ✅, or its own mistake with 😓 |
+| M12 | marks a warning with ⚠️ or a recommendation with ✅ |
 
 ## 5. Wording
 
