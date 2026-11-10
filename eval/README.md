@@ -47,7 +47,7 @@ task limits: $27.75 for the runs + $5.10 for judging = $32.85 at most
 - **Every call has a cap**: each `claude -p` gets `--max-budget-usd`, and it holds that cap before it starts.
 - **A stop stays usable**: whole rounds run first, so the arms stay balanced. Finished runs still get judged, and the report says the eval is incomplete.
 - **A resume keeps judging money only for open tasks**: a task with all its runs done and judged needs none. Before, a resume kept $0.30 back for every task again, and a costly run could not get its hold.
-- **A run can be followed**: every finished run prints a line and adds it to `progress.log` in the results folder. `tail -f` shows it live.
+- **A run can be followed**: every finished run prints a line and adds it to `raw/progress.log` in the results folder. `tail -f` shows it live.
 - **Resume is the same command**: finished runs are kept. Their cost stays in `ledger.jsonl`, so the limit applies across both sessions.
 - **More money is a higher `--budget`**: new runs join the old ones, and the task is judged again.
 - **One reply is capped at 16,000 output tokens**: `--max-budget-usd` is checked between turns only. On 2026-11-10 a chat task that wanted tools wrote 128,000 tokens of made-up tool calls in one reply, $2.56 a run against a $0.15 limit. A task that makes the model want to look at files must be an `agent` task with a fixture.

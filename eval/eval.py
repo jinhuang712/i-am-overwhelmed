@@ -129,7 +129,7 @@ def main():
     jobs = [(t, arm, plugin, i) for i in range(1, a.runs + 1) for t in tasks for arm, plugin in arms.items()]
 
     done, lock = [0], threading.Lock()
-    (out / "progress.log").parent.mkdir(parents=True, exist_ok=True)
+    raw.mkdir(parents=True, exist_ok=True)
 
     def job(j):
         t, arm, plugin, i = j
@@ -138,7 +138,7 @@ def main():
             done[0] += 1
             line = f"{done[0]}/{len(jobs)} ${budget.spent:.2f} {status}: {t['name']} {arm}-{i}"
             print(line, flush=True)
-            with (out / "progress.log").open("a") as f:
+            with (raw / "progress.log").open("a") as f:
                 f.write(line + "\n")
         return status
 
