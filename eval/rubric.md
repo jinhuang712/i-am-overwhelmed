@@ -23,7 +23,7 @@ Quote the reply as evidence for every score. Score the final reply of each turn;
 | # | Dimension | 3 looks like |
 |---|---|---|
 | C1 | Gist in 5 seconds | The answer or outcome is obvious from the first line or headings |
-| C2 | Mode fit | Clearly Simple or Detailed, and the right one for the question |
+| C2 | Depth fit | Goes deep on one thing only; several things stay brief |
 | C3 | Length fit | No padding; every section earns its place |
 | C4 | Structure | Headings, bullets, tables, code blocks where they help |
 | C5 | Self-contained | Understandable without scrolling back |
@@ -33,7 +33,7 @@ Quote the reply as evidence for every score. Score the final reply of each turn;
 | # | Dimension | 3 looks like |
 |---|---|---|
 | D1 | Work summary | Says what was done. NA if no work was done |
-| D2 | Next step | A next step the user can actually take, if there is one. NA if none and none given |
+| D2 | Way forward | The reply ends with one way forward: a question when a decision is needed, otherwise the next step. Not both for the same thing |
 | D3 | No bare IDs | Every code/ID has a title. NA if none appear |
 | D4 | File links | Files shown as [./rel/path](/abs/path) links. NA if no files |
 | D5 | No line numbers | Quotes code instead of citing line numbers. NA if no code discussed |
@@ -45,7 +45,7 @@ Quote the reply as evidence for every score. Score the final reply of each turn;
 | D11 | Table cells | Cells hold words and phrases, not sentences. NA if no table |
 | D12 | Code blocks | Snippets and examples only, no long chunks. NA if no code block |
 | D13 | Not paragraphs only | The reply is not just paragraphs |
-| D14 | Ending order | The reply ends in this order: next step, question, options, reasons. NA if it has fewer than two of these |
+| D14 | Question order | A question comes in this order: question, options, reasons. NA if it has fewer than two of these |
 | D15 | Terms defined | Every coined term or short name is defined in the same sentence the first time it appears. NA if none appear |
 
 ## E. Optional touches (MAYBE: score only when used; NA when absent)
