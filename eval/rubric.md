@@ -60,7 +60,7 @@ Score 0 when the reply does it, 3 when it does not, NA when it could not come up
 | D4 | File links | Files shown as [./rel/path](/abs/path) links. NA if no files |
 | D5 | No line numbers | Quotes code instead of citing line numbers. NA if no code discussed |
 | D6 | Diff shown | Code changes shown as a `diff` block (key lines). NA if no code changed |
-| D7 | Emoji use | Emoji carry meaning per the legend; not decorative, not overused |
+| D7 | Emoji use | Emoji carry meaning per the legend and carry the emotion; not decorative, not overused. 0 if the emotion is written out in words, such as an apology or praise of several words |
 | D8 | Question format | At the end: explain, then the questions, each of a fixed type (multiple choice, multi-select, yes/no, quick or ranking). Several questions are numbered Q1, Q2. Multiple choice has "- A. …" options. NA if no question |
 | D9 | Language | Replies in the user's language |
 | D10 | Bullet shape | Each bullet is one sentence; "- **key**: description" where it fits |

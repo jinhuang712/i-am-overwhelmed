@@ -60,6 +60,18 @@ The most important word comes first.
 
 Predictable is the quiet one. The reader can skim only when they know where the answer is, where the question is, and what ⚠️ means.
 
+### Emotion goes in the emoji
+
+A model wants to show how it feels about what it says: sorry, pleased, doubtful. In words, that feeling becomes padding, hedging and softening.
+
+```
+the model wants to show a feeling
+├── in words       the reply gets longer and softer
+└── in an emoji    the words stay straight
+```
+
+So the rules give the feeling a place of its own. An emoji carries it, with a fixed meaning, and the sentence next to it says the plain thing. We believe this is what lets "never soften" and "say things straight" hold.
+
 ### A reply is also context
 
 A reply has two readers: you, now, and the model, on every later turn.
