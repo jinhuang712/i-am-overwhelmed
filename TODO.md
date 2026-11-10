@@ -34,7 +34,7 @@ Faults the rubric check showed, on 20 replies
 
 - [ ] Three or more things in one sentence: 14 of 20, with and without the plugin. The owner read the rule "never chain parallel clauses; split them into bullets" and its wording is right. It is not followed. Look again after an eval.
 - [ ] File and folder names as links: the rule now says "each time you name it". With the plugin, replies linked the first mention only. See after an eval whether the later mentions are linked.
-- [ ] Replies cut too short to follow. The rules ask for few lines and few words, and no line says that saving words must not cost the meaning.
+- [ ] Replies cut too short to follow. No rule is changed for now: the replies that were too short came from a session on the old rules, so nothing points at one line. Three rubric lines watch for it ("a verdict with no reason", "a coined term not explained again", "a number and a short label"). Change a rule only when an eval shows them rising under the new rules.
 
 Carried over from the evals of 2026-11-10
 
