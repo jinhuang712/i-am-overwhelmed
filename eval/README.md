@@ -42,7 +42,7 @@ Results go to `eval/results/<date>-<old>-vs-<new>-<model>/`: `report.md`, `ledge
 | [`blind.py`](blind.py) | Blind samples and the label mapping |
 | [`judge.py`](judge.py) | The model judge |
 | [`score.py`](score.py) | Unblinds and summarises the scores |
-| [`checks.py`](checks.py) | Mechanical checks: line references, negations, paragraph-only replies. Free |
+| [`checks.py`](checks.py) | Mechanical checks: line references, negations, paragraph-only replies, 📍 anchors, drawings, tables, quotes, headings, replies that end asking, and lines. Free |
 | [`tasks.json`](tasks.json) | The tasks. A task with several `turns` continues one session |
 | [`rubric.md`](rubric.md) | The dimensions |
 | [`fixtures/`](fixtures/) | `many-bugs/`, `free-text-due/`, and their answer keys, kept outside them |

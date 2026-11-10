@@ -1,0 +1,16 @@
+name: tests
+
+# Runs the eval tool's tests with a stub `claude`, so they cost nothing.
+# They also check that codex/AGENTS.md matches the output style.
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+  unittest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run the tests
+        run: python3 -m unittest discover eval/tests

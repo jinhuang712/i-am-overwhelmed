@@ -15,6 +15,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Asking: a clear answer is decided and reported, not asked. One question holds one decision. Anything that needs confirmation is asked as a question.
 - Challenge: a premise that is a fact only the user knows is asked before it is built on.
 - Install: `install-claude.sh` installs the Claude Code plugin, or updates it when it is already there. Then it checks that the plugin is installed and enabled. `--check` runs only the check.
+- CI: a `tests` workflow runs the eval tests. A new test fails when `codex/AGENTS.md` and the output style differ in more than the frontmatter and the question-tools line.
 - Eval: rubric items D16 (shape drawn), D17 (one decision), D18 (needed question) and D19 (blockquotes); a `shape-zh` chat task; mechanical checks that count drawings, tables, quotes, headings, replies that end asking, and lines.
 
 ### Changed

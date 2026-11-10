@@ -53,6 +53,7 @@ examples/                                  raw outputs behind the README
 - [YES] Name the commit `Release <version>: <summary>`.
 - [YES] Keep one description across `plugin.json`, `marketplace.json` and the output style.
 - [WHEN] A change touches `plugin/` or `.claude-plugin/`: expect the plugin load check in CI.
+- [WHEN] You push or open a pull request: expect CI to run the eval tests, which also compare the two rule files.
 
 # Privacy
 

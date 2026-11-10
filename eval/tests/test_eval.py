@@ -217,5 +217,20 @@ class Parsing(unittest.TestCase):
         self.assertEqual(shaped["lines"], 12)
 
 
+class RuleFiles(unittest.TestCase):
+    def test_codex_rules_match_the_output_style(self):
+        """The two rule files differ only in the frontmatter and the question-tools line."""
+        repo = Path(__file__).resolve().parents[2]
+        style = (repo / "plugin/output-styles/i-am-overwhelmed.md").read_text()
+        codex = (repo / "codex/AGENTS.md").read_text()
+        body = style.split("---\n", 2)[2].lstrip("\n")
+        tools = "question tools"
+        style_lines = [line for line in body.splitlines() if tools not in line]
+        codex_lines = [line for line in codex.splitlines() if tools not in line]
+        self.assertEqual(style_lines, codex_lines)
+        self.assertEqual(sum(tools in line for line in body.splitlines()), 1)
+        self.assertEqual(sum(tools in line for line in codex.splitlines()), 1)
+
+
 if __name__ == "__main__":
     unittest.main()
