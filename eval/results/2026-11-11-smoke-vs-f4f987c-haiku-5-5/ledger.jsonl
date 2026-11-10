@@ -1,0 +1,6 @@
+{"kind": "run", "task": "fix-test-zh", "arm": "new", "run": 1, "model": "claude-haiku-5-5", "status": "done", "cost": 0.009115360000000001}
+{"kind": "run", "task": "design-flaw-zh", "arm": "new", "run": 1, "model": "claude-haiku-5-5", "status": "done", "cost": 0.0071245499999999995}
+{"kind": "run", "task": "fact-zh", "arm": "new", "run": 1, "model": "claude-haiku-5-5", "status": "done", "cost": 0.00067772}
+{"kind": "run", "task": "chat-zh", "arm": "new", "run": 1, "model": "claude-haiku-5-5", "status": "done", "cost": 0.0007311199999999999}
+{"kind": "run", "task": "shape-zh", "arm": "new", "run": 1, "model": "claude-haiku-5-5", "status": "done", "cost": 0.00136262}
+{"kind": "run", "task": "better-way-zh", "arm": "new", "run": 1, "model": "claude-haiku-5-5", "status": "done", "cost": 0.00058422}

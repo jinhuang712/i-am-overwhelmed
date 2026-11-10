@@ -22,6 +22,9 @@ Every line says how strong its evidence is. "One case" means one reply or one ru
 
 - **Withdrawn: "the plugin brings emoji with no meaning".** The first rubric check showed 7 of 14 plugin replies against 0 of 6 without. A reading of the hits showed the judge was wrong: it did not know the legend, and replies with no plugin simply have no emoji. The line on sentences with no subject was dropped as well, since the owner does not count that as a fault. (2026-11-11)
 
+- **A press release, as a one-line style, puts the result and its worst catch in the first line.** "todo.py gets a sort command, but only 1 of 6 todos can be sorted by date." Its work report on `fix-test-zh` was a third as long as ours and still said that only local runs were checked. Its costs: it wrote advice as a decision the team had announced, cited unnamed sources ("业内人士"), put a dateline and "（完）" on every reply, and ran about 1.4 times longer on chat tasks. The rubric scored it 46% to 71% against our 92% to 98%; the rubric is written from our rules, so read the replies, not the gap. (2026-11-11, Opus 5.5, 6 tasks, 2 runs each, results in `results/2026-11-11-press-release-vs-dece4e0-opus-5-5/`)
+- **A one-line style broke 4 of 12 replies.** Two showed the model's thinking at the top, one was empty, one began with a stray letter. Our rules broke none of 12 on the same tasks. The cause is not known. (2026-11-11, Opus 5.5)
+
 ## About judging
 
 - **A 0 to 3 scale is not stable.** Opus 5.5 judged the same four replies three times on ten rubric lines: 54% of the rule items and 58% of the degree items got the same score all three times. Nearly every miss was one point. Every eval before 2026-11-10 used this scale. (2026-11-10, 40 scores)
@@ -64,6 +67,8 @@ Every line says how strong its evidence is. "One case" means one reply or one ru
 - **Smoke the tool on a cheap model before a full run.** The three faults that lost $17.79 had nothing to do with how good the model is.
 - **Estimate from a measured price.** A guess for Haiku judging was ten times too high, and a guess for Sonnet was half the real cost.
 - **Measured on 2026-11-10, Opus 5.5 at medium effort**: a one-turn chat run $0.02 to $0.07, a four-turn agent run $1.18, a full run of 17 tasks and three arms $11.2, its judging $2.45.
+
+- **Any style can be an arm.** Commit it as the body of the output style on a throwaway branch, keep the frontmatter, and pass the branch as `--old`. The style's text is then the only difference. (2026-11-11)
 
 ## What we do not know yet
 

@@ -1,0 +1,30 @@
+{"kind": "run", "task": "chat-zh", "arm": "new", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.0491236}
+{"kind": "run", "task": "chat-zh", "arm": "old", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.0300116}
+{"kind": "run", "task": "design-flaw-zh", "arm": "new", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.17561200000000002}
+{"kind": "run", "task": "shape-zh", "arm": "new", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.0495666}
+{"kind": "run", "task": "design-flaw-zh", "arm": "old", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.20215}
+{"kind": "run", "task": "fact-zh", "arm": "old", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.021759}
+{"kind": "run", "task": "fix-test-zh", "arm": "old", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.1614218}
+{"kind": "run", "task": "shape-zh", "arm": "old", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.045675}
+{"kind": "run", "task": "fix-test-zh", "arm": "new", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.2223598}
+{"kind": "run", "task": "fact-zh", "arm": "new", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.0396402}
+{"kind": "run", "task": "better-way-zh", "arm": "old", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.020839}
+{"kind": "run", "task": "better-way-zh", "arm": "new", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.043831}
+{"kind": "run", "task": "chat-zh", "arm": "new", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.044427}
+{"kind": "run", "task": "chat-zh", "arm": "old", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.027555}
+{"kind": "run", "task": "fix-test-zh", "arm": "old", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.15779540000000003}
+{"kind": "run", "task": "shape-zh", "arm": "new", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.0507466}
+{"kind": "run", "task": "fact-zh", "arm": "old", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.015124199999999999}
+{"kind": "run", "task": "shape-zh", "arm": "old", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.043794599999999996}
+{"kind": "run", "task": "fact-zh", "arm": "new", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.0397562}
+{"kind": "run", "task": "better-way-zh", "arm": "old", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.014355}
+{"kind": "run", "task": "better-way-zh", "arm": "new", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.038847}
+{"kind": "run", "task": "fix-test-zh", "arm": "new", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.218339}
+{"kind": "run", "task": "design-flaw-zh", "arm": "old", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.19208540000000002}
+{"kind": "run", "task": "design-flaw-zh", "arm": "new", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.170217}
+{"kind": "judge", "task": "fix-test-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.1730298}
+{"kind": "judge", "task": "chat-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.1002852}
+{"kind": "judge", "task": "design-flaw-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.1493492}
+{"kind": "judge", "task": "shape-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.1387212}
+{"kind": "judge", "task": "fact-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.11742140000000001}
+{"kind": "judge", "task": "better-way-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.08851719999999999}
