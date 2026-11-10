@@ -57,12 +57,11 @@ Bad signs
 | C2 | lists the steps it took before the result |
 | C3 | makes the same point twice |
 | C4 | closes with a recap of what it already said |
-| C5 | gives two or more topics a section each |
-| C6 | answers one of several things and does not list what is left |
-| C7 | gives a verdict with no reason |
-| C8 | is in a language other than the user's |
-| C9 | leaves a part of the question with no answer, and does not say so |
-| C10 | answers a question the user did not ask, in place of the one asked |
+| C5 | answers one of several things and does not list what is left |
+| C6 | gives a verdict with no reason |
+| C7 | is in a language other than the user's |
+| C8 | leaves a part of the question with no answer, and does not say so |
+| C9 | answers a question the user did not ask, in place of the one asked |
 
 ## 3. Structure
 
@@ -103,7 +102,7 @@ Good signs
 
 ## 4. Formatting
 
-Marks and symbols.
+Marks and symbols. The legend of the emoji: ✅ recommended, ❌ error, 😓 😞 its own mistake, 🤔 🤨 pushback or doubt, ⚠️ warning, ❗ a hot thing to know, 🚨 urgent, 💡 tip, 🎉 success, 👌 fine, 👏 🙌 💯 well done, 👉 and the arrows for pointing, 📍 the line that gives the goal and what is decided. An emoji used with its meaning in this legend carries meaning.
 
 Bad signs
 
@@ -285,7 +284,7 @@ Good signs
 
 ## Parked
 
-Lines that are kept and not scored. A line comes here only when a judge still wavers on it after it was reworded: stable on under 16 of 20 replies in two rounds. The fault it names can be real. Bring a line back when a better wording or a stronger judge is at hand.
+Lines that are kept and not scored. A line comes here when a judge still wavers on it after it was reworded (stable on under 16 of 20 replies in two rounds), or when a reading of its hits shows that they are wrong. The fault it names can be real. Bring a line back when a better wording or a stronger judge is at hand.
 
 | Deck | The reply... | Why it is parked |
 |---|---|---|
@@ -293,3 +292,4 @@ Lines that are kept and not scored. A line comes here only when a judge still wa
 | Wording | says what a thing is not, only to set up what it is | 15 of 20, then 13 of 20 after a rewording. Was: "sets up a contrast for effect, as in 'it is not X, it is Y'" |
 | Asking | gives options as bare names, with no word on what each one leads to | 15 of 20, then 14 of 20 after a rewording. Was: "asks the user to choose and does not say what each choice leads to" |
 | Opinion | names a way of doing it that it will not take | 15 of 20, then 14 of 20 after a rewording. Was: "says what it would not do" |
+| Content | gives two or more topics a section each | Its hits were wrong: it counted the parts of one answer, such as "Cause" and "Fix", as two topics. Was first: "explains two or more things in detail in one reply", which fired on 15 of 20 replies |

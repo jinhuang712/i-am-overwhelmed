@@ -6,12 +6,10 @@ The order of work, agreed on 2026-11-11: first make the rubric something we can 
 
 ## The rubric, `eval/rubric-yesno.md`
 
-To check by reading the replies a line hit, at no cost
+Found by reading the replies four lines hit
 
-- [ ] "has a bullet point of two sentences or more": 11 of 20. Real fault or too strict?
-- [ ] "gives two or more topics a section each": 9 of 20. How does the judge count topics?
-- [ ] "uses an emoji that carries no meaning": 7 of 14 with the plugin, 0 of 6 without. Are the hits real?
-- [ ] "names a file or a folder with no link": 10 of 11. Confirm the rule is simply not followed.
+- [ ] Two lines can be a script, free and exact: "a bullet point of two sentences or more" and "a file or a folder with no link". A script agreed with the judge on 17 of 20 replies for each.
+- [ ] See whether the emoji lines hold now that the Formatting deck carries the legend.
 
 Not yet tested
 
@@ -34,7 +32,6 @@ Faults the rubric check showed, on 20 replies
 
 - [ ] Three or more things in one sentence: 14 of 20, with and without the plugin. The rule "never chain parallel clauses; split them into bullets" is not followed.
 - [ ] File and folder names as links: nearly never followed.
-- [ ] Emoji that carry no meaning appear with the plugin only.
 - [ ] Replies cut too short to follow. The rules ask for few lines and few words, and no line says that saving words must not cost the meaning.
 
 From the owner, 2026-11-11

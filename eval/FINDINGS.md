@@ -20,7 +20,7 @@ Every line says how strong its evidence is. "One case" means one reply or one ru
 - **Three or more things still sit inside one sentence.** The line fired on 14 of 20 replies, with and without the plugin. "Never chain parallel clauses; split them into bullets" is in the rules and is not followed. (2026-11-11, one judge)
 - **A rule that reads oddly to the owner is not added.** Three lines that were derived from a list of language habits were dropped the moment they were read. Rules come from a real annoyance first. (2026-11-10)
 
-- **A rubric that knows nothing of the plugin still sees the plugin's faults.** With the plugin, 4 of 14 replies had sentences with no subject or no verb, against 0 of 6 without it, and 7 of 14 used an emoji with no meaning, against 0 of 6. Small numbers, one judge. (2026-11-11)
+- **Withdrawn: "the plugin brings emoji with no meaning".** The first rubric check showed 7 of 14 plugin replies against 0 of 6 without. A reading of the hits showed the judge was wrong: it did not know the legend, and replies with no plugin simply have no emoji. The line on sentences with no subject was dropped as well, since the owner does not count that as a fault. (2026-11-11)
 
 ## About judging
 
@@ -35,6 +35,8 @@ Every line says how strong its evidence is. "One case" means one reply or one ru
 - **A plainer wording can make a line too wide.** "Names a better way than the one the user asked for" became "names a way the user did not mention": steadier, and it fired on 19 of 20 replies. It was put back. (2026-11-11)
 - **The judge's noise has a size.** The same 20 replies, judged three times: one reply's score moved by 2.4 points on average and 6.1 at most, and the mean of the 20 moved by 1 point. A gap of 1 or 2 points between two versions, on one pass, is nothing. (2026-11-11)
 - **A line that most replies meet still tells something.** A good sign on 17 of 20 replies marks the 3 that lack it. A line stops telling only when every reply answers the same. The agent wanted three such good signs out, and the owner kept them. (2026-11-11)
+- **Read what a line hit before you trust its count.** Four lines were checked against the replies they fired on. Two held: "a bullet point of two sentences or more" and "a file with no link" agreed with a simple script on 17 of 20 replies each, so the faults are real and common. Two did not: "an emoji that carries no meaning" fired on 🤔 and ⚠️ used as the legend says, because the judge had never been shown the legend; and "two or more topics a section each" counted "Cause" and "Fix" of one answer as two topics. (2026-11-11)
+- **A judge knows only what the deck tells it.** A line that leans on something outside the reply, such as the emoji legend, needs that thing written into the deck. (2026-11-11)
 - **A line can be stable and still too wide.** "Writes cause and effect as prose, with no arrows" fired on 18 of 19 replies, and "a bullet point holds two points" on 17 of 19. A line that fires on nearly every reply tells nothing. (2026-11-11)
 - **A third of the lines never fired on 20 replies**, most red flags among them. They are not wrong; the replies on disk hold no case for them. A line needs a reply that breaks it before it can be checked. (2026-11-11)
 - **The questions that stay unstable need the transcript checked**, such as "claims match evidence" and "a closing recap". Both models got 2 or 3 of 4 on them.
