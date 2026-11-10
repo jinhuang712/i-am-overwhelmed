@@ -1,0 +1,9 @@
+{"kind": "run", "task": "fix-test-zh", "arm": "new", "run": 1, "model": "claude-haiku-5-5", "status": "done", "cost": 0.01082451}
+{"kind": "run", "task": "fact-zh", "arm": "new", "run": 1, "model": "claude-haiku-5-5", "status": "done", "cost": 0.00205988}
+{"kind": "run", "task": "your-step-zh", "arm": "new", "run": 1, "model": "claude-haiku-5-5", "status": "done", "cost": 0.00196302}
+{"kind": "run", "task": "better-way-zh", "arm": "new", "run": 1, "model": "claude-haiku-5-5", "status": "done", "cost": 0.0014881200000000001}
+{"kind": "run", "task": "chat-zh", "arm": "new", "run": 1, "model": "claude-haiku-5-5", "status": "done", "cost": 0.00169652}
+{"kind": "run", "task": "multi-turn-zh", "arm": "new", "run": 1, "model": "claude-haiku-5-5", "status": "done", "cost": 0.00796233}
+{"kind": "run", "task": "design-flaw-zh", "arm": "new", "run": 1, "model": "claude-haiku-5-5", "status": "done", "cost": 0.01012124}
+{"kind": "run", "task": "shape-zh", "arm": "new", "run": 1, "model": "claude-haiku-5-5", "status": "done", "cost": 0.00196202}
+{"kind": "run", "task": "detail-zh", "arm": "new", "run": 1, "model": "claude-haiku-5-5", "status": "done", "cost": 0.00598372}
