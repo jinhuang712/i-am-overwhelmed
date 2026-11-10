@@ -73,5 +73,20 @@
     "turns": [
       "HTTP 的 401 和 403 有什么区别？"
     ]
+  },
+  {
+    "name": "your-step-zh",
+    "kind": "chat",
+    "turns": [
+      "我在 macOS 上用 Homebrew 装了 nginx，刚改完配置文件，怎么让它生效？"
+    ]
+  },
+  {
+    "name": "clear-step-zh",
+    "kind": "agent",
+    "fixture": "examples/fixture",
+    "turns": [
+      "给 retry.py 里的每个函数补一行 docstring。"
+    ]
   }
 ]

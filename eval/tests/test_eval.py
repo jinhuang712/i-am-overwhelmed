@@ -200,6 +200,7 @@ class Parsing(unittest.TestCase):
         self.assertIn("F4", dimensions())
         self.assertIn("D15", dimensions())
         self.assertIn("D19", dimensions())
+        self.assertIn("D20", dimensions())
         self.assertNotIn("E2", dimensions())
 
     def test_measure(self):
@@ -215,6 +216,15 @@ class Parsing(unittest.TestCase):
         self.assertEqual(shaped["headings"], 1)
         self.assertEqual(shaped["ends_asking"], 1)
         self.assertEqual(shaped["lines"], 12)
+
+    def test_ends_asking(self):
+        fact = "401 asks: who are you?\n- **401**: no identity.\n- **403**: no permission."
+        self.assertEqual(measure([fact])["ends_asking"], 0)
+        numbered = "Explained.\n\nQ1. Which one?\n- A. ✅ this\n- B. that\n\nReasons:\n- one\n- two\n- three"
+        self.assertEqual(measure([numbered])["ends_asking"], 1)
+        options = "Which one\n- A. this\n- B. that"
+        self.assertEqual(measure([options])["ends_asking"], 1)
+        self.assertEqual(measure(["Done.\n\nGo on?"])["ends_asking"], 1)
 
 
 class RuleFiles(unittest.TestCase):

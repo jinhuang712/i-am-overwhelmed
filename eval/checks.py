@@ -18,7 +18,10 @@ DRAWN = re.compile(r"[├└│┌┐┘─]|→|↓|->|-->")
 TABLE = re.compile(r"^\|.*\|\s*$", re.M)
 QUOTE = re.compile(r"^> ", re.M)
 HEADING = re.compile(r"^#+ ", re.M)
-QUESTION = re.compile(r"[?？]")
+
+
+NUMBERED = re.compile(r"^[*_]*Q\d+\.")
+OPTION = re.compile(r"^[-*] A\. ")
 
 
 def drawn(reply):
@@ -27,9 +30,18 @@ def drawn(reply):
 
 
 def asks(reply):
-    """True when one of the last lines outside code blocks holds a question mark."""
-    lines = [line for line in FENCE.sub("", reply).splitlines() if line.strip()]
-    return bool(QUESTION.search("\n".join(lines[-10:])))
+    """True when the reply ends with a question.
+
+    A question is a numbered "Q1." line, an option list ("- A. ...") near the end,
+    or a question mark at the end of one of the last two lines. A question mark
+    higher up is part of the answer, such as a quoted "who are you?".
+    """
+    lines = [line.strip() for line in FENCE.sub("", reply).splitlines() if line.strip()]
+    if any(NUMBERED.match(line) for line in lines):
+        return True
+    if any(OPTION.match(line) for line in lines[-12:]):
+        return True
+    return any(line.rstrip("*_ ").endswith(("?", "？")) for line in lines[-2:])
 
 
 def final_replies(run_dir):

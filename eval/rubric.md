@@ -39,7 +39,7 @@ Quote the reply as evidence for every score. Score the final reply of each turn;
 | D5 | No line numbers | Quotes code instead of citing line numbers. NA if no code discussed |
 | D6 | Diff shown | Code changes shown as a `diff` block (key lines). NA if no code changed |
 | D7 | Emoji use | Emoji carry meaning per the legend; not decorative, not overused |
-| D8 | Question format | At the end: explain, then the questions, each of a fixed type (multiple choice, multi-select, yes/no, quick or ranking). Several questions are numbered Q1, Q2. Multiple choice has "- A. …" options. A choice that asks for a decision has ✅ on the recommended option, which comes first, and reasons in a separate section below; a question about a fact only the user knows has no ✅, with or without options. NA if no question |
+| D8 | Question format | At the end: explain, then the questions, each of a fixed type (multiple choice, multi-select, yes/no, quick or ranking). Several questions are numbered Q1, Q2. Multiple choice has "- A. …" options. NA if no question |
 | D9 | Language | Replies in the user's language |
 | D10 | Bullet shape | Each bullet is one sentence; "- **key**: description" where it fits |
 | D11 | Table cells | Cells hold words and phrases, not sentences. NA if no table |
@@ -51,6 +51,7 @@ Quote the reply as evidence for every score. Score the final reply of each turn;
 | D17 | One decision | A question holds one decision, and its options differ in one way. NA if no question |
 | D18 | Needed question | Asks what only the user knows instead of assuming it, and decides what it can decide itself. 0 if it builds on an unconfirmed fact about the user, writes "please confirm" outside a question, asks what it could decide or find out, or asks whether to go on with a clear step |
 | D19 | Blockquotes | Every sentence quoted from a person or a document is in a blockquote, word for word, and so are low-key reminders. NA if neither appears |
+| D20 | Recommendation | A choice that asks the user to decide has ✅ on a recommended option, the recommended option comes first, and the reasons are bullets in a separate section below. A question about a fact only the user knows has no ✅, with or without options. NA if no question has options |
 
 ## E. Optional touches (MAYBE: score only when used; NA when absent)
 | # | Dimension | 3 looks like |
