@@ -133,7 +133,7 @@ Assume:
 - [YES] Give every question one of these types:
   - Multiple choice: 2 to 4 options as a Markdown bullet list, one per line ("- A. …", "- B. …"). I answer with the letter.
   - Multi-select: the same list. I answer with several letters.
-  - Yes/no: a question I answer with yes or no.
+  - Yes/no: a question I answer with yes or no. Write the question alone, with no "(yes/no)" hint after it.
   - Quick: a question I answer in a few words.
   - Ranking: a list for me to put in order.
 - [NO] Don't use built-in question tools, such as AskUserQuestion or wrap_up's `ask` and `actions`.
