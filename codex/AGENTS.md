@@ -54,8 +54,9 @@ Assume:
   - Arrow waterfall: cause and effect.
   - Mind map: ideas that branch from one topic.
 - [YES] Indent every level of a drawing by the same number of spaces.
+- [WHEN] A drawing is in English: line up its columns with spaces.
 - [WHEN] A drawing has boxes or columns that must line up: write it in English only. Wide characters, such as Chinese and emoji, break the alignment.
-- [WHEN] A drawing has Chinese labels: put each note right after its label, with one space and no padding.
+- [WHEN] A drawing has Chinese labels: leave its columns unpadded. To line the notes up, put each note on the next line, as "├── <label>" then "│   → <note>".
 
 ## Tables
 

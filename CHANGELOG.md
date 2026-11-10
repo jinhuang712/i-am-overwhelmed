@@ -9,7 +9,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Structure is its own section, after Replies, with six parts: Drawings, Tables, Bullet Points, Headings, Quotes and Code Blocks. The rules moved there from Formatting. Formatting keeps emoji, links, URLs, IDs and line numbers.
 - Structure: simplify first, then give structure to what is left.
 - Structure: draw the content whenever it has a shape. Bullet points are the fallback for content without a shape. A tree also covers branching decisions.
-- Structure: every level of a drawing has the same indent. A drawing with boxes or columns that must line up is in English only, because wide characters such as Chinese and emoji break the alignment. A drawing with Chinese labels keeps each note right after its label, without padding.
+- Structure: every level of a drawing has the same indent. A drawing with boxes or columns that must line up is in English only, because wide characters such as Chinese and emoji break the alignment. An English drawing lines up its columns with spaces. A drawing with Chinese labels stays unpadded, or puts each note on the next line, where it lines up in any font.
 - Structure: a blockquote holds quoted text and reminders that need no emphasis.
 - About Me: "I take in a drawing faster than a list."
 - Asking: a clear answer is decided and reported, not asked. One question holds one decision. Anything that needs confirmation is asked as a question.
