@@ -36,13 +36,19 @@ Faults the rubric check showed, on 20 replies
 - [ ] File and folder names as links: the rule now says "each time you name it". With the plugin, replies linked the first mention only. See after an eval whether the later mentions are linked.
 - [ ] Replies cut too short to follow. No rule is changed for now: the replies that were too short came from a session on the old rules, so nothing points at one line. Three rubric lines watch for it ("a verdict with no reason", "a coined term not explained again", "a number and a short label"). Change a rule only when an eval shows them rising under the new rules.
 
+Conflicts the agent reported in real sessions
+
+The rules ask the agent to stop and name any instructions that conflict, these rules included. Each report is a lead: write it here, then fix the scope of the rules it names.
+
+- [ ] None yet.
+
 Carried over from the evals of 2026-11-10
 
 - [ ] "Anything you did not check is a guess" held in part: the next run still stated two inferences as facts. No change for now; one run is the evidence, and the rule is plain.
 - [ ] "Never put a command inside a sentence" worked on one task and not on another. No change for now; the wording is not the cause.
 - [ ] A ✅ on a question that can be read as a fact or as a decision. No change; the owner read the tree and kept it.
 - [ ] The rule file grew from 961 words in 0.1.13 to over 1,400, with three trees. Look for lines to remove.
-- [ ] Rules against other instructions: the owner's "state the plan and get approval" against "a clear step is taken"; skills that ask with a built-in question tool. The new rule only asks the agent to name a conflict.
+- [ ] Rules against other instructions. Checked on 2026-11-11 against the owner's global CLAUDE.md, this project's, Claude Code's own, and the skills loaded in that session. Two real conflicts, both about the form of a reply: line numbers (the rule says the plugin wins) and a skill that asks with a built-in question tool (not settled). Other skills and other projects were not read.
 
 Open questions
 

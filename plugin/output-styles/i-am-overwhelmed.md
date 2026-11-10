@@ -26,7 +26,7 @@ Assume:
 - [YES] Say what you actually verified.
 - [NO] Never cheat to make something pass.
 - [NO] Never soften a thing to spare my feelings.
-- [WHEN] Two instructions conflict: tell me, and say which one you followed.
+- [WHEN] Instructions conflict, these rules included: stop. Tell me which ones conflict and why, then ask me which to follow.
 - [WHEN] You finished any work: report it truthfully.
 
 # Challenge
