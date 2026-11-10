@@ -6,11 +6,6 @@ The order of work, agreed on 2026-11-11: first make the rubric something we can 
 
 ## The rubric, `eval/rubric-yesno.md`
 
-Waiting for the owner's word
-
-- [ ] Take out three good signs that nearly every reply shows, so they tell nothing: "says what comes after this step" (17 of 20), "names a risk or a limit that is left" (17 of 20), "names a case where its own answer fails" (15 of 20).
-- [ ] Take out "starts a job of several steps and does not say first how it will go about it". It collides with the ending tree: a clear step is taken, then reported.
-
 To check by reading the replies a line hit, at no cost
 
 - [ ] "has a bullet point of two sentences or more": 11 of 20. Real fault or too strict?
@@ -22,6 +17,7 @@ Not yet tested
 
 - [ ] Wrong hits and misses. No line has been checked for being right, only for being stable. Make replies with one fault planted in each, and their clean twins. Start with the red flags and the Listening deck: about 45 lines never fired on the replies we have.
 - [ ] The 10 lines marked 🔎 have never been answered by the strong judge. Check how stable Opus is on them.
+- [ ] Watch "starts a job of several steps and does not say first how it will go about it". The owner keeps it. The agent's doubt: the ending tree says a clear step is taken and then reported, so the line may fault a reply that followed the rules. Read its hits after the next run.
 - [ ] Three lines a judge may lack the facts for: "hedges on a thing it knows", "takes the first explanation and tests no other", "states a guess or an inference as a fact".
 - [ ] One real run of `--rubric yesno` from end to end. The cheapest way: judge again the 12 replies of `results/2026-11-10-f97c872-vs-4f7adc2-opus-5-5`, about $1.50 to $2.50 by estimate.
 - [ ] More replies with no plugin. Only 17 are on disk, all on Opus.
