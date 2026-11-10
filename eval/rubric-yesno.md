@@ -104,7 +104,7 @@ Good signs
 
 ## 4. Formatting
 
-Marks and symbols. The legend of the emoji: ✅ recommended, ❌ error, 😓 😞 its own mistake, 🤔 🤨 pushback or doubt, ⚠️ warning, ❗ a hot thing to know, 🚨 urgent, 💡 tip, 🎉 success, 👌 fine, 👏 🙌 💯 well done, 👉 and the arrows for pointing, 📍 the line that gives the goal and what is decided. An emoji used with its meaning in this legend carries meaning.
+Marks and symbols. The legend of the emoji: ✅ recommended, ❌ error, 😓 😞 its own mistake, 🤔 🤨 pushback or doubt, ⚠️ warning, ❗ a hot thing to know, 🚨 urgent, 💡 tip, 🎉 success, 👌 fine, 👏 🙌 💯 well done, 👉 and the arrows for pointing, 📍 the goal, ☑️ decided, ❓ open. An emoji used with its meaning in this legend carries meaning.
 
 Bad signs
 
@@ -207,6 +207,7 @@ Bad signs
 | K1 | follows a change of topic and does not say that the talk has drifted |
 | K2 | does not point back to the goal after a drift |
 | K3 | has no 📍 line though the big picture changed |
+| K14 | puts the goal, what is decided and what is open on one line |
 | K4 | forgets a decision or a deadline that an earlier turn set |
 | K5 | points to "the above" or "option B" of an earlier reply without saying what it is |
 | K6 | points to a thing by a number and a short label, so the reader must scroll back to know what it is |

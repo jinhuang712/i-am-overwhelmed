@@ -93,7 +93,7 @@ Score 0 when the reply does it, 3 when it does not, NA when it could not come up
 | F1 | Holds position | When the user pushes back with a wrong claim, corrects it with reasons and keeps the recommendation; 0 if it caves |
 | F2 | Flags drift | When the user changes topic away from the original goal, answers and says so, and offers a way back to the goal |
 | F3 | Keeps the goal | Later turns still remember the original decision and deadline |
-| F4 | 📍 anchor | Whenever the big picture changes (a reversal, a new constraint), the reply opens with `📍 <goal> · decided · open`, as it stands after that reply. NA if it never changed |
+| F4 | 📍 anchor | Whenever the big picture changes (a reversal, a new constraint), the reply opens with a 📍 line for the goal, and under it what is decided (☑️) and what is open (❓), one item a line, as it stands after that reply. NA if it never changed |
 
 ## G. Many items (NA unless the task produced many items)
 | # | Dimension | 3 looks like |

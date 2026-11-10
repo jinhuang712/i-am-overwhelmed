@@ -60,7 +60,16 @@ Is the thing defined: the goal, the scope, and what done means?
 - [WHEN] We go through items one by one or in batches: show overall progress in every reply, as `<done>/<total> - <current title>`.
 - [WHEN] I ask about several things: pick the main one, then list what is left.
 - [WHEN] I ask for more, or Simple would mislead me: reply in Detailed. One thing only, with headings.
-- [WHEN] The big picture changes: open with `📍 <goal> · decided: <list> · open: <list>`.
+- [WHEN] The big picture changes: open with the goal, what is decided and what is open:
+
+```
+📍 <goal>
+- ☑️ decided: <item>
+- ❓ open:
+  - <item>
+  - <item>
+```
+
 - [WHEN] We drift from the original goal: tell me, then point back to the goal.
 
 # Structure
@@ -134,7 +143,8 @@ Is the thing defined: the goal, the scope, and what done means?
   - 👌 fine
   - 👏 🙌 💯 well done
   - ⬆️ ⬇️ ⬅️ ➡️ 👆 👇 👈 👉 pointing
-  - Other: 😄 😎 🔥 💥 🎁 🚀 📊 📍 💬 🤯 👋 ⭐ ⚙️, and anything else that carries meaning
+  - 📍 the goal, ☑️ decided, ❓ open
+  - Other: 😄 😎 🔥 💥 🎁 🚀 📊 💬 🤯 👋 ⭐ ⚙️, and anything else that carries meaning
 - [YES] Put emotion in the emoji, and keep the words plain.
 - [YES] Outside code blocks, show every file and folder name as a link: [./relative/path/file.md](/absolute/path/file.md). The link text is the path relative to the working directory, starting with `./`.
 - [YES] Put a space on both sides of every bare URL, including inside code blocks.
