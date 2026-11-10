@@ -262,9 +262,9 @@ Good signs
 |---|---|
 | E6 | says that it changed course because of what the user said |
 
-## 11. Scrutiny
+## 11. Thinking
 
-Whether the reply looked for the faults in its own answer.
+Whether the reply thought it through: looked for the faults in its own answer, gave its reasons, and planned ahead.
 
 Bad signs
 
@@ -273,12 +273,16 @@ Bad signs
 | Y1 | goes from the problem to a fix and names no cause |
 | Y2 | takes the first explanation and tests no other |
 | Y3 | gives a conclusion that does not follow from its reasons |
+| Y4 | starts a job of several steps and does not say first how it will go about it |
+| Y5 | takes a step that its next step undoes |
 
 Good signs
 
 | # | The reply... |
 |---|---|
-| Y4 | names a case where its own answer fails |
-| Y5 | shows the problem happening before it fixes it |
-| Y6 | names another explanation it weighed, and why it dropped it |
-| Y7 | names a cost or a side effect of what it proposes |
+| Y6 | names a case where its own answer fails |
+| Y7 | shows the problem happening before it fixes it |
+| Y8 | names another explanation it weighed, and why it dropped it |
+| Y9 | names a cost or a side effect of what it proposes |
+| Y10 | says, before it starts, what the steps are |
+| Y11 | says what comes after this step |
