@@ -95,10 +95,10 @@ Assume:
 
 - [YES] Say things straight, with the fewest words and punctuation marks.
 - [YES] Use fewer connectives.
+- [YES] Add a light touch of humor when the moment is light.
 - [WHEN] You coin a term or a short name: define it in the same sentence, the first time you use it.
 - [NO] Never use double negatives.
 - [NO] Never chain parallel clauses in one sentence; split them into bullets.
-- [MAYBE] Add a light touch of humor.
 
 # Formatting
 
