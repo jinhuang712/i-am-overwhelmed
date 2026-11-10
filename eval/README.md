@@ -32,18 +32,19 @@ A report from before 2026-11-10 has no red flag columns, so it shows `red flags:
 
 ## Budget
 
-Every task in [`tasks.json`](tasks.json) has a `budget`: the most one run of it may cost. A one-turn chat run gets $0.10 to $0.20 and the four-turn agent run gets $3.50, so a cheap task cannot starve a costly one. Judging keeps $0.30 for each task. `--dry-run` adds the limits up:
+Every task in [`tasks.json`](tasks.json) has a `budget`: the most one run of it may cost. A one-turn chat run gets $0.10 to $0.20 and the four-turn agent run gets $1.80, so a cheap task cannot starve a costly one. Judging keeps $0.30 for each task. `--dry-run` adds the limits up:
 
 ```
-task limits: $32.85 for the runs + $5.10 for judging = $37.95 at most
+task limits: $27.75 for the runs + $5.10 for judging = $32.85 at most
 ```
 
-`--budget` is still the limit for the whole eval. Each limit is about 2.5 times the highest cost measured on Opus 5.5 in the full run of 2026-11-10. That run, with three arms and one run each, cost about $11 for the runs and $2.50 for judging when nothing went wrong. Set the limits again when the model changes.
+`--budget` is still the limit for the whole eval. Each limit is about 2.5 times the highest cost measured, and 1.3 times for the costly `session-zh`, on Opus 5.5 in the full run of 2026-11-10. That run, with three arms and one run each, cost about $11 for the runs and $2.50 for judging when nothing went wrong. Set the limits again when the model changes.
 
 
 - **The limit covers everything**: runs and judging. $0.30 a task is kept back for judging, and never more than half the limit.
 - **Every call has a cap**: each `claude -p` gets `--max-budget-usd`, and it holds that cap before it starts.
 - **A stop stays usable**: whole rounds run first, so the arms stay balanced. Finished runs still get judged, and the report says the eval is incomplete.
+- **A resume keeps judging money only for open tasks**: a task with all its runs done and judged needs none. Before, a resume kept $0.30 back for every task again, and a costly run could not get its hold.
 - **Resume is the same command**: finished runs are kept. Their cost stays in `ledger.jsonl`, so the limit applies across both sessions.
 - **More money is a higher `--budget`**: new runs join the old ones, and the task is judged again.
 - **One reply is capped at 16,000 output tokens**: `--max-budget-usd` is checked between turns only. On 2026-11-10 a chat task that wanted tools wrote 128,000 tokens of made-up tool calls in one reply, $2.56 a run against a $0.15 limit. A task that makes the model want to look at files must be an `agent` task with a fixture.

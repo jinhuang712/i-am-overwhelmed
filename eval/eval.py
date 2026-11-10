@@ -113,6 +113,17 @@ def main():
     if a.none:
         arms["none"] = None
 
+    def settled(t):
+        """True when every run of the task is done and judged, so it needs no more money."""
+        root = raw / t["name"]
+        runs_done = all((root / f"{arm}-{i}" / "done.json").exists()
+                        for arm in arms for i in range(1, a.runs + 1))
+        return runs_done and (root / "blind" / "scores.csv").exists()
+
+    # On a resume, judging money is kept back only for the tasks that still need a judge.
+    open_tasks = [t for t in tasks if not settled(t)]
+    run_pool = a.budget - min(JUDGE_PER_TASK * len(open_tasks), a.budget * JUDGE_MAX_SHARE)
+
     # Whole rounds come first, so a stop leaves the arms balanced.
     jobs = [(t, arm, plugin, i) for i in range(1, a.runs + 1) for t in tasks for arm, plugin in arms.items()]
 

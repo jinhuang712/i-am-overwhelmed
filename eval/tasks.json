@@ -129,7 +129,7 @@
   {
     "name": "session-zh",
     "kind": "agent",
-    "budget": 3.5,
+    "budget": 1.8,
     "fixture": "examples/fixture",
     "turns": [
       "CI 红了，test_retry 时好时坏。让 CI 变绿。",
