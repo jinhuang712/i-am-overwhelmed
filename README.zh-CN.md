@@ -64,29 +64,25 @@ Install i-am-overwhelmed by following https://raw.githubusercontent.com/jinhuang
 
 </details>
 
-**打开**（17 行）
+**打开**（14 行）
 
-> 我的意见：**进程内缓存**。100 人的量级，Redis 多出一个要部署、监控、排障的服务，收益很小 🤔
+> 我的意见：**先用进程内字典** ✅ 100 人的量，Redis 多出来的是一个要部署、监控、维护的服务，收益很小。
 >
 > ```
-> 服务跑几个进程？
-> ├── 1 个进程
-> │   → 进程内缓存（加 TTL 过期）
-> ├── 多个进程，数据短暂不一致可接受
-> │   → 仍用进程内缓存，TTL 设短一点
-> └── 多个进程，要求强一致，或缓存要撑过重启
->     → 上 Redis
+> 缓存放哪里？
+> ├── 单进程部署
+> │   → 进程内字典（加 TTL 和大小上限）
+> ├── 多进程或多实例，且能接受数据短暂不一致
+> │   → 还是进程内字典，TTL 设短一点
+> └── 多实例，且要求数据强一致或要共享
+>     → 这时才上 Redis
 > ```
 >
-> - **TTL**: 字典必须带过期时间和大小上限，否则会无限增长。我没看你的代码，猜你用 Python 的话，`cachetools.TTLCache` 现成可用。
-> - **代价**: 重启后缓存清空，多进程各存一份。内部小工具通常没问题。
+> - 💡 **别手写 dict**：Python 用 `cachetools.TTLCache`，Node 用 `lru-cache`，这样过期和内存上限都自带。
+> - ⚠️ **重启即清空**：进程内缓存随进程消失，重启后第一批请求会慢一点，内部工具通常无所谓。
+> - 🤔 **我在猜的部分**：我不知道你的部署方式。多 worker（比如 gunicorn 开 4 个进程）时，每个进程各有一份缓存，数据可能不一致。
 >
-> Q1. 你的服务会跑几个进程或实例？
-> - A. 1 个
-> - B. 多个，短暂不一致可以接受
-> - C. 多个，必须一致
->
-> 答个字母，我按你的情况给具体写法。
+> Q1. 这个工具跑几个进程？（几个字回答即可，例如"单进程"或"gunicorn 4 个 worker"）
 
 ### 「用户在我们的网站上点『用 GitHub 登录』之后，浏览器、我们的后端和 GitHub 之间是怎么一步步交互的？」
 
@@ -150,37 +146,41 @@ Install i-am-overwhelmed by following https://raw.githubusercontent.com/jinhuang
 
 </details>
 
-**打开**（25 行）
+**打开**（29 行）
 
-> 这是标准的 OAuth 2.0 授权码流程（Authorization Code flow）。我假设你们用的是它，而不是 device flow 或纯前端 PKCE，这是我的推测，没看你们的代码。
+> 我假设你们用的是标准的 OAuth 2.0 授权码流程（authorization code flow，先拿一次性 code，再换 token），我没看你们的代码，所以这是推测。
 >
 > ```
-> Browser            Backend              GitHub
->    |                  |                    |
-> 1  |-- GET /auth/github -->|                |
-> 2  |<-- 302 + state ------|                 |
-> 3  |-- GET /login/oauth/authorize?client_id&state -->|
-> 4  |<-------- login + consent page ------------------|
-> 5  |<-------- 302 redirect_uri?code&state ------------|
-> 6  |-- GET /callback?code&state -->|          |
-> 7  |                  |-- POST access_token (code + secret) -->|
-> 8  |                  |<-- access_token ------|
-> 9  |                  |-- GET api.github.com/user -->|
-> 10 |                  |<-- profile -----------|
-> 11 |<-- Set-Cookie session + 302 home --|      |
+> 浏览器        我们的后端        GitHub
+>   │ 1 点「用 GitHub 登录」 │
+>   ├──────────▶│
+>   │ 2 302 跳转到 GitHub    │
+>   │◀──────────┤  (带 client_id, redirect_uri, scope, state)
+>   │ 3 跳去 GitHub，用户登录并点「授权」
+>   ├───────────────────────▶│
+>   │ 4 302 回到我们的回调地址
+>   │◀───────────────────────┤  (带 code, state)
+>   │ 5 浏览器访问回调地址
+>   ├──────────▶│
+>   │           │ 6 用 code + client_secret 换 token
+>   │           ├───────────▶│
+>   │           │ 7 返回 access_token
+>   │           │◀───────────┤
+>   │           │ 8 用 token 调 GET /user 拿用户信息
+>   │           ├───────────▶│
+>   │ 9 建立登录态 (Set-Cookie)
+>   │◀──────────┤
 > ```
 >
-> - **state**：第 2 步生成并存进 session，第 6 步必须比对，防 CSRF。
-> - **code**：一次性、很短命，经过浏览器，所以本身不值钱。
-> - **client_secret**：只在第 7 步由后端发出，浏览器永远看不到。
-> - **access_token**：留在后端，浏览器只拿到你们自己的 session cookie。
+> - **前台通道**（1-5）：走浏览器，所有内容用户都看得到，所以只放 `code`（一次性授权码），不放密钥。
+> - **后台通道**（6-8）：后端直连 GitHub，`client_secret` 和 `access_token` 只在这里出现。
+> - **`state`**：后端在第 2 步生成的随机串，第 5 步必须核对一致，用来防 CSRF（跨站请求伪造）。
 >
-> 💡 最常见的坑是漏掉 state 校验，或把 access_token 返回给前端。
+> ❗ 最常见的坑：漏掉 `state` 校验，或把 `client_secret` 放进前端。
 >
-> 想深入哪一块？
-> - A. ✅ state 与 CSRF 防护怎么做
-> - B. 第 11 步之后用户与 session 的关联
-> - C. 排查回调失败（redirect_uri 不匹配等）
+> Q1. 你想接着深入哪一块？（快问快答）
+> - 我推荐先讲 `state` 校验的实现，因为它最容易漏，也最容易出安全问题。
+> - 或者讲 token 换到之后，怎么和你们自己的用户表绑定。
 
 ### 「CI 红了，因为 test_retry 时不时失败。把 CI 弄绿。」
 
@@ -204,25 +204,31 @@ Install i-am-overwhelmed by following https://raw.githubusercontent.com/jinhuang
 
 </details>
 
-**打开**（12 行）
+**打开**（19 行）
 
-> ✅ `test_retry` 不再随机失败了:改完后连跑 300 次,0 次失败。
+> 🎉 `test_retry` 修好了，连续跑 200 次全部通过。
 >
-> **原因**:[./retry.py](/tmp/work/retry.py) 重试前会随机睡眠,两次重试最多睡 0.06 秒。而测试断言总耗时小于 0.03 秒,所以随机到较长的睡眠时就失败。
->
-> **改动**:在 [./tests/test_retry.py](/tmp/work/tests/test_retry.py) 里把 `time.sleep` 换成 mock,不再比较真实耗时,改为检查每次睡眠的时长在退避范围内。`retry.py` 没动。
->
-> ```diff
-> -        self.assertLess(time.monotonic() - start, 0.03)
-> +        delays = [c.args[0] for c in sleep.call_args_list]
-> +        self.assertEqual(len(delays), 2)
-> +        self.assertTrue(0 <= delays[0] <= 0.02)
-> +        self.assertTrue(0 <= delays[1] <= 0.04)
+> **根因**
+> ```
+> retry.py 睡眠 = random.uniform(0, 0.02 * 2**i)
+>   → 两次失败最多睡 0.02 + 0.04 = 0.06s
+>   → 测试断言总耗时 < 0.03s
+>   → 抖动取到大值就失败
 > ```
 >
-> ⚠️ 这里没有 CI 配置,目录也不是 git 仓库,所以没法验证 CI 本身。我只在本地用 `PYTHONPATH=. python3 -m unittest tests.test_retry` 跑过。
+> **改动**：只改了 [./tests/test_retry.py](/tmp/work/tests/test_retry.py)。
+> ```diff
+> - self.assertLess(time.monotonic() - start, 0.03)
+> + # mock sleep，并让 jitter 取上限
+> + self.assertEqual([c.args[0] for c in sleep.call_args_list], [0.02, 0.04])
+> ```
+> `test_gives_up` 也 mock 了 sleep，不再真睡。
 >
-> 下一步:你把改动提交后看一下 CI 是否变绿。如果 CI 用的是 pytest 或别的启动方式,告诉我命令,我照那个再跑一遍。
+> - **没有放宽阈值**：我没有把 0.03 改大。新断言检查的是延迟上限，比计时更准，也不依赖机器快慢。
+> - **`retry.py` 没动**：生产代码本身是对的。
+> - ⚠️ **没验证 CI 本身**：这里没有 CI 配置，也不是 git 仓库。我只在本地用 `PYTHONPATH=. python3 -m unittest tests.test_retry` 跑过。你的 CI 如果用别的命令，比如 pytest，路径设置可能不同。
+>
+> 下一步：把你的 CI 运行命令发我，我照那个命令再验证一遍。
 
 ### 到底变了什么
 

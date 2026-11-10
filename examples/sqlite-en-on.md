@@ -1,15 +1,20 @@
-✅ **SQLite.** At ~100 users a URL shortener is a tiny, read-heavy workload (lookup a slug, redirect), and SQLite handles thousands of reads per second on one box.
+✅ **SQLite.** At ~100 users, a shortener is read-heavy and tiny, so SQLite handles it with zero ops.
 
 ```
-SQLite                    Postgres
-├── no server to run      ├── separate service to run
-├── one file to back up   ├── users, backups, upgrades
-└── fast local reads      └── pays off at multi-server scale
+Request ──► App ──► SQLite file
+                    (one file, backup = copy)
 ```
 
-- **Turn on WAL mode** (write-ahead logging, which lets reads continue during writes): `PRAGMA journal_mode=WAL;`
-- **Migration is cheap**: a `links(slug, url, created_at)` table moves to Postgres in an afternoon if you outgrow it.
+- **Why**: no separate server to run, patch, or pay for
+- **Speed**: redirects are simple key lookups, so microseconds
+- **Setup**: turn on WAL mode (write-ahead log, lets reads and writes overlap) with `PRAGMA journal_mode=WAL;`
+- **Backups**: use Litestream or a nightly copy
 
-⚠️ **Premise I'm assuming**: one app server with a local disk. SQLite struggles if you run several servers or a platform with ephemeral disks (like many serverless hosts).
+⚠️ **Premise to check**: SQLite assumes one app server with a local disk. If you deploy on serverless or run several instances, Postgres fits better.
 
-Q1. Where will this run? (Quick: e.g. "one VPS", "Vercel", "Fly with 2 machines")
+🤔 **Switch to Postgres if**:
+- You need multiple app servers
+- Click analytics produce heavy concurrent writes
+- You plan to grow well beyond 100 users
+
+Q1. Will this run on a single server with a persistent disk? (yes/no)

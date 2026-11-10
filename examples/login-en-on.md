@@ -1,34 +1,28 @@
-Assuming the standard OAuth 2.0 "authorization code" flow (I haven't looked at your code, so this is the textbook version):
+Here is the standard OAuth 2.0 "authorization code" flow. I'm guessing your site uses it and haven't checked your code.
 
 ```
-Browser            Your backend             GitHub
-   |  1. click        |                        |
-   |----------------->|                        |
-   |  2. 302 redirect to GitHub (client_id, scope, state)
-   |<-----------------|                        |
-   |  3. user logs in and approves             |
-   |------------------------------------------>|
-   |  4. 302 back to your callback (code, state)
-   |<------------------------------------------|
-   |  5. GET /callback?code&state              |
-   |----------------->|                        |
-   |                  |  6. code + client_secret
-   |                  |----------------------->|
-   |                  |  7. access_token       |
-   |                  |<-----------------------|
-   |                  |  8. GET /user (token)  |
-   |                  |----------------------->|
-   |                  |  9. profile            |
-   |                  |<-----------------------|
-   |  10. Set-Cookie session, redirect home    |
-   |<-----------------|                        |
+Browser              Backend                GitHub
+   |                    |                      |
+1  |--- click --------->|                      |
+2  |<-- 302 to GitHub --|                      |
+   |    (client_id, scope, state)              |
+3  |------------ login + consent ------------->|
+4  |<----------- 302 to /callback -------------|
+   |             (code, state)                 |
+5  |--- /callback ----->|                      |
+   |    (code, state)   |                      |
+6  |                    |--- code + secret --->|
+7  |                    |<-- access_token -----|
+8  |                    |--- GET /user ------->|
+9  |                    |<-- profile ----------|
+10 |<-- session cookie -|                      |
 ```
 
-- **Steps 2-5**: the browser is only a messenger between you and GitHub, and it never sees the token.
-- **Step 6**: this is the one secret step. The `client_secret` stays on your backend.
-- **`state`**: a random value you save before step 2 and compare at step 5. It blocks login-CSRF (an attacker tricking a user into logging in as the attacker). ⚠️ This is the check most often forgotten.
-- **`code`**: single-use and short-lived, so it is useless without your `client_secret`.
+- **Steps 1-4**: the browser is only a messenger. It carries redirects between your backend and GitHub.
+- **Step 6**: the one that matters. The `code` is short-lived and useless alone. Your backend swaps it for a token using `client_secret`, which never reaches the browser ✅
+- **Step 5**: the backend must check that `state` matches what it issued in step 2. Skipping this opens a CSRF hole (forged login) ⚠️
+- **Step 10**: your backend creates its own session. GitHub's token usually stays server-side.
 
-💡 My opinion: after step 9, create your own session and discard the GitHub token unless you need to call the GitHub API later.
+💡 If your app is a SPA or mobile app with no secret, use PKCE (a one-time proof sent with the code) instead.
 
-Next step: want me to check your repo for where each of these steps lives and whether `state` is verified?
+Want me to check your code against these steps, especially the `state` check? Answer yes or no.

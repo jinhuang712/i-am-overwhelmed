@@ -1,29 +1,33 @@
-这是标准的 OAuth 2.0 授权码流程（Authorization Code flow）。我假设你们用的是它，而不是 device flow 或纯前端 PKCE，这是我的推测，没看你们的代码。
+我假设你们用的是标准的 OAuth 2.0 授权码流程（authorization code flow，先拿一次性 code，再换 token），我没看你们的代码，所以这是推测。
 
 ```
-Browser            Backend              GitHub
-   |                  |                    |
-1  |-- GET /auth/github -->|                |
-2  |<-- 302 + state ------|                 |
-3  |-- GET /login/oauth/authorize?client_id&state -->|
-4  |<-------- login + consent page ------------------|
-5  |<-------- 302 redirect_uri?code&state ------------|
-6  |-- GET /callback?code&state -->|          |
-7  |                  |-- POST access_token (code + secret) -->|
-8  |                  |<-- access_token ------|
-9  |                  |-- GET api.github.com/user -->|
-10 |                  |<-- profile -----------|
-11 |<-- Set-Cookie session + 302 home --|      |
+浏览器        我们的后端        GitHub
+  │ 1 点「用 GitHub 登录」 │
+  ├──────────▶│
+  │ 2 302 跳转到 GitHub    │
+  │◀──────────┤  (带 client_id, redirect_uri, scope, state)
+  │ 3 跳去 GitHub，用户登录并点「授权」
+  ├───────────────────────▶│
+  │ 4 302 回到我们的回调地址
+  │◀───────────────────────┤  (带 code, state)
+  │ 5 浏览器访问回调地址
+  ├──────────▶│
+  │           │ 6 用 code + client_secret 换 token
+  │           ├───────────▶│
+  │           │ 7 返回 access_token
+  │           │◀───────────┤
+  │           │ 8 用 token 调 GET /user 拿用户信息
+  │           ├───────────▶│
+  │ 9 建立登录态 (Set-Cookie)
+  │◀──────────┤
 ```
 
-- **state**：第 2 步生成并存进 session，第 6 步必须比对，防 CSRF。
-- **code**：一次性、很短命，经过浏览器，所以本身不值钱。
-- **client_secret**：只在第 7 步由后端发出，浏览器永远看不到。
-- **access_token**：留在后端，浏览器只拿到你们自己的 session cookie。
+- **前台通道**（1-5）：走浏览器，所有内容用户都看得到，所以只放 `code`（一次性授权码），不放密钥。
+- **后台通道**（6-8）：后端直连 GitHub，`client_secret` 和 `access_token` 只在这里出现。
+- **`state`**：后端在第 2 步生成的随机串，第 5 步必须核对一致，用来防 CSRF（跨站请求伪造）。
 
-💡 最常见的坑是漏掉 state 校验，或把 access_token 返回给前端。
+❗ 最常见的坑：漏掉 `state` 校验，或把 `client_secret` 放进前端。
 
-想深入哪一块？
-- A. ✅ state 与 CSRF 防护怎么做
-- B. 第 11 步之后用户与 session 的关联
-- C. 排查回调失败（redirect_uri 不匹配等）
+Q1. 你想接着深入哪一块？（快问快答）
+- 我推荐先讲 `state` 校验的实现，因为它最容易漏，也最容易出安全问题。
+- 或者讲 token 换到之后，怎么和你们自己的用户表绑定。

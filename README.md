@@ -67,23 +67,28 @@ Real output, same prompt, plugin off and on. Complete and untrimmed. Every examp
 
 </details>
 
-**On** (11 lines)
+**On** (15 lines)
 
-> ✅ **SQLite.** At ~100 users a URL shortener is a tiny, read-heavy workload (lookup a slug, redirect), and SQLite handles thousands of reads per second on one box.
+> ✅ **SQLite.** At ~100 users, a shortener is read-heavy and tiny, so SQLite handles it with zero ops.
 >
 > ```
-> SQLite                    Postgres
-> ├── no server to run      ├── separate service to run
-> ├── one file to back up   ├── users, backups, upgrades
-> └── fast local reads      └── pays off at multi-server scale
+> Request ──► App ──► SQLite file
+>                     (one file, backup = copy)
 > ```
 >
-> - **Turn on WAL mode** (write-ahead logging, which lets reads continue during writes): `PRAGMA journal_mode=WAL;`
-> - **Migration is cheap**: a `links(slug, url, created_at)` table moves to Postgres in an afternoon if you outgrow it.
+> - **Why**: no separate server to run, patch, or pay for
+> - **Speed**: redirects are simple key lookups, so microseconds
+> - **Setup**: turn on WAL mode (write-ahead log, lets reads and writes overlap) with `PRAGMA journal_mode=WAL;`
+> - **Backups**: use Litestream or a nightly copy
 >
-> ⚠️ **Premise I'm assuming**: one app server with a local disk. SQLite struggles if you run several servers or a platform with ephemeral disks (like many serverless hosts).
+> ⚠️ **Premise to check**: SQLite assumes one app server with a local disk. If you deploy on serverless or run several instances, Postgres fits better.
 >
-> Q1. Where will this run? (Quick: e.g. "one VPS", "Vercel", "Fly with 2 machines")
+> 🤔 **Switch to Postgres if**:
+> - You need multiple app servers
+> - Click analytics produce heavy concurrent writes
+> - You plan to grow well beyond 100 users
+>
+> Q1. Will this run on a single server with a persistent disk? (yes/no)
 
 ### "After a user clicks 'Sign in with GitHub' on our site, how do the browser, our backend and GitHub talk to each other, step by step?"
 
@@ -169,42 +174,36 @@ Real output, same prompt, plugin off and on. Complete and untrimmed. Every examp
 
 </details>
 
-**On** (30 lines)
+**On** (24 lines)
 
-> Assuming the standard OAuth 2.0 "authorization code" flow (I haven't looked at your code, so this is the textbook version):
+> Here is the standard OAuth 2.0 "authorization code" flow. I'm guessing your site uses it and haven't checked your code.
 >
 > ```
-> Browser            Your backend             GitHub
->    |  1. click        |                        |
->    |----------------->|                        |
->    |  2. 302 redirect to GitHub (client_id, scope, state)
->    |<-----------------|                        |
->    |  3. user logs in and approves             |
->    |------------------------------------------>|
->    |  4. 302 back to your callback (code, state)
->    |<------------------------------------------|
->    |  5. GET /callback?code&state              |
->    |----------------->|                        |
->    |                  |  6. code + client_secret
->    |                  |----------------------->|
->    |                  |  7. access_token       |
->    |                  |<-----------------------|
->    |                  |  8. GET /user (token)  |
->    |                  |----------------------->|
->    |                  |  9. profile            |
->    |                  |<-----------------------|
->    |  10. Set-Cookie session, redirect home    |
->    |<-----------------|                        |
+> Browser              Backend                GitHub
+>    |                    |                      |
+> 1  |--- click --------->|                      |
+> 2  |<-- 302 to GitHub --|                      |
+>    |    (client_id, scope, state)              |
+> 3  |------------ login + consent ------------->|
+> 4  |<----------- 302 to /callback -------------|
+>    |             (code, state)                 |
+> 5  |--- /callback ----->|                      |
+>    |    (code, state)   |                      |
+> 6  |                    |--- code + secret --->|
+> 7  |                    |<-- access_token -----|
+> 8  |                    |--- GET /user ------->|
+> 9  |                    |<-- profile ----------|
+> 10 |<-- session cookie -|                      |
 > ```
 >
-> - **Steps 2-5**: the browser is only a messenger between you and GitHub, and it never sees the token.
-> - **Step 6**: this is the one secret step. The `client_secret` stays on your backend.
-> - **`state`**: a random value you save before step 2 and compare at step 5. It blocks login-CSRF (an attacker tricking a user into logging in as the attacker). ⚠️ This is the check most often forgotten.
-> - **`code`**: single-use and short-lived, so it is useless without your `client_secret`.
+> - **Steps 1-4**: the browser is only a messenger. It carries redirects between your backend and GitHub.
+> - **Step 6**: the one that matters. The `code` is short-lived and useless alone. Your backend swaps it for a token using `client_secret`, which never reaches the browser ✅
+> - **Step 5**: the backend must check that `state` matches what it issued in step 2. Skipping this opens a CSRF hole (forged login) ⚠️
+> - **Step 10**: your backend creates its own session. GitHub's token usually stays server-side.
 >
-> 💡 My opinion: after step 9, create your own session and discard the GitHub token unless you need to call the GitHub API later.
+> 💡 If your app is a SPA or mobile app with no secret, use PKCE (a one-time proof sent with the code) instead.
 >
-> Next step: want me to check your repo for where each of these steps lives and whether `state` is verified?
+> Want me to check your code against these steps, especially the `state` check? Answer yes or no.
 
 ### "CI is red because `test_retry` fails from time to time. Get CI green."
 
@@ -223,25 +222,30 @@ Here the agent has tools and fixes a real flaky test. **Both versions fixed it t
 
 </details>
 
-**On** (12 lines)
+**On** (16 lines)
 
-> 🎉 `test_retry` is fixed. It passed 200 runs in a row. I can't see your CI, so I haven't confirmed that it's green.
+> 🎉 `test_retry` is fixed. It passed 30 runs out of 30, where before it failed in 5 of 6. I only ran the tests locally, since I can't see your CI.
 >
-> **Cause:** the test required the whole call to finish in under 0.03 s. `retry.py` sleeps for a random time, up to 0.02 s then up to 0.04 s. Whenever the random sleeps added up to more than 0.03 s, the test failed.
+> The test asserted that the whole call finishes in under 0.03s of real time. The retry code sleeps a random 0–0.02s, then 0–0.04s, which averages about 0.03s. So the test failed most runs by design.
 >
-> **Fix:** in [./tests/test_retry.py](/tmp/work/tests/test_retry.py), `time.sleep` is now mocked. The test checks that each requested delay is within its backoff bound, which is stricter than the old timing check. `test_gives_up` also mocks `sleep`, so it runs instantly.
+> I left [./retry.py](/tmp/work/retry.py) alone because its backoff is correct.
+>
+> The fix is in [./tests/test_retry.py](/tmp/work/tests/test_retry.py). It no longer waits on the clock:
 >
 > ```diff
 > -        start = time.monotonic()
+> -        self.assertEqual(call_with_retry(f), "ok")
 > -        self.assertLess(time.monotonic() - start, 0.03)
-> +        with mock.patch("retry.time.sleep") as sleep: ...
-> +        self.assertTrue(0 <= delays[0] <= 0.02)
-> +        self.assertTrue(0 <= delays[1] <= 0.04)
+> +        with mock.patch("retry.time.sleep") as sleep:
+> +            self.assertEqual(call_with_retry(f), "ok")
+> +        # delay i must be within [0, base_delay * 2**i]
 > ```
 >
-> I only edited the test and left [./retry.py](/tmp/work/retry.py) alone, because the retry code itself works as intended.
+> - **Patched sleep**: `time.sleep` is mocked, so the tests also run faster.
+> - **Bounds check**: the test now checks that the two delays stay within their backoff limits. That's a stronger check than the old time limit.
+> - **Other test**: I patched sleep in `test_gives_up` too.
 >
-> Next step: push the change and check CI. This folder isn't a git repo, so I didn't commit.
+> Next step: push it and confirm CI goes green.
 
 ### What actually changes
 
