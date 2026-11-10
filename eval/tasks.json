@@ -25,9 +25,9 @@
     "name": "multi-turn-zh",
     "kind": "chat",
     "turns": [
-      "我这周要给团队的 session 存储选一个缓存：Redis 还是 Memcached？给个建议。",
+      "我这周要给团队的 session 存储选一个缓存：Redis 还是 Memcached？",
       "可是 Redis 是单线程的，每秒只能处理几百个请求，扛不住我们 2000 QPS 吧？",
-      "对了，顺便问下，k8s 的 namespace 应该怎么命名比较好？"
+      "k8s 的 namespace 应该怎么命名比较好？"
     ]
   },
   {
@@ -52,7 +52,7 @@
     "name": "long-discussion-zh",
     "kind": "chat",
     "turns": [
-      "我要给团队的内部文档站选方案：自建 Docusaurus 还是用 Notion？下个月要定。给个建议。",
+      "我要给团队的内部文档站选方案：自建 Docusaurus 还是用 Notion？下个月要定。",
       "我们 30 人左右，基本都是工程师，文档希望和代码一起评审。",
       "Docusaurus 自带的搜索够用吗？",
       "刚得知产品和运营也要写文档，他们不会用 git。",
