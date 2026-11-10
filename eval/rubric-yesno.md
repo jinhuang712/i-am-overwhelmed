@@ -75,7 +75,7 @@ Bad signs
 | T1 | is paragraphs only |
 | T2 | writes a flow or a row of steps as prose or bullets, with no drawing |
 | T3 | writes folders or a hierarchy as prose or bullets, with no tree |
-| T4 | writes cause and effect as prose, with no arrows |
+| T4 | writes a chain of three or more causes and effects as prose, with no arrows |
 | T5 | compares items across the same attributes with no table |
 | T6 | has a bullet point of two sentences or more |
 | T7 | has a table cell that holds a sentence |
