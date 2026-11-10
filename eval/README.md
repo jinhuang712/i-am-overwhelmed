@@ -65,6 +65,16 @@ python3 eval/eval.py --smoke --budget 2
 
 `--smoke` runs every task once, the new arm only, on the cheap model, and judges nothing. It says which runs did not come through. Run it before a full run: on 2026-11-10 a wrong path, a task that ran away and a plugin that did not load cost $17.79, and none of the three had to do with how good the model was.
 
+## Another account
+
+The tools start `claude` with the environment they were started in. To run on another Claude Code profile, set its config folder for the command:
+
+```
+CLAUDE_CONFIG_DIR=<the profile's folder> python3 eval/eval.py --smoke --budget 2
+```
+
+The runs then use that profile's login and its usage limit. The eval adds its own flags for tools and permissions, so a profile's alias flags are not needed.
+
 ## Budget
 
 Every task in [`tasks.json`](tasks.json) has a `budget`: the most one run of it may cost. A one-turn chat run gets $0.10 to $0.20 and the four-turn agent run gets $1.80, so a cheap task cannot starve a costly one. Judging keeps $0.30 for each task. `--dry-run` adds the limits up:

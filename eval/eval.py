@@ -109,7 +109,7 @@ def main():
     calls = len(tasks) * n_arms * a.runs
     # Every task names the most one run may cost. The limits add up to the most the eval can cost.
     run_sum = sum(t["budget"] for t in tasks) * n_arms * a.runs
-    judge_each = JUDGE_PER_TASK_YESNO if a.rubric == "yesno" else JUDGE_PER_TASK
+    judge_each = 0 if a.smoke else JUDGE_PER_TASK_YESNO if a.rubric == "yesno" else JUDGE_PER_TASK
     judge_sum = judge_each * len(tasks)
     print(f"plan: {calls} runs, {len(tasks)} judge calls, {a.model}")
     print(f"task limits: ${run_sum:.2f} for the runs + ${judge_sum:.2f} for judging = ${run_sum + judge_sum:.2f} at most")
