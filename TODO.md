@@ -9,7 +9,10 @@ The order of work, agreed on 2026-11-11: first make the rubric something we can 
 Found by reading the replies four lines hit
 
 - [ ] Two lines can be a script, free and exact: "a bullet point of two sentences or more" and "a file or a folder with no link". A script agreed with the judge on 17 of 20 replies for each.
-- [ ] See whether the emoji lines hold now that the Formatting deck carries the legend.
+- [ ] Three lines stayed weak in every round, on Haiku. Try them on the strong judge before parking them, because each names a fault that matters:
+  - "states a guess or an inference as a fact": 15 of 20, twice. Already marked 🔎.
+  - "answers a plain fact and still closes with a question": 14 of 20, twice. This is the line behind the ending tree.
+  - "makes the same point twice": 13, then 12 of 20. The owner wants the wording kept as it is.
 
 Not yet tested
 

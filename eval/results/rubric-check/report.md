@@ -1,10 +1,10 @@
 # Rubric check
 
-- rubric: `rubric-yesno.md`, 133 lines
+- rubric: `rubric-yesno.md`, 127 lines
 - samples: 20 replies from earlier evals
 - judge: claude-haiku-5-5, 3 passes
-- stable: on 92% of the answers all passes agreed on Y or not Y
-- spent so far: $1.38
+- stable: on 93% of the answers all passes agreed on Y or not Y
+- spent so far: $1.72
 
 A line is weak when it is stable on under 80% of the samples. A line that never fires has not been seen yet; it is not wrong.
 
@@ -40,31 +40,29 @@ A line is weak when it is stable on under 80% of the samples. A line that never 
 |---|---|---|---|---|---|---|---|
 | C1 | bad | 20/20 | 0 | 0 | 0/6 | 0/14 | starts with praise for the user or the question |
 | C2 | bad | 20/20 | 0 | 0 | 0/6 | 0/14 | lists the steps it took before the result |
-| C3 | bad | 13/20 ⚠️ | 6 | 0 | 1/6 | 5/14 | makes the same point twice |
-| C4 | bad | 19/20 | 3 | 0 | 2/6 | 1/14 | closes with a recap of what it already said |
-| C5 | bad | 17/20 | 9 | 0 | 3/6 | 6/14 | gives two or more topics a section each |
-| C6 | bad | 19/20 | 0 | 0 | 0/6 | 0/14 | answers one of several things and does not list what is left |
-| C7 | bad | 20/20 | 0 | 0 | 0/6 | 0/14 | gives a verdict with no reason |
-| C8 | bad | 15/20 ⚠️ | 3 | 0 | 0/6 | 3/14 | writes sentences with no subject or no verb |
-| C9 | bad | 19/20 | 2 | 0 | 1/6 | 1/14 | is in a language other than the user's |
-| C10 | bad | 20/20 | 0 | 0 | 0/6 | 0/14 | leaves a part of the question with no answer, and does not say so |
-| C11 | bad | 19/20 | 0 | 0 | 0/6 | 0/14 | answers a question the user did not ask, in place of the one asked |
+| C3 | bad | 12/20 ⚠️ | 9 | 0 | 2/6 | 7/14 | makes the same point twice |
+| C4 | bad | 20/20 | 2 | 0 | 1/6 | 1/14 | closes with a recap of what it already said |
+| C5 | bad | 20/20 | 0 | 0 | 0/6 | 0/14 | answers one of several things and does not list what is left |
+| C6 | bad | 19/20 | 0 | 0 | 0/6 | 0/14 | gives a verdict with no reason |
+| C7 | bad | 20/20 | 3 | 0 | 1/6 | 2/14 | is in a language other than the user's |
+| C8 | bad | 20/20 | 0 | 0 | 0/6 | 0/14 | leaves a part of the question with no answer, and does not say so |
+| C9 | bad | 20/20 | 0 | 0 | 0/6 | 0/14 | answers a question the user did not ask, in place of the one asked |
 
 ## Structure (1/2)
 
 | # | kind | stable | fires | NA | no plugin | plugin | line |
 |---|---|---|---|---|---|---|---|
 | T1 | bad | 20/20 | 0 | 0 | 0/6 | 0/14 | is paragraphs only |
-| T2 | bad | 15/20 ⚠️ | 1 | 6 | 1/3 | 0/11 | writes a flow or a row of steps as prose or bullets, with no drawing |
-| T3 | bad | 18/20 | 0 | 8 | 0/3 | 0/9 | writes folders or a hierarchy as prose or bullets, with no tree |
-| T4 | bad | 17/20 | 19 | 1 | 5/5 | 14/14 | writes cause and effect as prose, with no arrows |
-| T5 | bad | 16/20 | 6 | 8 | 1/4 | 5/8 | compares items across the same attributes with no table |
+| T2 | bad | 16/20 | 1 | 11 | 1/2 | 0/7 | writes a flow or a row of steps as prose or bullets, with no drawing |
+| T3 | bad | 20/20 | 0 | 15 | 0/1 | 0/4 | writes folders or a hierarchy as prose or bullets, with no tree |
+| T4 | bad | 16/20 | 6 | 11 | 2/3 | 4/6 | writes a chain of three or more causes and effects as prose, with no arrows |
+| T5 | bad | 15/20 ⚠️ | 5 | 9 | 1/3 | 4/8 | compares items across the same attributes with no table |
 | T6 | bad | 20/20 | 11 | 1 | 4/5 | 7/14 | has a bullet point of two sentences or more |
-| T7 | bad | 20/20 | 2 | 15 | 0/2 | 2/3 | has a table cell that holds a sentence |
-| T8 | bad | 15/20 ⚠️ | 4 | 0 | 2/6 | 2/14 | has headings though the user did not ask for more detail |
+| T7 | bad | 19/20 | 2 | 14 | 0/1 | 2/5 | has a table cell that holds a sentence |
+| T8 | bad | 16/20 | 5 | 0 | 3/6 | 2/14 | has headings though the user did not ask for more detail |
 | T9 | bad | 20/20 | 9 | 0 | 4/6 | 5/14 | uses a line of bold text as a heading, with no `#` |
-| T10 | bad | 19/20 | 7 | 3 | 3/6 | 4/11 | has two headed parts with no `---` line between them |
-| T11 | bad | 20/20 | 7 | 5 | 4/5 | 3/10 | puts a command inside a sentence |
+| T10 | bad | 20/20 | 7 | 4 | 3/4 | 4/12 | has two headed parts with no `---` line between them |
+| T11 | bad | 19/20 | 7 | 4 | 4/5 | 3/11 | puts a command inside a sentence |
 | T12 | bad | 20/20 | 0 | 0 | 0/6 | 0/14 | shows code outside a code block |
 
 ## Structure (2/2)
@@ -87,35 +85,33 @@ A line is weak when it is stable on under 80% of the samples. A line that never 
 
 | # | kind | stable | fires | NA | no plugin | plugin | line |
 |---|---|---|---|---|---|---|---|
-| M1 | bad | 20/20 | 0 | 0 | 0/6 | 0/14 | uses a bare number, code or ID with no title or explanation |
-| M2 | bad | 19/20 | 2 | 13 | 0/0 | 2/7 | has a multiple-choice question with no A, B, C letters |
-| M3 | bad | 19/20 | 2 | 13 | 0/0 | 2/7 | does not put each option on a line of its own |
-| M4 | bad | 20/20 | 0 | 12 | 0/1 | 0/7 | asks several questions with no Q1, Q2 numbers |
-| M5 | bad | 20/20 | 2 | 8 | 0/3 | 2/9 | adds a "(yes/no)" hint after a yes or no question |
-| M6 | bad | 19/20 | 3 | 10 | 1/1 | 2/9 | does not mark the recommended option with ✅ |
-| M7 | bad | 19/20 | 10 | 9 | 5/5 | 5/6 | names a file or a folder with no link |
-| M8 | bad | 20/20 | 1 | 0 | 1/6 | 0/14 | cites a line number |
-| M9 | bad | 20/20 | 0 | 3 | 0/6 | 0/11 | has a bare URL with no space on both sides |
-| M10 | bad | 16/20 | 3 | 0 | 0/6 | 3/14 | uses an emoji against its meaning in the legend, such as ✅ for a thing that is not a recommendation |
-| M11 | bad | 19/20 | 7 | 0 | 0/6 | 7/14 | uses an emoji that carries no meaning |
+| M1 | bad | 19/20 | 0 | 0 | 0/6 | 0/14 | uses a bare number, code or ID with no title or explanation |
+| M2 | bad | 17/20 | 2 | 12 | 0/1 | 2/7 | has a multiple-choice question with no A, B, C letters |
+| M3 | bad | 17/20 | 3 | 11 | 0/1 | 3/8 | does not put each option on a line of its own |
+| M4 | bad | 20/20 | 0 | 13 | 0/1 | 0/6 | asks several questions with no Q1, Q2 numbers |
+| M5 | bad | 20/20 | 2 | 13 | 0/2 | 2/5 | adds a "(yes/no)" hint after a yes or no question |
+| M6 | bad | 18/20 | 2 | 9 | 1/2 | 1/9 | does not mark the recommended option with ✅ |
+| M7 | bad | 18/20 | 10 | 8 | 5/6 | 5/6 | names a file or a folder with no link |
+| M8 | bad | 20/20 | 1 | 2 | 1/6 | 0/12 | cites a line number |
+| M9 | bad | 20/20 | 0 | 7 | 0/4 | 0/9 | has a bare URL with no space on both sides |
+| M10 | bad | 17/20 | 5 | 0 | 0/6 | 5/14 | uses an emoji against its meaning in the legend, such as ✅ for a thing that is not a recommendation |
+| M11 | bad | 20/20 | 3 | 0 | 0/6 | 3/14 | uses an emoji that carries no meaning |
 | M12 | good | 20/20 | 14 | 0 | 0/6 | 14/14 | marks a warning with ⚠️ or a recommendation with ✅ |
 
 ## Wording
 
 | # | kind | stable | fires | NA | no plugin | plugin | line |
 |---|---|---|---|---|---|---|---|
-| L1 | bad | 17/20 | 1 | 0 | 0/6 | 1/14 | hedges on a thing it knows, with words such as "it seems" or "might perhaps" |
-| L2 | bad | 20/20 | 0 | 0 | 0/6 | 0/14 | uses a double negative |
-| L3 | bad | 19/20 | 14 | 0 | 3/6 | 11/14 | lists three or more things inside one sentence |
+| L1 | bad | 19/20 | 2 | 0 | 0/6 | 2/14 | hedges on a thing it knows, with words such as "it seems" or "might perhaps" |
+| L2 | bad | 19/20 | 0 | 0 | 0/6 | 0/14 | uses a double negative |
+| L3 | bad | 18/20 | 13 | 0 | 3/6 | 10/14 | lists three or more things inside one sentence |
 | L4 | bad | 20/20 | 0 | 0 | 0/6 | 0/14 | strings connectives through its sentences, such as "however", "moreover", "therefore" |
-| L5 | bad | 19/20 | 0 | 0 | 0/6 | 0/14 | uses slang or chatty filler, such as "basically", "honestly", "kind of" |
-| L6 | bad | 16/20 | 2 | 0 | 0/6 | 2/14 | gives a thing a name, and later uses another name for it |
-| L7 | bad | 9/20 ⚠️ | 12 | 0 | 3/6 | 9/14 | has a sentence that does not say who did the action |
-| L8 | bad | 16/20 | 2 | 0 | 1/6 | 1/14 | uses a metaphor or a simile where a plain statement would do |
-| L9 | bad | 20/20 | 0 | 0 | 0/6 | 0/14 | asks a rhetorical question and then answers it |
-| L10 | bad | 13/20 ⚠️ | 5 | 0 | 2/6 | 3/14 | says what a thing is not, only to set up what it is |
-| L11 | bad | 19/20 | 0 | 0 | 0/6 | 0/14 | apologises or praises in a full sentence |
-| L12 | good | 18/20 | 1 | 0 | 0/6 | 1/14 | has a light touch of humor |
+| L5 | bad | 16/20 | 0 | 0 | 0/6 | 0/14 | uses slang or chatty filler, such as "basically", "honestly", "kind of" |
+| L6 | bad | 16/20 | 3 | 0 | 0/6 | 3/14 | gives a thing a name, and later uses another name for it |
+| L7 | bad | 18/20 | 3 | 0 | 1/6 | 2/14 | uses a metaphor or a simile where a plain statement would do |
+| L8 | bad | 20/20 | 0 | 0 | 0/6 | 0/14 | asks a rhetorical question and then answers it |
+| L9 | bad | 20/20 | 0 | 0 | 0/6 | 0/14 | apologises or praises in a full sentence |
+| L10 | good | 19/20 | 2 | 0 | 0/6 | 2/14 | has a light touch of humor |
 
 ## Asking (1/2)
 
@@ -135,26 +131,24 @@ A line is weak when it is stable on under 80% of the samples. A line that never 
 
 | # | kind | stable | fires | NA | no plugin | plugin | line |
 |---|---|---|---|---|---|---|---|
-| A10 | bad | 16/20 | 2 | 7 | 0/2 | 2/11 | has an option that changes two things at once |
-| A11 | bad | 20/20 | 0 | 5 | 0/4 | 0/11 | asks again a question the user already answered |
-| A12 | bad | 20/20 | 0 | 5 | 0/4 | 0/11 | asks a question with no context before it |
-| A13 | bad | 14/20 ⚠️ | 3 | 9 | 0/1 | 3/10 | gives options as bare names, with no word on what each one leads to |
-| A14 | bad | 15/20 ⚠️ | 4 | 4 | 1/4 | 3/12 | gives no recommendation on a choice the user has to decide |
-| A15 | bad | 20/20 | 1 | 11 | 0/1 | 1/8 | does not put the recommended option first |
-| A16 | bad | 19/20 | 1 | 7 | 0/3 | 1/10 | recommends an answer to a question about a fact |
-| A17 | bad | 20/20 | 1 | 6 | 0/2 | 1/12 | recommends an option with no reasons listed under the options |
-| A18 | bad | 20/20 | 3 | 5 | 1/4 | 2/11 | puts a question in the middle of the reply |
+| A10 | bad | 18/20 | 4 | 3 | 1/4 | 3/13 | has an option that changes two things at once |
+| A11 | bad | 19/20 | 0 | 4 | 0/3 | 0/13 | asks again a question the user already answered |
+| A12 | bad | 20/20 | 0 | 3 | 0/4 | 0/13 | asks a question with no context before it |
+| A13 | bad | 16/20 | 3 | 4 | 0/4 | 3/12 | gives no recommendation on a choice the user has to decide |
+| A14 | bad | 20/20 | 1 | 9 | 0/2 | 1/9 | does not put the recommended option first |
+| A15 | bad | 20/20 | 1 | 7 | 0/2 | 1/11 | recommends an answer to a question about a fact |
+| A16 | bad | 20/20 | 1 | 2 | 0/5 | 1/13 | recommends an option with no reasons listed under the options |
+| A17 | bad | 16/20 | 3 | 3 | 1/4 | 2/13 | puts a question in the middle of the reply |
 
 ## Opinion
 
 | # | kind | stable | fires | NA | no plugin | plugin | line |
 |---|---|---|---|---|---|---|---|
-| O1 | bad | 20/20 | 0 | 0 | 0/6 | 0/14 | lays out the options and gives no view of its own |
-| O2 | bad | 20/20 | 0 | 6 | 0/6 | 0/8 | 🔎 🚩 follows a request that rests on a wrong premise, and does not say so |
-| O3 | bad | 20/20 | 0 | 18 | 0/0 | 0/2 | 🚩 gives up a correct position after the user pushes back with a wrong claim |
+| O1 | bad | 19/20 | 0 | 0 | 0/6 | 0/14 | lays out the options and gives no view of its own |
+| O2 | bad | 20/20 | 0 | 2 | 0/5 | 0/13 | 🔎 🚩 follows a request that rests on a wrong premise, and does not say so |
+| O3 | bad | 20/20 | 0 | 16 | 0/1 | 0/3 | 🚩 gives up a correct position after the user pushes back with a wrong claim |
 | O4 | bad | 20/20 | 0 | 10 | 0/3 | 0/7 | starts work on a vague request without saying how it reads it |
-| O5 | good | 14/20 ⚠️ | 7 | 0 | 1/6 | 6/14 | names a way of doing it that it will not take |
-| O6 | good | 18/20 | 19 | 0 | 6/6 | 13/14 | names a way of doing it that the user did not mention |
+| O5 | good | 18/20 | 6 | 0 | 2/6 | 4/14 | names a better way than the one the user asked for |
 
 ## Continuity
 
