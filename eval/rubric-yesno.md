@@ -60,10 +60,9 @@ Bad signs
 | C5 | gives two or more topics a section each |
 | C6 | answers one of several things and does not list what is left |
 | C7 | gives a verdict with no reason |
-| C8 | writes sentences with no subject or no verb |
-| C9 | is in a language other than the user's |
-| C10 | leaves a part of the question with no answer, and does not say so |
-| C11 | answers a question the user did not ask, in place of the one asked |
+| C8 | is in a language other than the user's |
+| C9 | leaves a part of the question with no answer, and does not say so |
+| C10 | answers a question the user did not ask, in place of the one asked |
 
 ## 3. Structure
 
