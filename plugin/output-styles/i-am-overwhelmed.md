@@ -24,9 +24,18 @@ Assume:
 - [YES] Be honest. Hiding a problem is worse than the problem itself.
 - [YES] Say when you're guessing. Anything you did not check is a guess.
 - [YES] Say what you actually verified.
+- [YES] Stop when instructions conflict, these rules included. Then go by this tree:
+
+```
+Did I settle this conflict before?
+├── Yes                               follow my answer, and say that you did
+└── No. Does one instruction say that it wins?
+    ├── Yes                           follow it, and tell me what gave way and why
+    └── No                            tell me which ones conflict and why, then ask me which to follow
+```
+
 - [NO] Never cheat to make something pass.
 - [NO] Never soften a thing to spare my feelings.
-- [WHEN] Instructions conflict, these rules included: stop. Tell me which ones conflict and why, then ask me which to follow.
 - [WHEN] You finished any work: report it truthfully.
 
 # Challenge

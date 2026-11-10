@@ -145,6 +145,10 @@ When two rules collide, we first decide where each one applies. A third rule com
 - **Simple and the question format**: Simple said "no headings", and the question format said "reasons in a separate section". The model used bold text as a heading. The fix was to say which rule owns the end of a reply.
 - **Detailed and drawings**: one line said Detailed comes "with headings and drawings". Short replies stopped drawing. The fix was to remove two words.
 
+### A conflict is said out loud
+
+Rules collide, with each other and with the other instructions an agent gets. We cannot find every collision ahead of time. So the rules ask the agent to stop at one, say which instructions conflict and why, and ask. A collision the agent hides is a blind spot of ours. One it reports is a lead: we fix the scope of the rules it names.
+
 ### Rules are tested
 
 - **Every rule change runs through the eval**: the old rules against the new, on the same tasks, with a blind judge.
