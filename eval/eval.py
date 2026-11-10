@@ -16,6 +16,7 @@ import argparse
 import json
 import shutil
 import subprocess
+import threading
 import sys
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date
@@ -127,9 +128,19 @@ def main():
     # Whole rounds come first, so a stop leaves the arms balanced.
     jobs = [(t, arm, plugin, i) for i in range(1, a.runs + 1) for t in tasks for arm, plugin in arms.items()]
 
+    done, lock = [0], threading.Lock()
+    (out / "progress.log").parent.mkdir(parents=True, exist_ok=True)
+
     def job(j):
         t, arm, plugin, i = j
-        return run_one(t, arm, plugin, i, raw, a.model, a.effort, budget, min(t["budget"], run_pool), run_pool)
+        status = run_one(t, arm, plugin, i, raw, a.model, a.effort, budget, min(t["budget"], run_pool), run_pool)
+        with lock:  # One line for every finished run, on screen and in progress.log.
+            done[0] += 1
+            line = f"{done[0]}/{len(jobs)} ${budget.spent:.2f} {status}: {t['name']} {arm}-{i}"
+            print(line, flush=True)
+            with (out / "progress.log").open("a") as f:
+                f.write(line + "\n")
+        return status
 
     with ThreadPoolExecutor(a.j) as ex:
         statuses = list(ex.map(job, jobs))

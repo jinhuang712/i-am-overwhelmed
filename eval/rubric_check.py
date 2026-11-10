@@ -16,7 +16,8 @@ For each line the report gives:
 Every answer is kept in a cache, keyed by the deck's text, the samples and the pass.
 After a deck is edited, the same command judges only that deck again.
 
-Work files go to eval/results/rubric-check/raw/, which git ignores.
+Work files go to eval/results/rubric-check/raw/, which git ignores. Every finished call prints a
+line and adds it to raw/progress.log, so a run can be followed with `tail -f`.
 """
 import argparse
 import collections
@@ -171,6 +172,23 @@ class Spend:
                 f.write(json.dumps({**record, "cost": cost}) + "\n")
 
 
+class Progress:
+    """Print one line for every finished call, and keep the same lines in a file to follow."""
+
+    def __init__(self, total, path):
+        self.total, self.path, self.done, self.lock = total, path, 0, threading.Lock()
+        path.write_text("")
+
+    def step(self, status, deck, spend):
+        with self.lock:
+            self.done += 1
+            spent = f" ${spend.spent:.2f}" if spend else ""
+            line = f"{self.done}/{self.total} {100 * self.done // self.total}%{spent} {status}: {deck}"
+            print(line, flush=True)
+            with self.path.open("a") as f:
+                f.write(line + "\n")
+
+
 def judge(deck, batch, k, model, cache, spend):
     """Return (status, answers). Answers come from the cache when this exact call ran before."""
     text = prompt(deck, batch)
@@ -275,8 +293,16 @@ def main():
     spend = None if a.dry_run else Spend(a.budget, OUT / "raw" / "ledger.jsonl")
 
     jobs = [(d, b, k) for k in range(a.passes) for d in decks for b in batches]
+    progress = None if a.dry_run else Progress(len(jobs), OUT / "raw" / "progress.log")
+
+    def one(j):
+        got = judge(j[0], j[1], j[2], a.model, cache, spend)
+        if progress:
+            progress.step(got[0], j[0]["name"], spend)
+        return got
+
     with ThreadPoolExecutor(a.j) as ex:
-        results = list(ex.map(lambda j: judge(j[0], j[1], j[2], a.model, cache, spend), jobs))
+        results = list(ex.map(one, jobs))
     counts = collections.Counter(status for status, _ in results)
     print(f"plan: {len(decks)} decks x {len(batches)} batches x {a.passes} passes = {len(jobs)} calls, {a.model}")
     print("calls:", dict(counts))
