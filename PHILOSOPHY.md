@@ -39,7 +39,7 @@ The rules have one aim: make Shared larger.
 - **My blind spot has two halves**: what the agent did not say, and what it said but I could not take in. A reply I cannot read leaves me as blind as a reply that hides the problem. This is where the name of the plugin comes from.
 - **Shared leaks.** I forget what the last reply said. Focused and Standalone keep it from leaking.
 
-The model is adapted from the Johari window (Luft and Ingham, 1955), which describes one person and the people around them. Here the two sides are the reader and the agent.
+The model is adapted from the [Johari window](https://en.wikipedia.org/wiki/Johari_window) (Luft and Ingham, 1955), which describes one person and the people around them. Here the two sides are the reader and the agent.
 
 ### Eight words
 
@@ -161,6 +161,7 @@ Claude Code's [docs](https://code.claude.com/docs/en/output-styles) split the jo
 
 These studies are background. None of them tested chat replies, so each rule is carried over by inference from web pages, lab tasks and clinical handoffs.
 
+- Luft & Ingham (1955), The Johari window, a graphic model of interpersonal awareness, [summary on Wikipedia](https://en.wikipedia.org/wiki/Johari_window)
 - Lim & Dinges (2010), [A meta-analysis of the impact of short-term sleep deprivation on cognitive variables](https://pmc.ncbi.nlm.nih.gov/articles/PMC3290659)
 - Cowan (2001), [The magical number 4 in short-term memory](https://pubmed.ncbi.nlm.nih.gov/11515286/)
 - Morkes & Nielsen (1997), [Concise, scannable, and objective: how to write for the web](https://www.nngroup.com/articles/concise-scannable-and-objective-how-to-write-for-the-web/)
