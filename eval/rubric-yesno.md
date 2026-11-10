@@ -118,13 +118,12 @@ Bad signs
 | M8 | cites a line number |
 | M9 | has a bare URL with no space on both sides |
 | M10 | uses an emoji against its meaning in the legend, such as ✅ for a thing that is not a recommendation |
-| M11 | uses an emoji that carries no meaning |
 
 Good signs
 
 | # | The reply... |
 |---|---|
-| M12 | marks a warning with ⚠️ or a recommendation with ✅ |
+| M11 | marks a warning with ⚠️ or a recommendation with ✅ |
 
 ## 5. Wording
 
@@ -293,3 +292,4 @@ Lines that are kept and not scored. A line comes here when a judge still wavers 
 | Asking | gives options as bare names, with no word on what each one leads to | 15 of 20, then 14 of 20 after a rewording. Was: "asks the user to choose and does not say what each choice leads to" |
 | Opinion | names a way of doing it that it will not take | 15 of 20, then 14 of 20 after a rewording. Was: "says what it would not do" |
 | Content | gives two or more topics a section each | Its hits were wrong: it counted the parts of one answer, such as "Cause" and "Fix", as two topics. Was first: "explains two or more things in detail in one reply", which fired on 15 of 20 replies |
+| Formatting | uses an emoji that carries no meaning | Too vague to judge: "no meaning" has no test. It fired on 🤔 and ⚠️ that were used as the legend says. The owner agreed to park it |
