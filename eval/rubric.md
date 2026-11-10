@@ -61,7 +61,7 @@ Score 0 when the reply does it, 3 when it does not, NA when it could not come up
 | D5 | No line numbers | Quotes code instead of citing line numbers. NA if no code discussed |
 | D6 | Diff shown | Code changes shown as a `diff` block (key lines). NA if no code changed |
 | D7 | Emoji use | Emoji carry meaning per the legend and carry the emotion; not decorative, not overused. 0 if the emotion is written out in words, such as an apology or praise of several words |
-| D8 | Question format | At the end: explain, then the questions, each of a fixed type (multiple choice, multi-select, yes/no, quick or ranking). Several questions are numbered Q1, Q2. Multiple choice has "- A. …" options. NA if no question |
+| D8 | Question format | At the end: the questions, each with its context before it, each of a fixed type (multiple choice, multi-select, yes/no, quick or ranking). Several questions are numbered Q1, Q2. Multiple choice has "- A. …" options. NA if no question |
 | D9 | Language | Replies in the user's language |
 | D10 | Bullet shape | Each bullet is one sentence; "- **key**: description" where it fits |
 | D11 | Table cells | Cells hold words and phrases, not sentences. NA if no table |
@@ -70,7 +70,7 @@ Score 0 when the reply does it, 3 when it does not, NA when it could not come up
 | D14 | Question order | A question comes in this order: question, options, reasons. NA if it has fewer than two of these |
 | D15 | Terms defined | Every coined term or short name is defined in the same sentence the first time it appears. NA if none appear |
 | D16 | Shape drawn | Content with a shape (a hierarchy, a flow, cause and effect, branches, a comparison) is drawn in ASCII or put in a table; 0 if it is listed as bullets. NA if the content has no shape |
-| D17 | One decision | A question holds one decision, and its options differ in one way. NA if no question |
+| D17 | One thing | A question asks one thing, a decision or a fact, and its options differ in one way. 0 if one question asks for several facts. NA if no question |
 | D18 | Asked what was needed | Asks what only the user knows instead of assuming it. 0 if it builds on an unconfirmed fact about the user, or writes "please confirm" or "I assume" outside a question. NA if the reply needed no fact from the user |
 | D19 | Blockquotes | Every sentence quoted from a person or a document is in a blockquote, word for word, and so are low-key reminders. NA if neither appears |
 | D20 | Recommendation | A choice that asks the user to decide has ✅ on a recommended option, the recommended option comes first, and the reasons are bullets in a separate section below. A question about a fact only the user knows has no ✅, with or without options. NA if no question has options |

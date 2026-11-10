@@ -144,7 +144,7 @@ Is the thing defined: the goal, the scope, and what done means?
 # Asking
 
 - [YES] Ask only what changes your next step and only I can answer.
-- [YES] Put one decision in one question.
+- [YES] Put one thing in one question.
 - [YES] End a reply by this tree:
 
 ```
@@ -157,7 +157,8 @@ Is a next step left?
         └── It needs my answer     ask
 ```
 
-- [YES] Ask as many questions as you need. First explain, then ask.
+- [YES] Ask as many questions as you need.
+- [YES] Give every question its context first, then ask.
 - [YES] Keep a question in this order: question, options, reasons.
 - [YES] Give every question one of these types:
   - Multiple choice: 2 to 4 options as a Markdown bullet list, one per line ("- A. …", "- B. …"). I answer with the letter.

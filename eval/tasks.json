@@ -72,7 +72,7 @@
     "kind": "chat",
     "budget": 0.15,
     "turns": [
-      "用户在我们的网站上点「用 GitHub 登录」之后，浏览器、我们的后端和 GitHub 之间是怎么一步步交互的？另外，token 过期、用户拒绝授权、state 对不上这几种情况分别怎么处理？"
+      "用户在我们的网站上点「用 GitHub 登录」之后，浏览器、我们的后端和 GitHub 之间是怎么交互的？"
     ]
   },
   {
@@ -123,7 +123,7 @@
     "kind": "chat",
     "budget": 0.15,
     "turns": [
-      "What happens between the browser, our backend and GitHub after a user clicks \"Sign in with GitHub\" on our site? And how do we handle an expired token, a user who denies access, and a state mismatch?"
+      "What happens between the browser, our backend and GitHub after a user clicks \"Sign in with GitHub\" on our site?"
     ]
   },
   {
