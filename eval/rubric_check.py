@@ -21,62 +21,21 @@ line and adds it to raw/progress.log, so a run can be followed with `tail -f`.
 """
 import argparse
 import collections
-import hashlib
 import json
-import os
 import random
-import re
-import subprocess
 import sys
 import threading
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from run import CLEAN_ENV, DISABLE_INSTALLED  # noqa: E402
+from yesno import RUBRIC, ask, read_decks, split_decks  # noqa: E402
 
 HERE = Path(__file__).parent
-RUBRIC = HERE / "rubric-yesno.md"
 RESULTS = HERE / "results"
 OUT = RESULTS / "rubric-check"
-DECK_MAX = 14  # Lines one judge call may hold. 14 was stable in the experiment of 2026-11-10.
 PER_CALL = 2  # Samples in one judge call.
 CALL_CAP = 0.06  # USD one call may cost.
-CSV_BLOCK = re.compile(r"```csv\n(.*?)```", re.S)
-ROW = re.compile(r"^\| ([A-Z]\d+) \| (.*) \|$")
-
-
-def read_decks(text):
-    """Return the decks of the rubric: name, what it covers, who it is about, and its lines."""
-    decks = []
-    text = text.split("\n## Parked")[0]  # Parked lines are kept in the file and not scored.
-    for part in re.split(r"^## \d+\. ", text, flags=re.M)[1:]:
-        name, _, body = part.partition("\n")
-        about = next((line for line in body.splitlines() if line.strip()), "")
-        who = "agent" if "| The agent" in body else "reply"
-        lines, kind = [], None
-        for line in body.splitlines():
-            if line.startswith("Bad signs"):
-                kind = "bad"
-            elif line.startswith("Good signs"):
-                kind = "good"
-            m = ROW.match(line)
-            if m:
-                lines.append({"id": m.group(1), "text": m.group(2), "kind": kind})
-        decks.append({"name": name.strip(), "about": about, "who": who, "lines": lines})
-    return decks
-
-
-def split_decks(decks, limit=DECK_MAX):
-    """Cut a deck that is too long into parts of equal size, so one call never holds too many lines."""
-    out = []
-    for d in decks:
-        parts = -(-len(d["lines"]) // limit)
-        size = -(-len(d["lines"]) // parts)
-        for k in range(parts):
-            name = d["name"] if parts == 1 else f"{d['name']} ({k + 1}/{parts})"
-            out.append({**d, "name": name, "lines": d["lines"][k * size:(k + 1) * size]})
-    return out
 
 
 def all_samples(results=RESULTS):
@@ -120,38 +79,6 @@ def pick(samples, n, seed=7):
     return chosen[:n]
 
 
-def prompt(deck, batch):
-    who = "The agent" if deck["who"] == "agent" else "The reply"
-    table = "\n".join(f"| {line['id']} | {line['text']} |" for line in deck["lines"])
-    parts = [
-        "You are a judge. Read each sample, then answer every line below for it.",
-        f"The lines are about one thing: {deck['name']}. {deck['about']}",
-        "Answer Y when the reply does what the line says. Answer N when it does not. "
-        "Answer NA when the reply has nothing the line can apply to.\n"
-        "Judge every final reply of a sample together: answer Y when any turn does it.\n"
-        "Use the tool calls and results to check what was actually done.",
-        f"| # | {who}... |\n|---|---|\n{table}",
-        "Write at most one line of notes per sample, then end with one fenced csv block.",
-        "Columns: " + ",".join(["label", *(line["id"] for line in deck["lines"])]),
-        "One row per sample. Values: Y, N or NA.",
-    ]
-    parts += [f"=== SAMPLE S{k:02d} ===\n{s['path'].read_text()}" for k, s in enumerate(batch, 1)]
-    return "\n\n".join(parts)
-
-
-def parse(text, ids, count):
-    """Return one {id: answer} per sample, or None when the judge's table is not usable."""
-    blocks = CSV_BLOCK.findall(text or "")
-    if not blocks:
-        return None
-    rows = [[c.strip() for c in line.split(",")] for line in blocks[-1].strip().splitlines()]
-    if rows[0] != ["label", *ids] or len(rows) != count + 1:
-        return None
-    if any(v not in ("Y", "N", "NA") for r in rows[1:] for v in r[1:]):
-        return None
-    return [dict(zip(ids, r[1:])) for r in rows[1:]]
-
-
 class Spend:
     def __init__(self, limit, ledger):
         self.limit, self.ledger, self.lock = limit, ledger, threading.Lock()
@@ -159,16 +86,16 @@ class Spend:
         if ledger.exists():
             self.spent = sum(json.loads(line)["cost"] for line in ledger.read_text().splitlines())
 
-    def hold(self):
+    def hold(self, amount):
         with self.lock:
-            if self.spent + CALL_CAP > self.limit:
+            if self.spent + amount > self.limit:
                 return False
-            self.spent += CALL_CAP
+            self.spent += amount
             return True
 
-    def settle(self, cost, **record):
+    def settle(self, held, cost, **record):
         with self.lock:
-            self.spent += cost - CALL_CAP
+            self.spent += cost - held
             with self.ledger.open("a") as f:
                 f.write(json.dumps({**record, "cost": cost}) + "\n")
 
@@ -191,35 +118,10 @@ class Progress:
 
 
 def judge(deck, batch, k, model, cache, spend):
-    """Return (status, answers). Answers come from the cache when this exact call ran before."""
-    text = prompt(deck, batch)
-    key = hashlib.sha1(f"{model}\n{k}\n{text}".encode()).hexdigest()
-    hit = cache / f"{key}.json"
-    ids = [line["id"] for line in deck["lines"]]
-    if hit.exists():
-        return "cached", json.loads(hit.read_text())
-    if spend is None:
-        return "planned", None
-    if not spend.hold():
-        return "stopped", None
-    cost, answers = CALL_CAP, None
-    try:
-        cmd = ["claude", "-p", "--model", model, "--effort", "medium", "--settings", DISABLE_INSTALLED,
-               "--tools", "", "--output-format", "json", "--max-budget-usd", f"{CALL_CAP:.2f}"]
-        res = subprocess.run(cmd, cwd=cache, env={**os.environ, **CLEAN_ENV}, input=text,
-                             capture_output=True, text=True)
-        try:
-            data = json.loads(res.stdout)
-        except ValueError:
-            return "failed", None
-        cost = data.get("total_cost_usd") or CALL_CAP
-        answers = parse(data.get("result"), ids, len(batch))
-        if answers is None:
-            return "failed", None
-        hit.write_text(json.dumps(answers))
-        return "done", answers
-    finally:
-        spend.settle(cost, deck=deck["name"], model=model, ok=answers is not None)
+    """Return (status, one {id: answer} per sample of the batch)."""
+    labelled = [(f"S{n:02d}", s["path"].read_text()) for n, s in enumerate(batch, 1)]
+    status, answers = ask(deck, labelled, k, model, CALL_CAP, cache, spend)
+    return status, [answers[label] for label, _ in labelled] if answers else None
 
 
 def summarise(decks, samples, votes, passes):

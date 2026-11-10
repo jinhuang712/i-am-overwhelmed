@@ -15,6 +15,8 @@ from budget import Budget, estimate, past_costs  # noqa: E402
 from checks import measure  # noqa: E402
 from judge import dimensions, parse_scores  # noqa: E402
 from score import summary as score_summary  # noqa: E402
+from score import summary_yesno  # noqa: E402
+import yesno  # noqa: E402
 
 STUB = r'''#!/usr/bin/env python3
 import json, os, re, sys, time
@@ -23,9 +25,10 @@ time.sleep(float(os.environ.get("STUB_SLEEP", "0")))
 with open(os.environ["STUB_LOG"], "a") as f:
     f.write(json.dumps(sys.argv[1:]) + "\n")
 if "json" in sys.argv and "stream-json" not in sys.argv:
-    labels = re.findall(r"=== SAMPLE (R\d+) ===", prompt)
+    labels = re.findall(r"=== SAMPLE (\S+) ===", prompt)
     columns = re.search(r"^Columns: (.*)$", prompt, re.M).group(1)
-    rows = [l + ",2" * (columns.count(",")) for l in labels]
+    value = ",N" if "Values: Y, N or NA" in prompt else ",2"
+    rows = [l + value * (columns.count(",")) for l in labels]
     print(json.dumps({"result": "notes\n```csv\n" + columns + "\n" + "\n".join(rows) + "\n```",
                       "total_cost_usd": float(os.environ["STUB_JUDGE_COST"])}))
 else:
@@ -203,6 +206,64 @@ class EndToEnd(unittest.TestCase):
             evaluate(tmp, 20, cost="0.40", judge_cost="0.10")
             self.assertEqual(sum(e["kind"] == "judge" for e in ledger(tmp)), 2)
             self.assertIn("== new (4 runs)", (Path(tmp) / "out" / "report.md").read_text())
+
+
+class YesNo(unittest.TestCase):
+    def test_the_rubric_reads_into_decks_without_the_parked_lines(self):
+        text = yesno.RUBRIC.read_text()
+        decks = yesno.read_decks(text)
+        self.assertGreaterEqual(len(decks), 11)
+        lines = [line for d in decks for line in d["lines"]]
+        self.assertEqual(len({line["id"] for line in lines}), len(lines))
+        self.assertTrue(all(line["kind"] in ("bad", "good") for line in lines))
+        parked = text.split("## Parked")[1]
+        self.assertTrue(all(line["text"] not in parked for line in lines))
+
+    def test_no_call_holds_more_lines_than_the_limit(self):
+        cheap, strong = yesno.for_judges(yesno.read_decks(yesno.RUBRIC.read_text()))
+        self.assertTrue(all(0 < len(d["lines"]) <= yesno.DECK_MAX for d in cheap + strong))
+        self.assertTrue(all(line["strong"] for d in strong for line in d["lines"]))
+        self.assertFalse(any(line["strong"] for d in cheap for line in d["lines"]))
+
+    def test_majority_counts_na_as_no(self):
+        self.assertEqual(yesno.majority(["Y", "Y", "N"]), "Y")
+        self.assertEqual(yesno.majority(["Y", "NA", "N"]), "N")
+        self.assertEqual(yesno.majority(["Y"]), "Y")
+
+    def test_parse_rejects_a_table_with_a_wrong_label(self):
+        good = "notes\n```csv\nlabel,A1,A2\nR01,Y,NA\n```"
+        self.assertEqual(yesno.parse(good, ["A1", "A2"], ["R01"]), {"R01": {"A1": "Y", "A2": "NA"}})
+        self.assertIsNone(yesno.parse(good, ["A1", "A2"], ["R02"]))
+        self.assertIsNone(yesno.parse(good.replace("NA", "maybe"), ["A1", "A2"], ["R01"]))
+
+    def test_summary_counts_faults_credits_and_red_flags(self):
+        lines = [{"id": "A1", "kind": "bad", "deck": "Asking", "flag": False},
+                 {"id": "A2", "kind": "bad", "deck": "Asking", "flag": True},
+                 {"id": "O1", "kind": "good", "deck": "Opinion", "flag": False}]
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "blind").mkdir()
+            (root / "mapping.txt").write_text("R01 new-1\nR02 old-1\n")
+            (root / "blind" / "yesno.csv").write_text("label,A1,A2,O1\nR01,N,Y,Y\nR02,Y,N,N\n")
+            text = summary_yesno(root, lines)
+            self.assertIn("== new (1 runs): 50.0% clean, 1.0 of 1 credits", text)
+            self.assertIn("red flags: A2 x1", text)
+            self.assertIn("bar: failed, red flags in new: A2 x1", text)
+
+    def test_a_full_run_with_the_yes_or_no_rubric(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            r = evaluate(tmp, 60, "--rubric", "yesno", "--runs", "1", cost="0.01", judge_cost="0.01")
+            self.assertEqual(r.returncode, 0, r.stderr)
+            out = Path(tmp) / "out"
+            report = (out / "report.md").read_text()
+            self.assertIn("100.0% clean", report)
+            self.assertIn("bar: passed", report)
+            self.assertTrue((out / "chat-en-yesno.csv").exists())
+            models = {c[c.index("--model") + 1] for c in calls(tmp) if "--tools" in c and "json" in c}
+            self.assertIn("claude-haiku-5-5", models)
+            before = len(calls(tmp))
+            evaluate(tmp, 60, "--rubric", "yesno", "--runs", "1", cost="0.01", judge_cost="0.01")
+            self.assertEqual(len(calls(tmp)), before)
 
 
 class Parsing(unittest.TestCase):

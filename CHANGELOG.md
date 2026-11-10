@@ -53,6 +53,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Honesty: when two instructions conflict, the reply says so and says which one it followed. Before, the agent picked a side and the user never learned that the other instruction was dropped.
 - Eval: a task can carry a `system` instruction, sent above the user's request. Two trap tasks use it: `conflict-zh` and `conflict-agent-zh`. Rubric B6 scores a conflict that is named.
 - Eval: every finished run or judge call prints a line and adds it to a `progress.log`, so a run can be followed live.
+- Eval: a second rubric, `rubric-yesno.md`, as a draft: every line is one thing a judge can see, answered yes or no, sorted by type into eleven decks, with bad signs and good signs. `--rubric yesno` cuts it into decks, has a cheap judge answer each deck three times, counts the majority, and sends the lines that need the transcript to the strong judge. On a 0 to 3 scale a judge gave the same score three times on 54% of the cases; with yes or no it is 92%.
+- Eval: `rubric_check.py` checks the rubric's own lines on replies already on disk: how stable each line is, and how often it fires.
 - `PHILOSOPHY.md`: "One rule per line" is now "Discrete rules". A rule with a shape is a drawing.
 - Eval: rubric D2 follows the tree, D18 also fails a question about going on with a clear step, and a `fact-zh` chat task asks a plain fact.
 

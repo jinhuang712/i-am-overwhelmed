@@ -27,10 +27,13 @@ from budget import Budget, estimate, past_costs
 from checks import summary as check_summary
 from judge import judge_task
 from run import REPO, run_one
+from yesno import RUBRIC as YESNO_RUBRIC, judge_task as judge_yesno, read_decks
 from score import summary as score_summary
+from score import summary_yesno as yesno_summary
 
 HERE = Path(__file__).parent
 JUDGE_PER_TASK = 0.30  # Kept back for judging, for each task.
+JUDGE_PER_TASK_YESNO = 0.50  # The same for --rubric yesno: about 90 cheap calls and a few strong ones.
 JUDGE_MAX_SHARE = 0.5  # Judging never reserves more than this part of the budget.
 
 
@@ -67,7 +70,13 @@ def parse_args():
     p.add_argument("--dry-run", action="store_true", help="show the plan and the estimate, spend nothing")
     p.add_argument("--model", default="claude-sonnet-5-5")
     p.add_argument("--effort", default="medium")
-    p.add_argument("--judge-model", default="claude-opus-5-5")
+    p.add_argument("--rubric", choices=["scale", "yesno"], default="scale",
+                   help="scale: rubric.md, scored 0 to 3 by one judge. yesno: rubric-yesno.md, cut into decks, "
+                        "answered several times by a cheap judge, with the majority counted")
+    p.add_argument("--judge-model", default="claude-opus-5-5", help="the judge for scale, and for the 🔎 lines of yesno")
+    p.add_argument("--cheap-judge", default="claude-haiku-5-5", help="the judge for the decks of yesno")
+    p.add_argument("--passes", type=int, default=3, help="yesno: times the cheap judge answers a deck")
+    p.add_argument("--strong-passes", type=int, default=1, help="yesno: times the strong judge answers the 🔎 lines")
     p.add_argument("--judge-effort", default="medium")
     p.add_argument("--runs", type=int, default=5, help="runs per arm per task")
     p.add_argument("--tasks", help="comma-separated task names (default all)")
@@ -92,7 +101,8 @@ def main():
     calls = len(tasks) * n_arms * a.runs
     # Every task names the most one run may cost. The limits add up to the most the eval can cost.
     run_sum = sum(t["budget"] for t in tasks) * n_arms * a.runs
-    judge_sum = JUDGE_PER_TASK * len(tasks)
+    judge_each = JUDGE_PER_TASK_YESNO if a.rubric == "yesno" else JUDGE_PER_TASK
+    judge_sum = judge_each * len(tasks)
     print(f"plan: {calls} runs, {len(tasks)} judge calls, {a.model}")
     print(f"task limits: ${run_sum:.2f} for the runs + ${judge_sum:.2f} for judging = ${run_sum + judge_sum:.2f} at most")
     print(f"estimate: ${cost:.2f} for the runs, judging extra ({'from past runs' if known else 'rough default, no history'})")
@@ -114,16 +124,18 @@ def main():
     if a.none:
         arms["none"] = None
 
+    score_file = "yesno.csv" if a.rubric == "yesno" else "scores.csv"
+
     def settled(t):
         """True when every run of the task is done and judged, so it needs no more money."""
         root = raw / t["name"]
         runs_done = all((root / f"{arm}-{i}" / "done.json").exists()
                         for arm in arms for i in range(1, a.runs + 1))
-        return runs_done and (root / "blind" / "scores.csv").exists()
+        return runs_done and (root / "blind" / score_file).exists()
 
     # On a resume, judging money is kept back only for the tasks that still need a judge.
     open_tasks = [t for t in tasks if not settled(t)]
-    run_pool = a.budget - min(JUDGE_PER_TASK * len(open_tasks), a.budget * JUDGE_MAX_SHARE)
+    run_pool = a.budget - min(judge_each * len(open_tasks), a.budget * JUDGE_MAX_SHARE)
 
     # Whole rounds come first, so a stop leaves the arms balanced.
     jobs = [(t, arm, plugin, i) for i in range(1, a.runs + 1) for t in tasks for arm, plugin in arms.items()]
@@ -151,26 +163,33 @@ def main():
                 if (raw / t["name"]).exists() and blind_task(raw / t["name"], t["turns"], a.seed, t.get("system"))}
     caps = judge_caps(raw, finished, a.budget - budget.spent)
 
+    yesno_lines = [line for d in read_decks(YESNO_RUBRIC.read_text()) for line in d["lines"]]
     sections = []
     for t in tasks:
         root = raw / t["name"]
         if t["name"] not in finished:
             sections.append(f"## {t['name']}\n\nNo finished runs.")
             continue
-        verdict = judge_task(root, a.judge_model, a.judge_effort, budget, caps.get(t["name"], 0))
-        print(f"judge {t['name']}: {verdict}", flush=True)
+        if a.rubric == "yesno":
+            verdict = judge_yesno(root, a.cheap_judge, a.judge_model, a.passes, a.strong_passes, budget)
+        else:
+            verdict = judge_task(root, a.judge_model, a.judge_effort, budget, caps.get(t["name"], 0))
+        print(f"judge {t['name']}: {verdict} ${budget.spent:.2f}", flush=True)
         text = check_summary(root)
-        if (root / "blind" / "scores.csv").exists():
-            text = score_summary(root) + "\n\nChecks:\n" + text
-            shutil.copy(root / "blind" / "scores.csv", out / f"{t['name']}-scores.csv")
+        if (root / "blind" / score_file).exists():
+            scored = yesno_summary(root, yesno_lines) if a.rubric == "yesno" else score_summary(root)
+            text = scored + "\n\nChecks:\n" + text
+            shutil.copy(root / "blind" / score_file, out / f"{t['name']}-{score_file}")
             shutil.copy(root / "mapping.txt", out / f"{t['name']}-mapping.txt")
         else:
             text = f"Judge: {verdict}\n\nChecks:\n" + text
         sections.append(f"## {t['name']}\n\n```\n{text}\n```")
 
+    judge_note = (f"{a.cheap_judge} x{a.passes} on rubric-yesno.md, {a.judge_model} on its 🔎 lines"
+                  if a.rubric == "yesno" else a.judge_model)
     head = (f"# Eval {name}\n\n- old: `{a.old}` ({shas['old']})\n- new: `{a.new}` ({shas['new']})\n"
             f"{'- none: no plugin' + chr(10) if a.none else ''}"
-            f"- model: {a.model}, effort {a.effort}, judge {a.judge_model}\n- runs: {counts}\n"
+            f"- model: {a.model}, effort {a.effort}, judge {judge_note}\n- runs: {counts}\n"
             f"- spent: ${budget.spent:.2f} of ${a.budget:.2f}\n")
     if "stopped" in counts:
         head += "- incomplete: the budget stopped some runs\n"

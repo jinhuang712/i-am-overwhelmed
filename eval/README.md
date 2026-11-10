@@ -22,6 +22,28 @@ python3 eval/eval.py --old <git ref> --new HEAD --budget <usd>
 
 Results go to `eval/results/<date>-<old>-vs-<new>-<model>/`: `report.md`, `ledger.jsonl`, and scores and mappings per task. `raw/` holds the runs and is git-ignored.
 
+## Two rubrics
+
+`--rubric` picks how the replies are judged.
+
+| | `scale`, the default | `yesno` |
+|---|---|---|
+| File | [`rubric.md`](rubric.md) | [`rubric-yesno.md`](rubric-yesno.md), a draft |
+| A line | a quality, scored 0 to 3 | one thing a judge can see, answered yes or no |
+| Judge | one strong judge, one pass | a cheap judge, three passes on each deck, the majority counts. The lines marked 🔎 go to the strong judge |
+| Stable over three passes | 54% to 58% on Opus | 92% on Haiku, with N and NA as one answer |
+| The report gives | the share of points | "clean": the share of bad signs a reply does not show; the credits; the faults by deck |
+
+```
+python3 eval/eval.py --old v0.1.14 --rubric yesno --budget 10
+```
+
+- **Decks**: the rubric is cut by type into decks of at most 14 lines, so the lines in one call explain each other.
+- **The bar**: no red flag in the new arm, and "clean" at most 2 points under the old arm. Two points is what one pass of the judge moves a reply by.
+- **Read a deck, not a line**: one line's answer moves between runs. A deck's count and the whole score are steady.
+- **Check the rubric itself** with `python3 eval/rubric_check.py --dry-run`. It judges replies that are already on disk, several times, and reports for every line how stable it is and how often it fires.
+- `yesno` will become the default when its lines have been checked for wrong hits and misses.
+
 ## Reading a report
 
 The rubric has three layers: red flags, items, and a release bar. For each task the report prints, per arm:

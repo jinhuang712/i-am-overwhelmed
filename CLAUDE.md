@@ -16,6 +16,7 @@ install-claude.sh                          the Claude Code installer
 INSTALL.md                                 install steps, written for the agent
 eval/                                      the A/B tool, with a budget
 eval/FINDINGS.md                           what the evals taught us, a running record
+eval/rubric-yesno.md                       the rubric as yes or no lines, a draft
 examples/                                  raw outputs behind the README
 assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
 .local/                                    private, git-ignored
@@ -47,6 +48,7 @@ assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
 
 - [YES] Run `python3 eval/eval.py --old <ref> --dry-run` before a real run.
 - [YES] Run `python3 -m unittest discover eval/tests` after changing the eval. It costs nothing.
+- [YES] Run `python3 eval/rubric_check.py` after changing `eval/rubric-yesno.md`. It judges only the decks that changed.
 - [YES] Treat eval scores as samples. Read the judge's quotes as well as the totals.
 - [NO] Never spend on a real run without an approved budget.
 - [NO] Never let a task's words do a rule's work, such as "keep it simple" or "you decide".
