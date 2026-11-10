@@ -67,6 +67,17 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - `PHILOSOPHY.md`: "One rule per line" is now "Discrete rules". A rule with a shape is a drawing.
 - Eval: rubric D2 follows the tree, D18 also fails a question about going on with a clear step, and a `fact-zh` chat task asks a plain fact.
 
+- Replies: a reply has a shape, drawn as a template: what another rule says to open with, a lead of one or two whole sentences that answers on its own, parts in order of importance, each a whole sentence that states a claim and then the drawing, list or table that backs it, and the ending tree. This replaces "open with the point". It comes from news writing: the lead and the inverted pyramid.
+- Replies: "make every reply stand on its own" is three lines, and one is new: say what changed since the last reply. It comes from the update line of a wire story.
+- Honesty: a guess is marked where it is made, and a checked fact says so where it is stated. Before, a reply could close with one note that everything above was inferred. What the agent did not do or could not find is said as plainly as what it did.
+- Structure: a list gets its count first.
+- Bullet points: the part after the key is one whole sentence.
+- Wordings: "the fewest words and punctuation marks" is "cut every word and punctuation mark that carries nothing", and every sentence stays whole, with its subject and its verb. "Use fewer connectives" is gone. The old lines cut grammar along with padding, and replies read as fragments.
+- Wordings: plain written language, not spoken language; the verb itself, not a verb hidden in a noun; no fillers or slang. The target is the register of news and popular-science writing, between speech and officialese.
+- Wordings: every claim is checkable, by a number, a name or how it works; every number has what it compares with, the new value first; one thing keeps one name in every reply.
+- Formatting: "put emotion in the emoji to keep the words plain" is one rule, with its purpose.
+- `PHILOSOPHY.md`: a "What news writing taught us" part, and four sources on news writing and register.
+
 ### Fixed
 - Install: `install-claude.sh` now updates a plugin that is already installed. Before, `claude plugin install` reported success for an installed plugin, so the update never ran and the old version stayed.
 

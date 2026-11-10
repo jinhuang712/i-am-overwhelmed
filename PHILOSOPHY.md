@@ -89,6 +89,23 @@ the model prints a reply
 - **So a messy reply costs twice**: you read it once, and the model reads it many times.
 - **We believe long sessions drift more for it.** We reasoned this out and have not measured it.
 
+### What news writing taught us
+
+News copy is written for our reader: someone who skims and may stop at any line. We compared replies with Chinese press releases, read how newsrooms write, and read what linguistics says about register. Three things carried over. The format did not.
+
+```
+news writing
+├── the shape       a lead that answers on its own, then parts by importance
+├── the sentences   whole, written, checkable
+└── the sourcing    each fact says how it is known, where it is stated
+```
+
+- **Short means no empty words, not no grammar.** "The fewest words" made the model drop subjects and links, and replies read as fragments. News cuts padding and keeps every sentence whole. The owner read the longer, whole sentences as easier.
+- **The register is a band.** Written Chinese runs from speech to officialese. News and popular science sit between them: precise, and still easy to read. So the rules guard both edges: no fillers or slang on one side, no verb hidden in a noun on the other.
+- **The source sits with the fact.** A closing note that "all of the above is inferred" hides which line is a guess. A wire story attributes each fact where it states it, and says plainly what it could not find. In a first run on five tasks, every reply that had a guess marked it where it was made.
+- **The genre's name stays out of the rules.** Every time "press release" was in the instruction, the model brought the dateline, the headline and the PR voice with it. The rules say what to do in our own words.
+- **Not every newsroom habit carries over.** An editor's pass before sending was left out. We believe a model writes a reply in one pass, so a check stands a better chance written as a rule for writing.
+
 ## Part 2. How the rules are written
 
 ### We don't teach the model how to work
@@ -194,3 +211,7 @@ These studies are background. None of them tested chat replies, so each rule is 
 - Vasconcelos et al. (2023), [Explanations can reduce overreliance on AI systems during decision-making](https://arxiv.org/abs/2212.06823)
 - Sharma et al. (2024), [Towards understanding sycophancy in language models](https://arxiv.org/abs/2310.13548)
 - Starmer et al. (2014), I-PASS handoff program, [summary on PSNet](https://psnet.ahrq.gov/issue/changes-medical-errors-after-implementation-handoff-program)
+- Reuters, [Handbook of Journalism](https://mediakar.wordpress.com/wp-content/uploads/2012/10/handbook-of-journalism-reuters.pdf), an older edition
+- Nielsen (2006), [F-shaped pattern for reading web content](https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content-discovered/)
+- 邰沁清、饶高琦 (2021), [a quantitative study of eight Chinese registers](https://aclanthology.org/2021.ccl-1.37.pdf)
+- US Federal Plain Language Guidelines, [writing](https://digital.gov/guides/plain-language/writing)
