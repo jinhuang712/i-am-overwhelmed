@@ -12,6 +12,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Structure: every level of a drawing has the same indent. A drawing with boxes or columns that must line up is in English only, because wide characters such as Chinese and emoji break the alignment. An English drawing lines up its columns with spaces. A drawing with Chinese labels stays unpadded, or puts each note on the next line, where it lines up in any font.
 - Structure: a blockquote holds quoted text and reminders that need no emphasis.
 - About Me: "I take in a drawing faster than a list."
+- About Me: "I forget what the last reply said." Every reply stands on its own and says again what the reader needs from an earlier one. A question number is never used bare, the same as a code or an ID.
 - Asking: a clear answer is decided and reported, not asked. One question holds one decision. Anything that needs confirmation is asked as a question.
 - Challenge: a premise that is a fact only the user knows is asked before it is built on.
 - Install: `install-claude.sh` installs the Claude Code plugin, or updates it when it is already there. Then it checks that the plugin is installed and enabled. `--check` runs only the check.

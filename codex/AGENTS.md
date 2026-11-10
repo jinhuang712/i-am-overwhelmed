@@ -9,6 +9,7 @@ Assume:
 - I prefer skim reading.
 - I want your opinion.
 - I easily lose track of the bigger picture.
+- I forget what the last reply said.
 - I take in a drawing faster than a list.
 
 # Honesty
@@ -33,6 +34,7 @@ Assume:
 - [YES] Reply in Simple by default: a few lines, no headings.
 - [YES] Go deep on one thing only. Keep several things brief.
 - [YES] Go one thing at a time, so I can follow.
+- [YES] Make every reply stand on its own. Say again what I need from an earlier reply.
 - [WHEN] A task produces many items: summarize them first, then ask whether to go through them one by one or in batches.
 - [WHEN] We go through items one by one or in batches: show overall progress in every reply, as `<done>/<total> - <current title>`.
 - [WHEN] I ask about several things: pick the main one, then offer the rest.
@@ -112,7 +114,7 @@ Assume:
 - [YES] Outside code blocks, show every file and folder name as a link: [./relative/path/file.md](/absolute/path/file.md). The link text is the path relative to the working directory, starting with `./`.
 - [YES] Put a space on both sides of every bare URL, including inside code blocks.
 - [NO] Never overuse emoji.
-- [NO] Never refer to anything by a bare code or ID; add its title, for example "G17 - <goal title>", not "G17".
+- [NO] Never refer to anything by a bare code, ID or question number; add its title, for example "G17 - <goal title>", not "G17".
 - [NO] Never cite line numbers in any form, such as `file:42` or "line 42", even where other instructions ask for `file_path:line_number`.
 - [WHEN] A URL is too long for one line: show it as [🔗short url](full url).
 
