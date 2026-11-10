@@ -9,7 +9,7 @@ eval/results/*/raw/*/blind/, and has a cheap judge answer every line of
 rubric-yesno.md for them, several times.
 
 For each line the report gives:
-  stable   on how many samples all passes gave the same answer
+  stable   on how many samples all passes agreed on Y or not Y (N and NA count as one answer)
   fires    on how many samples the majority answer was Y
   NA       on how many samples the majority answer was NA
 
@@ -232,7 +232,8 @@ def summarise(decks, samples, votes, passes):
                 if len(got) < passes:
                     continue
                 full += 1
-                same += len(set(got)) == 1
+                # N and NA both say "the reply did not do it". Only a flip to or from Y is a real disagreement.
+                same += len({v == "Y" for v in got}) == 1
                 top = collections.Counter(got).most_common(1)[0][0]
                 fires += top == "Y"
                 na += top == "NA"
@@ -248,8 +249,8 @@ def report(rows, samples, passes, model, spent):
     judged = [r for r in rows if r["n"]]
     stable = sum(r["same"] for r in judged) / max(sum(r["n"] for r in judged), 1)
     out = [f"# Rubric check\n\n- rubric: `rubric-yesno.md`, {len(rows)} lines\n- samples: {len(samples)} replies from "
-           f"earlier evals\n- judge: {model}, {passes} passes\n- stable: {100 * stable:.0f}% of the answers were the "
-           f"same in all passes\n- spent so far: ${spent:.2f}\n"]
+           f"earlier evals\n- judge: {model}, {passes} passes\n- stable: on {100 * stable:.0f}% of the answers all passes "
+           f"agreed on Y or not Y\n- spent so far: ${spent:.2f}\n"]
     out.append("A line is weak when it is stable on under 80% of the samples. A line that never fires has not been "
                "seen yet; it is not wrong.\n")
     deck = None

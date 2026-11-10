@@ -19,6 +19,8 @@ Every line says how strong its evidence is. "One case" means one reply or one ru
 - **Humor does not come from a rule.** It scored 0.6 of 3 as `[MAYBE]` and as `[YES]`. (2026-11-10)
 - **A rule that reads oddly to the owner is not added.** Three lines that were derived from a list of language habits were dropped the moment they were read. Rules come from a real annoyance first. (2026-11-10)
 
+- **A rubric that knows nothing of the plugin still sees the plugin's faults.** With the plugin, 4 of 14 replies had sentences with no subject or no verb, against 0 of 6 without it, and 7 of 14 used an emoji with no meaning, against 0 of 6. Small numbers, one judge. (2026-11-11)
+
 ## About judging
 
 - **A 0 to 3 scale is not stable.** Opus 5.5 judged the same four replies three times on ten rubric lines: 54% of the rule items and 58% of the degree items got the same score all three times. Nearly every miss was one point. Every eval before 2026-11-10 used this scale. (2026-11-10, 40 scores)
@@ -27,6 +29,9 @@ Every line says how strong its evidence is. "One case" means one reply or one ru
 - **Describing every level of a scale does not help.** Three degree items as 0, 1, 2 with a sentence for each level: 42% identical on Haiku, against 67% for the old lines. (2026-11-10, 24 scores)
 - **One rubric line a call is not more accurate than a group of lines.** Haiku and Sonnet both agreed with Opus less when they got one line at a time. (2026-11-10, 16 scores)
 - **With yes or no questions, Haiku is as stable as Opus, at a tenth of the cost.** One judging call: $0.066 on Opus, $0.007 on Haiku. Their majority answers agreed on 47 of 56 questions. (2026-11-10)
+- **Most of a judge's wavering is between N and NA, and it means nothing.** On 132 lines and 20 replies, Haiku gave the same answer three times on 79% of the cases. Six flips in ten were between "no" and "not applicable". With the two counted as one answer, 92% were stable, and 13 lines stayed weak. Ask a judge for Y or not Y. (2026-11-11, 2,640 answers, $0.96)
+- **A line can be stable and still too wide.** "Writes cause and effect as prose, with no arrows" fired on 18 of 19 replies, and "a bullet point holds two points" on 17 of 19. A line that fires on nearly every reply tells nothing. (2026-11-11)
+- **A third of the lines never fired on 20 replies**, most red flags among them. They are not wrong; the replies on disk hold no case for them. A line needs a reply that breaks it before it can be checked. (2026-11-11)
 - **The questions that stay unstable need the transcript checked**, such as "claims match evidence" and "a closing recap". Both models got 2 or 3 of 4 on them.
 - **Stable is not the same as right.** A judge can be wrong the same way every time. Three judges on the old scale agreed with each other on 10 of 16 scores at best.
 - **The rubric is written from the rules, so it favours the version that states a rule.** No plugin loses points for formats it was never told about.
