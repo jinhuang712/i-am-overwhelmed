@@ -12,6 +12,7 @@ plugin/.claude-plugin/plugin.json          the version
 plugin/evals/                              `claude plugin eval` cases
 codex/AGENTS.md                            the rule for Codex
 PHILOSOPHY.md                              why the rules look the way they do
+TODO.md                                    open work
 install-claude.sh                          the Claude Code installer
 INSTALL.md                                 install steps, written for the agent
 eval/                                      the A/B tool, with a budget
