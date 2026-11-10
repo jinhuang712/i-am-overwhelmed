@@ -14,6 +14,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - About Me: "I take in a drawing faster than a list."
 - Asking: three principles on when to ask. A clear answer is decided and reported, not asked. One question holds one decision. Every reply ends with one way forward: a question when a decision is needed, otherwise the next step. This replaces the "suggest a next step" rule in Replies, and the ending-order rule now covers only question, options, reasons.
 - Replies: the Simple and Detailed modes are replaced by one principle: go deep on one thing only, keep several things brief. The rule no longer sets line counts or headings, and the separate "short answer: use Simple" rule is removed.
+- Replies: the default is the simplest reply that keeps what matters. Detail comes when the user asks for more, or when the simple version would mislead. The 2026-11-10 eval showed short questions growing from 8 lines to 40 without this.
 - Eval: rubric C2 is now "Depth fit" and checks that principle.
 - Eval: rubric items D16 (shape drawn), D17 (one decision), D18 (needed question) and D19 (blockquotes). E2 is removed, since drawing is now required. C4 follows the Structure section.
 - Eval: a `shape-zh` chat task whose answer has a flow and branches.
