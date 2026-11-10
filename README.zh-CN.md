@@ -8,18 +8,27 @@
 
 ## 📦 安装
 
-把下面这段粘贴给 Claude Code：
+**给 Claude Code 安装**
 
-```text
-Install the plugin from github.com/jinhuang712/i-am-overwhelmed:
+1. 用命令行：
+
+```bash
 claude plugin marketplace add jinhuang712/i-am-overwhelmed
 claude plugin install i-am-overwhelmed@i-am-overwhelmed
 ```
 
-或者把这段粘贴给 Codex：
+2. 用 curl：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/jinhuang712/i-am-overwhelmed/master/install-claude.sh | sh
+```
+
+**让 agent 来安装**
+
+把这句话贴给 Claude Code、Codex 或其他 agent：
 
 ```text
-把 https://raw.githubusercontent.com/jinhuang712/i-am-overwhelmed/master/codex/AGENTS.md 的内容追加到 ~/.codex/AGENTS.md，然后提醒我开一个新会话。
+Install i-am-overwhelmed by following https://raw.githubusercontent.com/jinhuang712/i-am-overwhelmed/master/INSTALL.md
 ```
 
 细节、注意事项和卸载方法见 [INSTALL.zh-CN.md](INSTALL.zh-CN.md)。

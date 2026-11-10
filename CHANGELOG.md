@@ -5,7 +5,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Added
+- Install: `install-claude.sh` installs the Claude Code plugin, or updates it when it is already there. Then it checks that the plugin is installed and enabled. `--check` runs only the check.
+
 ### Changed
+- Install: the README shows two ways. For Claude Code, the two CLI commands or one curl line. For any agent, one line to paste, which sends it to `INSTALL.md`. `INSTALL.md` is now written for the agent: Claude Code runs the script, and Codex or another agent reads the rules and decides how to add them to the user's instructions.
 - Formatting: the shape rules are now one principle with examples: draw the content whenever it has a shape (table, ASCII tree, diagram, arrow waterfall, mind map). Bullet points are the fallback for content without a shape. The tree also covers branching decisions.
 - About Me: "I take in a drawing faster than a list."
 - Asking: three principles on when to ask. A clear answer is decided and reported, not asked. One question holds one decision. Every reply ends with one way forward: a question when a decision is needed, otherwise the next step. This replaces the "suggest a next step" rule in Replies, and the ending-order rule now covers only question, options, reasons.

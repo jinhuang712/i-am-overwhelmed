@@ -8,18 +8,27 @@
 
 ## 📦 Install
 
-Paste this to Claude Code:
+**Install for Claude Code**
 
-```text
-Install the plugin from github.com/jinhuang712/i-am-overwhelmed:
+1. With the CLI:
+
+```bash
 claude plugin marketplace add jinhuang712/i-am-overwhelmed
 claude plugin install i-am-overwhelmed@i-am-overwhelmed
 ```
 
-Or paste this to Codex:
+2. With curl:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/jinhuang712/i-am-overwhelmed/master/install-claude.sh | sh
+```
+
+**Install with an agent**
+
+Paste this to Claude Code, Codex or another agent:
 
 ```text
-Append the contents of https://raw.githubusercontent.com/jinhuang712/i-am-overwhelmed/master/codex/AGENTS.md to ~/.codex/AGENTS.md, then tell me to start a new session.
+Install i-am-overwhelmed by following https://raw.githubusercontent.com/jinhuang712/i-am-overwhelmed/master/INSTALL.md
 ```
 
 Details, caveats and how to remove it: [INSTALL.md](INSTALL.md).

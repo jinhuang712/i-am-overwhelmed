@@ -11,6 +11,8 @@ plugin/output-styles/i-am-overwhelmed.md   the rule, the source of truth
 plugin/.claude-plugin/plugin.json          the version
 plugin/evals/                              `claude plugin eval` cases
 codex/AGENTS.md                            the rule for Codex
+install-claude.sh                          the Claude Code installer
+INSTALL.md                                 install steps, written for the agent
 eval/                                      the A/B tool, with a budget
 examples/                                  raw outputs behind the README
 .local/                                    private, git-ignored
