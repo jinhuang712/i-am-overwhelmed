@@ -34,6 +34,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Eval: humor is rubric D25, a required item, in place of the optional E3.
 - Formatting: emotion goes in the emoji, and the words stay plain. Before, the rule only said what emoji can do.
 - `PHILOSOPHY.md`: an "Emotion goes in the emoji" part.
+- Replies: the order is define, discuss, do, drawn as a tree. A thing whose goal, scope or end is not defined gets a definition first, and the agent says it. A defined thing with open points is discussed. A defined thing with none is done.
+- Eval: rubric D26 (defined first) and a `vague-zh` agent task, "optimise this project".
 - `PHILOSOPHY.md`: "One rule per line" is now "Discrete rules". A rule with a shape is a drawing.
 - Eval: rubric D2 follows the tree, D18 also fails a question about going on with a clear step, and a `fact-zh` chat task asks a plain fact.
 

@@ -39,6 +39,7 @@ The rules have one aim: make Shared larger.
 Opinionated works on two quadrants. A better way that the agent sees and I do not is in my blind spot, the same as a problem it does not report.
 
 - **My blind spot has two halves**: what the agent did not say, and what it said but I could not take in. A reply I cannot read leaves me as blind as a reply that hides the problem. This is where the name of the plugin comes from.
+- **A definition works on both blind spots at once.** The agent says how it reads the goal, the scope and what done means. I see its reading, and my correction tells it mine. So the order is define, discuss, do.
 - **Shared leaks.** I forget what the last reply said. Focused and Standalone keep it from leaking.
 
 The model is adapted from the [Johari window](https://en.wikipedia.org/wiki/Johari_window) (Luft and Ingham, 1955), which describes one person and the people around them. Here the two sides are the reader and the agent.
