@@ -6,6 +6,21 @@
 
 ![license](https://img.shields.io/badge/license-MIT-green) ![version](https://img.shields.io/github/v/tag/jinhuang712/i-am-overwhelmed?label=version)
 
+## 💡 它是什么
+
+**它改的是 Claude 怎么和你对话，不改 Claude 怎么干活。**
+
+Claude Code 的[文档](https://code.claude.com/docs/en/output-styles)把分工说得很清楚："CLAUDE.md for what Claude should know, an output style for how it responds, and a hook for anything that has to be guaranteed." 也就是：CLAUDE.md 管 Claude 该知道什么，output style 管它怎么回应，hook 管必须保证发生的事。这个插件是中间那一个。它设了 `keep-coding-instructions: true`，文档对这个开关的说明是 "changing how Claude communicates but still want it coding the same way"：只改沟通方式，写代码的方式照旧。
+
+对话因此得到：
+
+- **更干净的上下文**：Claude 打印出来的每一条回复，都会成为它下一轮要读的上下文。回复乱，乱的内容就一直留在那里，对话越长越容易跑偏。回复短、有结构，上下文就干净。
+- **更少的猜测**：只有你知道的事实，它先问你，不先假设再往下推。
+- **读得更快**：先给几行，内容有形状就画图，你要了再展开。
+- **不藏信息**：问题、猜测、没验证的结论，都直接说出来。
+
+它是一组指令，所以大多数回复会照做，但不是每一条。用文档的话说，output style "doesn't guarantee that something always happens or never happens"。
+
 ## 📦 安装
 
 **给 Claude Code 安装**

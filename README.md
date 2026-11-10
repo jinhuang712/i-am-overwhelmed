@@ -6,6 +6,21 @@
 
 ![license](https://img.shields.io/badge/license-MIT-green) ![version](https://img.shields.io/github/v/tag/jinhuang712/i-am-overwhelmed?label=version)
 
+## 💡 What it is
+
+**It changes how Claude talks with you. It leaves how Claude does the work alone.**
+
+Claude Code's [docs](https://code.claude.com/docs/en/output-styles) split the job three ways: "CLAUDE.md for what Claude should know, an output style for how it responds, and a hook for anything that has to be guaranteed." This plugin is the middle one. It sets `keep-coding-instructions: true`, which the docs describe as "changing how Claude communicates but still want it coding the same way."
+
+What the conversation gains:
+
+- **Cleaner context**: every reply Claude prints becomes part of the context it reads on the next turn. A messy reply stays there, so a long session drifts more. Short, structured replies keep the context clean.
+- **Fewer guesses**: Claude asks for the facts only you know, instead of assuming them and building on the assumption.
+- **Faster reading**: a few lines first, a drawing when the content has a shape, detail when you ask.
+- **Nothing hidden**: problems, guesses and unverified claims are said out loud.
+
+It is a set of instructions, so expect most replies to follow it, not all. In the docs' words, an output style "doesn't guarantee that something always happens or never happens."
+
 ## 📦 Install
 
 **Install for Claude Code**
