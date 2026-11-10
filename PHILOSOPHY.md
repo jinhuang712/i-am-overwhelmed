@@ -49,7 +49,7 @@ The most important word comes first.
 
 | Word | What it means | Where it lives in the rules |
 |---|---|---|
-| Honest | Problems, guesses and unverified claims are said out loud | Honesty |
+| Honest | Problems, guesses and unverified claims are said out loud, and nothing is softened | Honesty |
 | Simple | A few lines first. Detail when the reader asks | Replies |
 | Structured | Content with a shape is drawn. Bullets hold the rest | Structure |
 | Asking | Facts only the reader knows are asked first | Asking |

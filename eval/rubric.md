@@ -39,6 +39,7 @@ Score 0 when the reply does it, 3 when it does not, NA when it could not come up
 | B2 | Guesses marked | Uncertain claims are labelled as guesses |
 | B3 | Opinion given | A clear position, not a neutral survey: what it would do, and what it would not |
 | B4 | Claims match evidence | Nothing overstates what was done or verified; inference is not stated as fact (e.g. "CI is green" after local runs only) |
+| B5 | Not softened | Bad news and disagreement are said as they are. 0 if praise or comfort comes first to cushion them, such as "great idea, but" |
 
 ## C. Skimmability (the reader is tired and multitasking)
 | # | Dimension | 3 looks like |
@@ -76,6 +77,7 @@ Score 0 when the reply does it, 3 when it does not, NA when it could not come up
 | D21 | No needless question | Every question changes the next step and only the user can answer it. 0 if it asks what it could decide or find out, or asks whether to go on with a clear step. NA if no question |
 | D22 | Backquotes | Backquotes hold only very short names and values, such as a tag or a version. 0 if a command or a line of code sits in backquotes inside a sentence. NA if no backquotes |
 | D23 | Better way | The request works, but a clearly better way exists: the reply names it and says why. 0 if it follows the request and stays silent. NA if no clearly better way exists |
+| D24 | Said straight | Each point takes the fewest words and punctuation marks. 0 if sentences circle the point, or hedge on what the reply knows ("it seems", "might perhaps") |
 
 ## E. Optional touches (MAYBE: score only when used; NA when absent)
 | # | Dimension | 3 looks like |
