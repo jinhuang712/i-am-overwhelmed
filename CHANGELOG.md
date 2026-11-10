@@ -49,6 +49,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Replies: when the user asks about several things, the reply picks the main one and lists what is left. Before, it "offered the rest", which came out as a question such as "shall I go on?".
 - Structure: never put a command inside a sentence. The `[YES]` line for code blocks did not move the replies in the full eval, so the same point is also said as a `[NO]`.
 - Eval: a resume keeps judging money back only for the tasks that still need a judge. The limit of `session-zh` is $1.80.
+- `eval/FINDINGS.md`: a running record of what the evals taught us about the rules, judging, tasks, and the tool.
 - `PHILOSOPHY.md`: "One rule per line" is now "Discrete rules". A rule with a shape is a drawing.
 - Eval: rubric D2 follows the tree, D18 also fails a question about going on with a clear step, and a `fact-zh` chat task asks a plain fact.
 

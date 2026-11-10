@@ -1,0 +1,58 @@
+# Findings
+
+A running record of what the evals taught us: what helps the rules, and how to run an eval well. New findings go at the end of a section, with a date. The numbers behind them are in [`README.md`](README.md) and in [`results/`](results/).
+
+Every line says how strong its evidence is. "One case" means one reply or one run.
+
+## About the rules
+
+- **The plugin is the large effect.** No plugin scored 65.0%, 0.1.14 scored 87.5% and the rules of 2026-11-10 scored 89.7%, on 17 tasks with one run each. Red flags were hit only with no plugin: twice it built on a fact only the user knew, and once it acted without asking. (2026-11-10, Opus 5.5)
+- **A small change sits inside the noise.** Two points between two versions, on one run per arm, mean nothing. See "About judging". (2026-11-10)
+- **A principle loses to an unconditional rule.** "As simple as you can" left short answers three to five times longer, while "give each part a heading" was followed every time. A definition a person can check, "a few lines, no headings", did the work. (2026-11-03 and 2026-11-10, two evals)
+- **The wording of a trigger decides whether a rule is followed.** "You show a local difference" lost most `diff` blocks. "You changed code or text" brought them back. (2026-11-03)
+- **The worst replies come from two rules that collide, or from one rule followed too far.**
+  - "Every reply ends with one way forward" made 0.1.14 close a plain fact answer with a made-up question. On that task it scored under no plugin. An ending tree fixed it. (2026-11-10, both runs of two)
+  - "Show me the premises that matter" and "ask me a fact only I know" together made replies list their assumptions and build on them. (2026-11-10, read in replies)
+  - "Keep several things brief" and "pick the main one, then offer the rest" say opposite things. "Offer" came out as "shall I go on?". (2026-11-10, two replies)
+- **A `[NO]` may work where a `[YES]` did not.** "Put every command in its own code block" left the backquotes item at 2.1 of 3 in both versions. After "never put a command inside a sentence" one task scored 3. Another task still had `git status` inside a sentence. (2026-11-10, one case each way)
+- **A model does not see its own inference as a guess.** A reply said a second case was "fixed too" after it had checked only the first. "Say when you're guessing" did not stop it. The rule now defines a guess: anything you did not check. In the next run the same task marked an unchecked choice, and still stated two inferences as facts. (2026-11-10, one case each)
+- **Humor does not come from a rule.** It scored 0.6 of 3 as `[MAYBE]` and as `[YES]`. (2026-11-10)
+- **A rule that reads oddly to the owner is not added.** Three lines that were derived from a list of language habits were dropped the moment they were read. Rules come from a real annoyance first. (2026-11-10)
+
+## About judging
+
+- **A 0 to 3 scale is not stable.** Opus 5.5 judged the same four replies three times on ten rubric lines: 54% of the rule items and 58% of the degree items got the same score all three times. Nearly every miss was one point. Every eval before 2026-11-10 used this scale. (2026-11-10, 40 scores)
+- **Yes or no is stable.** The same rule items as pass or fail: 86% to 89% identical over three passes, for Opus and for Haiku. (2026-11-10)
+- **A degree item becomes stable when it is split into several yes or no questions.** "Length fit" became "is a point made twice", "does the reply close with a recap", "can the first sentence be deleted". 86% identical on Opus, 82% on Haiku. (2026-11-10, 28 scores)
+- **Describing every level of a scale does not help.** Three degree items as 0, 1, 2 with a sentence for each level: 42% identical on Haiku, against 67% for the old lines. (2026-11-10, 24 scores)
+- **One rubric line a call is not more accurate than a group of lines.** Haiku and Sonnet both agreed with Opus less when they got one line at a time. (2026-11-10, 16 scores)
+- **With yes or no questions, Haiku is as stable as Opus, at a tenth of the cost.** One judging call: $0.066 on Opus, $0.007 on Haiku. Their majority answers agreed on 47 of 56 questions. (2026-11-10)
+- **The questions that stay unstable need the transcript checked**, such as "claims match evidence" and "a closing recap". Both models got 2 or 3 of 4 on them.
+- **Stable is not the same as right.** A judge can be wrong the same way every time. Three judges on the old scale agreed with each other on 10 of 16 scores at best.
+- **The rubric is written from the rules, so it favours the version that states a rule.** No plugin loses points for formats it was never told about.
+- **Every real finding came from reading the replies.** The scores pointed at a task. The cause was found in the text each time: the reply that never answered the edge cases, the claim that was not true, the task that asked four things.
+
+## About tasks
+
+- **A task's words must not do a rule's work.** "Keep it simple", "you decide", "give me a recommendation" and "by the way" were all in tasks, and each handed a rule its result. (2026-11-10)
+- **A task asks one thing**, unless it tests a message that asks several. The drawing task asked for a flow and three edge cases. It tested how a reply handles a crowded question, and the new rules lost 12 points on it. With one question they led by 8. (2026-11-10)
+- **A task that makes the model want to read files needs tools.** As a chat task with no tools, "write a deploy script for our service" made the model write made-up tool calls up to the output limit: 128,000 tokens, three times. (2026-11-10)
+- **The user's turns in a multi-turn task are fixed.** A question the model asks in turn 1 is never answered, so the same open questions come back in every later turn. Read those turns with that in mind.
+- **One run per arm shows a direction only.** The compound task scored 95.0 for 0.1.14 in one run and 81.2 in the next.
+
+## About the tool and the money
+
+- **Claude Code skips a `--plugin-dir` it cannot find and says nothing.** A relative results path left every arm with no plugin. 32 runs went through before a read of the replies showed it. The path is absolute now, and each run checks the session's plugin list.
+- **`--max-budget-usd` is checked between turns only.** One reply ran to $2.56 against a $0.15 limit. A reply is now capped at 16,000 output tokens. That cap has not been seen to stop a reply yet.
+- **On a subscription the costs are list prices, and the runs use up the usage limit.** One full run used up a 5-hour limit, and every judge call failed.
+- **A hold is not a spend.** The tool holds a run's whole limit before the run starts. A limit set too wide, or judging money kept back twice on a resume, stops runs although the money is there.
+- **Smoke the tool on a cheap model before a full run.** The three faults that lost $17.79 had nothing to do with how good the model is.
+- **Estimate from a measured price.** A guess for Haiku judging was ten times too high, and a guess for Sonnet was half the real cost.
+- **Measured on 2026-11-10, Opus 5.5 at medium effort**: a one-turn chat run $0.02 to $0.07, a four-turn agent run $1.18, a full run of 17 tasks and three arms $11.2, its judging $2.45.
+
+## What we do not know yet
+
+- How a rubric of yes or no questions does on a full run.
+- Whether the rules do the same on Sonnet and on Codex. Every eval since 2026-11-10 ran on Opus.
+- What the owner feels after some days of real use with the rules of 2026-11-10. No eval replaces that.
+- Whether the three trees in the rule file get in each other's way.

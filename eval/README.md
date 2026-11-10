@@ -2,6 +2,8 @@
 
 A repeatable A/B, kept as a tool: run the same tasks against two versions of the plugin, blind the replies, have a model judge score them with [`rubric.md`](rubric.md), then unblind.
 
+What the evals have taught us is in [`FINDINGS.md`](FINDINGS.md).
+
 ## Run it
 
 See the plan and the estimate first. This spends nothing:

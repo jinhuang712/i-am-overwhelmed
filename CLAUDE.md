@@ -15,6 +15,7 @@ PHILOSOPHY.md                              why the rules look the way they do
 install-claude.sh                          the Claude Code installer
 INSTALL.md                                 install steps, written for the agent
 eval/                                      the A/B tool, with a budget
+eval/FINDINGS.md                           what the evals taught us, a running record
 examples/                                  raw outputs behind the README
 assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
 .local/                                    private, git-ignored
@@ -52,6 +53,7 @@ assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
 - [YES] Make a task ask one thing, unless it tests a message that asks several.
 - [YES] Give a task that makes the agent want to read files the `agent` kind and a fixture.
 - [WHEN] A release changes rules: run the eval on them first.
+- [WHEN] An eval or an experiment teaches something: add it to `eval/FINDINGS.md`, with its date and how strong the evidence is.
 - [WHEN] A model has no cost history: start with a small smoke run.
 
 # Release
