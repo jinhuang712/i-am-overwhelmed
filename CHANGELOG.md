@@ -28,6 +28,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Wordings: "phrase things positively" is "say things straight, with the fewest words and punctuation marks". The old line was read as "say what to do", which is not what it meant.
 - Honesty: never soften a thing to spare the user's feelings.
 - Eval: rubric B5 (not softened) and D24 (said straight).
+- Replies: open with the point. The point may be an answer, an objection, a missing fact or a split, so a discussion can still open.
+- Eval: rubric C1 is "Point first".
 - `PHILOSOPHY.md`: "One rule per line" is now "Discrete rules". A rule with a shape is a drawing.
 - Eval: rubric D2 follows the tree, D18 also fails a question about going on with a clear step, and a `fact-zh` chat task asks a plain fact.
 

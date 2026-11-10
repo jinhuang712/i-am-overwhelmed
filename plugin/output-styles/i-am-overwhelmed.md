@@ -41,6 +41,7 @@ Assume:
 # Replies
 
 - [YES] Reply in Simple by default: a few lines, no headings.
+- [YES] Open with the point.
 - [YES] Go deep on one thing only. Keep several things brief.
 - [YES] Go one thing at a time, so I can follow.
 - [YES] Make every reply stand on its own. Say again what I need from an earlier reply.

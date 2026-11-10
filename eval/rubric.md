@@ -44,7 +44,7 @@ Score 0 when the reply does it, 3 when it does not, NA when it could not come up
 ## C. Skimmability (the reader is tired and multitasking)
 | # | Dimension | 3 looks like |
 |---|---|---|
-| C1 | Gist in 5 seconds | The answer or outcome is obvious from the first line or headings |
+| C1 | Point first | The reply opens with its point: an answer, an objection, a missing fact or a split. 0 if the first sentence can be deleted with nothing lost, such as a greeting or the question said again |
 | C2 | Depth fit | Goes deep on one thing only; several things stay brief |
 | C3 | Length fit | No padding; every section earns its place |
 | C4 | Structure | A Simple reply has no headings and a Detailed reply has one per part; drawings, tables, bullets, quotes and code blocks are each used for what they fit |
