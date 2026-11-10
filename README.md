@@ -1,3 +1,5 @@
+<img src="assets/hero.svg" alt="I am overwhelmed. A fed-up user's message to their coding agent, with the reply rules highlighted." width="100%">
+
 # 😵‍💫 i-am-overwhelmed
 
 [English](README.md) · [简体中文](README.zh-CN.md)
@@ -6,20 +8,22 @@
 
 ![license](https://img.shields.io/badge/license-MIT-green) ![version](https://img.shields.io/github/v/tag/jinhuang712/i-am-overwhelmed?label=version)
 
-## 💡 What it is
+You are tired, you are doing three other things, and you skim. This plugin makes Claude reply for that reader. Its replies are:
 
-**It changes how Claude talks with you. It leaves how Claude does the work alone.**
+- **Simple**: a few lines first, detail when you ask.
+- **Honest**: problems, guesses and unverified claims are said out loud.
+- **Structured**: a drawing when the content has a shape, bullets otherwise.
+- **Predictable**: the same formats and the same emoji meanings every time, so you know where to look.
+- **Focused**: one thing at a time, and a note when the talk drifts from the goal.
+- **Asking**: the facts only you know are asked first, not assumed.
+- **Opinionated**: it gives a view, pushes back, and holds it until you convince it.
 
-Claude Code's [docs](https://code.claude.com/docs/en/output-styles) split the job three ways: "CLAUDE.md for what Claude should know, an output style for how it responds, and a hook for anything that has to be guaranteed." This plugin is the middle one. It sets `keep-coding-instructions: true`, which the docs describe as "changing how Claude communicates but still want it coding the same way."
+## 🎁 What you get
 
-What the conversation gains:
-
-- **Cleaner context**: every reply Claude prints becomes part of the context it reads on the next turn. A messy reply stays there, so a long session drifts more. Short, structured replies keep the context clean.
-- **Fewer guesses**: Claude asks for the facts only you know, instead of assuming them and building on the assumption.
-- **Faster reading**: a few lines first, a drawing when the content has a shape, detail when you ask.
-- **Nothing hidden**: problems, guesses and unverified claims are said out loud.
-
-It is a set of instructions, so expect most replies to follow it, not all. In the docs' words, an output style "doesn't guarantee that something always happens or never happens."
+- **A cleaner context, and less drift**: every reply Claude prints becomes part of the context it reads on the next turn. A messy reply stays there, so a long session drifts more. Short, structured replies keep the context clean.
+- **Fewer wrong turns**: Claude asks before it assumes, so the work is not built on a guess about you.
+- **Less to read**: the answer comes first, and the detail waits until you ask for it.
+- **No late surprises**: what is broken, guessed or unverified is said now, not found later.
 
 ## 📦 Install
 
@@ -47,6 +51,25 @@ Install i-am-overwhelmed by following https://raw.githubusercontent.com/jinhuang
 ```
 
 Details, caveats and how to remove it: [INSTALL.md](INSTALL.md).
+
+## 🧱 How it works
+
+**The plugin sets one thing: Claude Code's output style.** It adds no hooks, no skills, no tools and no `CLAUDE.md`.
+
+```
+Claude Code
+├── system prompt
+│   ├── coding instructions    kept as they are
+│   └── output style           the one thing this plugin sets
+├── CLAUDE.md                  untouched
+└── hooks, skills, tools       untouched
+```
+
+Claude Code's [docs](https://code.claude.com/docs/en/output-styles) split the job three ways: "CLAUDE.md for what Claude should know, an output style for how it responds, and a hook for anything that has to be guaranteed." This plugin is the middle one. It sets `keep-coding-instructions: true`, which the docs describe as "changing how Claude communicates but still want it coding the same way." So it changes how Claude talks with you, and leaves how Claude does the work alone.
+
+That is one file per tool. For Claude Code it is [`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md), the plugin's output style, with `force-for-plugin` and `keep-coding-instructions`, so it stays after compaction and keeps Claude Code's own instructions. For Codex it is [`codex/AGENTS.md`](codex/AGENTS.md), the same rules without the Claude Code parts.
+
+It is a set of instructions, so expect most replies to follow it, not all. In the docs' words, an output style "doesn't guarantee that something always happens or never happens."
 
 ## 👀 See it
 
@@ -289,8 +312,6 @@ One run per prompt, so these are samples. [`examples/README.md`](examples/README
 | ❓ **Asking** | No question popups. A clear answer is decided and reported, not asked. One decision per question. Every reply ends with one way forward: questions when an answer is needed, otherwise the next step. As many questions as needed, last, after the explanation, numbered Q1, Q2. Each has a fixed type: multiple choice (2 to 4 options), multi-select, yes/no, quick or ranking. Anything that needs my confirmation is asked as a question. A choice that asks me to decide carries a recommendation, with reasons as bullets below. |
 
 Most rules are flat bullets with a tag: `[YES]` do it, `[NO]` never, `[MAYBE]` your call, `[WHEN]` a situation ("situation: what to do").
-
-That is one file per tool. For Claude Code it is [`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md), the plugin's output style, with `force-for-plugin` and `keep-coding-instructions`, so it stays after compaction and keeps Claude Code's own instructions. For Codex it is [`codex/AGENTS.md`](codex/AGENTS.md), the same rules without the Claude Code parts.
 
 These are my own preferences. Fork it and write yours. 🍴
 

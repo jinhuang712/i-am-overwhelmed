@@ -1,3 +1,5 @@
+<img src="assets/hero.svg" alt="I am overwhelmed. A fed-up user's message to their coding agent, with the reply rules highlighted." width="100%">
+
 # 😵‍💫 i-am-overwhelmed（我过载了）
 
 [English](README.md) · [简体中文](README.zh-CN.md)
@@ -6,20 +8,22 @@
 
 ![license](https://img.shields.io/badge/license-MIT-green) ![version](https://img.shields.io/github/v/tag/jinhuang712/i-am-overwhelmed?label=version)
 
-## 💡 它是什么
+你很累，同时在做三件别的事，只想扫一眼。这个插件让 Claude 照着这样的读者来回复。它的回复是：
 
-**它改的是 Claude 怎么和你对话，不改 Claude 怎么干活。**
+- **Simple（简单）**：先给几行，你要了再展开。
+- **Honest（诚实）**：问题、猜测、没验证的结论，都直接说出来。
+- **Structured（有结构）**：内容有形状就画图，否则用要点。
+- **Predictable（可预期）**：每次都是同样的格式、同样的表情含义，你知道该看哪里。
+- **Focused（聚焦）**：一次只讲一件事，话题偏离目标时会提醒你。
+- **Asking（先问）**：只有你知道的事实，先问你，不靠假设。
+- **Opinionated（有主见）**：给出看法，有异议就反驳，没被说服就坚持。
 
-Claude Code 的[文档](https://code.claude.com/docs/en/output-styles)把分工说得很清楚："CLAUDE.md for what Claude should know, an output style for how it responds, and a hook for anything that has to be guaranteed." 也就是：CLAUDE.md 管 Claude 该知道什么，output style 管它怎么回应，hook 管必须保证发生的事。这个插件是中间那一个。它设了 `keep-coding-instructions: true`，文档对这个开关的说明是 "changing how Claude communicates but still want it coding the same way"：只改沟通方式，写代码的方式照旧。
+## 🎁 你能得到什么
 
-对话因此得到：
-
-- **更干净的上下文**：Claude 打印出来的每一条回复，都会成为它下一轮要读的上下文。回复乱，乱的内容就一直留在那里，对话越长越容易跑偏。回复短、有结构，上下文就干净。
-- **更少的猜测**：只有你知道的事实，它先问你，不先假设再往下推。
-- **读得更快**：先给几行，内容有形状就画图，你要了再展开。
-- **不藏信息**：问题、猜测、没验证的结论，都直接说出来。
-
-它是一组指令，所以大多数回复会照做，但不是每一条。用文档的话说，output style "doesn't guarantee that something always happens or never happens"。
+- **更干净的上下文，更少跑偏**：Claude 打印出来的每一条回复，都会成为它下一轮要读的上下文。回复乱，乱的内容就一直留在那里，对话越长越容易跑偏。回复短、有结构，上下文就干净。
+- **少走弯路**：它先问再假设，工作不会建在对你的猜测上。
+- **读得更少**：结论在最前面，细节等你要了再给。
+- **不会事后才发现**：坏了的、猜的、没验证的，现在就说，不留到以后。
 
 ## 📦 安装
 
@@ -47,6 +51,25 @@ Install i-am-overwhelmed by following https://raw.githubusercontent.com/jinhuang
 ```
 
 细节、注意事项和卸载方法见 [INSTALL.zh-CN.md](INSTALL.zh-CN.md)。
+
+## 🧱 它是怎么工作的
+
+**这个插件只设置一样东西：Claude Code 的输出风格（output style）。** 它不加 hook，不加 skill，不加工具，也不写 `CLAUDE.md`。
+
+```
+Claude Code
+├── system prompt
+│   ├── coding instructions    kept as they are
+│   └── output style           the one thing this plugin sets
+├── CLAUDE.md                  untouched
+└── hooks, skills, tools       untouched
+```
+
+Claude Code 的[文档](https://code.claude.com/docs/en/output-styles)把分工说得很清楚："CLAUDE.md for what Claude should know, an output style for how it responds, and a hook for anything that has to be guaranteed." 也就是：CLAUDE.md 管 Claude 该知道什么，output style 管它怎么回应，hook 管必须保证发生的事。这个插件是中间那一个。它设了 `keep-coding-instructions: true`，文档对这个开关的说明是 "changing how Claude communicates but still want it coding the same way"。所以它改的是 Claude 怎么和你对话，不改 Claude 怎么干活。
+
+每个工具一个文件（英文原文）。Claude Code 用 [`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md)，它是插件的输出风格，带 `force-for-plugin` 和 `keep-coding-instructions`，所以压缩上下文后依然有效，也保留了 Claude Code 自己的指令。Codex 用 [`codex/AGENTS.md`](codex/AGENTS.md)，规则相同，去掉了 Claude Code 专属的部分。
+
+它是一组指令，所以大多数回复会照做，但不是每一条。用文档的话说，output style "doesn't guarantee that something always happens or never happens"。
 
 ## 👀 看效果
 
@@ -272,8 +295,6 @@ Install i-am-overwhelmed by following https://raw.githubusercontent.com/jinhuang
 | ❓ **提问** | 不弹提问框。答案清楚就自己定，定完告诉我。一个问题只装一个决定。每条回复以一条出路收尾：需要我回答就提问，否则写下一步。需要问几个就问几个，先解释再问，放在最后，编号为 Q1、Q2。每个问题都用固定题型：选择题（2 到 4 个选项）、多选题、是非题、快问快答或排序题。需要我确认的事一律写成问题。让我做决定的选择题带推荐，理由用要点写在选项下面。 |
 
 大多数规则是一行带标签的短句：`[YES]` 要做，`[NO]` 不要做，`[MAYBE]` 你决定，`[WHEN]` 某种情况（"情况：怎么做"）。
-
-每个工具一个文件（英文原文）。Claude Code 用 [`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md)，它是插件的输出风格，带 `force-for-plugin` 和 `keep-coding-instructions`，所以压缩上下文后依然有效，也保留了 Claude Code 自己的指令。Codex 用 [`codex/AGENTS.md`](codex/AGENTS.md)，规则相同，去掉了 Claude Code 专属的部分。
 
 这是我自己的偏好。Fork 一份，写你自己的。🍴
 
