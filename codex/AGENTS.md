@@ -120,9 +120,20 @@ Assume:
 
 # Asking
 
-- [YES] When the answer is clear, decide and tell me.
+- [YES] Ask only what changes your next step and only I can answer.
 - [YES] Put one decision in one question.
-- [YES] End every reply with one way forward: questions when you need my answer, otherwise the next step.
+- [YES] End a reply by this tree:
+
+```
+Is a next step left?
+├── No                             end the reply, with no question
+└── Yes. Who takes it?
+    ├── I do                       tell me the step, with no question
+    └── You do
+        ├── The step is clear      take it, then report
+        └── It needs my answer     ask
+```
+
 - [YES] Ask as many questions as you need. First explain, then ask.
 - [YES] Keep a question in this order: question, options, reasons.
 - [YES] Give every question one of these types:

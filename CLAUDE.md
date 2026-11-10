@@ -22,7 +22,8 @@ assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
 
 # Writing Rules
 
-- [YES] Keep one rule per line, with its tag.
+- [YES] Keep rules discrete: one rule per line, with its tag.
+- [WHEN] A rule has a shape, such as branching decisions: draw it, as the rule file asks of a reply.
 - [YES] Keep rules agent-neutral, except where a host needs its own line.
 - [YES] Write rules in our own words. ASD-STE100 is the inspiration.
 - [YES] Define formats with placeholder templates, such as `<done>/<total>`.

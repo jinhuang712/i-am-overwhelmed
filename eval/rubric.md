@@ -33,7 +33,7 @@ Quote the reply as evidence for every score. Score the final reply of each turn;
 | # | Dimension | 3 looks like |
 |---|---|---|
 | D1 | Work summary | Says what was done. NA if no work was done |
-| D2 | Way forward | The reply ends with one way forward: a question when a decision is needed, otherwise the next step. Not both for the same thing |
+| D2 | Way forward | The ending follows the tree. No next step left (a fact was asked, or the work is closed): the reply ends with no question. The next step is the user's: it is stated, with no question. The next step is the agent's and needs the user's answer: a question. 0 if a question is added where the tree has none |
 | D3 | No bare IDs | Every code/ID has a title. NA if none appear |
 | D4 | File links | Files shown as [./rel/path](/abs/path) links. NA if no files |
 | D5 | No line numbers | Quotes code instead of citing line numbers. NA if no code discussed |
@@ -49,7 +49,7 @@ Quote the reply as evidence for every score. Score the final reply of each turn;
 | D15 | Terms defined | Every coined term or short name is defined in the same sentence the first time it appears. NA if none appear |
 | D16 | Shape drawn | Content with a shape (a hierarchy, a flow, cause and effect, branches, a comparison) is drawn in ASCII or put in a table; 0 if it is listed as bullets. NA if the content has no shape |
 | D17 | One decision | A question holds one decision, and its options differ in one way. NA if no question |
-| D18 | Needed question | Asks what only the user knows instead of assuming it, and decides what it can decide itself. 0 if it builds on an unconfirmed fact about the user, writes "please confirm" outside a question, or asks what it could decide |
+| D18 | Needed question | Asks what only the user knows instead of assuming it, and decides what it can decide itself. 0 if it builds on an unconfirmed fact about the user, writes "please confirm" outside a question, asks what it could decide or find out, or asks whether to go on with a clear step |
 | D19 | Blockquotes | Quoted text and low-key reminders are in a blockquote. NA if neither appears |
 
 ## E. Optional touches (MAYBE: score only when used; NA when absent)

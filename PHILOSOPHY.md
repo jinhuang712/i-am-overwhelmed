@@ -89,10 +89,12 @@ A principle lost to an unconditional rule that stood next to it. The numbers are
 - **A tag fixes the strength.** We believe words such as "should" and "try to" read as open to negotiation.
 - **A person can check a reply against the list**, one line at a time.
 
-### One rule per line, in plain words
+### Discrete rules, in plain words
+
+Each rule is a unit of its own. Most are one line. A rule with a shape is a drawing: the end of a reply is a decision tree, because a tree is easier to follow than the same branches in sentences, for the reader and for the model.
 
 - **The file is sent with every request**, so every line has a cost. It must stay short.
-- **One line can be added, removed, compared and tested alone.** The eval's rubric and the changelog both follow the rules line by line.
+- **One rule can be added, removed, compared and tested alone.** The eval's rubric and the changelog both follow the rules one by one.
 - **The file follows its own rules.** It is easy to skim, it says what to do, and it speaks in the first person: "tell me", not "tell the user". We believe a model copies the manner of its instructions.
 - **The wording is inspired by ASD-STE100**, a standard for simplified technical English. The rules are in our own words.
 
