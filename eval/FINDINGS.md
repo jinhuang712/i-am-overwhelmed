@@ -23,7 +23,8 @@ Every line says how strong its evidence is. "One case" means one reply or one ru
 - **Withdrawn: "the plugin brings emoji with no meaning".** The first rubric check showed 7 of 14 plugin replies against 0 of 6 without. A reading of the hits showed the judge was wrong: it did not know the legend, and replies with no plugin simply have no emoji. The line on sentences with no subject was dropped as well, since the owner does not count that as a fault. (2026-11-11)
 
 - **A press release, as a one-line style, puts the result and its worst catch in the first line.** "todo.py gets a sort command, but only 1 of 6 todos can be sorted by date." Its work report on `fix-test-zh` was a third as long as ours and still said that only local runs were checked. Its costs: it wrote advice as a decision the team had announced, cited unnamed sources ("业内人士"), put a dateline and "（完）" on every reply, and ran about 1.4 times longer on chat tasks. The rubric scored it 46% to 71% against our 92% to 98%; the rubric is written from our rules, so read the replies, not the gap. (2026-11-11, Opus 5.5, 6 tasks, 2 runs each, results in `results/2026-11-11-press-release-vs-dece4e0-opus-5-5/`)
-- **A one-line style broke 4 of 12 replies.** Two showed the model's thinking at the top, one was empty, one began with a stray letter. Our rules broke none of 12 on the same tasks. The cause is not known. (2026-11-11, Opus 5.5)
+- **A news tone, without the news format, reads short and plain.** Four one-line wordings were tuned by reading, one run per task on the same 6 tasks. "Press release style" put a dateline and "（完）" in every intact reply, and wrote advice as an announcement. "News report tone, start with the body" left a dateline or a headline in 2 of 6, and a reporter's voice ("业内", "用户今日请求") in 2. "Answer me directly" took both to 0 of 6. "News brief" in place of "news report" cut the length by about a third: shorter than our rules on 4 of 6 tasks, a third as long on the work report, which still said CI had not run. The wording that held over 12 replies: 「请你用新闻简讯的语气直接回答我，第一句就写正文。」 (2026-11-11, Opus 5.5, $1.73, results in `results/2026-11-11-news-tone-*`)
+- **A one-line style breaks about a third of the replies.** Over five wordings, 11 of 36 replies on Opus showed the model's thinking at the top, came back empty, or were unrelated text that ended in a made-up system reminder. Our rules broke none of 12 on the same tasks, and no plugin none of 6. The cause is not known. A guess: the short style, not its words, since every wording did it. (2026-11-11, Opus 5.5)
 
 ## About judging
 
@@ -68,6 +69,7 @@ Every line says how strong its evidence is. "One case" means one reply or one ru
 - **Estimate from a measured price.** A guess for Haiku judging was ten times too high, and a guess for Sonnet was half the real cost.
 - **Measured on 2026-11-10, Opus 5.5 at medium effort**: a one-turn chat run $0.02 to $0.07, a four-turn agent run $1.18, a full run of 17 tasks and three arms $11.2, its judging $2.45.
 
+- **`--smoke --cheap-judge claude-opus-5-5` tunes a wording cheaply.** It runs the strong model once per task, on the new arm only, with no judge: about $0.43 for 6 tasks. Read the replies; the rubric would favour our rules anyway. (2026-11-11)
 - **Any style can be an arm.** Commit it as the body of the output style on a throwaway branch, keep the frontmatter, and pass the branch as `--old`. The style's text is then the only difference. (2026-11-11)
 
 ## What we do not know yet

@@ -1,0 +1,6 @@
+{"kind": "run", "task": "chat-zh", "arm": "new", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.021242999999999998}
+{"kind": "run", "task": "fact-zh", "arm": "new", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.016111}
+{"kind": "run", "task": "fix-test-zh", "arm": "new", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.1598124}
+{"kind": "run", "task": "better-way-zh", "arm": "new", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.018131}
+{"kind": "run", "task": "shape-zh", "arm": "new", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.029167000000000002}
+{"kind": "run", "task": "design-flaw-zh", "arm": "new", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.1703298}
