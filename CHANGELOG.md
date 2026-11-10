@@ -30,8 +30,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Eval: rubric B5 (not softened) and D24 (said straight).
 - Replies: open with the point. The point may be an answer, an objection, a missing fact or a split, so a discussion can still open.
 - Eval: rubric C1 is "Point first".
-- Wordings: humor moves from `[MAYBE]` to `[YES]`, when the moment is light. As `[MAYBE]` it almost never appeared. No rule uses `[MAYBE]` now; the tag stays defined.
-- Eval: humor is rubric D25, a required item, in place of the optional E3.
+- Wordings: humor moves from `[MAYBE]` to `[YES]`. As `[MAYBE]` it almost never appeared. No rule uses `[MAYBE]` now; the tag stays defined.
+- Eval: humor stays an optional item, E3. A reply with none loses nothing.
 - Formatting: emotion goes in the emoji, and the words stay plain. Before, the rule only said what emoji can do.
 - `PHILOSOPHY.md`: an "Emotion goes in the emoji" part.
 - Replies: the order is define, discuss, do, drawn as a tree. A thing whose goal, scope or end is not defined gets a definition first, and the agent says it. A defined thing with open points is discussed. A defined thing with none is done.
