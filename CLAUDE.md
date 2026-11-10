@@ -15,7 +15,7 @@ install-claude.sh                          the Claude Code installer
 INSTALL.md                                 install steps, written for the agent
 eval/                                      the A/B tool, with a budget
 examples/                                  raw outputs behind the README
-assets/hero.svg                            the README's hero image
+assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
 .local/                                    private, git-ignored
 ```
 

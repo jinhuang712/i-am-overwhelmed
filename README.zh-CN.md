@@ -1,4 +1,4 @@
-<img src="assets/hero.svg" alt="I am overwhelmed. A fed-up user's message to their coding agent, with the reply rules highlighted." width="100%">
+<img src="assets/hero.zh-CN.svg" alt="我过载了。一位被烦到的用户写给编程 agent 的话，其中的回复规则被划了出来。" width="100%">
 
 # 😵‍💫 i-am-overwhelmed（我过载了）
 
