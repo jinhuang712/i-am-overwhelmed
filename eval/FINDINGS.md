@@ -59,6 +59,8 @@ Every line says how strong its evidence is. "One case" means one reply or one ru
 - **`--max-budget-usd` is checked between turns only.** One reply ran to $2.56 against a $0.15 limit. A reply is now capped at 16,000 output tokens. That cap has not been seen to stop a reply yet.
 - **On a subscription the costs are list prices, and the runs use up the usage limit.** One full run used up a 5-hour limit, and every judge call failed.
 - **A hold is not a spend.** The tool holds a run's whole limit before the run starts. A limit set too wide, or judging money kept back twice on a resume, stops runs although the money is there.
+- **A smoke run is cheap and it finds things.** All 19 tasks once on Haiku cost $0.17: a chat run $0.001 to $0.002, the four-turn agent run $0.055. Every run came through, the plugin loaded, and both trap tasks stopped at the conflict and named it. (2026-11-11)
+- **An agent's work folder must be a repository of its own.** The folder sits inside this repository, so the agent's git commands acted on this repository, and one agent read this project's CI file as if it were the fixture's. Each work folder now gets its own `.git`. (2026-11-11, seen in a smoke run and in a run of 2026-11-10)
 - **Smoke the tool on a cheap model before a full run.** The three faults that lost $17.79 had nothing to do with how good the model is.
 - **Estimate from a measured price.** A guess for Haiku judging was ten times too high, and a guess for Sonnet was half the real cost.
 - **Measured on 2026-11-10, Opus 5.5 at medium effort**: a one-turn chat run $0.02 to $0.07, a four-turn agent run $1.18, a full run of 17 tasks and three arms $11.2, its judging $2.45.

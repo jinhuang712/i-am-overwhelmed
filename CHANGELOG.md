@@ -63,6 +63,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Formatting: a file or folder name is a link each time it is named. Replies linked the first mention and left the later ones bare.
 - Structure: an arrow waterfall is for a chain of causes and effects. One cause needs no arrows.
 - Eval: the README says how to run on another Claude Code profile, with `CLAUDE_CONFIG_DIR`. A smoke run keeps no money back for judging.
+- Eval: an agent task's work folder is a git repository of its own, so the agent's git commands cannot reach this repository.
 - `PHILOSOPHY.md`: "One rule per line" is now "Discrete rules". A rule with a shape is a drawing.
 - Eval: rubric D2 follows the tree, D18 also fails a question about going on with a clear step, and a `fact-zh` chat task asks a plain fact.
 

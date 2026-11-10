@@ -22,6 +22,18 @@ CLEAN_ENV = {"CLAUDE_CODE_DISABLE_CLAUDE_MDS": "1", "CLAUDE_CODE_MAX_OUTPUT_TOKE
 LIMIT_NOTE = "You've hit your"  # The start of the reply when the account's usage limit is reached.
 
 
+def fence_off(work):
+    """Make the work folder a git repository of its own.
+
+    The folder sits inside this repository. Without its own .git, a `git status` or a
+    `git commit` by the agent would act on this repository, and on 2026-11-11 an agent
+    read this project's CI file and took it for the fixture's.
+    """
+    git = ["git", "-C", str(work), "-c", "user.name=eval", "-c", "user.email=eval@example.invalid"]
+    for args in (["init", "-q"], ["add", "-A"], ["commit", "-q", "-m", "fixture"]):
+        subprocess.run(git + args, capture_output=True)
+
+
 def plugin_loaded(events, plugin_dir):
     """True when the session's start event lists the plugin of this arm.
 
@@ -49,6 +61,7 @@ def run_one(task, arm, plugin_dir, i, raw, model, effort, budget, cap, limit):
         work.mkdir(parents=True)
         if task.get("fixture"):
             shutil.copytree(REPO / task["fixture"], work, dirs_exist_ok=True)
+            fence_off(work)
         base = ["claude", "-p", "--model", model, "--effort", effort,
                 "--settings", DISABLE_INSTALLED, "--output-format", "stream-json", "--verbose"]
         if plugin_dir:  # The "none" arm runs with no plugin at all.

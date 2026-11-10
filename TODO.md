@@ -58,7 +58,8 @@ Open questions
 
 ## The eval tool
 
-- [ ] The two trap tasks, `conflict-zh` and `conflict-agent-zh`, and the `system` field have never run.
+- [ ] The two trap tasks ran once, on Haiku, in a smoke run, and both stopped at the conflict. They have not run on the model we measure, and have not been judged.
+- [ ] On Haiku, 📍 opened every reply of the compound task as if it were a heading, though the big picture had not changed. See whether the stronger models do the same with the new 📍 block.
 - [ ] The cap of 16,000 output tokens a reply has not been seen to stop a reply.
 - [ ] A task with a `CLAUDE.md` that collides with the plugin. The tool turns `CLAUDE.md` off today.
 - [ ] A watch on `raw/progress.log` that reports each quarter of a run to the owner.
