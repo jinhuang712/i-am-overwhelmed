@@ -11,6 +11,7 @@ plugin/output-styles/i-am-overwhelmed.md   the rule, the source of truth
 plugin/.claude-plugin/plugin.json          the version
 plugin/evals/                              `claude plugin eval` cases
 codex/AGENTS.md                            the rule for Codex
+PHILOSOPHY.md                              why the rules look the way they do
 install-claude.sh                          the Claude Code installer
 INSTALL.md                                 install steps, written for the agent
 eval/                                      the A/B tool, with a budget
@@ -37,6 +38,7 @@ assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
 - [YES] Change the output style and `codex/AGENTS.md` together. They differ only in the frontmatter and the question-tools line.
 - [YES] Record every change under `[Unreleased]` in `CHANGELOG.md`.
 - [WHEN] A change alters what a section promises: update "The rules" in both READMEs.
+- [WHEN] A change alters the thinking behind the rules: update `PHILOSOPHY.md`.
 - [WHEN] A change alters the eval's scope: update `eval/rubric.md` and `eval/tasks.json`.
 
 # Eval

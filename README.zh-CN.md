@@ -21,7 +21,7 @@
 
 ## 🎁 你能得到什么
 
-- **更干净的上下文，更少跑偏**：Claude 打印出来的每一条回复，都会成为它下一轮要读的上下文。回复乱，乱的内容就一直留在那里，对话越长越容易跑偏。回复短、有结构，上下文就干净。
+- **更干净的上下文，更少跑偏**：Claude 打印的每条回复都会成为下一轮的上下文，所以回复短、有结构，长对话就不容易跑偏。
 - **少走弯路**：它先问再假设，工作不会建在对你的猜测上。
 - **读得更少**：结论在最前面，细节等你要了再给。
 - **不会事后才发现**：坏了的、猜的、没验证的，现在就说，不留到以后。
@@ -66,11 +66,11 @@ Claude Code
 └── hooks, skills, tools       untouched
 ```
 
-Claude Code 的[文档](https://code.claude.com/docs/en/output-styles)把分工说得很清楚："CLAUDE.md for what Claude should know, an output style for how it responds, and a hook for anything that has to be guaranteed." 也就是：CLAUDE.md 管 Claude 该知道什么，output style 管它怎么回应，hook 管必须保证发生的事。这个插件是中间那一个。它设了 `keep-coding-instructions: true`，文档对这个开关的说明是 "changing how Claude communicates but still want it coding the same way"。所以它改的是 Claude 怎么和你对话，不改 Claude 怎么干活。
+它改的是 Claude 怎么和你对话，不改 Claude 怎么干活。它是一组指令，所以大多数回复会照做，但不是每一条。
 
 每个工具一个文件（英文原文）。Claude Code 用 [`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md)，它是插件的输出风格，带 `force-for-plugin` 和 `keep-coding-instructions`，所以压缩上下文后依然有效，也保留了 Claude Code 自己的指令。Codex 用 [`codex/AGENTS.md`](codex/AGENTS.md)，规则相同，去掉了 Claude Code 专属的部分。
 
-它是一组指令，所以大多数回复会照做，但不是每一条。用文档的话说，output style "doesn't guarantee that something always happens or never happens"。
+为什么这样设计，以及规则为什么这样写，见 [PHILOSOPHY.md](PHILOSOPHY.md)（英文）。
 
 ## 👀 看效果
 
@@ -305,21 +305,6 @@ Claude Code 的[文档](https://code.claude.com/docs/en/output-styles)把分工�
 
 - **本地路径安装**（`claude plugin marketplace add /path/to/i-am-overwhelmed`）：运行 `/reload-plugins`。
 - **GitHub 安装**：推送，在 `plugin/.claude-plugin/plugin.json` 里升版本号，运行 `claude plugin update i-am-overwhelmed@i-am-overwhelmed`。
-
-## 📚 参考文献
-
-上面规则的背景阅读，不是证明：这些研究都没有测过聊天回复，所以每条规则都是从网页、实验室任务和临床交接推过来的。
-
-- Lim & Dinges (2010), [A meta-analysis of the impact of short-term sleep deprivation on cognitive variables](https://pmc.ncbi.nlm.nih.gov/articles/PMC3290659)
-- Cowan (2001), [The magical number 4 in short-term memory](https://pubmed.ncbi.nlm.nih.gov/11515286/)
-- Morkes & Nielsen (1997), [Concise, scannable, and objective: how to write for the web](https://www.nngroup.com/articles/concise-scannable-and-objective-how-to-write-for-the-web/)
-- Pernice (2019), [Text scanning patterns: eyetracking evidence](https://www.nngroup.com/articles/text-scanning-patterns-eyetracking/)
-- Kim et al. (2024), ["I'm not sure, but...": examining the impact of large language models' uncertainty expression on user reliance and trust](https://www.arxiv.org/abs/2405.00623)
-- Steyvers et al. (2025), [What large language models know and what people think they know](https://arxiv.org/abs/2401.13835)
-- Bansal et al. (2021), [Does the whole exceed its parts? The effect of AI explanations on complementary team performance](https://arxiv.org/abs/2006.14779)
-- Vasconcelos et al. (2023), [Explanations can reduce overreliance on AI systems during decision-making](https://arxiv.org/abs/2212.06823)
-- Sharma et al. (2024), [Towards understanding sycophancy in language models](https://arxiv.org/abs/2310.13548)
-- Starmer et al. (2014), I-PASS handoff program, [summary on PSNet](https://psnet.ahrq.gov/issue/changes-medical-errors-after-implementation-handoff-program)
 
 ## 许可
 

@@ -21,7 +21,7 @@ You are tired, you are doing three other things, and you skim. This plugin makes
 
 ## 🎁 What you get
 
-- **A cleaner context, and less drift**: every reply Claude prints becomes part of the context it reads on the next turn. A messy reply stays there, so a long session drifts more. Short, structured replies keep the context clean.
+- **A cleaner context, and less drift**: every reply Claude prints becomes context for the next turn, so short, structured replies keep a long session on track.
 - **Fewer wrong turns**: Claude asks before it assumes, so the work is not built on a guess about you.
 - **Less to read**: the answer comes first, and the detail waits until you ask for it.
 - **No late surprises**: what is broken, guessed or unverified is said now, not found later.
@@ -66,11 +66,11 @@ Claude Code
 └── hooks, skills, tools       untouched
 ```
 
-Claude Code's [docs](https://code.claude.com/docs/en/output-styles) split the job three ways: "CLAUDE.md for what Claude should know, an output style for how it responds, and a hook for anything that has to be guaranteed." This plugin is the middle one. It sets `keep-coding-instructions: true`, which the docs describe as "changing how Claude communicates but still want it coding the same way." So it changes how Claude talks with you, and leaves how Claude does the work alone.
+It changes how Claude talks with you, and leaves how Claude does the work alone. It is a set of instructions, so expect most replies to follow it, not all.
 
 That is one file per tool. For Claude Code it is [`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md), the plugin's output style, with `force-for-plugin` and `keep-coding-instructions`, so it stays after compaction and keeps Claude Code's own instructions. For Codex it is [`codex/AGENTS.md`](codex/AGENTS.md), the same rules without the Claude Code parts.
 
-It is a set of instructions, so expect most replies to follow it, not all. In the docs' words, an output style "doesn't guarantee that something always happens or never happens."
+Why it is built this way, and why the rules are written the way they are: [PHILOSOPHY.md](PHILOSOPHY.md).
 
 ## 👀 See it
 
@@ -322,21 +322,6 @@ Edit the file above, then:
 
 - **Local-path install** (`claude plugin marketplace add /path/to/i-am-overwhelmed`): run `/reload-plugins`.
 - **GitHub install**: push, bump the version in `plugin/.claude-plugin/plugin.json`, run `claude plugin update i-am-overwhelmed@i-am-overwhelmed`.
-
-## 📚 References
-
-Background reading for the rules above. It is not proof: none of these studies tested chat replies, so each rule is carried over by inference from web pages, lab tasks and clinical handoffs.
-
-- Lim & Dinges (2010), [A meta-analysis of the impact of short-term sleep deprivation on cognitive variables](https://pmc.ncbi.nlm.nih.gov/articles/PMC3290659)
-- Cowan (2001), [The magical number 4 in short-term memory](https://pubmed.ncbi.nlm.nih.gov/11515286/)
-- Morkes & Nielsen (1997), [Concise, scannable, and objective: how to write for the web](https://www.nngroup.com/articles/concise-scannable-and-objective-how-to-write-for-the-web/)
-- Pernice (2019), [Text scanning patterns: eyetracking evidence](https://www.nngroup.com/articles/text-scanning-patterns-eyetracking/)
-- Kim et al. (2024), ["I'm not sure, but...": examining the impact of large language models' uncertainty expression on user reliance and trust](https://www.arxiv.org/abs/2405.00623)
-- Steyvers et al. (2025), [What large language models know and what people think they know](https://arxiv.org/abs/2401.13835)
-- Bansal et al. (2021), [Does the whole exceed its parts? The effect of AI explanations on complementary team performance](https://arxiv.org/abs/2006.14779)
-- Vasconcelos et al. (2023), [Explanations can reduce overreliance on AI systems during decision-making](https://arxiv.org/abs/2212.06823)
-- Sharma et al. (2024), [Towards understanding sycophancy in language models](https://arxiv.org/abs/2310.13548)
-- Starmer et al. (2014), I-PASS handoff program, [summary on PSNet](https://psnet.ahrq.gov/issue/changes-medical-errors-after-implementation-handoff-program)
 
 ## License
 

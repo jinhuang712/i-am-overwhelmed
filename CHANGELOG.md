@@ -27,6 +27,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Asking: every reply ends with one way forward: questions when an answer is needed, otherwise the next step. This replaces the "suggest a next step" rule in Replies.
 - Formatting: "Never reply in paragraphs only" is now a positive `[YES]` rule in Structure: give every reply some structure.
 - README: a new order. A hero image, an intro with eight keywords (Simple, Honest, Structured, Predictable, Focused, Standalone, Asking, Opinionated), what you get, install, how it works, examples, then the rules. "How it works" says the plugin sets only the output style, with the Claude Code docs as the source.
+- `PHILOSOPHY.md`: why the rules look the way they do. What a reply should be, how the rules are written, and what the plugin leaves alone. The README's docs quotes and background reading move there.
 - `assets/hero.svg` and `assets/hero.zh-CN.svg`: a fed-up user's message to their agent after a long session, with the reply rules highlighted.
 - README: the plugin-on examples are re-recorded with the new rules, a sign-in flow example shows a drawing, and the plugin-off reply folds away. The comparison table follows the new rules.
 - Install: the README shows two ways. For Claude Code, the two CLI commands or one curl line. For any agent, one line to paste, which sends it to `INSTALL.md`. `INSTALL.md` is now written for the agent: Claude Code runs the script, and Codex or another agent reads the rules and decides how to add them to the user's instructions.
