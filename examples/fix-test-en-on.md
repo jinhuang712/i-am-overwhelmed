@@ -1,15 +1,17 @@
-🎉 `test_retry` is fixed. It passed 30 runs out of 30.
+🎉 `test_retry` is fixed. It passed 200 runs in a row. I can't see your CI, so I haven't confirmed that it's green.
 
-## Cause
-- [./retry.py](/private/tmp/claude-501/-Users-jin-huang-dev-projects-i-am-overwhelmed/ad842afa-f550-4cfd-b1a9-dce5446f54db/scratchpad/work-fix-test-en-on.md/retry.py) sleeps a random time between 0 and `0.02 * 2**i` seconds. Two retries can add up to 0.06s.
-- The test asserted that the whole call took under 0.03s, so it failed whenever the jitter came out high. The failure was in the test, not in the retry code.
+**Cause:** the test required the whole call to finish in under 0.03 s. `retry.py` sleeps for a random time, up to 0.02 s then up to 0.04 s. Whenever the random sleeps added up to more than 0.03 s, the test failed.
 
-## Fix
-I changed only [./tests/test_retry.py](/private/tmp/claude-501/-Users-jin-huang-dev-projects-i-am-overwhelmed/ad842afa-f550-4cfd-b1a9-dce5446f54db/scratchpad/work-fix-test-en-on.md/tests/test_retry.py):
-- `time.sleep` is now mocked, so the test no longer depends on real time.
-- The timing assertion is replaced by a check that the two sleeps stay within their backoff bounds: `[0, 0.02]` and `[0, 0.04]`.
-- `test_gives_up` also mocks the sleep, so it runs instantly.
+**Fix:** in [./tests/test_retry.py](/tmp/work/tests/test_retry.py), `time.sleep` is now mocked. The test checks that each requested delay is within its backoff bound, which is stricter than the old timing check. `test_gives_up` also mocks `sleep`, so it runs instantly.
 
-## Notes
-- 💡 I didn't just raise the 0.03s threshold. A looser time limit would still be flaky and would not check the backoff behaviour.
-- ⚠️ I couldn't see your CI config. I ran the tests locally with `PYTHONPATH=. python3 -m unittest tests.test_retry`. If CI runs them differently, such as `discover`, the import of `retry` may need a different path.
+```diff
+-        start = time.monotonic()
+-        self.assertLess(time.monotonic() - start, 0.03)
++        with mock.patch("retry.time.sleep") as sleep: ...
++        self.assertTrue(0 <= delays[0] <= 0.02)
++        self.assertTrue(0 <= delays[1] <= 0.04)
+```
+
+I only edited the test and left [./retry.py](/tmp/work/retry.py) alone, because the retry code itself works as intended.
+
+Next step: push the change and check CI. This folder isn't a git repo, so I didn't commit.

@@ -1,0 +1,21 @@
+{"kind": "run", "task": "chat-en", "arm": "new", "run": 1, "model": "claude-sonnet-5-5", "status": "done", "cost": 0.0173424}
+{"kind": "run", "task": "chat-en", "arm": "old", "run": 1, "model": "claude-sonnet-5-5", "status": "done", "cost": 0.0168984}
+{"kind": "run", "task": "chat-zh", "arm": "old", "run": 1, "model": "claude-sonnet-5-5", "status": "done", "cost": 0.0185844}
+{"kind": "run", "task": "chat-zh", "arm": "new", "run": 1, "model": "claude-sonnet-5-5", "status": "done", "cost": 0.0205984}
+{"kind": "run", "task": "chat-en", "arm": "new", "run": 2, "model": "claude-sonnet-5-5", "status": "done", "cost": 0.0188044}
+{"kind": "run", "task": "shape-zh", "arm": "new", "run": 1, "model": "claude-sonnet-5-5", "status": "done", "cost": 0.0316204}
+{"kind": "run", "task": "chat-zh", "arm": "new", "run": 2, "model": "claude-sonnet-5-5", "status": "done", "cost": 0.0221704}
+{"kind": "run", "task": "chat-en", "arm": "old", "run": 2, "model": "claude-sonnet-5-5", "status": "done", "cost": 0.0141113}
+{"kind": "run", "task": "chat-zh", "arm": "old", "run": 2, "model": "claude-sonnet-5-5", "status": "done", "cost": 0.022106400000000002}
+{"kind": "run", "task": "shape-zh", "arm": "old", "run": 1, "model": "claude-sonnet-5-5", "status": "done", "cost": 0.0364764}
+{"kind": "run", "task": "chat-en", "arm": "old", "run": 3, "model": "claude-sonnet-5-5", "status": "done", "cost": 0.0142913}
+{"kind": "run", "task": "chat-en", "arm": "new", "run": 3, "model": "claude-sonnet-5-5", "status": "done", "cost": 0.016905299999999998}
+{"kind": "run", "task": "chat-zh", "arm": "old", "run": 3, "model": "claude-sonnet-5-5", "status": "done", "cost": 0.0159061}
+{"kind": "run", "task": "shape-zh", "arm": "new", "run": 2, "model": "claude-sonnet-5-5", "status": "done", "cost": 0.0297324}
+{"kind": "run", "task": "chat-zh", "arm": "new", "run": 3, "model": "claude-sonnet-5-5", "status": "done", "cost": 0.0179401}
+{"kind": "run", "task": "shape-zh", "arm": "old", "run": 2, "model": "claude-sonnet-5-5", "status": "done", "cost": 0.029561900000000002}
+{"kind": "run", "task": "shape-zh", "arm": "old", "run": 3, "model": "claude-sonnet-5-5", "status": "done", "cost": 0.025101900000000003}
+{"kind": "run", "task": "shape-zh", "arm": "new", "run": 3, "model": "claude-sonnet-5-5", "status": "done", "cost": 0.0271659}
+{"kind": "judge", "task": "chat-en", "model": "claude-opus-5-5", "status": "done", "cost": 0.0902702}
+{"kind": "judge", "task": "chat-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.09522620000000001}
+{"kind": "judge", "task": "shape-zh", "model": "claude-opus-5-5", "status": "done", "cost": 0.1473952}

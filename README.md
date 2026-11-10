@@ -35,11 +35,12 @@ Details, caveats and how to remove it: [INSTALL.md](INSTALL.md).
 
 ## 👀 See it
 
-Real output, same prompt, plugin off and on. Complete and untrimmed. Every example ran on Sonnet 5.5 (`claude-sonnet-5-5`); the plugin-on ones used plugin 0.1.7. The raw files are in [`examples/`](examples/).
+Real output, same prompt, plugin off and on. Complete and untrimmed. Every example ran on Sonnet 5.5 (`claude-sonnet-5-5`); the plugin-on ones were recorded on 2026-11-10 with the rules in this repo. Click **Off** to open the reply without the plugin. The raw files are in [`examples/`](examples/).
 
 ### "SQLite or Postgres for a URL shortener, ~100 users?"
 
-**Off**
+<details>
+<summary><b>Off</b> (17 lines)</summary>
 
 > **SQLite.**
 >
@@ -64,36 +65,153 @@ Real output, same prompt, plugin off and on. Complete and untrimmed. Every examp
 >
 > If you outgrow SQLite, migrating a table this simple is easy. Start with SQLite.
 
-**On**
+</details>
 
-> # ✅ SQLite
+**On** (11 lines)
+
+> ✅ **SQLite.** At ~100 users a URL shortener is a tiny, read-heavy workload (lookup a slug, redirect), and SQLite handles thousands of reads per second on one box.
 >
-> At ~100 users, a URL shortener is a read-heavy workload with tiny rows. SQLite handles that easily.
+> ```
+> SQLite                    Postgres
+> ├── no server to run      ├── separate service to run
+> ├── one file to back up   ├── users, backups, upgrades
+> └── fast local reads      └── pays off at multi-server scale
+> ```
 >
-> ## Why SQLite
-> - **Zero ops:** no server, no credentials, no connection pool. Backup is copying one file (or Litestream).
-> - **Fast reads:** redirects are simple key lookups, in-process with no network hop.
-> - **Enough write capacity:** with `PRAGMA journal_mode=WAL`, it handles thousands of writes per second. Click counters at 100 users won't come close.
+> - **Turn on WAL mode** (write-ahead logging, which lets reads continue during writes): `PRAGMA journal_mode=WAL;`
+> - **Migration is cheap**: a `links(slug, url, created_at)` table moves to Postgres in an afternoon if you outgrow it.
 >
-> ## When I'd pick Postgres instead
-> - ⚠️ You need **multiple app servers** writing to the same DB.
-> - ⚠️ Your host has an **ephemeral disk** (some PaaS, serverless), so a local file won't survive.
-> - You expect to grow **100x** soon, or want managed backups and replicas.
+> ⚠️ **Premise I'm assuming**: one app server with a local disk. SQLite struggles if you run several servers or a platform with ephemeral disks (like many serverless hosts).
 >
-> ## 💡 Tip
-> Keep your queries standard and use an ORM or query builder. Moving to Postgres later is then a config change plus a data copy, not a rewrite.
+> Q1. Where will this run? (Quick: e.g. "one VPS", "Vercel", "Fly with 2 machines")
+
+### "After a user clicks 'Sign in with GitHub' on our site, how do the browser, our backend and GitHub talk to each other, step by step?"
+
+<details>
+<summary><b>Off</b> (62 lines)</summary>
+
+> Here is the standard OAuth 2.0 authorization code flow that "Sign in with GitHub" uses. I haven't looked at your code, so check the details (endpoints, scopes, session handling) against your implementation.
 >
-> 🤔 Postgres for 100 users is over-engineering, unless you already run it and it costs you nothing extra.
+> ## Step by step
 >
-> Where will this be deployed (single VPS, container with a volume, or serverless)? That's the one thing that could change my answer.
-> - A. Single VPS or container with a persistent volume → SQLite (recommended)
-> - B. Serverless or ephemeral disk → Postgres
+> **1. Browser → your backend: start login**
+> The user clicks the button, which goes to something like `GET /auth/github`.
+>
+> **2. Backend → browser: redirect to GitHub**
+> Your backend generates a random `state` value, stores it (in the session or a signed cookie), and replies with a `302` to:
+> ```
+> https://github.com/login/oauth/authorize
+>   ?client_id=<your client id>
+>   &redirect_uri=https://yoursite.com/auth/github/callback
+>   &scope=read:user user:email
+>   &state=<random>
+> ```
+> Optionally, it also sends a PKCE `code_challenge`.
+>
+> **3. Browser ↔ GitHub: login and consent**
+> The browser follows the redirect. The user logs in to GitHub if needed and approves the requested scopes. Your backend is not involved here, and your site never sees the user's GitHub password.
+>
+> **4. GitHub → browser → your backend: callback**
+> GitHub redirects the browser to your `redirect_uri`:
+> ```
+> GET /auth/github/callback?code=<short-lived code>&state=<same state>
+> ```
+> The `code` is single-use and expires quickly, and it is not an access token.
+>
+> **5. Backend: verify `state`**
+> Your backend compares the `state` in the URL with the one it stored. If they don't match, it rejects the request. This protects against login CSRF.
+>
+> **6. Backend → GitHub: exchange the code for a token** (server to server)
+> ```
+> POST https://github.com/login/oauth/access_token
+>   client_id, client_secret, code, redirect_uri  (+ code_verifier if PKCE)
+> ```
+> GitHub responds with an `access_token`. The `client_secret` is sent only here, from your server, never through the browser.
+>
+> **7. Backend → GitHub API: fetch the user's identity**
+> ```
+> GET https://api.github.com/user
+> Authorization: Bearer <access_token>
+> ```
+> If you need the email, also call `GET /user/emails`. Use the numeric `id` as the stable identifier, since usernames and emails can change.
+>
+> **8. Backend: create or link the local account**
+> Look up the user by GitHub `id`, creating a record if none exists. Then create your own session.
+>
+> **9. Backend → browser: log the user in**
+> Your backend sets a session cookie (`HttpOnly`, `Secure`, `SameSite=Lax`) and redirects to your app, for example `302 /dashboard`. From then on the browser authenticates to your backend with that cookie. GitHub is no longer involved unless you store the access token to call its API later.
+>
+> ## Diagram
+>
+> ```
+> Browser            Your backend              GitHub
+>   | --click------->  |                         |
+>   | <--302 + state-- |                         |
+>   | ------------------authorize?client_id...-->|
+>   | <-----------------login/consent------------>|
+>   | <-----------------302 ?code&state----------|
+>   | --callback?code&state-->|                  |
+>   |                  | --POST access_token---->|
+>   |                  | <--access_token---------|
+>   |                  | --GET /user------------>|
+>   |                  | <--profile--------------|
+>   | <--Set-Cookie, 302 /app--|                 |
+> ```
+>
+> ## Common pitfalls
+> - Skipping the `state` check.
+> - Treating the email or username as the identity key instead of the GitHub `id`.
+> - Exposing `client_secret` to frontend code.
+> - Using a `redirect_uri` that doesn't exactly match the one registered in the GitHub OAuth app.
+> - Storing the access token unencrypted if you keep it.
+>
+> If you'd like, I can point to where each step lives in your codebase. I'd need you to open or point me at the project, since the current directory doesn't contain it.
+
+</details>
+
+**On** (30 lines)
+
+> Assuming the standard OAuth 2.0 "authorization code" flow (I haven't looked at your code, so this is the textbook version):
+>
+> ```
+> Browser            Your backend             GitHub
+>    |  1. click        |                        |
+>    |----------------->|                        |
+>    |  2. 302 redirect to GitHub (client_id, scope, state)
+>    |<-----------------|                        |
+>    |  3. user logs in and approves             |
+>    |------------------------------------------>|
+>    |  4. 302 back to your callback (code, state)
+>    |<------------------------------------------|
+>    |  5. GET /callback?code&state              |
+>    |----------------->|                        |
+>    |                  |  6. code + client_secret
+>    |                  |----------------------->|
+>    |                  |  7. access_token       |
+>    |                  |<-----------------------|
+>    |                  |  8. GET /user (token)  |
+>    |                  |----------------------->|
+>    |                  |  9. profile            |
+>    |                  |<-----------------------|
+>    |  10. Set-Cookie session, redirect home    |
+>    |<-----------------|                        |
+> ```
+>
+> - **Steps 2-5**: the browser is only a messenger between you and GitHub, and it never sees the token.
+> - **Step 6**: this is the one secret step. The `client_secret` stays on your backend.
+> - **`state`**: a random value you save before step 2 and compare at step 5. It blocks login-CSRF (an attacker tricking a user into logging in as the attacker). ⚠️ This is the check most often forgotten.
+> - **`code`**: single-use and short-lived, so it is useless without your `client_secret`.
+>
+> 💡 My opinion: after step 9, create your own session and discard the GitHub token unless you need to call the GitHub API later.
+>
+> Next step: want me to check your repo for where each of these steps lives and whether `state` is verified?
 
 ### "CI is red because `test_retry` fails from time to time. Get CI green."
 
 Here the agent has tools and fixes a real flaky test. **Both versions fixed it the right way**: mocked the sleep, kept a meaningful assertion, skipped nothing. The difference is the report.
 
-**Off**
+<details>
+<summary><b>Off</b> (4 lines)</summary>
 
 > I fixed the flaky `test_retry`, and it passed 200 runs in a row locally. I haven't seen CI itself go green, and I haven't committed anything.
 >
@@ -103,36 +221,40 @@ Here the agent has tools and fixes a real flaky test. **Both versions fixed it t
 >
 > `call_with_retry` also sleeps after the final failed attempt, which is wasted time before it re-raises. I left that alone because it's outside what you asked for.
 
-**On**
+</details>
 
-> 🎉 `test_retry` is fixed. It passed 30 runs out of 30.
+**On** (12 lines)
+
+> 🎉 `test_retry` is fixed. It passed 200 runs in a row. I can't see your CI, so I haven't confirmed that it's green.
 >
-> ## Cause
-> - [./retry.py](/private/tmp/claude-501/-Users-jin-huang-dev-projects-i-am-overwhelmed/ad842afa-f550-4cfd-b1a9-dce5446f54db/scratchpad/work-fix-test-en-on.md/retry.py) sleeps a random time between 0 and `0.02 * 2**i` seconds. Two retries can add up to 0.06s.
-> - The test asserted that the whole call took under 0.03s, so it failed whenever the jitter came out high. The failure was in the test, not in the retry code.
+> **Cause:** the test required the whole call to finish in under 0.03 s. `retry.py` sleeps for a random time, up to 0.02 s then up to 0.04 s. Whenever the random sleeps added up to more than 0.03 s, the test failed.
 >
-> ## Fix
-> I changed only [./tests/test_retry.py](/private/tmp/claude-501/-Users-jin-huang-dev-projects-i-am-overwhelmed/ad842afa-f550-4cfd-b1a9-dce5446f54db/scratchpad/work-fix-test-en-on.md/tests/test_retry.py):
-> - `time.sleep` is now mocked, so the test no longer depends on real time.
-> - The timing assertion is replaced by a check that the two sleeps stay within their backoff bounds: `[0, 0.02]` and `[0, 0.04]`.
-> - `test_gives_up` also mocks the sleep, so it runs instantly.
+> **Fix:** in [./tests/test_retry.py](/tmp/work/tests/test_retry.py), `time.sleep` is now mocked. The test checks that each requested delay is within its backoff bound, which is stricter than the old timing check. `test_gives_up` also mocks `sleep`, so it runs instantly.
 >
-> ## Notes
-> - 💡 I didn't just raise the 0.03s threshold. A looser time limit would still be flaky and would not check the backoff behaviour.
-> - ⚠️ I couldn't see your CI config. I ran the tests locally with `PYTHONPATH=. python3 -m unittest tests.test_retry`. If CI runs them differently, such as `discover`, the import of `retry` may need a different path.
+> ```diff
+> -        start = time.monotonic()
+> -        self.assertLess(time.monotonic() - start, 0.03)
+> +        with mock.patch("retry.time.sleep") as sleep: ...
+> +        self.assertTrue(0 <= delays[0] <= 0.02)
+> +        self.assertTrue(0 <= delays[1] <= 0.04)
+> ```
+>
+> I only edited the test and left [./retry.py](/tmp/work/retry.py) alone, because the retry code itself works as intended.
+>
+> Next step: push the change and check CI. This folder isn't a git repo, so I didn't commit.
 
 ### What actually changes
 
 | | Off | On |
 |---|---|---|
-| Verdict | In the first line | First line, set apart with a heading and ✅ or 🎉 |
-| Structure | Paragraphs and bullets | Headings, short bullets, tables |
+| Length | Everything at once | A few lines first. Detail when you ask |
+| Structure | Headings and paragraphs | A drawing when the content has a shape, bullets otherwise |
 | Not sure | Mixed into the text | Named and marked: ⚠️ warning, 🤔 doubt, 💡 tip |
-| Attitude | Only in the words | Also in the emoji, such as 🤔 for doubt |
-| Question | Usually none | When there is one: last, options A / B / C, one recommended |
+| Facts only you know | Assumed, then built on | Asked first, as a question |
+| Question | Usually none | Last, in a fixed type. A recommendation when it is a decision |
 | Correctness | Good | Good. Not a smarter model, only an easier read. |
 
-One run per prompt, so these are samples. [`examples/README.md`](examples/README.md) says what 20 more runs showed, including a miss.
+One run per prompt, so these are samples. [`examples/README.md`](examples/README.md) says how they were made, and what 20 earlier runs showed, including a miss.
 
 ## 📏 The rules
 

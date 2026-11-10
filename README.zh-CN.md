@@ -35,11 +35,12 @@ Install i-am-overwhelmed by following https://raw.githubusercontent.com/jinhuang
 
 ## 👀 看效果
 
-真实输出，同一个提示，分别关掉和打开插件。完整，没有删减。全部用 Sonnet 5.5（`claude-sonnet-5-5`）跑的，打开插件的那组用的是插件 0.1.7。原始文件在 [`examples/`](examples/)。
+真实输出，同一个提示，分别关掉和打开插件。完整，没有删减。全部用 Sonnet 5.5（`claude-sonnet-5-5`）跑的，打开插件的那组录于 2026-11-10，用的是本仓库当前的规则。点开 **关闭** 可以看不带插件的回复。原始文件在 [`examples/`](examples/)。
 
 ### 「我给一个 100 人用的内部小工具加缓存，用 Redis 还是进程内的字典？」
 
-**Off**
+<details>
+<summary><b>关闭</b>（15 行）</summary>
 
 > 用进程内字典（或 `functools.lru_cache` / `cachetools.TTLCache` 这类带过期的封装）就够了。
 >
@@ -61,44 +62,132 @@ Install i-am-overwhelmed by following https://raw.githubusercontent.com/jinhuang
 >
 > 建议先用进程内缓存，把缓存逻辑封装在一个小函数或类后面，以后真需要时再换成 Redis，改动范围很小。
 
-**On**
+</details>
 
-> ## 👉 用进程内缓存
+**打开**（17 行）
+
+> 我的意见：**进程内缓存**。100 人的量级，Redis 多出一个要部署、监控、排障的服务，收益很小 🤔
 >
-> 100 人的内部工具，进程内缓存足够了 ✅
+> ```
+> 服务跑几个进程？
+> ├── 1 个进程
+> │   → 进程内缓存（加 TTL 过期）
+> ├── 多个进程，数据短暂不一致可接受
+> │   → 仍用进程内缓存，TTL 设短一点
+> └── 多个进程，要求强一致，或缓存要撑过重启
+>     → 上 Redis
+> ```
 >
-> - **零运维**：不用部署、监控 Redis，也不用处理连接失败
-> - **更快**：没有网络往返
-> - **够用**：100 人的数据量，内存几乎不是问题
+> - **TTL**: 字典必须带过期时间和大小上限，否则会无限增长。我没看你的代码，猜你用 Python 的话，`cachetools.TTLCache` 现成可用。
+> - **代价**: 重启后缓存清空，多进程各存一份。内部小工具通常没问题。
 >
-> ## ⚠️ 别直接用裸 `dict`
+> Q1. 你的服务会跑几个进程或实例？
+> - A. 1 个
+> - B. 多个，短暂不一致可以接受
+> - C. 多个，必须一致
 >
-> - **要有 TTL**：否则数据会过期不了
-> - **要有大小上限**：否则内存会一直涨
-> - **并发要安全**：多线程时注意加锁
+> 答个字母，我按你的情况给具体写法。
+
+### 「用户在我们的网站上点『用 GitHub 登录』之后，浏览器、我们的后端和 GitHub 之间是怎么一步步交互的？」
+
+<details>
+<summary><b>关闭</b>（47 行）</summary>
+
+> 这是标准的 OAuth 2.0 授权码流程（Authorization Code Flow）。
 >
-> 💡 Python 的话，用 `cachetools.TTLCache`（或 `functools.lru_cache`，但它没有 TTL）。别自己手写。
+> ## 时序
 >
-> ## 🤔 什么时候该换 Redis
+> ```
+> 浏览器                    我们的后端                    GitHub
+>   |  1. 点「用 GitHub 登录」  |                            |
+>   |------------------------->|                            |
+>   |                          | 生成 state（可选 PKCE）存 session
+>   |  2. 302 到 GitHub 授权页  |                            |
+>   |<-------------------------|                            |
+>   |  3. GET /login/oauth/authorize?client_id&redirect_uri&scope&state
+>   |------------------------------------------------------>|
+>   |  4. 用户登录 GitHub（如未登录）并点「Authorize」          |
+>   |<----------------------------------------------------->|
+>   |  5. 302 到 redirect_uri?code=xxx&state=yyy             |
+>   |<------------------------------------------------------|
+>   |  6. GET /auth/github/callback?code&state              |
+>   |------------------------->|                            |
+>   |                          | 7. 校验 state 与 session 中一致
+>   |                          | 8. POST /login/oauth/access_token
+>   |                          |    (client_id, client_secret, code, redirect_uri)
+>   |                          |--------------------------->|
+>   |                          |    access_token            |
+>   |                          |<---------------------------|
+>   |                          | 9. GET api.github.com/user
+>   |                          |    Authorization: Bearer <token>
+>   |                          |--------------------------->|
+>   |                          |    id, login, avatar...    |
+>   |                          |<---------------------------|
+>   |                          | 10. 查找/创建本地用户，建立会话
+>   | 11. Set-Cookie: session + 302 到首页                    |
+>   |<-------------------------|                            |
+> ```
 >
-> - 跑了**多个进程或实例**（gunicorn 多 worker、多个 pod），而且缓存必须**一致**
-> - 重启后**不能接受冷缓存**（比如重建很贵）
-> - 需要**主动失效**，且要跨实例生效
+> ## 各步骤要点
 >
-> 注意：多 worker 时每个进程各有一份缓存，只是命中率低一点，数据可能短时间不一致。如果能接受几十秒到几分钟的陈旧，也不用 Redis。
+> 1. **发起**：后端生成随机 `state`（防 CSRF），存进 session 或签名 cookie。如果用 PKCE，同时生成 `code_verifier` 并把 `code_challenge` 带上。
+> 2. **跳转授权页**：参数有 `client_id`、`redirect_uri`、`scope`（只要登录用 `read:user`，要邮箱再加 `user:email`）和 `state`。
+> 3. **用户授权**：这一步完全发生在浏览器和 GitHub 之间，我们的后端看不到。
+> 4. **回调**：GitHub 把用户重定向回我们预先注册的 `redirect_uri`，带上一次性的 `code`（短时效，约 10 分钟）和原样返回的 `state`。
+> 5. **校验 state**：不一致就直接拒绝，这是防登录 CSRF 的关键。
+> 6. **换 token**：后端用 `code` + `client_secret` 向 GitHub 请求 `access_token`。这一步是服务器对服务器，`client_secret` 不会暴露给浏览器。请求时加 `Accept: application/json`，否则 GitHub 默认返回 form 编码格式。
+> 7. **取用户信息**：用 token 调 `GET /user`。如果需要邮箱，再调 `GET /user/emails`，因为用户可能把邮箱设为私密，`/user` 里的 `email` 可能为空。
+> 8. **建立本地会话**：用 GitHub 的**数字 `id`** 作为唯一标识去匹配或创建本地用户，不要用 `login`（可改名）或 email。然后下发自己的会话 cookie（`HttpOnly; Secure; SameSite=Lax`）。
 >
-> ## ❓ 问题
+> ## 容易踩的点
 >
-> 你的工具是单进程还是多实例部署？缓存的数据能容忍多久的陈旧？
+> - `access_token` 只留在后端。如果只用来登录，用完就可以丢掉，不必存。
+> - `redirect_uri` 必须和 GitHub OAuth App 中注册的一致，否则授权会失败。
+> - `code` 只能用一次。
+> - 登录之后浏览器和 GitHub 就没关系了，后续请求只带我们自己的 session cookie。
 >
-> - A. 单进程，或多实例但能容忍短时间不一致：用 `TTLCache`。✅ 推荐，最省事
-> - B. 多实例，且要求缓存强一致或可主动失效：上 Redis
+> 如果你想对照项目里的实际实现来检查（比如 state 校验、用什么字段做用户唯一标识），告诉我代码在哪，我可以帮你看。
+
+</details>
+
+**打开**（25 行）
+
+> 这是标准的 OAuth 2.0 授权码流程（Authorization Code flow）。我假设你们用的是它，而不是 device flow 或纯前端 PKCE，这是我的推测，没看你们的代码。
+>
+> ```
+> Browser            Backend              GitHub
+>    |                  |                    |
+> 1  |-- GET /auth/github -->|                |
+> 2  |<-- 302 + state ------|                 |
+> 3  |-- GET /login/oauth/authorize?client_id&state -->|
+> 4  |<-------- login + consent page ------------------|
+> 5  |<-------- 302 redirect_uri?code&state ------------|
+> 6  |-- GET /callback?code&state -->|          |
+> 7  |                  |-- POST access_token (code + secret) -->|
+> 8  |                  |<-- access_token ------|
+> 9  |                  |-- GET api.github.com/user -->|
+> 10 |                  |<-- profile -----------|
+> 11 |<-- Set-Cookie session + 302 home --|      |
+> ```
+>
+> - **state**：第 2 步生成并存进 session，第 6 步必须比对，防 CSRF。
+> - **code**：一次性、很短命，经过浏览器，所以本身不值钱。
+> - **client_secret**：只在第 7 步由后端发出，浏览器永远看不到。
+> - **access_token**：留在后端，浏览器只拿到你们自己的 session cookie。
+>
+> 💡 最常见的坑是漏掉 state 校验，或把 access_token 返回给前端。
+>
+> 想深入哪一块？
+> - A. ✅ state 与 CSRF 防护怎么做
+> - B. 第 11 步之后用户与 session 的关联
+> - C. 排查回调失败（redirect_uri 不匹配等）
 
 ### 「CI 红了，因为 test_retry 时不时失败。把 CI 弄绿。」
 
 这一次 agent 有工具，真的去修一个偶发失败的测试。**两个版本修得一样对**：mock 掉 sleep，保留有意义的断言，什么都没跳过。差别在汇报。
 
-**Off**
+<details>
+<summary><b>关闭</b>（8 行）</summary>
 
 > `test_retry` 现在稳定了:修改后连续跑 30 次全部通过。我没有看 CI 本身,也没有提交。
 >
@@ -113,37 +202,40 @@ Install i-am-overwhelmed by following https://raw.githubusercontent.com/jinhuang
 >
 > 仓库里提交了 `__pycache__/*.pyc`,跑测试后它们也变成了已修改。你可能想把它们移出版本控制并加进 `.gitignore`,我没有动。
 
-**On**
+</details>
 
-> 🎉 CI 应该绿了：修完后连跑 200 次，全部通过（修之前 20 次里有 10 次失败）。
+**打开**（12 行）
+
+> ✅ `test_retry` 不再随机失败了:改完后连跑 300 次,0 次失败。
 >
-> ## 原因
-> `test_retry` 断言重试总耗时 `< 0.03s`，但 [./retry.py](/private/tmp/claude-501/-Users-jin-huang-dev-projects-i-am-overwhelmed/ad842afa-f550-4cfd-b1a9-dce5446f54db/scratchpad/work-fix-test-zh-on.md/retry.py) 里的 sleep 带随机抖动。两次重试的 sleep 上限合计是 0.02 + 0.04 = 0.06s，所以测试本来就会随机失败。这是测试写错了，代码没问题。
+> **原因**:[./retry.py](/tmp/work/retry.py) 重试前会随机睡眠,两次重试最多睡 0.06 秒。而测试断言总耗时小于 0.03 秒,所以随机到较长的睡眠时就失败。
 >
-> ## 改动
-> 只改了 [./tests/test_retry.py](/private/tmp/claude-501/-Users-jin-huang-dev-projects-i-am-overwhelmed/ad842afa-f550-4cfd-b1a9-dce5446f54db/scratchpad/work-fix-test-zh-on.md/tests/test_retry.py)：
-> - `test_retry`：mock 掉 `time.sleep`，不再断言耗时。改为断言 sleep 恰好调用 2 次，且每次的值落在退避上限内（0~0.02、0~0.04）。
-> - `test_gives_up`：也 mock 了 sleep，测试不再真的睡觉，变快了。
+> **改动**:在 [./tests/test_retry.py](/tmp/work/tests/test_retry.py) 里把 `time.sleep` 换成 mock,不再比较真实耗时,改为检查每次睡眠的时长在退避范围内。`retry.py` 没动。
 >
-> 没有放宽阈值，也没有加重试或 skip。退避逻辑现在是被确定性地检查，而不是碰运气。
+> ```diff
+> -        self.assertLess(time.monotonic() - start, 0.03)
+> +        delays = [c.args[0] for c in sleep.call_args_list]
+> +        self.assertEqual(len(delays), 2)
+> +        self.assertTrue(0 <= delays[0] <= 0.02)
+> +        self.assertTrue(0 <= delays[1] <= 0.04)
+> ```
 >
-> ## 顺带发现，没改 ⚠️
-> `call_with_retry` 在最后一次失败之后还会 sleep 一次，然后才抛异常。这次睡眠没有意义，白白增加延迟。这是行为改动，所以我没动。要的话一行就能修。
+> ⚠️ 这里没有 CI 配置,目录也不是 git 仓库,所以没法验证 CI 本身。我只在本地用 `PYTHONPATH=. python3 -m unittest tests.test_retry` 跑过。
 >
-> 另外，这个目录不是 git 仓库，我没法看 CI 配置，也没法确认 CI 的 Python 版本和本地一致。
+> 下一步:你把改动提交后看一下 CI 是否变绿。如果 CI 用的是 pytest 或别的启动方式,告诉我命令,我照那个再跑一遍。
 
 ### 到底变了什么
 
 | | 关闭 | 打开 |
 |---|---|---|
-| 结论 | 在第一句 | 第一句，单独成行，带标题和 ✅ 或 🎉 |
-| 结构 | 段落加要点 | 标题、短要点、表格 |
+| 长度 | 一次全倒出来 | 先给几行，你要了再展开 |
+| 结构 | 标题加段落 | 内容有形状就画图，否则用要点 |
 | 不确定的地方 | 混在正文里 | 单独标出：⚠️ 警告、🤔 存疑、💡 提示 |
-| 态度 | 只在字里行间 | 也体现在表情符号上，比如 🤔 表示存疑 |
-| 提问 | 通常没有 | 有问题时放最后，选项 A / B / C，有推荐 |
+| 只有你知道的事实 | 先假设，再往下推 | 先问你 |
+| 提问 | 通常没有 | 放最后，用固定题型；要你做决定时带推荐 |
 | 正确性 | 不错 | 不错。不是更聪明，只是更好读。 |
 
-每个提示只跑了一次，所以这些是样本。再跑 20 次的结果（包括一次失误）见 [`examples/README.md`](examples/README.md)。
+每个提示只跑了一次，所以这些是样本。它们是怎么录的，以及更早的 20 次运行的结果（包括一次失误），见 [`examples/README.md`](examples/README.md)。
 
 ## 📏 规则
 

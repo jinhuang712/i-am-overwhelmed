@@ -24,6 +24,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Asking: only a choice that asks for a decision carries a recommendation.
 - Asking: every reply ends with one way forward: questions when an answer is needed, otherwise the next step. This replaces the "suggest a next step" rule in Replies.
 - Formatting: "Never reply in paragraphs only" is now a positive `[YES]` rule in Structure: give every reply some structure.
+- README: the plugin-on examples are re-recorded with the new rules, a sign-in flow example shows a drawing, and the plugin-off reply folds away. The comparison table follows the new rules.
 - Install: the README shows two ways. For Claude Code, the two CLI commands or one curl line. For any agent, one line to paste, which sends it to `INSTALL.md`. `INSTALL.md` is now written for the agent: Claude Code runs the script, and Codex or another agent reads the rules and decides how to add them to the user's instructions.
 - Eval: rubric C2 is "Depth fit", C4 follows the Structure section, D2 is "Way forward", D8 and D14 follow the asking rules. E2 is removed, since drawing is now required.
 

@@ -1,22 +1,15 @@
-# ✅ SQLite
+✅ **SQLite.** At ~100 users a URL shortener is a tiny, read-heavy workload (lookup a slug, redirect), and SQLite handles thousands of reads per second on one box.
 
-At ~100 users, a URL shortener is a read-heavy workload with tiny rows. SQLite handles that easily.
+```
+SQLite                    Postgres
+├── no server to run      ├── separate service to run
+├── one file to back up   ├── users, backups, upgrades
+└── fast local reads      └── pays off at multi-server scale
+```
 
-## Why SQLite
-- **Zero ops:** no server, no credentials, no connection pool. Backup is copying one file (or Litestream).
-- **Fast reads:** redirects are simple key lookups, in-process with no network hop.
-- **Enough write capacity:** with `PRAGMA journal_mode=WAL`, it handles thousands of writes per second. Click counters at 100 users won't come close.
+- **Turn on WAL mode** (write-ahead logging, which lets reads continue during writes): `PRAGMA journal_mode=WAL;`
+- **Migration is cheap**: a `links(slug, url, created_at)` table moves to Postgres in an afternoon if you outgrow it.
 
-## When I'd pick Postgres instead
-- ⚠️ You need **multiple app servers** writing to the same DB.
-- ⚠️ Your host has an **ephemeral disk** (some PaaS, serverless), so a local file won't survive.
-- You expect to grow **100x** soon, or want managed backups and replicas.
+⚠️ **Premise I'm assuming**: one app server with a local disk. SQLite struggles if you run several servers or a platform with ephemeral disks (like many serverless hosts).
 
-## 💡 Tip
-Keep your queries standard and use an ORM or query builder. Moving to Postgres later is then a config change plus a data copy, not a rewrite.
-
-🤔 Postgres for 100 users is over-engineering, unless you already run it and it costs you nothing extra.
-
-Where will this be deployed (single VPS, container with a volume, or serverless)? That's the one thing that could change my answer.
-- A. Single VPS or container with a persistent volume → SQLite (recommended)
-- B. Serverless or ephemeral disk → Postgres
+Q1. Where will this run? (Quick: e.g. "one VPS", "Vercel", "Fly with 2 machines")

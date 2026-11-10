@@ -1,16 +1,17 @@
-🎉 CI 应该绿了：修完后连跑 200 次，全部通过（修之前 20 次里有 10 次失败）。
+✅ `test_retry` 不再随机失败了:改完后连跑 300 次,0 次失败。
 
-## 原因
-`test_retry` 断言重试总耗时 `< 0.03s`，但 [./retry.py](/private/tmp/claude-501/-Users-jin-huang-dev-projects-i-am-overwhelmed/ad842afa-f550-4cfd-b1a9-dce5446f54db/scratchpad/work-fix-test-zh-on.md/retry.py) 里的 sleep 带随机抖动。两次重试的 sleep 上限合计是 0.02 + 0.04 = 0.06s，所以测试本来就会随机失败。这是测试写错了，代码没问题。
+**原因**:[./retry.py](/tmp/work/retry.py) 重试前会随机睡眠,两次重试最多睡 0.06 秒。而测试断言总耗时小于 0.03 秒,所以随机到较长的睡眠时就失败。
 
-## 改动
-只改了 [./tests/test_retry.py](/private/tmp/claude-501/-Users-jin-huang-dev-projects-i-am-overwhelmed/ad842afa-f550-4cfd-b1a9-dce5446f54db/scratchpad/work-fix-test-zh-on.md/tests/test_retry.py)：
-- `test_retry`：mock 掉 `time.sleep`，不再断言耗时。改为断言 sleep 恰好调用 2 次，且每次的值落在退避上限内（0~0.02、0~0.04）。
-- `test_gives_up`：也 mock 了 sleep，测试不再真的睡觉，变快了。
+**改动**:在 [./tests/test_retry.py](/tmp/work/tests/test_retry.py) 里把 `time.sleep` 换成 mock,不再比较真实耗时,改为检查每次睡眠的时长在退避范围内。`retry.py` 没动。
 
-没有放宽阈值，也没有加重试或 skip。退避逻辑现在是被确定性地检查，而不是碰运气。
+```diff
+-        self.assertLess(time.monotonic() - start, 0.03)
++        delays = [c.args[0] for c in sleep.call_args_list]
++        self.assertEqual(len(delays), 2)
++        self.assertTrue(0 <= delays[0] <= 0.02)
++        self.assertTrue(0 <= delays[1] <= 0.04)
+```
 
-## 顺带发现，没改 ⚠️
-`call_with_retry` 在最后一次失败之后还会 sleep 一次，然后才抛异常。这次睡眠没有意义，白白增加延迟。这是行为改动，所以我没动。要的话一行就能修。
+⚠️ 这里没有 CI 配置,目录也不是 git 仓库,所以没法验证 CI 本身。我只在本地用 `PYTHONPATH=. python3 -m unittest tests.test_retry` 跑过。
 
-另外，这个目录不是 git 仓库，我没法看 CI 配置，也没法确认 CI 的 Python 版本和本地一致。
+下一步:你把改动提交后看一下 CI 是否变绿。如果 CI 用的是 pytest 或别的启动方式,告诉我命令,我照那个再跑一遍。

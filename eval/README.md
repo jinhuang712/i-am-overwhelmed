@@ -85,6 +85,27 @@ Same setup. Arms: "hybrid" (Simple defined as a few lines with no headings, plus
 - **Bullet commas**: a one-comma limit was broken in most bullets and made replies cramped; one sentence per bullet was mostly kept.
 - **Still open**: replies sometimes call an undecided choice "decided", yes/no questions often skip the A/B options, and short English answers often miss the risk that would flip them.
 
+## Results, 2026-11-10: principles against definitions
+
+Baseline 0.1.13 (`8811684`), Sonnet 5.5, 3 runs per arm. Four rounds, each against the same baseline. Lines are the mean per run, from the mechanical checks.
+
+| Round | New arm | `chat-en` lines | `chat-zh` lines | `shape-zh` lines |
+|---|---|---|---|---|
+| baseline | 0.1.13 | 7 to 8 | 8 to 12 | 43 to 47 |
+| 1 | `9d3a3c2`: modes replaced by principles, headings and drawings required | 40.7 | 31.7 | 50.0 |
+| 2 | `0ca536a`: adds "write as simply as you can" | 31.7 | 34.7 | 43.3 |
+| 3 | `5fab671`: adds "simplify first, then give structure" | 27.0 | 28.0 | 34.0 |
+| 4 | `30abbeb`: Simple by default, Detailed on request | 9.7 | 12.0 | 28.3 |
+
+Results are in [`results/`](results/), one folder per round. Round 1 also ran `multi-turn-zh`, `many-items-zh` and `design-flaw-zh`.
+
+- **A principle lost to an unconditional rule**: "as simple as you can" and "simplify first" cut short answers by a third at most, while "give each part a heading" and "draw whenever it has a shape" were followed every time. The 2026-11-03 finding held again: the definition of Simple does the work.
+- **Drawings came with the rule**: chat replies went from no drawings to one per reply in rounds 1 to 3. In round 4 they stay where the content has a shape (`shape-zh`, `chat-zh`) and the short English answer has none.
+- **The judge's totals favour the new arm in rounds 1 to 3**, because the rubric gained items for drawings and headings in the same change. The line counts are the independent signal.
+- **Asking**: every reply still ends with a question in both arms. Rounds 1 to 3 showed no clear effect from the asking principles; round 4 scores D17 (one decision) and D18 (needed question) at or above the baseline.
+- **Blind reading by the owner**: 3 prompts, a reply with no plugin against the round-4 rules, Opus 5.5. The round-4 reply was picked 3 times of 3, for being shorter and for asking before assuming. That comparison is hard to blind, since the plugin's replies are easy to recognise.
+- **Cost**: $6.60 for the four rounds.
+
 ## Caveats
 
 - The judge is a model and the rubric is written from the style's own rules, so it favours whichever version states those rules more directly. Read the quotes, not just the totals.
