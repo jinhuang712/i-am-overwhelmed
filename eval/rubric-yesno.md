@@ -56,7 +56,7 @@ Bad signs
 | C2 | lists the steps it took before the result |
 | C3 | makes the same point twice |
 | C4 | closes with a recap of what it already said |
-| C5 | explains two or more things in detail in one reply |
+| C5 | gives two or more topics a section each |
 | C6 | answers one of several things and does not list what is left |
 | C7 | gives a verdict with no reason |
 | C8 | writes sentences with no subject or no verb |
@@ -77,30 +77,29 @@ Bad signs
 | T3 | writes folders or a hierarchy as prose or bullets, with no tree |
 | T4 | writes cause and effect as prose, with no arrows |
 | T5 | compares items across the same attributes with no table |
-| T6 | has a bullet point that is a long sentence |
-| T7 | has a bullet point that holds two points |
-| T8 | has a table cell that holds a sentence |
-| T9 | has headings though the user did not ask for more detail |
-| T10 | uses a line of bold text as a heading, with no `#` |
-| T11 | has two headed parts with no `---` line between them |
-| T12 | puts a command inside a sentence |
-| T13 | shows code outside a code block |
-| T14 | shows a setting outside a code block |
-| T15 | shows program output outside a code block |
-| T16 | puts a long chunk in a code block |
-| T17 | describes a code change in words, with no `diff` block |
-| T18 | quotes someone's words with no blockquote |
-| T19 | puts more than a short name or value in backquotes |
-| T20 | has a drawing whose levels are indented by different amounts |
-| T21 | has an English drawing whose columns do not line up |
-| T22 | has a drawing with boxes or columns that holds Chinese or emoji |
+| T6 | has a bullet point of two sentences or more |
+| T7 | has a table cell that holds a sentence |
+| T8 | has headings though the user did not ask for more detail |
+| T9 | uses a line of bold text as a heading, with no `#` |
+| T10 | has two headed parts with no `---` line between them |
+| T11 | puts a command inside a sentence |
+| T12 | shows code outside a code block |
+| T13 | shows a setting outside a code block |
+| T14 | shows program output outside a code block |
+| T15 | puts a long chunk in a code block |
+| T16 | describes a code change in words, with no `diff` block |
+| T17 | quotes someone's words with no blockquote |
+| T18 | puts more than a short name or value in backquotes |
+| T19 | has a drawing whose levels are indented by different amounts |
+| T20 | has an English drawing whose columns do not line up |
+| T21 | has a drawing with boxes or columns that holds Chinese or emoji |
 
 Good signs
 
 | # | The reply... |
 |---|---|
-| T23 | gives each part a heading when the user asked for more |
-| T24 | writes its bullet points as "- **key**: description" |
+| T22 | gives each part a heading when the user asked for more |
+| T23 | writes its bullet points as "- **key**: description" |
 
 ## 4. Formatting
 
@@ -138,14 +137,14 @@ Bad signs
 |---|---|
 | L1 | hedges on a thing it knows, with words such as "it seems" or "might perhaps" |
 | L2 | uses a double negative |
-| L3 | chains three or more parallel clauses in one sentence |
+| L3 | lists three or more things inside one sentence |
 | L4 | strings connectives through its sentences, such as "however", "moreover", "therefore" |
 | L5 | uses slang or chatty filler, such as "basically", "honestly", "kind of" |
-| L6 | uses two different words for the same thing |
-| L7 | uses a passive sentence that hides who did the thing |
+| L6 | gives a thing a name, and later uses another name for it |
+| L7 | has a sentence that does not say who did the action |
 | L8 | uses a metaphor or a simile where a plain statement would do |
 | L9 | asks a rhetorical question and then answers it |
-| L10 | sets up a contrast for effect, as in "it is not X, it is Y" |
+| L10 | says what a thing is not, only to set up what it is |
 | L11 | apologises or praises in a full sentence |
 
 Good signs
@@ -164,17 +163,17 @@ Bad signs
 |---|---|
 | A1 | leaves a next step open and does not say what it is |
 | A2 | answers a plain fact and still closes with a question |
-| A3 | asks a question though the next step is the user's to take |
+| A3 | ends with a question though it has just told the user what to do next |
 | A4 | asks whether to go on with a step that is clear |
 | A5 | 🔎 asks a thing it could find out itself |
 | A6 | 🔎 asks a thing it could decide itself |
 | A7 | 🔎 🚩 takes a fact only the user knows as known, and works on from it |
 | A8 | says "please confirm" or "I assume" outside a question |
 | A9 | asks two things in one question |
-| A10 | has options that differ in more than one way at once |
+| A10 | has an option that changes two things at once |
 | A11 | asks again a question the user already answered |
 | A12 | asks a question with no context before it |
-| A13 | asks the user to choose and does not say what each choice leads to |
+| A13 | gives options as bare names, with no word on what each one leads to |
 | A14 | gives no recommendation on a choice the user has to decide |
 | A15 | does not put the recommended option first |
 | A16 | recommends an answer to a question about a fact |
@@ -198,8 +197,8 @@ Good signs
 
 | # | The reply... |
 |---|---|
-| O5 | says what it would not do |
-| O6 | names a better way than the one the user asked for |
+| O5 | names a way of doing it that it will not take |
+| O6 | names a way of doing it that the user did not mention |
 
 ## 8. Continuity
 
