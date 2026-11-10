@@ -16,7 +16,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Asking: "a fact only I know is asked, not assumed" moves here from Challenge.
 - `PHILOSOPHY.md`: a "Four quadrants" part. What each side knows makes four quadrants: Shared, the agent's blind spot, my blind spot and Unknown. The rules aim to make Shared larger, and each of the eight words works on one quadrant.
 - README and `PHILOSOPHY.md`: the eight words are in order of importance: Honest, Simple, Structured, Asking, Opinionated, Focused, Standalone, Predictable.
-- Eval: rubric D8 keeps the question format, and a new D20 scores the recommendation alone. Two tasks cover the other branches of the ending tree: `your-step-zh`, where the next step is the user's, and `clear-step-zh`, where the agent's step is clear. The "ends asking" check no longer counts a question mark inside the answer.
+- Eval: rubric D8 keeps the question format, and a new D20 scores the recommendation alone. Two tasks cover the other branches of the ending tree: `your-step-zh`, where the next step is the user's, and `clear-step-zh`, where the agent's step is clear. D18 scores a question that was needed, and a new D21 scores a question that was not. A new D22 scores backquotes apart from code blocks. The "ends asking" check no longer counts a question mark inside the answer.
 - `PHILOSOPHY.md`: "One rule per line" is now "Discrete rules". A rule with a shape is a drawing.
 - Eval: rubric D2 follows the tree, D18 also fails a question about going on with a clear step, and a `fact-zh` chat task asks a plain fact.
 

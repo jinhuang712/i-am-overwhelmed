@@ -201,6 +201,8 @@ class Parsing(unittest.TestCase):
         self.assertIn("D15", dimensions())
         self.assertIn("D19", dimensions())
         self.assertIn("D20", dimensions())
+        self.assertIn("D21", dimensions())
+        self.assertIn("D22", dimensions())
         self.assertNotIn("E2", dimensions())
 
     def test_measure(self):
