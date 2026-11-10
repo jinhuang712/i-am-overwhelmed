@@ -13,8 +13,13 @@ if ! command -v claude >/dev/null 2>&1; then
 fi
 
 if [ "${1:-}" != "--check" ]; then
-  claude plugin marketplace add "$MARKET" || claude plugin marketplace update i-am-overwhelmed
-  claude plugin install "$PLUGIN" || claude plugin update "$PLUGIN"
+  # "add" and "install" succeed without a change when the thing is already
+  # there, so the update always runs after them.
+  # A failed "add" stays quiet: the update below reports a real problem.
+  claude plugin marketplace add "$MARKET" >/dev/null 2>&1 || true
+  claude plugin marketplace update i-am-overwhelmed
+  claude plugin install "$PLUGIN" || true
+  claude plugin update "$PLUGIN"
 fi
 
 # Read the plugin's version and status from the list of installed plugins.
