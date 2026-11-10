@@ -4,6 +4,39 @@ Open work, kept here so it does not live in one session only. Take a line out wh
 
 The order of work, agreed on 2026-11-11: first make the rubric something we can rely on, then go back to the rules.
 
+## Handoff, 2026-11-11
+
+Written for the session that takes this work over. Read this part first, then [`eval/FINDINGS.md`](eval/FINDINGS.md).
+
+Where things stand
+
+- Everything since 0.1.14 is committed on `master` and nothing is pushed. The owner said to wait with the push and with a release.
+- The rules changed in about 25 places since 0.1.14. `[Unreleased]` in `CHANGELOG.md` has every change.
+- `eval/rubric-yesno.md` is the new rubric, a draft: 126 lines in eleven decks, 6 lines parked. Three rounds of `eval/rubric_check.py` put it at 93% stable on Haiku.
+- `python3 eval/eval.py --rubric yesno` can judge with it. It has run only in the unit tests.
+- A smoke run of all 19 tasks came through on Haiku for $0.17.
+- 32 unit tests pass: `python3 -m unittest discover eval/tests`.
+
+Waiting for the owner's word
+
+- A first real run with the new rubric. Proposed and not approved: 6 tasks (the two traps, the compound task, the deploy script, the fact question, the drawing), three arms, 2 runs each, Sonnet 5.5 as the subject, a limit of $7.
+- How to get replies with a planted fault, to test wrong hits and misses. See "Not yet tested" below.
+
+How the owner works, where the files do not say it
+
+- The owner names the budget. Propose a number and wait. Do not pick one.
+- Run the evals on the owner's second Claude Code profile. See "Another account" in `eval/README.md`.
+- Change one thing at a time, and show the change as git prints it.
+- Improve a rule that exists before you add one. Rules carry no examples.
+- A rubric line is one plain sentence that names one thing a judge can see.
+- Never drop a rubric line for how often it fires. Read what it hit. Park a line; do not delete it.
+- When a judgment is the owner's to make, such as whether a thing is a fault, ask. Do not decide it from a count.
+- Reply in the owner's language. The owner often reads on a phone: send a file when asked to show one.
+
+The next step
+
+- Ask the owner whether to run the proposal above, and under what limit. Run `python3 eval/eval.py --smoke` first if the rules or the tasks changed since the last smoke run.
+
 ## The rubric, `eval/rubric-yesno.md`
 
 Sent to the strong judge, not yet run
