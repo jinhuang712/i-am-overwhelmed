@@ -48,6 +48,9 @@ assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
 - [YES] Run `python3 -m unittest discover eval/tests` after changing the eval. It costs nothing.
 - [YES] Treat eval scores as samples. Read the judge's quotes as well as the totals.
 - [NO] Never spend on a real run without an approved budget.
+- [NO] Never let a task's words do a rule's work, such as "keep it simple" or "you decide".
+- [YES] Make a task ask one thing, unless it tests a message that asks several.
+- [YES] Give a task that makes the agent want to read files the `agent` kind and a fixture.
 - [WHEN] A release changes rules: run the eval on them first.
 - [WHEN] A model has no cost history: start with a small smoke run.
 

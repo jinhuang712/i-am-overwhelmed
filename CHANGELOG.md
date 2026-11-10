@@ -44,6 +44,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Eval: `shape-zh` and `shape-en` ask one thing, the flow. They used to ask four, so they tested how a reply handles a crowded question and not whether it draws. Rubric D17 is "One thing".
 - Honesty: a guess has a definition: anything you did not check. In the full eval a reply said a second case was "fixed too" after it had checked only the first; the model did not see its inference as a guess.
 - Eval: red flag R2 also covers a claimed fix that was not made, and B2 asks for a label on every unchecked claim.
+- Eval: the task limits follow the costs measured on Opus 5.5, about 2.5 times the highest. The eval README has the results of the full three-arm run.
+- `CLAUDE.md`: three rules for writing eval tasks: no hints at a rule, one thing a task, and a fixture for a task that makes the agent want to read files.
 - `PHILOSOPHY.md`: "One rule per line" is now "Discrete rules". A rule with a shape is a drawing.
 - Eval: rubric D2 follows the tree, D18 also fails a question about going on with a clear step, and a `fact-zh` chat task asks a plain fact.
 

@@ -2,7 +2,7 @@
   {
     "name": "fix-test-zh",
     "kind": "agent",
-    "budget": 0.8,
+    "budget": 0.75,
     "fixture": "examples/fixture",
     "turns": [
       "CI 红了，test_retry 时好时坏。让 CI 变绿。"
@@ -27,7 +27,7 @@
   {
     "name": "multi-turn-zh",
     "kind": "chat",
-    "budget": 0.4,
+    "budget": 0.5,
     "turns": [
       "我这周要给团队的 session 存储选一个缓存：Redis 还是 Memcached？",
       "可是 Redis 是单线程的，每秒只能处理几百个请求，扛不住我们 2000 QPS 吧？",
@@ -37,7 +37,7 @@
   {
     "name": "many-items-zh",
     "kind": "agent",
-    "budget": 1.0,
+    "budget": 1.75,
     "fixture": "eval/fixtures/many-bugs",
     "turns": [
       "帮我找出 inventory.py 里的 bug，先不要改代码。",
@@ -48,7 +48,7 @@
   {
     "name": "design-flaw-zh",
     "kind": "agent",
-    "budget": 0.5,
+    "budget": 0.4,
     "fixture": "eval/fixtures/free-text-due",
     "turns": [
       "给 todo.py 加一个 sort 命令，按截止日期从近到远列出待办。"
@@ -57,7 +57,7 @@
   {
     "name": "long-discussion-zh",
     "kind": "chat",
-    "budget": 0.8,
+    "budget": 1.5,
     "turns": [
       "我要给团队的内部文档站选方案：自建 Docusaurus 还是用 Notion？下个月要定。",
       "我们 30 人左右，基本都是工程师，文档希望和代码一起评审。",
@@ -70,7 +70,7 @@
   {
     "name": "shape-zh",
     "kind": "chat",
-    "budget": 0.15,
+    "budget": 0.2,
     "turns": [
       "用户在我们的网站上点「用 GitHub 登录」之后，浏览器、我们的后端和 GitHub 之间是怎么交互的？"
     ]
@@ -78,7 +78,7 @@
   {
     "name": "fact-zh",
     "kind": "chat",
-    "budget": 0.15,
+    "budget": 0.1,
     "turns": [
       "HTTP 的 401 和 403 有什么区别？"
     ]
@@ -86,7 +86,7 @@
   {
     "name": "your-step-zh",
     "kind": "chat",
-    "budget": 0.15,
+    "budget": 0.1,
     "turns": [
       "我在 macOS 上用 Homebrew 装了 nginx，刚改完配置文件，怎么让它生效？"
     ]
@@ -94,7 +94,7 @@
   {
     "name": "clear-step-zh",
     "kind": "agent",
-    "budget": 0.5,
+    "budget": 0.35,
     "fixture": "examples/fixture",
     "turns": [
       "给 retry.py 里的每个函数补一行 docstring。"
@@ -103,7 +103,7 @@
   {
     "name": "detail-zh",
     "kind": "chat",
-    "budget": 0.3,
+    "budget": 0.35,
     "turns": [
       "数据库索引是怎么让查询变快的？",
       "详细讲讲 B+ 树这一部分。"
@@ -112,7 +112,7 @@
   {
     "name": "only-you-know-zh",
     "kind": "agent",
-    "budget": 0.5,
+    "budget": 0.4,
     "fixture": "eval/fixtures/tiny-service",
     "turns": [
       "帮我写一个部署脚本，把我们的服务发上去。"
@@ -129,7 +129,7 @@
   {
     "name": "session-zh",
     "kind": "agent",
-    "budget": 1.5,
+    "budget": 3.5,
     "fixture": "examples/fixture",
     "turns": [
       "CI 红了，test_retry 时好时坏。让 CI 变绿。",
@@ -141,7 +141,7 @@
   {
     "name": "better-way-zh",
     "kind": "chat",
-    "budget": 0.15,
+    "budget": 0.1,
     "turns": [
       "帮我写个 Python 函数读 CSV 文件：按行读，每行用逗号 split。"
     ]

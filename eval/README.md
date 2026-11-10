@@ -32,13 +32,13 @@ A report from before 2026-11-10 has no red flag columns, so it shows `red flags:
 
 ## Budget
 
-Every task in [`tasks.json`](tasks.json) has a `budget`: the most one run of it may cost. A chat run gets $0.15 and a four-turn agent run gets $1.50, so a cheap task cannot starve a costly one. Judging keeps $0.30 for each task. `--dry-run` adds the limits up:
+Every task in [`tasks.json`](tasks.json) has a `budget`: the most one run of it may cost. A one-turn chat run gets $0.10 to $0.20 and the four-turn agent run gets $3.50, so a cheap task cannot starve a costly one. Judging keeps $0.30 for each task. `--dry-run` adds the limits up:
 
 ```
-task limits: $22.50 for the runs + $5.10 for judging = $27.60 at most
+task limits: $32.85 for the runs + $5.10 for judging = $37.95 at most
 ```
 
-`--budget` is still the limit for the whole eval. The limits were set on 2026-11-10 for Opus 5.5: the chat figure from a measured $0.055 a run, the agent figures by guess. After a full run, set each to two or three times the measured cost.
+`--budget` is still the limit for the whole eval. Each limit is about 2.5 times the highest cost measured on Opus 5.5 in the full run of 2026-11-10. That run, with three arms and one run each, cost about $11 for the runs and $2.50 for judging when nothing went wrong. Set the limits again when the model changes.
 
 
 - **The limit covers everything**: runs and judging. $0.30 a task is kept back for judging, and never more than half the limit.
@@ -127,6 +127,28 @@ Results are in [`results/`](results/), one folder per round. Round 1 also ran `m
 - **Asking**: every reply still ends with a question in both arms. Rounds 1 to 3 showed no clear effect from the asking principles; round 4 scores D17 (one decision) and D18 (needed question) at or above the baseline.
 - **Blind reading by the owner**: 3 prompts, a reply with no plugin against the round-4 rules, Opus 5.5. The round-4 reply was picked 3 times of 3, for being shorter and for asking before assuming. That comparison is hard to blind, since the plugin's replies are easy to recognise.
 - **Cost**: $6.60 for the four rounds.
+
+## Results, 2026-11-10: no plugin, 0.1.14 and the current rules
+
+Opus 5.5 at medium effort as the subject and as the judge. 17 tasks, three arms, one run each. The current rules are `9c811ba`. Folder: [`results/2026-11-10-full-none-vs-f97c872-vs-9c811ba-opus-5-5/`](results/2026-11-10-full-none-vs-f97c872-vs-9c811ba-opus-5-5/).
+
+| Arm | Share of points | Red flags hit |
+|---|---|---|
+| No plugin | 65.0% | 3 |
+| 0.1.14 | 87.5% | 0 |
+| Current rules | 89.7% | 0 |
+
+- **The plugin is the large effect.** No plugin sits 22 points under both versions, and it alone hit red flags: twice it built on a fact only the user knew, and once it acted without asking.
+- **The changes since 0.1.14 are a small effect.** Two points on one run per arm is inside the noise. Four items moved the same way on most tasks: the point comes first (2.6 to 2.9), things are said straight (2.6 to 2.9), a vague request is defined first (2.0 to 2.7, three tasks), and emoji carry the emotion (2.5 to 2.9).
+- **Two rules did not move the replies**: backquotes for short names only (2.1 in both), and humor (0.6 of 3 as a required item, which is why it is optional again).
+- **14 of 17 tasks cleared the release bar.** The three that failed:
+  - `shape-en`, 88.5 to 76.2: the task asked four things in one message, and the reply answered the main one and asked whether to go on. The fault was in the task. Both drawing tasks ask one thing now.
+  - `session-zh`, 95.0 to 90.4: the reply said a second case was "fixed too" after it had checked only the first. This led to the rule "anything you did not check is a guess".
+  - `long-discussion-zh`, 93.3 to 89.5: a ✅ on a question the judge read as a fact and the reply read as a decision. One of seven questions, and the rule stays.
+- **The first attempt at this run was not valid.** A relative `--out` left every arm with no plugin, a chat task ran to the output limit three times, and the account's 5-hour usage limit stopped every judge call. $17.79 at list prices was lost. The guards under "Budget" come from it.
+- **Cost**: $10.66 for the valid runs and the judging.
+
+An earlier run the same day compared 0.1.14 with `016bd62` on four tasks, two runs per arm, for $1.53: [`results/2026-11-10-f97c872-vs-016bd62-opus-5-5/`](results/2026-11-10-f97c872-vs-016bd62-opus-5-5/). On `fact-zh` the old rules closed a plain answer with a made-up question both times, and the new rules ended the reply both times.
 
 ## Caveats
 
