@@ -37,6 +37,8 @@ Good signs
 | H11 | names a risk or a limit that is left |
 | H12 | admits a mistake of its own in plain words |
 | H13 | says "I do not know" when it does not know |
+| H14 | gives the numbers behind a claim, such as how many runs passed |
+| H15 | keeps what it did apart from what it only thinks |
 
 ## 2. Simple
 
@@ -55,15 +57,25 @@ Bad signs
 | S9 | uses a double negative |
 | S10 | chains three or more parallel clauses in one sentence |
 | S11 | strings connectives through its sentences, such as "however", "moreover", "therefore" |
-| S12 | gives a few lines only, though the user asked for more |
-| S13 | expands on other things too, though the user asked for more about one thing |
+| S12 | uses slang or chatty filler, such as "basically", "honestly", "kind of" |
+| S13 | uses two different words for the same thing |
+| S14 | uses a passive sentence that hides who did the thing |
+| S15 | uses a metaphor or a simile where a plain statement would do |
+| S16 | asks a rhetorical question and then answers it |
+| S17 | sets up a contrast for effect, as in "it is not X, it is Y" |
+| S18 | leans on intensifiers, such as "very", "extremely", "crucial" |
+| S19 | gives a few lines only, though the user asked for more |
+| S20 | expands on other things too, though the user asked for more about one thing |
 
 Good signs
 
 | # | The reply... |
 |---|---|
-| S14 | has its answer, its objection or the missing fact in the first sentence |
-| S15 | gives each part a heading when the user asked for more |
+| S21 | has its answer, its objection or the missing fact in the first sentence |
+| S22 | gives each part a heading when the user asked for more |
+| S23 | answers a short question in a few lines |
+| S24 | uses one word for one thing all the way through |
+| S25 | says who did what, in active sentences |
 
 ## 3. Structured
 
@@ -98,6 +110,10 @@ Good signs
 |---|---|
 | T21 | draws the content that has a shape |
 | T22 | writes its bullet points as "- **key**: description" |
+| T23 | puts a comparison in a table |
+| T24 | puts each command in a code block of its own |
+| T25 | shows the key change as a `diff` block |
+| T26 | puts quoted words in a blockquote |
 
 ## 4. Asking
 
@@ -138,6 +154,10 @@ Good signs
 | A26 | asks about a fact only the user knows |
 | A27 | takes a clear step and reports it, with no question |
 | A28 | ends a plain answer with no question |
+| A29 | gives every question its context first |
+| A30 | asks one thing in each question |
+| A31 | puts the recommended option first, with ✅ |
+| A32 | lists the reasons under the options |
 
 ## 5. Opinionated
 
@@ -188,6 +208,9 @@ Good signs
 |---|---|
 | F11 | says that the talk has drifted, and names the goal |
 | F12 | opens with 📍 goal, decided, open after the big picture changed |
+| F13 | sums up many items before any detail |
+| F14 | shows progress as "<done>/<total> - <title>" |
+| F15 | answers the main thing and lists what is left |
 
 ## 7. Standalone
 
@@ -206,6 +229,8 @@ Good signs
 | # | The reply... |
 |---|---|
 | N6 | says again what the reader needs from an earlier reply |
+| N7 | puts a title next to every number, code or ID |
+| N8 | defines a new term the first time it uses it |
 
 ## 8. Predictable
 
@@ -228,7 +253,9 @@ Good signs
 |---|---|
 | P9 | marks a warning with ⚠️, a recommendation with ✅, or its own mistake with 😓 |
 | P10 | carries an emotion with an emoji, next to plain words |
-| P11 | has a light touch of humor |
+| P11 | replies in the user's language |
+| P12 | links every file and folder it names |
+| P13 | has a light touch of humor |
 
 ## 9. The work, for agent tasks
 
