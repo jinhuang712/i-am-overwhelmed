@@ -3,6 +3,7 @@
 Usage:
   python3 eval/eval.py --old REF [--new REF] --budget USD [options]
   python3 eval/eval.py --old REF --dry-run
+  python3 eval/eval.py --old REF --none --budget USD   (adds an arm with no plugin)
 
 --budget is the limit for the whole eval, judging included, and it is required
 for a real run. Run the same command again to resume: finished runs are kept, and
@@ -59,6 +60,7 @@ def parse_args():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--old", required=True, help="git ref of the baseline")
     p.add_argument("--new", default="HEAD", help="git ref to compare (default HEAD)")
+    p.add_argument("--none", action="store_true", help="add a third arm that runs with no plugin")
     p.add_argument("--budget", type=float, help="USD limit for the whole eval")
     p.add_argument("--dry-run", action="store_true", help="show the plan and the estimate, spend nothing")
     p.add_argument("--model", default="claude-sonnet-5-5")
@@ -83,8 +85,9 @@ def main():
         tasks = [t for t in tasks if t["name"] in a.tasks.split(",")]
     refs = {"old": a.old, "new": a.new}
     shas = {arm: short_sha(ref) for arm, ref in refs.items()}
-    cost, known = estimate(tasks, a.model, len(refs), a.runs, past_costs(HERE / "results"))
-    calls = len(tasks) * len(refs) * a.runs
+    n_arms = len(refs) + (1 if a.none else 0)
+    cost, known = estimate(tasks, a.model, n_arms, a.runs, past_costs(HERE / "results"))
+    calls = len(tasks) * n_arms * a.runs
     print(f"plan: {calls} runs, {len(tasks)} judge calls, {a.model}")
     print(f"estimate: ${cost:.2f} for the runs, judging extra ({'from past runs' if known else 'rough default, no history'})")
     if a.budget is not None:
@@ -103,6 +106,8 @@ def main():
     raw = out / "raw"
     budget = Budget(a.budget, out / "ledger.jsonl")
     arms = {arm: export_arm(ref, raw / "arms" / arm) for arm, ref in refs.items()}
+    if a.none:
+        arms["none"] = None
 
     # Whole rounds come first, so a stop leaves the arms balanced.
     jobs = [(t, arm, plugin, i) for i in range(1, a.runs + 1) for t in tasks for arm, plugin in arms.items()]
@@ -138,6 +143,7 @@ def main():
         sections.append(f"## {t['name']}\n\n```\n{text}\n```")
 
     head = (f"# Eval {name}\n\n- old: `{a.old}` ({shas['old']})\n- new: `{a.new}` ({shas['new']})\n"
+            f"{'- none: no plugin' + chr(10) if a.none else ''}"
             f"- model: {a.model}, effort {a.effort}, judge {a.judge_model}\n- runs: {counts}\n"
             f"- spent: ${budget.spent:.2f} of ${a.budget:.2f}\n")
     if "stopped" in counts:

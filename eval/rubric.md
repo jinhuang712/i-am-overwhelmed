@@ -107,7 +107,7 @@ Score 0 when the reply does it, 3 when it does not, NA when it could not come up
 
 | Field | What it is |
 |---|---|
-| Benchmark | The last released version. Replies with no plugin are the second benchmark; the tool does not run that arm yet |
+| Benchmark | The last released version. Replies with no plugin are the second benchmark: run it with `--none` |
 | Comparison | The new rules against the benchmark, on the same tasks, judged blind |
 | Threshold | No red flag in the new arm. On every task, the new arm's share of points is at most 3 points under the old arm's. Every item the release changed has a mean of 2 or more |
 

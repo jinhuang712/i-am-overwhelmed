@@ -32,8 +32,9 @@ def run_one(task, arm, plugin_dir, i, raw, model, effort, budget, cap, limit):
         if task.get("fixture"):
             shutil.copytree(REPO / task["fixture"], work, dirs_exist_ok=True)
         base = ["claude", "-p", "--model", model, "--effort", effort,
-                "--settings", DISABLE_INSTALLED, "--plugin-dir", str(plugin_dir),
-                "--output-format", "stream-json", "--verbose"]
+                "--settings", DISABLE_INSTALLED, "--output-format", "stream-json", "--verbose"]
+        if plugin_dir:  # The "none" arm runs with no plugin at all.
+            base += ["--plugin-dir", str(plugin_dir)]
         if task["kind"] == "agent":
             base += ["--permission-mode", "auto"]
         else:
