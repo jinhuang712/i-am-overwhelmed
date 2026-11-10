@@ -22,6 +22,19 @@ CLEAN_ENV = {"CLAUDE_CODE_DISABLE_CLAUDE_MDS": "1", "CLAUDE_CODE_MAX_OUTPUT_TOKE
 LIMIT_NOTE = "You've hit your"  # The start of the reply when the account's usage limit is reached.
 
 
+def plugin_loaded(events, plugin_dir):
+    """True when the session's start event lists the plugin of this arm.
+
+    Claude Code skips a --plugin-dir it cannot find and says nothing. On 2026-11-10 a
+    relative path did that to a whole eval: every arm ran with no plugin.
+    """
+    inits = [e for e in events if e.get("type") == "system" and e.get("subtype") == "init"]
+    if not inits or "plugins" not in inits[0]:
+        return True  # No list to check against.
+    want = os.path.realpath(plugin_dir)
+    return any(os.path.realpath(str(p.get("path"))) == want for p in inits[0]["plugins"])
+
+
 def run_one(task, arm, plugin_dir, i, raw, model, effort, budget, cap, limit):
     """Return one of: done, skipped, stopped, failed."""
     run_dir = raw / task["name"] / f"{arm}-{i}"
@@ -55,6 +68,10 @@ def run_one(task, arm, plugin_dir, i, raw, model, effort, budget, cap, limit):
             (run_dir / f"turn-{k}.jsonl").write_text(res.stdout)
             events = [json.loads(line) for line in res.stdout.splitlines() if line.startswith("{")]
             results = [e for e in events if e.get("type") == "result"]
+            if plugin_dir and not plugin_loaded(events, plugin_dir):
+                cost = max(cost, sum(r.get("total_cost_usd") or 0 for r in results))
+                (run_dir / "error.txt").write_text(f"the plugin at {plugin_dir} was not loaded")
+                return status
             if not results or results[-1].get("total_cost_usd") is None:
                 cost = max(cost, cap)  # Unknown spend counts as the whole hold.
                 (run_dir / "error.txt").write_text(res.stderr[-2000:])

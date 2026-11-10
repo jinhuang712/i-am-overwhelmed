@@ -48,6 +48,7 @@ task limits: $22.50 for the runs + $5.10 for judging = $27.60 at most
 - **More money is a higher `--budget`**: new runs join the old ones, and the task is judged again.
 - **One reply is capped at 16,000 output tokens**: `--max-budget-usd` is checked between turns only. On 2026-11-10 a chat task that wanted tools wrote 128,000 tokens of made-up tool calls in one reply, $2.56 a run against a $0.15 limit. A task that makes the model want to look at files must be an `agent` task with a fixture.
 - **On a subscription the costs are list prices, and the runs use up the usage limit**: the full run of 2026-11-10 used up a 5-hour limit, and every judge call failed with "You've hit your 5-hour limit". A run that hits the limit now counts as failed, and the same command resumes it after the reset.
+- **A plugin that did not load fails the run**: Claude Code skips a `--plugin-dir` it cannot find and says nothing. On 2026-11-10 a relative `--out` made every plugin path relative, each run started in its own folder, and a full run of 48 runs went through with no plugin in any arm. The path is absolute now, and a run checks the session's plugin list.
 - **Unknown spend counts in full**: a call that reports no cost counts as its whole cap.
 - **Estimates improve with use**: `--dry-run` reads past ledgers. Until a model has history it uses a rough default and says so.
 - **The limit is as exact as `--max-budget-usd`**: a call can overrun its cap. On 2026-11-07 the worst overrun was about 50%, so keep a margin.

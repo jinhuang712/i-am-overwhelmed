@@ -105,7 +105,8 @@ def main():
         return
 
     name = f"{date.today()}-{shas['old']}-vs-{shas['new']}-{a.model.removeprefix('claude-')}"
-    out = Path(a.out) if a.out else HERE / "results" / name
+    # Absolute, because each run starts in its own folder: a relative --plugin-dir would point nowhere.
+    out = (Path(a.out) if a.out else HERE / "results" / name).resolve()
     raw = out / "raw"
     budget = Budget(a.budget, out / "ledger.jsonl")
     arms = {arm: export_arm(ref, raw / "arms" / arm) for arm, ref in refs.items()}

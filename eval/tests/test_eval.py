@@ -29,6 +29,9 @@ if "json" in sys.argv and "stream-json" not in sys.argv:
     print(json.dumps({"result": "notes\n```csv\n" + columns + "\n" + "\n".join(rows) + "\n```",
                       "total_cost_usd": float(os.environ["STUB_JUDGE_COST"])}))
 else:
+    listed = [] if os.environ.get("STUB_NO_PLUGIN") else [
+        {"path": sys.argv[sys.argv.index("--plugin-dir") + 1]}] if "--plugin-dir" in sys.argv else []
+    print(json.dumps({"type": "system", "subtype": "init", "plugins": listed}))
     print(json.dumps({"type": "result", "result": "- answer", "session_id": "s",
                       "total_cost_usd": float(os.environ["STUB_COST"])}))
 '''
@@ -92,6 +95,23 @@ class EndToEnd(unittest.TestCase):
             self.assertNotEqual(r.returncode, 0)
             self.assertIn("--budget", r.stderr)
             self.assertEqual(calls(tmp), [])
+
+    def test_a_plugin_that_did_not_load_fails_the_run(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            os.environ["STUB_NO_PLUGIN"] = "1"
+            try:
+                evaluate(tmp, 20, "--runs", "1")
+            finally:
+                del os.environ["STUB_NO_PLUGIN"]
+            runs = [e for e in ledger(tmp) if e["kind"] == "run"]
+            self.assertTrue(all(e["status"] == "failed" for e in runs))
+
+    def test_the_plugin_path_is_absolute(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            evaluate(tmp, 20, "--runs", "1")
+            paths = [c[c.index("--plugin-dir") + 1] for c in calls(tmp) if "--plugin-dir" in c]
+            self.assertEqual(len(paths), 2)
+            self.assertTrue(all(os.path.isabs(p) for p in paths))
 
     def test_dry_run_calls_nothing(self):
         with tempfile.TemporaryDirectory() as tmp:
