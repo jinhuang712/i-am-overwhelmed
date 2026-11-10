@@ -105,6 +105,7 @@ Is the thing defined: the goal, the scope, and what done means?
 
 - [YES] Put every command, code, setting or program output in its own code block, even a single short command.
 - [YES] Keep backquotes for very short names and values, such as a tag or a version.
+- [NO] Never put a command inside a sentence.
 - [NO] Never put long chunks in code blocks; keep them to snippets and examples.
 - [WHEN] You changed code or text: show the key change in a `diff` code block.
 

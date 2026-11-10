@@ -47,6 +47,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Eval: the task limits follow the costs measured on Opus 5.5, about 2.5 times the highest. The eval README has the results of the full three-arm run.
 - `CLAUDE.md`: three rules for writing eval tasks: no hints at a rule, one thing a task, and a fixture for a task that makes the agent want to read files.
 - Replies: when the user asks about several things, the reply picks the main one and lists what is left. Before, it "offered the rest", which came out as a question such as "shall I go on?".
+- Structure: never put a command inside a sentence. The `[YES]` line for code blocks did not move the replies in the full eval, so the same point is also said as a `[NO]`.
 - `PHILOSOPHY.md`: "One rule per line" is now "Discrete rules". A rule with a shape is a drawing.
 - Eval: rubric D2 follows the tree, D18 also fails a question about going on with a clear step, and a `fact-zh` chat task asks a plain fact.
 
