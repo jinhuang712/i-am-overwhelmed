@@ -14,7 +14,12 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 DISABLE_INSTALLED = json.dumps({"enabledPlugins": {"i-am-overwhelmed@i-am-overwhelmed": False}})
-CLEAN_ENV = {"CLAUDE_CODE_DISABLE_CLAUDE_MDS": "1"}
+# One reply may not run past this many output tokens. --max-budget-usd is checked
+# between turns only, so a reply that loops would otherwise run to the model's limit:
+# on 2026-11-10 three chat runs wrote 128,000 tokens each, $2.56 a run against a $0.15 cap.
+MAX_OUTPUT_TOKENS = "16000"
+CLEAN_ENV = {"CLAUDE_CODE_DISABLE_CLAUDE_MDS": "1", "CLAUDE_CODE_MAX_OUTPUT_TOKENS": MAX_OUTPUT_TOKENS}
+LIMIT_NOTE = "You've hit your"  # The start of the reply when the account's usage limit is reached.
 
 
 def run_one(task, arm, plugin_dir, i, raw, model, effort, budget, cap, limit):
@@ -55,7 +60,7 @@ def run_one(task, arm, plugin_dir, i, raw, model, effort, budget, cap, limit):
                 (run_dir / "error.txt").write_text(res.stderr[-2000:])
                 return status
             cost += results[-1]["total_cost_usd"]
-            if results[-1].get("is_error"):
+            if results[-1].get("is_error") or str(results[-1].get("result", "")).startswith(LIMIT_NOTE):
                 (run_dir / "error.txt").write_text(str(results[-1].get("subtype")))
                 return status
             session = results[-1]["session_id"]

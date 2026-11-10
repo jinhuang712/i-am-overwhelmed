@@ -37,6 +37,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Replies: the order is define, discuss, do, drawn as a tree. A thing whose goal, scope or end is not defined gets a definition first, and the agent says it. A defined thing with open points is discussed. A defined thing with none is done.
 - Eval: rubric D26 (defined first) and a `vague-zh` agent task, "optimise this project".
 - Eval: every task has a `budget`, the most one run of it may cost. The tool caps each run at its own limit, adds the limits up in `--dry-run`, and keeps $0.30 a task for judging. Before, the budget was split evenly, so a chat run could not spend its share and an agent run was stopped early.
+- Eval: one reply is capped at 16,000 output tokens, and a run that hits the account's usage limit counts as failed. `only-you-know-zh` is an agent task with a `tiny-service` fixture: as a chat task with no tools it made the model write made-up tool calls until the output limit.
 - `PHILOSOPHY.md`: "One rule per line" is now "Discrete rules". A rule with a shape is a drawing.
 - Eval: rubric D2 follows the tree, D18 also fails a question about going on with a clear step, and a `fact-zh` chat task asks a plain fact.
 
