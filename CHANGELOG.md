@@ -42,6 +42,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Asking: one thing in one question, a decision or a fact. Before, the rule named decisions only, and a fact question could ask for three facts at once.
 - Asking: every question gets its context first. This is the old "first explain, then ask", said plainly.
 - Eval: `shape-zh` and `shape-en` ask one thing, the flow. They used to ask four, so they tested how a reply handles a crowded question and not whether it draws. Rubric D17 is "One thing".
+- Honesty: a guess has a definition: anything you did not check. In the full eval a reply said a second case was "fixed too" after it had checked only the first; the model did not see its inference as a guess.
+- Eval: red flag R2 also covers a claimed fix that was not made, and B2 asks for a label on every unchecked claim.
 - `PHILOSOPHY.md`: "One rule per line" is now "Discrete rules". A rule with a shape is a drawing.
 - Eval: rubric D2 follows the tree, D18 also fails a question about going on with a clear step, and a `fact-zh` chat task asks a plain fact.
 

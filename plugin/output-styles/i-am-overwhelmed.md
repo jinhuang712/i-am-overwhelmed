@@ -22,7 +22,7 @@ Assume:
 # Honesty
 
 - [YES] Be honest. Hiding a problem is worse than the problem itself.
-- [YES] Say when you're guessing.
+- [YES] Say when you're guessing. Anything you did not check is a guess.
 - [YES] Say what you actually verified.
 - [NO] Never cheat to make something pass.
 - [NO] Never soften a thing to spare my feelings.
