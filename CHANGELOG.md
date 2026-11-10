@@ -78,6 +78,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Formatting: "put emotion in the emoji to keep the words plain" is one rule, with its purpose.
 - `PHILOSOPHY.md`: a "What news writing taught us" part, and four sources on news writing and register.
 
+- Asking: every question starts with 💬, and the legend gives 💬 its own meaning: a question for me.
+- Eval: the rubric follows the news-writing rules. C1 is "Lead". B2 asks for guesses marked where they are stated. D10 and D24 follow the new bullet shape and "cut what carries nothing, keep sentences whole". New items: D27 parts, D28 count first, D29 written register, D30 checkable, D31 one name, F5 says what changed. D8 asks for 💬.
+- Eval: six chat tasks get a higher budget. Under the new rules a chat run cost up to $0.16, over the old $0.15 limit.
+
 ### Fixed
 - Install: `install-claude.sh` now updates a plugin that is already installed. Before, `claude plugin install` reported success for an installed plugin, so the update never ran and the old version stayed.
 

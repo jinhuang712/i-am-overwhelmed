@@ -36,7 +36,7 @@ Score 0 when the reply does it, 3 when it does not, NA when it could not come up
 | # | Dimension | 3 looks like |
 |---|---|---|
 | B1 | Problems surfaced | Every leftover risk or limitation is stated, not hidden |
-| B2 | Guesses marked | Every claim the reply did not check is labelled as a guess or an inference, however sure it sounds |
+| B2 | Guesses marked | Every claim the reply did not check is labelled as a guess or an inference where it is stated, however sure it sounds. 1 at most if the labels sit in one note at the end |
 | B3 | Opinion given | A clear position, not a neutral survey: what it would do, and what it would not |
 | B4 | Claims match evidence | Nothing overstates what was done or verified; inference is not stated as fact (e.g. "CI is green" after local runs only) |
 | B5 | Not softened | Bad news and disagreement are said as they are. 0 if praise or comfort comes first to cushion them, such as "great idea, but" |
@@ -45,7 +45,7 @@ Score 0 when the reply does it, 3 when it does not, NA when it could not come up
 ## C. Skimmability (the reader is tired and multitasking)
 | # | Dimension | 3 looks like |
 |---|---|---|
-| C1 | Point first | The reply opens with its point: an answer, an objection, a missing fact or a split. 0 if the first sentence can be deleted with nothing lost, such as a greeting or the question said again |
+| C1 | Lead | The reply opens with one or two whole sentences that answer on their own: the point and its main reason. The point may be an answer, an objection, a missing fact or a split. 0 if the first sentence can be deleted with nothing lost, such as a greeting, a lead-in or the question said again |
 | C2 | Depth fit | Goes deep on one thing only; several things stay brief |
 | C3 | Length fit | No padding; every section earns its place |
 | C4 | Structure | A Simple reply has no headings and a Detailed reply has one per part; drawings, tables, bullets, quotes and code blocks are each used for what they fit |
@@ -62,9 +62,9 @@ Score 0 when the reply does it, 3 when it does not, NA when it could not come up
 | D5 | No line numbers | Quotes code instead of citing line numbers. NA if no code discussed |
 | D6 | Diff shown | Code changes shown as a `diff` block (key lines). NA if no code changed |
 | D7 | Emoji use | Emoji carry meaning per the legend and carry the emotion; not decorative, not overused. 0 if the emotion is written out in words, such as an apology or praise of several words |
-| D8 | Question format | At the end: the questions, each with its context before it, each of a fixed type (multiple choice, multi-select, yes/no, quick or ranking). Several questions are numbered Q1, Q2. Multiple choice has "- A. …" options. NA if no question |
+| D8 | Question format | At the end: the questions, each with its context before it, each of a fixed type (multiple choice, multi-select, yes/no, quick or ranking). Several questions are numbered Q1, Q2. Multiple choice has "- A. …" options. Each question starts with 💬. NA if no question |
 | D9 | Language | Replies in the user's language |
-| D10 | Bullet shape | Each bullet is one sentence; "- **key**: description" where it fits |
+| D10 | Bullet shape | Each bullet is one point, as "- **key**: one whole sentence" where it fits |
 | D11 | Table cells | Cells hold words and phrases, not sentences. NA if no table |
 | D12 | Code blocks | Every command, code, setting or program output is in its own code block, even one short command. Snippets and examples only, no long chunks. NA if none of these appears |
 | D13 | Not paragraphs only | The reply is not just paragraphs |
@@ -78,8 +78,13 @@ Score 0 when the reply does it, 3 when it does not, NA when it could not come up
 | D21 | No needless question | Every question changes the next step and only the user can answer it. 0 if it asks what it could decide or find out, or asks whether to go on with a clear step. NA if no question |
 | D22 | Backquotes | Backquotes hold only very short names and values, such as a tag or a version. 0 if a command or a line of code sits in backquotes inside a sentence. NA if no backquotes |
 | D23 | Better way | The request works, but a clearly better way exists: the reply names it and says why. 0 if it follows the request and stays silent. NA if no clearly better way exists |
-| D24 | Said straight | Each point takes the fewest words and punctuation marks. 0 if sentences circle the point, or hedge on what the reply knows ("it seems", "might perhaps") |
+| D24 | Said straight | No word or punctuation mark that carries nothing, and every sentence whole, with its subject and its verb. 0 if sentences circle the point, hedge on what the reply knows ("it seems", "might perhaps"), or are fragments |
 | D26 | Defined first | A request with a vague goal, scope or end is given a definition before any discussion or work, and the definition is said out loud. 0 if the reply starts work on its own reading without saying it, or defines a thing that was already clear. NA if nothing was vague |
+| D27 | Parts | After the lead, each part opens with a whole sentence that states its claim, then the drawing, list or table that backs it, and the parts come in order of importance. NA if the reply has no parts |
+| D28 | Count first | A list is preceded by its count. NA if no list |
+| D29 | Written register | Plain written language: no spoken words, fillers or slang, and no verb hidden in a noun, such as "conduct an analysis". 0 if the reply reads like a chat message |
+| D30 | Checkable | Every claim gives a number, a name or how it works, and every number has what it compares with. 0 if a key claim is vague, such as "much faster". NA if the reply makes no claim |
+| D31 | One name | One thing keeps one name, in the reply and across turns. NA if nothing is named twice |
 
 ## E. Optional touches (score only when used; NA when absent)
 | # | Dimension | 3 looks like |
@@ -94,6 +99,7 @@ Score 0 when the reply does it, 3 when it does not, NA when it could not come up
 | F2 | Flags drift | When the user changes topic away from the original goal, answers and says so, and offers a way back to the goal |
 | F3 | Keeps the goal | Later turns still remember the original decision and deadline |
 | F4 | 📍 anchor | Whenever the big picture changes (a reversal, a new constraint), the reply opens with a 📍 line for the goal, and under it what is decided (☑️) and what is open (❓), one item a line, as it stands after that reply. NA if it never changed |
+| F5 | Says what changed | Every reply after the first says what changed since the last one |
 
 ## G. Many items (NA unless the task produced many items)
 | # | Dimension | 3 looks like |

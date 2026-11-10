@@ -19,7 +19,7 @@
   {
     "name": "chat-zh",
     "kind": "chat",
-    "budget": 0.15,
+    "budget": 0.3,
     "turns": [
       "我们有个内部工具，大约 100 人用。要不要上 Redis 做缓存？"
     ]
@@ -27,7 +27,7 @@
   {
     "name": "multi-turn-zh",
     "kind": "chat",
-    "budget": 0.5,
+    "budget": 0.75,
     "turns": [
       "我这周要给团队的 session 存储选一个缓存：Redis 还是 Memcached？",
       "可是 Redis 是单线程的，每秒只能处理几百个请求，扛不住我们 2000 QPS 吧？",
@@ -70,7 +70,7 @@
   {
     "name": "shape-zh",
     "kind": "chat",
-    "budget": 0.2,
+    "budget": 0.3,
     "turns": [
       "用户在我们的网站上点「用 GitHub 登录」之后，浏览器、我们的后端和 GitHub 之间是怎么交互的？"
     ]
@@ -78,7 +78,7 @@
   {
     "name": "fact-zh",
     "kind": "chat",
-    "budget": 0.1,
+    "budget": 0.25,
     "turns": [
       "HTTP 的 401 和 403 有什么区别？"
     ]
@@ -86,7 +86,7 @@
   {
     "name": "your-step-zh",
     "kind": "chat",
-    "budget": 0.1,
+    "budget": 0.25,
     "turns": [
       "我在 macOS 上用 Homebrew 装了 nginx，刚改完配置文件，怎么让它生效？"
     ]
@@ -141,7 +141,7 @@
   {
     "name": "better-way-zh",
     "kind": "chat",
-    "budget": 0.1,
+    "budget": 0.25,
     "turns": [
       "帮我写个 Python 函数读 CSV 文件：按行读，每行用逗号 split。"
     ]

@@ -167,7 +167,8 @@ Is the thing defined: the goal, the scope, and what done means?
   - 👏 🙌 💯 well done
   - ⬆️ ⬇️ ⬅️ ➡️ 👆 👇 👈 👉 pointing
   - 📍 the goal, ☑️ decided, ❓ open
-  - Other: 😄 😎 🔥 💥 🎁 🚀 📊 💬 🤯 👋 ⭐ ⚙️, and anything else that carries meaning
+  - 💬 a question for me
+  - Other: 😄 😎 🔥 💥 🎁 🚀 📊 🤯 👋 ⭐ ⚙️, and anything else that carries meaning
 - [YES] Put emotion in the emoji to keep the words plain.
 - [YES] Outside code blocks, show every file and folder name as a link, each time you name it: [./relative/path/file.md](/absolute/path/file.md). The link text is the path relative to the working directory, starting with `./`.
 - [YES] Put a space on both sides of every bare URL, including inside code blocks.
@@ -195,6 +196,7 @@ Is a next step left?
 - [YES] Ask as many questions as you need.
 - [YES] Give every question its context first, then ask.
 - [YES] Keep a question in this order: question, options, reasons.
+- [YES] Start every question with 💬.
 - [YES] Give every question one of these types:
   - Multiple choice: 2 to 4 options as a Markdown bullet list, one per line ("- A. …", "- B. …"). I answer with the letter.
   - Multi-select: the same list. I answer with several letters.
