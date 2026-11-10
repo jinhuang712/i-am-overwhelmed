@@ -32,7 +32,16 @@ A report from before 2026-11-10 has no red flag columns, so it shows `red flags:
 
 ## Budget
 
-- **The limit covers everything**: runs and judging. A quarter is kept back for judging.
+Every task in [`tasks.json`](tasks.json) has a `budget`: the most one run of it may cost. A chat run gets $0.15 and a four-turn agent run gets $1.50, so a cheap task cannot starve a costly one. Judging keeps $0.30 for each task. `--dry-run` adds the limits up:
+
+```
+task limits: $22.50 for the runs + $5.10 for judging = $27.60 at most
+```
+
+`--budget` is still the limit for the whole eval. The limits were set on 2026-11-10 for Opus 5.5: the chat figure from a measured $0.055 a run, the agent figures by guess. After a full run, set each to two or three times the measured cost.
+
+
+- **The limit covers everything**: runs and judging. $0.30 a task is kept back for judging, and never more than half the limit.
 - **Every call has a cap**: each `claude -p` gets `--max-budget-usd`, and it holds that cap before it starts.
 - **A stop stays usable**: whole rounds run first, so the arms stay balanced. Finished runs still get judged, and the report says the eval is incomplete.
 - **Resume is the same command**: finished runs are kept. Their cost stays in `ledger.jsonl`, so the limit applies across both sessions.
@@ -115,35 +124,6 @@ Results are in [`results/`](results/), one folder per round. Round 1 also ran `m
 - **Asking**: every reply still ends with a question in both arms. Rounds 1 to 3 showed no clear effect from the asking principles; round 4 scores D17 (one decision) and D18 (needed question) at or above the baseline.
 - **Blind reading by the owner**: 3 prompts, a reply with no plugin against the round-4 rules, Opus 5.5. The round-4 reply was picked 3 times of 3, for being shorter and for asking before assuming. That comparison is hard to blind, since the plugin's replies are easy to recognise.
 - **Cost**: $6.60 for the four rounds.
-
-## To do: a budget per task
-
-Decided on 2026-11-10, not built yet.
-
-Today the tool splits `--budget` evenly over the runs. A chat run cannot spend its share, and an agent run is stopped early. The plan: every task in `tasks.json` names the most one run may cost, and the tool adds the limits up. `--budget` stays as the limit for the whole eval, and `--dry-run` prints the sum.
-
-| Kind | Tasks | Limit per run |
-|---|---|---|
-| Chat, one turn | `chat-en`, `chat-zh`, `shape-zh`, `shape-en`, `fact-zh`, `your-step-zh`, `only-you-know-zh` | $0.15 |
-| Chat, two turns | `detail-zh` | $0.30 |
-| Chat, three turns | `multi-turn-zh` | $0.40 |
-| Chat, six turns | `long-discussion-zh` | $0.80 |
-| Agent, one turn | `design-flaw-zh`, `clear-step-zh` | $0.50 |
-| Agent, one turn, with a bug to fix | `fix-test-zh` | $0.80 |
-| Agent, three turns | `many-items-zh` | $1.00 |
-| Agent, four turns | `session-zh` | $1.50 |
-| Judging | once per task | $0.30 |
-
-```
-one run of every task          $6.85
-x 3 arms x 1 run               $20.55
-+ judging, 15 tasks            $4.50
-total, the upper limit         $25.05
-```
-
-- The limits are for Opus 5.5. The chat figure comes from a measured $0.055 a run. The agent figures are guesses.
-- After the first full run, set each limit to two or three times the measured cost.
-- The first full run is planned as three arms: no plugin, 0.1.14, and the current rules.
 
 ## Caveats
 

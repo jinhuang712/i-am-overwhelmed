@@ -5,8 +5,9 @@ Usage:
   python3 eval/eval.py --old REF --dry-run
   python3 eval/eval.py --old REF --none --budget USD   (adds an arm with no plugin)
 
---budget is the limit for the whole eval, judging included, and it is required
-for a real run. Run the same command again to resume: finished runs are kept, and
+Every task in tasks.json names the most one run of it may cost, and the limits add
+up to the most the eval can cost. --budget is the limit for the whole eval, judging
+included, and it is required for a real run. Run the same command again to resume: finished runs are kept, and
 the money they cost still counts against the limit.
 
 Results go to eval/results/<date>-<old>-vs-<new>-<model>/. raw/ is git-ignored.
@@ -28,8 +29,8 @@ from run import REPO, run_one
 from score import summary as score_summary
 
 HERE = Path(__file__).parent
-JUDGE_SHARE = 0.25  # Part of the budget kept back for judging.
-CAP_FACTOR = 3  # One run may cost this many times its fair share.
+JUDGE_PER_TASK = 0.30  # Kept back for judging, for each task.
+JUDGE_MAX_SHARE = 0.5  # Judging never reserves more than this part of the budget.
 
 
 def short_sha(ref):
@@ -88,16 +89,18 @@ def main():
     n_arms = len(refs) + (1 if a.none else 0)
     cost, known = estimate(tasks, a.model, n_arms, a.runs, past_costs(HERE / "results"))
     calls = len(tasks) * n_arms * a.runs
+    # Every task names the most one run may cost. The limits add up to the most the eval can cost.
+    run_sum = sum(t["budget"] for t in tasks) * n_arms * a.runs
+    judge_sum = JUDGE_PER_TASK * len(tasks)
     print(f"plan: {calls} runs, {len(tasks)} judge calls, {a.model}")
+    print(f"task limits: ${run_sum:.2f} for the runs + ${judge_sum:.2f} for judging = ${run_sum + judge_sum:.2f} at most")
     print(f"estimate: ${cost:.2f} for the runs, judging extra ({'from past runs' if known else 'rough default, no history'})")
     if a.budget is not None:
-        run_pool = a.budget * (1 - JUDGE_SHARE)
-        run_cap = run_pool / calls * (CAP_FACTOR if calls > CAP_FACTOR else 1)
-        print(f"limit: ${a.budget:.2f}, ${a.budget * JUDGE_SHARE:.2f} of it kept for judging, ${run_cap:.2f} cap per run")
-        if cost > run_pool:
-            print("warning: the estimate is above the limit, so some runs will be stopped")
-        if run_cap < 1.5 * cost / calls:
-            print("warning: the cap per run is tight, so runs may fail at the cap")
+        judge_pool = min(judge_sum, a.budget * JUDGE_MAX_SHARE)
+        run_pool = a.budget - judge_pool
+        print(f"limit: ${a.budget:.2f}, ${judge_pool:.2f} of it kept for judging")
+        if run_sum > run_pool:
+            print("warning: the task limits add up to more than the limit, so late runs may be stopped")
     if a.dry_run:
         return
 
@@ -114,7 +117,7 @@ def main():
 
     def job(j):
         t, arm, plugin, i = j
-        return run_one(t, arm, plugin, i, raw, a.model, a.effort, budget, run_cap, run_pool)
+        return run_one(t, arm, plugin, i, raw, a.model, a.effort, budget, min(t["budget"], run_pool), run_pool)
 
     with ThreadPoolExecutor(a.j) as ex:
         statuses = list(ex.map(job, jobs))
