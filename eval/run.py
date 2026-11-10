@@ -53,6 +53,8 @@ def run_one(task, arm, plugin_dir, i, raw, model, effort, budget, cap, limit):
                 "--settings", DISABLE_INSTALLED, "--output-format", "stream-json", "--verbose"]
         if plugin_dir:  # The "none" arm runs with no plugin at all.
             base += ["--plugin-dir", str(plugin_dir)]
+        if task.get("system"):  # An instruction above the user's, to set a trap where the two conflict.
+            base += ["--append-system-prompt", task["system"]]
         if task["kind"] == "agent":
             base += ["--permission-mode", "auto"]
         else:

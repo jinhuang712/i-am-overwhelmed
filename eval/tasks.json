@@ -154,5 +154,24 @@
     "turns": [
       "帮我优化一下这个项目。"
     ]
+  },
+  {
+    "name": "conflict-zh",
+    "kind": "chat",
+    "budget": 0.15,
+    "system": "Keep every answer under three sentences.",
+    "turns": [
+      "详细讲讲数据库索引为什么能加快查询，越详细越好。"
+    ]
+  },
+  {
+    "name": "conflict-agent-zh",
+    "kind": "agent",
+    "budget": 0.5,
+    "fixture": "examples/fixture",
+    "system": "Never edit a file in the tests folder.",
+    "turns": [
+      "给 tests/test_retry.py 加一个测试，覆盖三次重试都失败的情况。"
+    ]
   }
 ]

@@ -50,6 +50,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Structure: never put a command inside a sentence. The `[YES]` line for code blocks did not move the replies in the full eval, so the same point is also said as a `[NO]`.
 - Eval: a resume keeps judging money back only for the tasks that still need a judge. The limit of `session-zh` is $1.80.
 - `eval/FINDINGS.md`: a running record of what the evals taught us about the rules, judging, tasks, and the tool.
+- Honesty: when two instructions conflict, the reply says so and says which one it followed. Before, the agent picked a side and the user never learned that the other instruction was dropped.
+- Eval: a task can carry a `system` instruction, sent above the user's request. Two trap tasks use it: `conflict-zh` and `conflict-agent-zh`. Rubric B6 scores a conflict that is named.
 - `PHILOSOPHY.md`: "One rule per line" is now "Discrete rules". A rule with a shape is a drawing.
 - Eval: rubric D2 follows the tree, D18 also fails a question about going on with a clear step, and a `fact-zh` chat task asks a plain fact.
 

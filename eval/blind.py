@@ -39,7 +39,7 @@ def render(run_dir):
     return "\n\n".join(parts).replace(str(run_dir / "work"), "/WORKDIR").replace(str(run_dir), "/RUN")
 
 
-def blind_task(root, turns, seed=None):
+def blind_task(root, turns, seed=None, system=None):
     runs = sorted(d for d in root.iterdir() if (d / "done.json").exists())
     blind = root / "blind"
     mapping_file = root / "mapping.txt"
@@ -55,6 +55,8 @@ def blind_task(root, turns, seed=None):
         label = f"R{k:02d}"
         mapping.append(f"{label} {run.name}")
         header = "\n".join(f"USER TURN {n}: {t}" for n, t in enumerate(turns, 1))
+        if system:  # The judge must see the instruction the user's request conflicts with.
+            header = f"SYSTEM INSTRUCTION: {system}\n" + header
         (blind / f"{label}.md").write_text(header + "\n\n" + render(run))
     (root / "mapping.txt").write_text("\n".join(mapping) + "\n")
     return len(runs)
@@ -67,7 +69,7 @@ def main():
     p.add_argument("--seed", type=int, help="fixed seed for a reproducible shuffle; random by default")
     a = p.parse_args()
     tasks = {t["name"]: t for t in json.loads((Path(__file__).parent / "tasks.json").read_text())}
-    print(blind_task(Path(a.raw) / a.task, tasks[a.task]["turns"], a.seed), "samples")
+    print(blind_task(Path(a.raw) / a.task, tasks[a.task]["turns"], a.seed, tasks[a.task].get("system")), "samples")
 
 
 if __name__ == "__main__":

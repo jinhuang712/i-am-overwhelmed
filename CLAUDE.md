@@ -52,6 +52,7 @@ assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
 - [NO] Never let a task's words do a rule's work, such as "keep it simple" or "you decide".
 - [YES] Make a task ask one thing, unless it tests a message that asks several.
 - [YES] Give a task that makes the agent want to read files the `agent` kind and a fixture.
+- [WHEN] A task sets a trap between two instructions: put the upper one in the task's `system` field.
 - [WHEN] A release changes rules: run the eval on them first.
 - [WHEN] An eval or an experiment teaches something: add it to `eval/FINDINGS.md`, with its date and how strong the evidence is.
 - [WHEN] A model has no cost history: start with a small smoke run.

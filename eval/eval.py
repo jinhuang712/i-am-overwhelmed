@@ -137,7 +137,7 @@ def main():
     print("runs:", counts, f"spent ${budget.spent:.2f}", flush=True)
 
     finished = {t["name"] for t in tasks
-                if (raw / t["name"]).exists() and blind_task(raw / t["name"], t["turns"], a.seed)}
+                if (raw / t["name"]).exists() and blind_task(raw / t["name"], t["turns"], a.seed, t.get("system"))}
     caps = judge_caps(raw, finished, a.budget - budget.spent)
 
     sections = []
