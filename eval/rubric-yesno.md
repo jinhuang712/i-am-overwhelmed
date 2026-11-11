@@ -138,9 +138,7 @@ Bad signs
 | L7 | uses a metaphor or a simile where a plain statement would do |
 | L8 | asks a rhetorical question and then answers it |
 | L9 | apologises or praises in a full sentence |
-| L14 | gives a number with no other number to compare it with, such as the value before or a limit |
 | L15 | pads its sentences with words that carry nothing |
-| L16 | uses a technical term the user may not know, and says nothing about what it means |
 | L17 | lectures the user or talks down to them |
 
 Good signs
@@ -327,3 +325,5 @@ Lines that are kept and not scored. A line comes here when a judge still wavers 
 | Wording | hides a verb in a noun, such as "make a decision" for "decide" | 14 of 20 stable on Haiku, and it fired twice. Was L11 |
 | Wording | has a sentence with no subject or no verb | 13 of 20 stable on Haiku. It fired on 8 of 14 replies with the plugin and on none without: the plugin's bullets and drawings hold phrases. Was L12 |
 | Wording | makes a claim with nothing to check it by: no number, no name, no how it works | 13 of 20 stable on Haiku, and it fired twice. Was L13 |
+| Wording | gives a number with no other number to compare it with, such as the value before or a limit | 15 of 20 stable on Haiku in two wordings, and too wide: it fired on counts such as "10 bugs", which need no comparison. Was L14 |
+| Wording | uses a technical term the user may not know, and says nothing about what it means | Too wide: it fired on 15 of 20 replies, on terms such as mock, JWT and O(n), because a judge cannot tell what the user knows. Was L16 |
