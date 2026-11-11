@@ -28,7 +28,7 @@ from budget import Budget, estimate, past_costs
 from checks import summary as check_summary
 from judge import judge_task
 from run import REPO, run_one
-from yesno import RUBRIC as YESNO_RUBRIC, judge_task as judge_yesno, read_decks
+from yesno import FLAG_PASSES, RUBRIC as YESNO_RUBRIC, judge_task as judge_yesno, read_decks
 from score import summary as score_summary
 from score import summary_yesno as yesno_summary
 
@@ -201,7 +201,8 @@ def main():
             text = f"Judge: {verdict}\n\nChecks:\n" + text
         sections.append(f"## {t['name']}\n\n```\n{text}\n```")
 
-    judge_note = (f"{a.cheap_judge} x{a.passes} on rubric-yesno.md, {a.judge_model} on its 🔎 lines"
+    judge_note = (f"{a.cheap_judge} x{a.passes} on rubric-yesno.md, {a.judge_model} on its 🔎 lines, "
+                  f"x{FLAG_PASSES} where it raises a red flag"
                   if a.rubric == "yesno" else a.judge_model)
     head = (f"# Eval {name}\n\n- old: `{a.old}` ({shas['old']})\n- new: `{a.new}` ({shas['new']})\n"
             f"{'- none: no plugin' + chr(10) if a.none else ''}"

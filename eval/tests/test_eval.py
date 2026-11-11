@@ -34,6 +34,14 @@ if "json" in sys.argv and "stream-json" not in sys.argv:
     columns = re.search(r"^Columns: (.*)$", prompt, re.M).group(1)
     value = ",N" if "Values: Y, N or NA" in prompt else ",2"
     rows = [l + value * (columns.count(",")) for l in labels]
+    flag = os.environ.get("STUB_FLAG")  # Say Y on this line in the first STUB_FLAG_TIMES calls that hold it.
+    if flag and flag in columns.split(","):
+        seen = os.environ["STUB_LOG"] + ".flag"
+        n = int(open(seen).read()) if os.path.exists(seen) else 0
+        open(seen, "w").write(str(n + 1))
+        if n < int(os.environ.get("STUB_FLAG_TIMES", "999")):
+            cols = columns.split(",")[1:]
+            rows = [l + "".join(",Y" if c == flag else value for c in cols) for l in labels]
     print(json.dumps({"result": "notes\n```csv\n" + columns + "\n" + "\n".join(rows) + "\n```",
                       "total_cost_usd": float(os.environ["STUB_JUDGE_COST"])}))
 else:
@@ -345,6 +353,32 @@ class YesNo(unittest.TestCase):
             before = len(calls(tmp))
             evaluate(tmp, 60, "--rubric", "yesno", "--runs", "1", cost="0.01", judge_cost="0.01")
             self.assertEqual(len(calls(tmp)), before)
+
+
+    def strong_flag_run(self, times):
+        """Return (strong judge calls, answers on H3) for a yes or no run where the strong judge says Y on H3."""
+        with tempfile.TemporaryDirectory() as tmp, \
+                mock.patch.dict(os.environ, {"STUB_FLAG": "H3", "STUB_FLAG_TIMES": str(times)}):
+            r = evaluate(tmp, 60, "--rubric", "yesno", "--runs", "1", cost="0.01", judge_cost="0.01")
+            self.assertEqual(r.returncode, 0, r.stderr)
+            strong = [c for c in calls(tmp) if "json" in c and c[c.index("--model") + 1] == "claude-opus-5-5"]
+            csv = (Path(tmp) / "out" / "chat-en-yesno.csv").read_text().splitlines()
+            column = csv[0].split(",").index("H3")
+            return len(strong), [row.split(",")[column] for row in csv[1:]]
+
+    def test_a_red_flag_the_strong_judge_raises_once_does_not_count(self):
+        count, answers = self.strong_flag_run(times=1)
+        self.assertEqual(count, yesno.FLAG_PASSES)
+        self.assertEqual(answers, ["N", "N"])
+
+    def test_a_red_flag_the_strong_judge_keeps_raising_counts(self):
+        count, answers = self.strong_flag_run(times=99)
+        self.assertEqual(count, yesno.FLAG_PASSES)
+        self.assertEqual(answers, ["Y", "Y"])
+
+    def test_no_red_flag_no_more_strong_passes(self):
+        count, _ = self.strong_flag_run(times=0)
+        self.assertEqual(count, 1)
 
 
 class Parsing(unittest.TestCase):

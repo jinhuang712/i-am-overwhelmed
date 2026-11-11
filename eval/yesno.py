@@ -23,6 +23,7 @@ DECK_MAX = 14  # Lines one call may hold. 14 was stable in the experiment of 202
 PER_CALL = 2  # Samples in one call.
 CHEAP_CAP = 0.06  # USD one call to the cheap judge may cost.
 STRONG_CAP = 0.40  # USD one call to the strong judge may cost.
+FLAG_PASSES = 3  # Passes of the strong judge behind a red flag it raised. One red flag fails a reply.
 STRONG_DECK = "Checked against the transcript"
 CSV_BLOCK = re.compile(r"```csv\n(.*?)```", re.S)
 ROW = re.compile(r"^\| ([A-Z]\d+) \| (.*) \|$")
@@ -167,11 +168,21 @@ def judge_task(root, cheap, strong, passes, strong_passes, budget, jobs=8):
     decks = read_decks(RUBRIC.read_text())
     cheap_decks, strong_decks = for_judges(decks)
     batches = [samples[i:i + PER_CALL] for i in range(0, len(samples), PER_CALL)]
-    calls = [(d, b, k, cheap, CHEAP_CAP) for d in cheap_decks for b in batches for k in range(passes)]
-    calls += [(d, b, k, strong, STRONG_CAP) for d in strong_decks for b in batches for k in range(strong_passes)]
+    cheap_calls = [(d, b, k, cheap, CHEAP_CAP) for d in cheap_decks for b in batches for k in range(passes)]
+    strong_calls = [(d, b, k, strong, STRONG_CAP) for d in strong_decks for b in batches for k in range(strong_passes)]
+    flags = {line["id"] for d in strong_decks for line in d["lines"] if line["flag"]}
     with ThreadPoolExecutor(jobs) as ex:
-        results = list(ex.map(lambda c: ask(c[0], c[1], c[2], c[3], c[4], cache, budget), calls))
-    statuses = {status for status, _ in results}
+        def ask_all(calls):
+            return list(ex.map(lambda c: ask(c[0], c[1], c[2], c[3], c[4], cache, budget), calls))
+        results = ask_all(cheap_calls + strong_calls)
+        # Where the strong judge raised a red flag, it answers again, and its red flags count by majority.
+        raised = {}
+        for (d, b, *_), (_, answers) in zip(strong_calls, results[len(cheap_calls):]):
+            if any(row.get(i) == "Y" for row in (answers or {}).values() for i in flags):
+                raised[(d["name"], tuple(label for label, _ in b))] = (d, b)
+        again = ask_all([(d, b, k, strong, STRONG_CAP) for d, b in raised.values()
+                         for k in range(strong_passes, FLAG_PASSES)])
+    statuses = {status for status, _ in results + again}
     if "stopped" in statuses:
         return "stopped"
     if "failed" in statuses or "planned" in statuses:
@@ -181,6 +192,10 @@ def judge_task(root, cheap, strong, passes, strong_passes, budget, jobs=8):
         for label, row in (answers or {}).items():
             for line_id, v in row.items():
                 votes[(label, line_id)].append(v)
+    for _, answers in again:  # Only the red flags: the other lines keep the passes every batch had.
+        for label, row in (answers or {}).items():
+            for line_id in flags & row.keys():
+                votes[(label, line_id)].append(row[line_id])
     for d in decks:  # The lines a script answers: exact, and free.
         for line in d["lines"]:
             if line["script"]:

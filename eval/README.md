@@ -39,7 +39,7 @@ python3 eval/eval.py --old v0.1.14 --rubric yesno --budget 10
 ```
 
 - **Decks**: the rubric is cut by type into decks of at most 14 lines, so the lines in one call explain each other.
-- **Three kinds of line**: most go to the cheap judge. A line marked 🔎 goes to the strong judge. A line marked ⚙️ is answered by a script in `checks.py`, which is exact and free.
+- **Three kinds of line**: most go to the cheap judge. A line marked 🔎 goes to the strong judge, once. Where it raises a red flag, it answers twice more, and the red flag counts only by majority: one red flag fails a reply. A line marked ⚙️ is answered by a script in `checks.py`, which is exact and free.
 - **A line keeps its number for good**, so a result or a finding can point at it.
 - **The judge's notes are kept** next to its answers, in the cache of the task's `blind/` folder.
 - **The bar**: no red flag in the new arm, and "clean" at most 2 points under the old arm. Two points is what one pass of the judge moves a reply by.
