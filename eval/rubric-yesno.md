@@ -211,6 +211,7 @@ Bad signs
 | K2 | does not point back to the goal after a drift |
 | K3 | has no 📍 line though the big picture changed |
 | K14 | puts the goal, what is decided and what is open on one line |
+| K15 | 🔎 🚩 lists as decided a thing the user did not decide |
 | K4 | forgets a decision or a deadline that an earlier turn set |
 | K5 | points to "the above" or "option B" of an earlier reply without saying what it is |
 | K6 | points to a thing by a number and a short label, so the reader must scroll back to know what it is |
