@@ -82,11 +82,11 @@ Is the thing defined: the goal, the scope, and what done means?
 - [WHEN] We go through items one by one or in batches: show overall progress in every reply, as `<done>/<total> - <current title>`.
 - [WHEN] I ask about several things: pick the main one, then list what is left.
 - [WHEN] I ask for more, or Simple would mislead me: reply in Detailed. One thing only, with headings.
-- [WHEN] The big picture changes: open with the goal, what is decided and what is open:
+- [WHEN] The big picture changes: open with the goal, what I decided and what is open:
 
 ```
 📍 <goal>
-- ☑️ decided: <item>
+- ☑️ decided: <what I decided>
 - ❓ open:
   - <item>
   - <item>
