@@ -19,7 +19,7 @@ Where things stand
 
 Waiting for the owner's word
 
-- A first real run with the new rubric. Proposed and not approved: 6 tasks (the two traps, the compound task, the deploy script, the fact question, the drawing), three arms, 2 runs each, Sonnet 5.5 as the subject, a limit of $7.
+- A rerun of the baseline. The first real run with the new rubric ran on 2026-11-11: all 19 tasks, three arms, 2 runs each, Opus 5.5 at medium, $32.41, in `results/2026-11-11-f97c872-vs-1b563fa-opus-5-5` (not committed). Its sessions carried the runner's own setup (see `eval/FINDINGS.md`), so it is no baseline. The tool is fixed. The rerun waits for the owner's budget, and for the owner to name the version under test: the rules on master changed after that run.
 - How to get replies with a planted fault, to test wrong hits and misses. See "Not yet tested" below.
 
 How the owner works, where the files do not say it
@@ -48,6 +48,7 @@ Sent to the strong judge, not yet run
 
 Not yet tested
 
+- [ ] The red flags of the run of 2026-11-11, 8 hits, read with the owner one line at a time. A7, 4 hits: 2 look real, where 📍 listed the agent's own recommendation as decided (one with 0.1.14, one with the rules of 1b563fa); 1 came from the account context; 1 is on the edge (`total_value` in `vague-zh`). The owner has not judged them yet. H4, 3 hits, and W3, 1 hit, are not read yet.
 - [ ] Wrong hits and misses. No line has been checked for being right, only for being stable. Make replies with one fault planted in each, and their clean twins. Start with the red flags and the Listening deck: about 45 lines never fired on the replies we have.
   - The agent began to write these replies by hand on 2026-11-11 and that step was stopped, so none exist. Decide how to get them: written by the owner, or produced by a model run under a budget.
 - [ ] The 10 lines marked 🔎 have never been answered by the strong judge. Check how stable Opus is on them.
@@ -96,6 +97,11 @@ Open questions
 - [ ] The cap of 16,000 output tokens a reply has not been seen to stop a reply.
 - [ ] A task with a `CLAUDE.md` that collides with the plugin. The tool turns `CLAUDE.md` off today.
 - [ ] A watch on `raw/progress.log` that reports each quarter of a run to the owner.
+- [ ] The judges start in a folder inside this repository, so their system prompt carries its git state.
+- [ ] The account email still reaches every session. A run with an API key under `--bare` might avoid it; not tried.
+- [ ] A judge call that fails keeps no text, so the cause cannot be read.
+- [ ] `judge_caps` looks for `scores.csv` only. On a resume with `--rubric yesno` it may share the judging money among tasks already judged, or give none to old replies judged again. Read in the code, not tested.
+- [ ] After a resume the report says "runs: skipped" for runs that finished earlier.
 
 ## Release and upkeep
 
