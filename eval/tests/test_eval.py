@@ -6,6 +6,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parents[1]
@@ -34,6 +35,11 @@ if "json" in sys.argv and "stream-json" not in sys.argv:
 else:
     listed = [] if os.environ.get("STUB_NO_PLUGIN") else [
         {"path": sys.argv[sys.argv.index("--plugin-dir") + 1]}] if "--plugin-dir" in sys.argv else []
+    listed += [{"name": "telemetry", "path": "builtin"}]
+    if os.environ.get("CLAUDE_CODE_PLUGIN_DIRS"):  # A terminal's plugin, loaded the way Claude Code does.
+        listed += [{"name": "calm", "path": os.environ["CLAUDE_CODE_PLUGIN_DIRS"]}]
+    if os.environ.get("STUB_FOREIGN"):
+        listed += [{"name": "wt", "path": "/plugins/wt"}]
     print(json.dumps({"type": "system", "subtype": "init", "plugins": listed}))
     print(json.dumps({"type": "result", "result": "- answer", "session_id": "s",
                       "total_cost_usd": float(os.environ["STUB_COST"])}))
@@ -108,6 +114,37 @@ class EndToEnd(unittest.TestCase):
                 del os.environ["STUB_NO_PLUGIN"]
             runs = [e for e in ledger(tmp) if e["kind"] == "run"]
             self.assertTrue(all(e["status"] == "failed" for e in runs))
+
+    def test_every_session_starts_without_user_settings(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            evaluate(tmp, 20, "--runs", "1")
+            sessions = calls(tmp)
+            self.assertTrue(any("stream-json" in c for c in sessions))  # runs
+            self.assertTrue(any("stream-json" not in c for c in sessions))  # judges
+            for c in sessions:
+                self.assertEqual(c[c.index("--setting-sources") + 1], "project,local")
+                self.assertTrue(json.loads(c[c.index("--settings") + 1])["disableAllHooks"])
+
+    def test_a_plugin_from_outside_the_eval_fails_the_run(self):
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.dict(os.environ, {"STUB_FOREIGN": "1"}):
+            evaluate(tmp, 20, "--runs", "1")
+            runs = [e for e in ledger(tmp) if e["kind"] == "run"]
+            self.assertTrue(runs and all(e["status"] == "failed" for e in runs))
+            errors = list((Path(tmp) / "out" / "raw").glob("*/*/error.txt"))
+            self.assertTrue(errors and all("wt" in e.read_text() for e in errors))
+
+    def test_the_terminals_plugin_stays_out(self):
+        with tempfile.TemporaryDirectory() as tmp, \
+                mock.patch.dict(os.environ, {"CLAUDE_CODE_PLUGIN_DIRS": "/Calm/agents/claude-code"}):
+            evaluate(tmp, 20, "--runs", "1")
+            runs = [e for e in ledger(tmp) if e["kind"] == "run"]
+            self.assertTrue(runs and all(e["status"] == "done" for e in runs))
+
+    def test_a_chat_run_works_in_a_repository_of_its_own(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            evaluate(tmp, 20, "--runs", "1")
+            works = list((Path(tmp) / "out" / "raw" / "chat-en").glob("*/work"))
+            self.assertTrue(works and all((w / ".git").is_dir() for w in works))
 
     def test_the_plugin_path_is_absolute(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -10,14 +10,13 @@ Every call is cached in the task's blind/ folder: a resume asks only what is mis
 import collections
 import hashlib
 import json
-import os
 import re
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from checks import scripted_answer
-from run import CLEAN_ENV, DISABLE_INSTALLED
+from run import ISOLATE, clean_env
 
 RUBRIC = Path(__file__).parent / "rubric-yesno.md"
 DECK_MAX = 14  # Lines one call may hold. 14 was stable in the experiment of 2026-11-10.
@@ -127,9 +126,9 @@ def ask(deck, samples, k, model, cap, cache, budget):
         return "stopped", None
     cost, answers = cap, None  # Unknown spend counts as the whole hold.
     try:
-        cmd = ["claude", "-p", "--model", model, "--effort", "medium", "--settings", DISABLE_INSTALLED,
+        cmd = ["claude", "-p", "--model", model, "--effort", "medium", *ISOLATE,
                "--tools", "", "--output-format", "json", "--max-budget-usd", f"{cap:.2f}"]
-        res = subprocess.run(cmd, cwd=cache, env={**os.environ, **CLEAN_ENV}, input=text,
+        res = subprocess.run(cmd, cwd=cache, env=clean_env(), input=text,
                              capture_output=True, text=True)
         try:
             data = json.loads(res.stdout)

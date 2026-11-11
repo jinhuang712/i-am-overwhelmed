@@ -96,6 +96,7 @@ task limits: $27.75 for the runs + $5.10 for judging = $32.85 at most
 - **One reply is capped at 16,000 output tokens**: `--max-budget-usd` is checked between turns only. On 2026-11-10 a chat task that wanted tools wrote 128,000 tokens of made-up tool calls in one reply, $2.56 a run against a $0.15 limit. A task that makes the model want to look at files must be an `agent` task with a fixture.
 - **On a subscription the costs are list prices, and the runs use up the usage limit**: the full run of 2026-11-10 used up a 5-hour limit, and every judge call failed with "You've hit your 5-hour limit". A run that hits the limit now counts as failed, and the same command resumes it after the reset.
 - **A plugin that did not load fails the run**: Claude Code skips a `--plugin-dir` it cannot find and says nothing. On 2026-11-10 a relative `--out` made every plugin path relative, each run started in its own folder, and a full run of 48 runs went through with no plugin in any arm. The path is absolute now, and a run checks the session's plugin list.
+- **A plugin from outside the eval fails the run**: on 2026-11-11 the runs carried the runner's own setup, with its plugins, skills and their hooks. One hook's note reached 66 of 114 runs. Sessions now start with user settings off (`--setting-sources project,local`), hooks off, no plugin from the terminal's `CLAUDE_CODE_PLUGIN_DIRS`, and every work folder a git repository of its own. A run whose session lists a plugin other than its arm's and Claude Code's own fails.
 - **Unknown spend counts in full**: a call that reports no cost counts as its whole cap.
 - **Estimates improve with use**: `--dry-run` reads past ledgers. Until a model has history it uses a rough default and says so.
 - **The limit is as exact as `--max-budget-usd`**: a call can overrun its cap. On 2026-11-07 the worst overrun was about 50%, so keep a margin.
@@ -117,7 +118,7 @@ task limits: $27.75 for the runs + $5.10 for judging = $32.85 at most
 | [`fixtures/`](fixtures/) | `many-bugs/`, `free-text-due/`, and their answer keys, kept outside them |
 | [`tests/`](tests/) | Tests with a stub `claude`, so they cost nothing: `python3 -m unittest discover eval/tests` |
 
-Every run has `CLAUDE.md` files off and the installed plugin disabled, so the only difference between arms is the plugin directory. Agent tasks run in auto mode, so the permission classifier reviews their calls.
+Every run has `CLAUDE.md` files, user settings and hooks off, and the installed plugin disabled, so the only difference between arms is the plugin directory. The judges start the same way. Agent tasks run in auto mode, so the permission classifier reviews their calls.
 
 ## Results, 2026-11-03: 0.1.8 vs the tagged rewrite
 
@@ -201,4 +202,4 @@ An earlier run the same day compared 0.1.14 with `016bd62` on four tasks, two ru
 
 - The judge is a model and the rubric is written from the style's own rules, so it favours whichever version states those rules more directly. Read the quotes, not just the totals.
 - 5 runs per arm are samples, not measurements.
-- `CLAUDE_CODE_DISABLE_CLAUDE_MDS=1` turns off `CLAUDE.md` files, but Claude Code still adds account context such as your email to every session. One reply named the runner's company although no prompt mentioned it. It affects all arms equally.
+- `CLAUDE_CODE_DISABLE_CLAUDE_MDS=1` turns off `CLAUDE.md` files, but Claude Code still adds account context such as your email to every session. No switch was found for it: `CLAUDE_CODE_USER_EMAIL` does not replace it (2026-11-11). Replies have named the runner's company although no prompt mentioned it. It affects all arms equally.

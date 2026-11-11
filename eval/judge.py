@@ -4,12 +4,11 @@ The judge sees only rubric.md and the blind samples. It writes its notes, then o
 fenced csv block: blind/scores.csv. Notes go to blind/judge.md.
 """
 import json
-import os
 import re
 import subprocess
 from pathlib import Path
 
-from run import CLEAN_ENV, DISABLE_INSTALLED
+from run import ISOLATE, clean_env
 
 RUBRIC = Path(__file__).parent / "rubric.md"
 CSV_BLOCK = re.compile(r"```csv\n(.*?)```", re.S)
@@ -60,9 +59,9 @@ def judge_task(root, model, effort, budget, cap):
     cost, status = cap, "failed"  # Unknown spend counts as the whole hold.
     try:
         cmd = ["claude", "-p", "--model", model, "--effort", effort,
-               "--settings", DISABLE_INSTALLED, "--tools", "",
+               *ISOLATE, "--tools", "",
                "--output-format", "json", "--max-budget-usd", f"{cap:.2f}"]
-        res = subprocess.run(cmd, cwd=blind, env={**os.environ, **CLEAN_ENV},
+        res = subprocess.run(cmd, cwd=blind, env=clean_env(),
                              input=build_prompt(root), capture_output=True, text=True)
         try:
             data = json.loads(res.stdout)

@@ -1,8 +1,9 @@
 """Run one task against one version of the plugin, under the budget.
 
-Each run is a fresh `claude -p` session with CLAUDE.md files off and the installed
-copy of the plugin disabled, so the only difference between arms is the plugin
-directory. Multi-turn tasks continue the same session with --resume.
+Each run is a fresh `claude -p` session that starts with only what the eval gives
+it: CLAUDE.md files off, user settings off (with them the owner's plugins, hooks and
+skills), the terminal's plugins off, and the installed copy of the plugin disabled. So
+the only difference between arms is the plugin directory. Multi-turn tasks continue the same session with --resume.
 
 Output: RAW/<task>/<arm>-<i>/turn-<k>.jsonl, done.json when the run finished.
 """
@@ -13,13 +14,25 @@ import subprocess
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-DISABLE_INSTALLED = json.dumps({"enabledPlugins": {"i-am-overwhelmed@i-am-overwhelmed": False}})
+# Settings for every session, the judges' too. User settings bring the owner's plugins,
+# hooks and skills. On 2026-11-11 a hook from one of them spoke in 66 of 114 runs, two
+# replies answered it, and two named the owner's company from a skill's name.
+SETTINGS = json.dumps({"enabledPlugins": {"i-am-overwhelmed@i-am-overwhelmed": False},
+                       "disableAllHooks": True, "autoMemoryEnabled": False})
+ISOLATE = ["--settings", SETTINGS, "--setting-sources", "project,local"]
 # One reply may not run past this many output tokens. --max-budget-usd is checked
 # between turns only, so a reply that loops would otherwise run to the model's limit:
 # on 2026-11-10 three chat runs wrote 128,000 tokens each, $2.56 a run against a $0.15 cap.
 MAX_OUTPUT_TOKENS = "16000"
 CLEAN_ENV = {"CLAUDE_CODE_DISABLE_CLAUDE_MDS": "1", "CLAUDE_CODE_MAX_OUTPUT_TOKENS": MAX_OUTPUT_TOKENS}
 LIMIT_NOTE = "You've hit your"  # The start of the reply when the account's usage limit is reached.
+
+
+def clean_env():
+    """The environment for a session: the eval's variables, and no plugin the terminal adds."""
+    env = {**os.environ, **CLEAN_ENV}
+    env.pop("CLAUDE_CODE_PLUGIN_DIRS", None)  # Calm, for one, loads its own plugin through it.
+    return env
 
 
 def fence_off(work):
@@ -47,6 +60,16 @@ def plugin_loaded(events, plugin_dir):
     return any(os.path.realpath(str(p.get("path"))) == want for p in inits[0]["plugins"])
 
 
+def foreign_plugins(events, plugin_dir):
+    """Names of the plugins in the session that are neither this arm's nor Claude Code's own."""
+    inits = [e for e in events if e.get("type") == "system" and e.get("subtype") == "init"]
+    if not inits:
+        return []
+    own = os.path.realpath(plugin_dir) if plugin_dir else None
+    return [p.get("name") for p in inits[0].get("plugins", [])
+            if p.get("path") != "builtin" and os.path.realpath(str(p.get("path"))) != own]
+
+
 def run_one(task, arm, plugin_dir, i, raw, model, effort, budget, cap, limit):
     """Return one of: done, skipped, stopped, failed."""
     run_dir = raw / task["name"] / f"{arm}-{i}"
@@ -61,9 +84,9 @@ def run_one(task, arm, plugin_dir, i, raw, model, effort, budget, cap, limit):
         work.mkdir(parents=True)
         if task.get("fixture"):
             shutil.copytree(REPO / task["fixture"], work, dirs_exist_ok=True)
-            fence_off(work)
-        base = ["claude", "-p", "--model", model, "--effort", effort,
-                "--settings", DISABLE_INSTALLED, "--output-format", "stream-json", "--verbose"]
+        fence_off(work)  # A chat run too: else it starts inside this repository and sees its git state.
+        base = ["claude", "-p", "--model", model, "--effort", effort, *ISOLATE,
+                "--output-format", "stream-json", "--verbose"]
         if plugin_dir:  # The "none" arm runs with no plugin at all.
             base += ["--plugin-dir", str(plugin_dir)]
         if task.get("system"):  # An instruction above the user's, to set a trap where the two conflict.
@@ -78,7 +101,7 @@ def run_one(task, arm, plugin_dir, i, raw, model, effort, budget, cap, limit):
             cmd = base + ["--max-budget-usd", f"{left:.2f}"]
             cmd += ["--resume", session] if session else []
             # The prompt goes in on stdin: --tools is variadic and would swallow it.
-            res = subprocess.run(cmd, cwd=work, env={**os.environ, **CLEAN_ENV},
+            res = subprocess.run(cmd, cwd=work, env=clean_env(),
                                  input=prompt, capture_output=True, text=True)
             (run_dir / f"turn-{k}.jsonl").write_text(res.stdout)
             events = [json.loads(line) for line in res.stdout.splitlines() if line.startswith("{")]
@@ -86,6 +109,10 @@ def run_one(task, arm, plugin_dir, i, raw, model, effort, budget, cap, limit):
             if plugin_dir and not plugin_loaded(events, plugin_dir):
                 cost = max(cost, sum(r.get("total_cost_usd") or 0 for r in results))
                 (run_dir / "error.txt").write_text(f"the plugin at {plugin_dir} was not loaded")
+                return status
+            if foreign := foreign_plugins(events, plugin_dir):
+                cost = max(cost, sum(r.get("total_cost_usd") or 0 for r in results))
+                (run_dir / "error.txt").write_text(f"plugins from outside the eval: {', '.join(foreign)}")
                 return status
             if not results or results[-1].get("total_cost_usd") is None:
                 cost = max(cost, cap)  # Unknown spend counts as the whole hold.
