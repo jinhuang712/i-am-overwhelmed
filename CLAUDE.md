@@ -18,6 +18,7 @@ INSTALL.md                                 install steps, written for the agent
 eval/                                      the A/B tool, with a budget
 eval/FINDINGS.md                           what the evals taught us, a running record
 eval/rubric-yesno.md                       the rubric as yes or no lines, a draft
+eval/flag-cases/                           real replies with the owner's answer on each red flag, git-ignored
 examples/                                  raw outputs behind the README
 assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
 .local/                                    private, git-ignored

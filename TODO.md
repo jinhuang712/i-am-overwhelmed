@@ -33,6 +33,8 @@ How the owner works, where the files do not say it
 - Never drop a rubric line for how often it fires. Read what it hit. Park a line; do not delete it.
 - When a judgment is the owner's to make, such as whether a thing is a fault, ask. Do not decide it from a count.
 - Reply in the owner's language. The owner often reads on a phone: send a file when asked to show one.
+- One thing and one question a reply. Long replies with several parts and several questions read as a mess to the owner ("有点乱"); the owner asks for a summary when they do.
+- Compare against no plugin. The owner stopped comparing with 0.1.14 on 2026-11-11.
 
 The next step
 
@@ -49,6 +51,7 @@ Sent to the strong judge, not yet run
 
 Not yet tested
 
+- [ ] `eval/results/rubric-check/report.md` is of the 127-line rubric. Run the check once on the whole current rubric, about $1, and commit that report.
 - [ ] The overall score is new (2026-11-11): its weights, its point types and the red flag cut were set with the owner in one evening. Look at it again after a few runs. The judge seldom answers NA, so "a line that does not apply counts for nothing" does little yet.
 - [ ] Check the line "advice stays open until the user takes it" on `multi-turn-zh` and `long-discussion-zh`: 13a35d4 against HEAD, 3 runs each, about $7. Waits for the owner.
 - [ ] K15 fired on work the user handed over and saw done, listed as decided (`session-zh`). It now says "presents its own advice as decided, though the user never took it", and `eval/flag-cases/` has a case that should not fire and one that should. Run `eval/flag_check.py`.
@@ -101,7 +104,7 @@ Open questions
 - [ ] A watch on `raw/progress.log` that reports each quarter of a run to the owner.
 - [ ] The account email still reaches every session, and a run's saved session keeps it; a judge's no longer is saved. A run with an API key under `--bare` might avoid it; not tried.
 - [ ] `eval/rubric.md`, the old scale, still judges what the agent did (R1, R6, section A). The owner set the scope to the reply on 2026-11-11.
-- [ ] Reuse the replies of the arms that did not change, such as 0.1.14 and no plugin, in a later run. The owner's idea; the tool cannot do it yet.
+- [ ] Reuse is by hand: copy the run folders in, and a higher `--runs` adds new runs next to them. A flag that names the runs to reuse would save the copying.
 - [ ] A judge call that fails keeps no text, so the cause cannot be read.
 
 ## Release and upkeep
