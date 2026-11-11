@@ -97,5 +97,75 @@ def summary_yesno(root, lines, margin=NOISE):
     return "\n".join(out)
 
 
+# The overall score. The words of PHILOSOPHY.md in their order, each with its weight and its decks.
+# Focused and Standalone share the Continuity and Listening decks, so they share one row and add their weights.
+WORDS = [("Honest", 8, ("Honesty", "The work")), ("Simple", 7, ("Content", "Wording")),
+         ("Structured", 6, ("Structure",)), ("Asking", 5, ("Asking",)),
+         ("Opinionated", 4, ("Opinion", "Thinking")), ("Focused, Standalone", 5, ("Continuity", "Listening")),
+         ("Predictable", 1, ("Formatting",))]
+CORE = {"H10", "H11"}  # Good signs worth two points, and missed where they apply.
+DUE = {"H12", "K13"}  # Good signs missed where they apply.
+FLAG_CUT = 0.5  # An arm whose every reply has a red flag keeps half of its score.
+
+
+def reply_score(row, lines):
+    """Return {word: (points, most)} for one reply. A line that does not apply counts for nothing.
+
+    A bad sign: 1 point when the reply avoids it. A good sign in CORE: 2 when it shows, 0 when
+    missed. In DUE: 1 or 0. Any other good sign: 1 when it shows, nothing when it does not.
+    """
+    word_of = {deck: word for word, _, decks in WORDS for deck in decks}
+    out = defaultdict(lambda: [0, 0])
+    for line in lines:
+        answer = row.get(line["id"], "NA")
+        if line["flag"] or line["deck"] not in word_of:
+            continue
+        if line["kind"] == "bad":
+            points, most = (int(answer == "N"), 1) if answer != "NA" else (0, 0)
+        elif line["id"] in CORE:
+            points, most = (2 * (answer == "Y"), 2) if answer != "NA" else (0, 0)
+        elif line["id"] in DUE:
+            points, most = (int(answer == "Y"), 1) if answer != "NA" else (0, 0)
+        else:
+            points = most = int(answer == "Y")
+        out[word_of[line["deck"]]][0] += points
+        out[word_of[line["deck"]]][1] += most
+    return out
+
+
+def overall_yesno(roots, lines):
+    """The overall score per arm, over every task, as a Markdown table. Reads blind/yesno-full.csv."""
+    weight = {word: w for word, w, _ in WORDS}
+    replies = defaultdict(list)
+    for root in roots:
+        mapping = dict(line.split() for line in (root / "mapping.txt").read_text().splitlines())
+        for row in csv.DictReader((root / "blind" / "yesno-full.csv").read_text().splitlines()):
+            words = {w: p / m for w, (p, m) in reply_score(row, lines).items() if m}
+            quality = sum(weight[w] * s for w, s in words.items()) / sum(weight[w] for w in words)
+            flagged = any(row.get(line["id"]) == "Y" for line in lines if line["flag"])
+            replies[mapping[row["label"]].rsplit("-", 1)[0]].append((quality, flagged, words))
+    arms = [a for a in ("old", "new", "none") if a in replies] + sorted(set(replies) - {"old", "new", "none"})
+    if not arms:
+        return ""
+    def mean(values):
+        values = list(values)
+        return sum(values) / len(values) if values else float("nan")
+    cells = {}
+    for arm in arms:
+        rs = replies[arm]
+        flagged = sum(f for _, f, _ in rs)
+        quality = mean(q for q, _, _ in rs)
+        cells[arm] = [f"{100 * quality * (1 - FLAG_CUT * flagged / len(rs)):.1f}", f"{100 * quality:.1f}",
+                      f"{flagged}/{len(rs)}"]
+        cells[arm] += [f"{100 * mean(w[word] for _, _, w in rs if word in w):.1f}" for word, _, _ in WORDS]
+    names = ["**score**", "quality", "replies with a red flag"] + [f"{word} ({w})" for word, w, _ in WORDS]
+    out = ["## Overall", "",
+           f"score = quality x (1 - {FLAG_CUT} x the share of replies with a red flag). Quality weighs the words "
+           "of PHILOSOPHY.md by rank; a line that does not apply counts for nothing.", "",
+           "| | " + " | ".join(arms) + " |", "|---|" + "---|" * len(arms)]
+    out += [f"| {name} | " + " | ".join(cells[a][k] for a in arms) + " |" for k, name in enumerate(names)]
+    return "\n".join(out) + "\n"
+
+
 if __name__ == "__main__":
     print(summary(Path(sys.argv[1]) / sys.argv[2]))

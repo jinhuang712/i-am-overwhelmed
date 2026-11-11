@@ -56,6 +56,15 @@ python3 eval/eval.py --old v0.1.14 --rubric yesno --budget 10
 
 ## Reading a report
 
+With `--rubric yesno` the report opens with **Overall**: one score per arm, and one per word of [`PHILOSOPHY.md`](../PHILOSOPHY.md).
+
+- **Quality**: each word's share of the points its lines could give, weighed by the word's rank: Honest 8, Simple 7, Structured 6, Asking 5, Opinionated 4, Focused and Standalone 5 together, Predictable 1. A line that does not apply (NA) counts for nothing.
+- **Points**: a bad sign avoided is 1. A good sign is 1 when it shows and nothing when it does not, except "says what it checked" and "says what it did not check", worth 2 and missed where they apply, and "names a risk that is left" and "says again what the reader needs", missed where they apply.
+- **Score**: quality x (1 - 0.5 x the share of replies with a red flag). One red flag or several in a reply count alike. An arm whose every reply has one keeps half.
+- **Noise**: on 2026-11-11 the same version scored 2.5 points apart in two runs. A smaller gap is no difference.
+
+The rest of this section is about the scale rubric.
+
 The rubric has three layers: red flags, items, and a release bar. For each task the report prints, per arm:
 
 - the share of points, with the red flags and the optional items left out

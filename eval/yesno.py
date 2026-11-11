@@ -154,7 +154,15 @@ def rubric_stamp():
 def judged(blind):
     """True when blind/yesno.csv answers the rubric as it is now."""
     stamp = blind / "yesno.rubric"
-    return (blind / "yesno.csv").exists() and stamp.exists() and stamp.read_text().strip() == rubric_stamp()
+    return ((blind / "yesno.csv").exists() and (blind / "yesno-full.csv").exists()
+            and stamp.exists() and stamp.read_text().strip() == rubric_stamp())
+
+
+def majority3(votes):
+    """Y when more than half of the passes said Y. Otherwise NA when NA came at least as often as N."""
+    if sum(v == "Y" for v in votes) * 2 > len(votes):
+        return "Y"
+    return "NA" if votes.count("NA") and votes.count("NA") >= votes.count("N") else "N"
 
 
 def majority(votes):
@@ -218,5 +226,9 @@ def judge_task(root, cheap, strong, passes, strong_passes, budget, jobs=8):
     rows = [",".join(["label", *ids])]
     rows += [",".join([label, *(majority(votes[(label, i)]) for i in ids)]) for label, _ in samples]
     (blind / "yesno.csv").write_text("\n".join(rows) + "\n")
+    # The same majority with NA kept apart, for the overall score: a line that does not apply counts for nothing.
+    full = [",".join(["label", *ids])]
+    full += [",".join([label, *(majority3(votes[(label, i)]) for i in ids)]) for label, _ in samples]
+    (blind / "yesno-full.csv").write_text("\n".join(full) + "\n")
     (blind / "yesno.rubric").write_text(rubric_stamp() + "\n")
     return "done"

@@ -47,7 +47,10 @@ Sent to the strong judge, not yet run
 
 Not yet tested
 
-- [ ] The rubric of 2026-11-11 evening judges purposes, not our formats: 23 lines parked, 24 added. Run `eval/rubric_check.py` on the changed decks, then judge the baseline and the run `results/2026-11-11-94c87e5-vs-13a35d4-opus-5-5` again. Both wait for the owner's budget.
+- [ ] The overall score is new (2026-11-11): its weights, its point types and the red flag cut were set with the owner in one evening. Look at it again after a few runs. The judge seldom answers NA, so "a line that does not apply counts for nothing" does little yet.
+- [ ] Check the line "advice stays open until the user takes it" on `multi-turn-zh` and `long-discussion-zh`: 13a35d4 against HEAD, 3 runs each, about $7. Waits for the owner.
+- [ ] K15 also fires on work the user handed over and saw done, listed as decided (`session-zh`). Narrow it, and add those replies to `eval/flag-cases/` as cases that should not fire.
+- [ ] "Puts a question in the middle of the reply" fired on 44% of replies with the plugin and 9% without. The rules put the reasons for a recommendation under the options, so a question is often not last. Read the hits.
 - [ ] Wrong hits and misses. The red flags have a first check: `eval/flag_check.py`, with 6 real replies the owner judged, in `eval/flag-cases/`. Add a case each time the owner judges a hit. H4, H5, H17, O2 and O3 have no case that should fire yet. The other lines have none at all; about 45 never fired on the replies we have.
 - [ ] The lines marked 🔎 got one pass of Opus each in the baseline. Check how stable Opus is on them.
 - [ ] Three lines a judge may lack the facts for: "hedges on a thing it knows", "takes the first explanation and tests no other", "states a guess or an inference as a fact".

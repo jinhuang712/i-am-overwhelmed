@@ -29,7 +29,7 @@ from checks import summary as check_summary
 from judge import judge_task
 from run import REPO, run_one
 from yesno import FLAG_PASSES, RUBRIC as YESNO_RUBRIC, judge_task as judge_yesno, judged as yesno_judged, read_decks
-from score import summary as score_summary
+from score import overall_yesno, summary as score_summary
 from score import summary_yesno as yesno_summary
 
 HERE = Path(__file__).parent
@@ -184,7 +184,7 @@ def main():
     caps = judge_caps(raw, finished, a.budget - budget.spent)
 
     yesno_lines = [line for d in read_decks(YESNO_RUBRIC.read_text()) for line in d["lines"]]
-    sections = []
+    sections, scored_roots = [], []
     for t in tasks:
         root = raw / t["name"]
         if t["name"] not in finished:
@@ -200,6 +200,9 @@ def main():
             scored = yesno_summary(root, yesno_lines) if a.rubric == "yesno" else score_summary(root)
             text = scored + "\n\nChecks:\n" + text
             shutil.copy(root / "blind" / score_file, out / f"{t['name']}-{score_file}")
+            if (root / "blind" / "yesno-full.csv").exists():
+                scored_roots.append(root)
+                shutil.copy(root / "blind" / "yesno-full.csv", out / f"{t['name']}-yesno-full.csv")
             shutil.copy(root / "mapping.txt", out / f"{t['name']}-mapping.txt")
         else:
             text = f"Judge: {verdict}\n\nChecks:\n" + text
@@ -215,6 +218,8 @@ def main():
             f"- spent: ${budget.spent:.2f} of ${a.budget:.2f}\n")
     if "stopped" in counts:
         head += "- incomplete: the budget stopped some runs\n"
+    if a.rubric == "yesno" and scored_roots:
+        head += "\n" + overall_yesno(scored_roots, yesno_lines)
     (out / "report.md").write_text(head + "\n" + "\n\n".join(sections) + "\n")
     print(f"spent ${budget.spent:.2f} of ${a.budget:.2f}. Report: {out / 'report.md'}")
 

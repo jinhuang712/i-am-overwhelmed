@@ -353,6 +353,36 @@ class YesNo(unittest.TestCase):
                   "TOOL RESULT:\nretry.py\n\n=== FINAL REPLY (turn-2) ===\ntwo\n")
         self.assertEqual(sample_replies(sample), ["one", "two"])
 
+    def test_majority3_keeps_na_apart(self):
+        self.assertEqual(yesno.majority3(["Y", "Y", "N"]), "Y")
+        self.assertEqual(yesno.majority3(["N", "NA", "NA"]), "NA")
+        self.assertEqual(yesno.majority3(["N", "N", "NA"]), "N")
+        self.assertEqual(yesno.majority3(["Y", "N", "NA"]), "NA")
+        self.assertEqual(yesno.majority3(["N"]), "N")
+
+    def test_the_overall_score(self):
+        from score import FLAG_CUT, overall_yesno, reply_score
+        lines = [{"id": "C1", "kind": "bad", "deck": "Content", "flag": False},
+                 {"id": "H10", "kind": "good", "deck": "Honesty", "flag": False},
+                 {"id": "L10", "kind": "good", "deck": "Wording", "flag": False},
+                 {"id": "H3", "kind": "bad", "deck": "Honesty", "flag": True}]
+        # A bad sign avoided, a core sign missed, a plain credit not shown, no red flag.
+        self.assertEqual(dict(reply_score({"C1": "N", "H10": "N", "L10": "N", "H3": "N"}, lines)),
+                         {"Simple": [1, 1], "Honest": [0, 2]})
+        # Lines that do not apply count for nothing.
+        self.assertEqual(dict(reply_score({"C1": "NA", "H10": "NA", "L10": "N", "H3": "N"}, lines)),
+                         {"Simple": [0, 0], "Honest": [0, 0]})
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "task"
+            (root / "blind").mkdir(parents=True)
+            (root / "mapping.txt").write_text("R01 new-1\nR02 none-1\n")
+            (root / "blind" / "yesno-full.csv").write_text("label,C1,H10,L10,H3\nR01,N,Y,Y,N\nR02,Y,N,N,Y\n")
+            table = overall_yesno([root], lines)
+            self.assertIn("## Overall", table)
+            rows = {r.split("|")[1].strip(): [c.strip() for c in r.split("|")[2:-1]] for r in table.splitlines() if r.startswith("| ")}
+            self.assertEqual(rows["**score**"], ["100.0", f"{0.0 * (1 - FLAG_CUT):.1f}"])
+            self.assertEqual(rows["replies with a red flag"], ["0/1", "1/1"])
+
     def test_majority_counts_na_as_no(self):
         self.assertEqual(yesno.majority(["Y", "Y", "N"]), "Y")
         self.assertEqual(yesno.majority(["Y", "NA", "N"]), "N")
@@ -385,6 +415,7 @@ class YesNo(unittest.TestCase):
             out = Path(tmp) / "out"
             report = (out / "report.md").read_text()
             self.assertIn("100.0% clean", report)
+            self.assertIn("## Overall", report)
             self.assertIn("bar: passed", report)
             self.assertTrue((out / "chat-en-yesno.csv").exists())
             models = {c[c.index("--model") + 1] for c in calls(tmp) if "--tools" in c and "json" in c}
