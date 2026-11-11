@@ -78,6 +78,7 @@ Every line says how strong its evidence is. "One case" means one reply or one ru
 - **A smoke run or a resume needs a limit above the largest task budget.** Each run holds its task's budget before it starts, so a $0.30 limit with tasks of $0.25 to $0.75 stops most runs after the first. (2026-11-11)
 - **A run that goes over its cap still wrote its reply.** The result comes back empty with `error_max_budget_usd`, and the reply sits in the assistant messages of the turn file. (2026-11-11)
 - **`--smoke --cheap-judge claude-opus-5-5` tunes a wording cheaply.** It runs the strong model once per task, on the new arm only, with no judge: about $0.43 for 6 tasks. Read the replies; the rubric would favour our rules anyway. (2026-11-11)
+- **A chat run must start outside any git repository.** A chat run has no tools. In an empty repository of its own, Opus took "our site" for code to read and wrote made-up tool calls as text. 4 of 6 shape-en runs ran to the cap and left no reply, the new rules' two among them. Two more replies opened with made-up calls, one in shape-en and one in long-discussion-zh. In probes, 2 of 2 runs did it in an empty repository, 0 of 3 in a plain folder, and 0 of 3 in a repository with Read, Glob and Grep. Chat runs now start in an empty temporary folder. (2026-11-11, 114 runs and 8 probes, $0.71)
 - **Any style can be an arm.** Commit it as the body of the output style on a throwaway branch, keep the frontmatter, and pass the branch as `--old`. The style's text is then the only difference. (2026-11-11)
 
 ## What we do not know yet

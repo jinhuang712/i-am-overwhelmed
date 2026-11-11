@@ -20,8 +20,12 @@ from score import summary_yesno  # noqa: E402
 import yesno  # noqa: E402
 
 STUB = r'''#!/usr/bin/env python3
-import json, os, re, sys, time
+import json, os, re, subprocess, sys, time
 prompt = sys.stdin.read()
+if os.environ.get("STUB_GIT") and "stream-json" in sys.argv:  # Is the run's folder inside a repository?
+    inside = subprocess.run(["git", "rev-parse"], capture_output=True).returncode == 0
+    with open(os.environ["STUB_GIT"], "a") as f:
+        f.write(("yes" if inside else "no") + "\n")
 time.sleep(float(os.environ.get("STUB_SLEEP", "0")))
 with open(os.environ["STUB_LOG"], "a") as f:
     f.write(json.dumps(sys.argv[1:]) + "\n")
@@ -141,11 +145,14 @@ class EndToEnd(unittest.TestCase):
             runs = [e for e in ledger(tmp) if e["kind"] == "run"]
             self.assertTrue(runs and all(e["status"] == "done" for e in runs))
 
-    def test_a_chat_run_works_in_a_repository_of_its_own(self):
+    def test_a_chat_run_works_outside_any_repository(self):
         with tempfile.TemporaryDirectory() as tmp:
-            evaluate(tmp, 20, "--runs", "1")
-            works = list((Path(tmp) / "out" / "raw" / "chat-en").glob("*/work"))
-            self.assertTrue(works and all((w / ".git").is_dir() for w in works))
+            subprocess.run(["git", "init", "-q", tmp])  # The results folder sits inside a repository.
+            seen = Path(tmp) / "git"
+            with mock.patch.dict(os.environ, {"STUB_GIT": str(seen)}):
+                evaluate(tmp, 20, "--runs", "1")
+            self.assertEqual(seen.read_text().split(), ["no", "no"])
+            self.assertEqual(list((Path(tmp) / "out" / "raw" / "chat-en").glob("*/work")), [])
 
     def test_the_plugin_path_is_absolute(self):
         with tempfile.TemporaryDirectory() as tmp:

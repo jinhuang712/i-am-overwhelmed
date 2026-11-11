@@ -11,6 +11,7 @@ import json
 import os
 import shutil
 import subprocess
+import tempfile
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
@@ -48,6 +49,16 @@ def fence_off(work):
         subprocess.run(git + args, capture_output=True)
 
 
+def chat_folder():
+    """Make an empty folder outside any git repository, for a chat run.
+
+    A chat run has no tools. In a repository, even an empty one of its own, Opus took
+    "our site" for code to read and wrote made-up tool calls until the cap stopped it:
+    on 2026-11-11, 5 of 6 shape-en runs, and 2 of 2 in a probe against 0 of 3 outside.
+    """
+    return Path(tempfile.mkdtemp(prefix="eval-chat-"))
+
+
 def plugin_loaded(events, plugin_dir):
     """True when the session's start event lists the plugin of this arm.
 
@@ -78,15 +89,19 @@ def run_one(task, arm, plugin_dir, i, raw, model, effort, budget, cap, limit):
         return "skipped"
     if not budget.hold(cap, limit):
         return "stopped"
-    cost, status = 0.0, "failed"
+    cost, status, outside = 0.0, "failed", None
     try:
         shutil.rmtree(run_dir, ignore_errors=True)
-        work = run_dir / "work"
-        work.mkdir(parents=True)
-        if task.get("fixture"):
-            shutil.copytree(REPO / task["fixture"], work, dirs_exist_ok=True)
-        fence_off(work)  # A chat run too: else it starts inside this repository and sees its git state.
-        base = ["claude", "-p", "--model", model, "--effort", effort, *ISOLATE,
+        run_dir.mkdir(parents=True)
+        if task["kind"] == "agent":
+            work = run_dir / "work"
+            work.mkdir()
+            if task.get("fixture"):
+                shutil.copytree(REPO / task["fixture"], work, dirs_exist_ok=True)
+            fence_off(work)
+        else:
+            work = outside = chat_folder()
+        base =["claude", "-p", "--model", model, "--effort", effort, *ISOLATE,
                 "--output-format", "stream-json", "--verbose"]
         if plugin_dir:  # The "none" arm runs with no plugin at all.
             base += ["--plugin-dir", str(plugin_dir)]
@@ -128,5 +143,7 @@ def run_one(task, arm, plugin_dir, i, raw, model, effort, budget, cap, limit):
         status = "done"
         return status
     finally:
+        if outside:
+            shutil.rmtree(outside, ignore_errors=True)
         budget.settle(cap, cost, kind="run", task=task["name"], arm=arm, run=i,
                       model=model, status=status)
