@@ -28,7 +28,7 @@ from budget import Budget, estimate, past_costs
 from checks import summary as check_summary
 from judge import judge_task
 from run import REPO, run_one
-from yesno import FLAG_PASSES, RUBRIC as YESNO_RUBRIC, judge_task as judge_yesno, read_decks
+from yesno import FLAG_PASSES, RUBRIC as YESNO_RUBRIC, judge_task as judge_yesno, judged as yesno_judged, read_decks
 from score import summary as score_summary
 from score import summary_yesno as yesno_summary
 
@@ -139,6 +139,8 @@ def main():
         root = raw / t["name"]
         runs_done = all((root / f"{arm}-{i}" / "done.json").exists()
                         for arm in arms for i in range(1, a.runs + 1))
+        if a.rubric == "yesno":
+            return runs_done and yesno_judged(root / "blind")
         return runs_done and (root / "blind" / score_file).exists()
 
     # On a resume, judging money is kept back only for the tasks that still need a judge.
@@ -164,7 +166,8 @@ def main():
 
     with ThreadPoolExecutor(a.j) as ex:
         statuses = list(ex.map(job, jobs))
-    counts = {s: statuses.count(s) for s in sorted(set(statuses))}
+    # A run that finished on an earlier start is kept, not skipped.
+    counts = {("kept" if s == "skipped" else s): statuses.count(s) for s in sorted(set(statuses))}
     print("runs:", counts, f"spent ${budget.spent:.2f}", flush=True)
 
     if a.smoke:  # No blind samples and no judge: the point is only whether every run comes through.

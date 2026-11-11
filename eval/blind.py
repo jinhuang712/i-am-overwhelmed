@@ -9,6 +9,7 @@ replaced by /WORKDIR, and RAW_DIR/<task>/mapping.txt (label -> arm-run).
 Give the judge only the blind/ folder and rubric.md.
 """
 import argparse
+import hashlib
 import json
 import random
 import shutil
@@ -39,13 +40,27 @@ def render(run_dir):
     return "\n\n".join(parts).replace(str(run_dir / "work"), "/WORKDIR").replace(str(run_dir), "/RUN")
 
 
+def fingerprint(run_dir):
+    """A hash of the run's turns: a run done again under the same name gets a new one."""
+    h = hashlib.sha1()
+    for turn in sorted(run_dir.glob("turn-*.jsonl")):
+        h.update(turn.read_bytes())
+    return h.hexdigest()
+
+
 def blind_task(root, turns, seed=None, system=None):
     runs = sorted(d for d in root.iterdir() if (d / "done.json").exists())
     blind = root / "blind"
     mapping_file = root / "mapping.txt"
+    prints_file = root / "runs.json"  # Older folders have none: they are checked by run name only.
+    prints = {r.name: fingerprint(r) for r in runs}
     if mapping_file.exists():
         known = sorted(line.split()[1] for line in mapping_file.read_text().splitlines())
-        if known == [r.name for r in runs]:
+        same = known == [r.name for r in runs]
+        if same and prints_file.exists():
+            same = json.loads(prints_file.read_text()) == prints
+        if same:
+            prints_file.write_text(json.dumps(prints, indent=1) + "\n")
             return len(runs)  # Same runs: keep the labels, so existing scores stay valid.
         shutil.rmtree(blind, ignore_errors=True)  # New runs: the old scores no longer apply.
     random.Random(seed).shuffle(runs)
@@ -59,6 +74,7 @@ def blind_task(root, turns, seed=None, system=None):
             header = f"SYSTEM INSTRUCTION: {system}\n" + header
         (blind / f"{label}.md").write_text(header + "\n\n" + render(run))
     (root / "mapping.txt").write_text("\n".join(mapping) + "\n")
+    prints_file.write_text(json.dumps(prints, indent=1) + "\n")
     return len(runs)
 
 

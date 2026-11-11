@@ -375,6 +375,32 @@ class YesNo(unittest.TestCase):
             self.assertEqual(len(calls(tmp)), before)
 
 
+    def test_a_changed_rubric_is_judged_again_from_the_cache(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            args = ("--rubric", "yesno", "--runs", "1")
+            first = evaluate(tmp, 60, *args, cost="0.01", judge_cost="0.01")
+            self.assertIn("judge chat-en: done", first.stdout)
+            again = evaluate(tmp, 60, *args, cost="0.01", judge_cost="0.01")
+            self.assertIn("judge chat-en: skipped", again.stdout)
+            self.assertIn("runs: {'kept': 2}", again.stdout)
+            stamp = Path(tmp) / "out" / "raw" / "chat-en" / "blind" / "yesno.rubric"
+            stamp.write_text("an older rubric\n")
+            before = len(calls(tmp))
+            changed = evaluate(tmp, 60, *args, cost="0.01", judge_cost="0.01")
+            self.assertIn("judge chat-en: done", changed.stdout)
+            self.assertEqual(len(calls(tmp)), before)  # Every answer came from the cache.
+
+    def test_a_run_done_again_under_its_name_gets_new_samples(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            args = ("--rubric", "yesno", "--runs", "1")
+            evaluate(tmp, 60, *args, cost="0.01", judge_cost="0.01")
+            task = Path(tmp) / "out" / "raw" / "chat-en"
+            turn = task / "new-1" / "turn-1.jsonl"
+            turn.write_text(turn.read_text().replace('"- answer"', '"- a new answer"'))
+            evaluate(tmp, 60, *args, cost="0.01", judge_cost="0.01")
+            samples = " ".join(f.read_text() for f in (task / "blind").glob("R*.md"))
+            self.assertIn("a new answer", samples)
+
     def strong_flag_run(self, times):
         """Return (strong judge calls, answers on H3) for a yes or no run where the strong judge says Y on H3."""
         with tempfile.TemporaryDirectory() as tmp, \

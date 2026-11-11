@@ -44,7 +44,7 @@ def check(cases_dir, cheap, strong, passes, budget):
         blind = root / "blind"
         blind.mkdir(parents=True, exist_ok=True)
         shutil.copy(cases_dir / case["reply"], blind / "R01.md")
-        (blind / "yesno.csv").unlink(missing_ok=True)  # The rubric may have changed: judge again, from the cache.
+        (blind / "yesno.csv").unlink(missing_ok=True)  # The reply may have changed: judge again, from the cache.
         status = judge_task(root, cheap, strong, passes, 1, budget) if budget else "planned"
         got = {}
         if status == "done":

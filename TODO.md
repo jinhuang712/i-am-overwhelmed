@@ -95,13 +95,9 @@ Open questions
 - [ ] A watch on `raw/progress.log` that reports each quarter of a run to the owner.
 - [ ] The judges start in a folder inside this repository, so their system prompt carries its git state.
 - [ ] The account email still reaches every session, and a run's saved session keeps it; a judge's no longer is saved. A run with an API key under `--bare` might avoid it; not tried.
-- [ ] After a rubric change a resume keeps the old scores: `yesno.csv` does not record the rubric it was judged with. Delete the task's `blind/yesno.csv` by hand; the cache keeps what did not change.
-- [ ] A run done again under the same name keeps its old blind samples: `blind_task` compares run names only. Move the task's `mapping.txt` and `blind/` aside with the runs.
 - [ ] `eval/rubric.md`, the old scale, still judges what the agent did (R1, R6, section A). The owner set the scope to the reply on 2026-11-11.
 - [ ] Reuse the replies of the arms that did not change, such as 0.1.14 and no plugin, in a later run. The owner's idea; the tool cannot do it yet.
 - [ ] A judge call that fails keeps no text, so the cause cannot be read.
-- [ ] `judge_caps` looks for `scores.csv` only. On a resume with `--rubric yesno` it may share the judging money among tasks already judged, or give none to old replies judged again. Read in the code, not tested.
-- [ ] After a resume the report says "runs: skipped" for runs that finished earlier.
 
 ## Release and upkeep
 

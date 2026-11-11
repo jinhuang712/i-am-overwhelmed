@@ -24,7 +24,7 @@ def num(v):
 
 def summary(root):
     mapping = dict(line.split() for line in (root / "mapping.txt").read_text().splitlines())
-    rows = list(csv.DictReader((root / "blind" / "scores.csv").open()))
+    rows = list(csv.DictReader((root / "blind" / "scores.csv").read_text().splitlines()))
     dims = [c for c in rows[0] if c != "label"]
     core = [d for d in dims if d[0] not in "ER"]
     flags = [d for d in dims if d.startswith("R")]
@@ -64,7 +64,7 @@ def summary_yesno(root, lines, margin=NOISE):
     The bar: no red flag in the new arm, and new at most `margin` points of clean under old.
     """
     mapping = dict(line.split() for line in (root / "mapping.txt").read_text().splitlines())
-    rows = list(csv.DictReader((root / "blind" / "yesno.csv").open()))
+    rows = list(csv.DictReader((root / "blind" / "yesno.csv").read_text().splitlines()))
     known = [line for line in lines if line["id"] in rows[0]]
     bad = [line for line in known if line["kind"] == "bad"]
     good = [line for line in known if line["kind"] == "good"]

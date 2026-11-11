@@ -146,6 +146,17 @@ def ask(deck, samples, k, model, cap, cache, budget):
         budget.settle(cap, cost, kind="judge", deck=deck["name"], model=model, status="done" if answers else "failed")
 
 
+def rubric_stamp():
+    """The rubric's fingerprint. The scores keep it, so a changed rubric is judged again."""
+    return hashlib.sha1(RUBRIC.read_bytes()).hexdigest()
+
+
+def judged(blind):
+    """True when blind/yesno.csv answers the rubric as it is now."""
+    stamp = blind / "yesno.rubric"
+    return (blind / "yesno.csv").exists() and stamp.exists() and stamp.read_text().strip() == rubric_stamp()
+
+
 def majority(votes):
     """Y when more than half of the passes said Y. N and NA both count as not Y."""
     return "Y" if sum(v == "Y" for v in votes) * 2 > len(votes) else "N"
@@ -155,11 +166,13 @@ def judge_task(root, cheap, strong, passes, strong_passes, budget, jobs=8):
     """Judge every blind sample of a task. Return one of: done, skipped, stopped, failed.
 
     The answers go to blind/yesno.csv only when every call came back, so a half-judged
-    task is judged again on the next run, from the cache.
+    task is judged again on the next run, from the cache. So is a task whose scores
+    answer an older rubric.
     """
     blind = root / "blind"
-    if (blind / "yesno.csv").exists():
+    if judged(blind):
         return "skipped"
+    (blind / "yesno.csv").unlink(missing_ok=True)  # Scores for another rubric: judge again, from the cache.
     samples = [(s.stem, s.read_text()) for s in sorted(blind.glob("R*.md"))]
     if not samples:
         return "failed"
@@ -205,4 +218,5 @@ def judge_task(root, cheap, strong, passes, strong_passes, budget, jobs=8):
     rows = [",".join(["label", *ids])]
     rows += [",".join([label, *(majority(votes[(label, i)]) for i in ids)]) for label, _ in samples]
     (blind / "yesno.csv").write_text("\n".join(rows) + "\n")
+    (blind / "yesno.rubric").write_text(rubric_stamp() + "\n")
     return "done"
