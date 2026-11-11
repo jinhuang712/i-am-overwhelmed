@@ -6,6 +6,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 ## [Unreleased]
 
 ### Changed
+- Replies: the agent's own advice stays open until the user takes it. With the template alone, the latest rules still listed Redis as decided in 2 of 3 runs of `multi-turn-zh`.
 - Replies: ☑️ decided lists only what the user decided. The template says `<what I decided>`. In the clean baseline of 2026-11-11, replies listed the agent's own advice as decided 6 times with the plugin, 0.1.14 and the rules of 94c87e5 alike, and 2 times with no plugin, in prose.
 - Asking: the end of a reply is a decision tree, drawn in the rule file. No next step left: the reply ends with no question. The next step is the user's: it is stated. The next step is the agent's: a clear step is taken, and a step that needs the user's answer is asked. This replaces "end every reply with one way forward" and "when the answer is clear, decide and tell me". Before, a reply to a plain fact question still closed with a question.
 - Asking: a question is asked only when its answer changes the next step and only the user can give it.
