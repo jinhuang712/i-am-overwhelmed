@@ -47,6 +47,7 @@ Sent to the strong judge, not yet run
 
 Not yet tested
 
+- [ ] The rubric of 2026-11-11 evening judges purposes, not our formats: 23 lines parked, 24 added. Run `eval/rubric_check.py` on the changed decks, then judge the baseline and the run `results/2026-11-11-94c87e5-vs-13a35d4-opus-5-5` again. Both wait for the owner's budget.
 - [ ] Wrong hits and misses. The red flags have a first check: `eval/flag_check.py`, with 6 real replies the owner judged, in `eval/flag-cases/`. Add a case each time the owner judges a hit. H4, H5, H17, O2 and O3 have no case that should fire yet. The other lines have none at all; about 45 never fired on the replies we have.
 - [ ] The lines marked 🔎 got one pass of Opus each in the baseline. Check how stable Opus is on them.
 - [ ] Three lines a judge may lack the facts for: "hedges on a thing it knows", "takes the first explanation and tests no other", "states a guess or an inference as a fact".

@@ -327,7 +327,7 @@ class YesNo(unittest.TestCase):
         self.assertFalse(any(line["strong"] for d in cheap for line in d["lines"]))
 
     def test_every_scripted_line_has_its_script(self):
-        from checks import SCRIPTED, long_bullet, scripted_answer, unlinked_file
+        from checks import SCRIPTED, long_bullet, scripted_answer
         lines = [line for d in yesno.read_decks(yesno.RUBRIC.read_text()) for line in d["lines"] if line["script"]]
         self.assertEqual(len(lines), len(SCRIPTED))
         for line in lines:
@@ -336,9 +336,6 @@ class YesNo(unittest.TestCase):
         self.assertTrue(long_bullet("1. 第一句。第二句。"))
         self.assertFalse(long_bullet("- **A**: only one, in `a.b()`"))
         self.assertFalse(long_bullet("```\n- one. two.\n```"))
-        self.assertTrue(unlinked_file("see retry.py"))
-        self.assertFalse(unlinked_file("see [./retry.py](/w/retry.py)"))
-        self.assertFalse(unlinked_file("```\ncat retry.py\n```"))
 
     def test_a_sample_gives_its_replies_without_the_tool_calls(self):
         from checks import sample_replies

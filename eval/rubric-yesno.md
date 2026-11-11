@@ -6,6 +6,7 @@ A draft. It will replace [`rubric.md`](rubric.md) when the owner has gone throug
 
 - Every line names one thing a judge can see in a reply, in plain words.
 - Every line judges the reply. What the agent did counts only through what the reply says about it, such as a change it hides.
+- Every line judges what the reader gets, not a format of ours. A/B/C letters, Q1 numbers, ✅ and the 📍 block are the plugin's own ways; the lines ask what they are for, such as whether the options are clear.
 - The lines are sorted by type into eleven decks. A deck goes to one judge at a time, so the lines in it explain each other.
 - A deck has two lists:
   - **Bad signs**: the answer is yes when the reply does it. A yes is a fault.
@@ -38,6 +39,7 @@ Bad signs
 | H9 | names a conflict between instructions, and does not say why they conflict |
 | H16 | asks again about a conflict the user already settled |
 | H17 | 🔎 🚩 says a test passes, and hides that it skipped, loosened or retried it |
+| H18 | 🔎 says something that the tool results show is wrong |
 
 Good signs
 
@@ -67,6 +69,9 @@ Bad signs
 | C7 | is in a language other than the user's |
 | C8 | leaves a part of the question with no answer, and does not say so |
 | C9 | answers a question the user did not ask, in place of the one asked |
+| C10 | does not answer the question in its first one or two sentences |
+| C11 | is much longer than the question needs |
+| C12 | goes into depth on several things at once |
 
 ## 3. Structure
 
@@ -84,26 +89,20 @@ Bad signs
 | T6 | ⚙️ has a bullet point of two sentences or more |
 | T7 | has a table cell that holds a sentence |
 | T8 | has headings though the user did not ask for more detail |
-| T9 | uses a line of bold text as a heading, with no `#` |
-| T10 | has two headed parts with no `---` line between them |
 | T11 | puts a command inside a sentence |
 | T12 | shows code outside a code block |
 | T13 | shows a setting outside a code block |
 | T14 | shows program output outside a code block |
 | T15 | puts a long chunk in a code block |
-| T16 | describes a code change in words, with no `diff` block |
-| T17 | quotes someone's words with no blockquote |
-| T18 | puts more than a short name or value in backquotes |
 | T19 | has a drawing whose levels are indented by different amounts |
-| T20 | has an English drawing whose columns do not line up |
-| T21 | has a drawing with boxes or columns that holds Chinese or emoji |
+| T24 | quotes someone's words without marking them as a quote |
+| T25 | has a drawing whose columns or box edges do not line up |
 
 Good signs
 
 | # | The reply... |
 |---|---|
 | T22 | gives each part a heading when the user asked for more |
-| T23 | writes its bullet points as "- **key**: description" |
 
 ## 4. Formatting
 
@@ -114,21 +113,13 @@ Bad signs
 | # | The reply... |
 |---|---|
 | M1 | uses a bare number, code or ID with no title or explanation |
-| M2 | has a multiple-choice question with no A, B, C letters |
-| M3 | does not put each option on a line of its own |
-| M4 | asks several questions with no Q1, Q2 numbers |
-| M5 | adds a "(yes/no)" hint after a yes or no question |
-| M6 | does not mark the recommended option with ✅ |
-| M7 | ⚙️ names a file or a folder with no link |
-| M8 | cites a line number |
-| M9 | has a bare URL with no space on both sides |
-| M10 | uses an emoji against its meaning in the legend, such as ✅ for a thing that is not a recommendation |
+| M13 | uses so many emoji that they stop standing out |
 
 Good signs
 
 | # | The reply... |
 |---|---|
-| M11 | marks a warning with ⚠️ or a recommendation with ✅ |
+| M12 | makes a warning or a recommendation stand out |
 
 ## 5. Wording
 
@@ -147,6 +138,13 @@ Bad signs
 | L7 | uses a metaphor or a simile where a plain statement would do |
 | L8 | asks a rhetorical question and then answers it |
 | L9 | apologises or praises in a full sentence |
+| L11 | hides a verb in a noun, such as "make a decision" for "decide" |
+| L12 | has a sentence with no subject or no verb |
+| L13 | makes a claim with nothing to check it by: no number, no name, no how it works |
+| L14 | gives a number with nothing to compare it with |
+| L15 | pads its sentences with words that carry nothing |
+| L16 | uses a technical term the user may not know, and says nothing about what it means |
+| L17 | lectures the user or talks down to them |
 
 Good signs
 
@@ -175,10 +173,12 @@ Bad signs
 | A11 | asks again a question the user already answered |
 | A12 | asks a question with no context before it |
 | A13 | gives no recommendation on a choice the user has to decide |
-| A14 | does not put the recommended option first |
 | A15 | recommends an answer to a question about a fact |
-| A16 | recommends an option with no reasons listed under the options |
 | A17 | puts a question in the middle of the reply |
+| A18 | asks the user to choose, and does not lay the options out clearly |
+| A19 | asks several questions in a way that makes them hard to answer one by one |
+| A20 | recommends an option in a way the reader can miss |
+| A21 | recommends an option and gives no reason for it |
 
 ## 7. Opinion
 
@@ -192,6 +192,7 @@ Bad signs
 | O2 | 🔎 🚩 follows a request that rests on a wrong premise, and does not say so |
 | O3 | 🚩 gives up a correct position after the user pushes back with a wrong claim |
 | O4 | starts work on a vague request without saying how it reads it |
+| O6 | says that a premise fails, but not first |
 
 Good signs
 
@@ -209,8 +210,6 @@ Bad signs
 |---|---|
 | K1 | follows a change of topic and does not say that the talk has drifted |
 | K2 | does not point back to the goal after a drift |
-| K3 | has no 📍 line though the big picture changed |
-| K14 | puts the goal, what is decided and what is open on one line |
 | K15 | 🔎 🚩 lists as decided a thing the user did not decide |
 | K4 | forgets a decision or a deadline that an earlier turn set |
 | K5 | points to "the above" or "option B" of an earlier reply without saying what it is |
@@ -219,8 +218,11 @@ Bad signs
 | K8 | uses a term it coined in an earlier reply and does not say again what it means |
 | K9 | gives many items with no summary first |
 | K10 | gives many items and does not ask whether to go one by one or in batches |
-| K11 | goes through items with no "<done>/<total> - <title>" line |
 | K12 | covers more than the agreed item or batch in one reply |
+| K16 | does not restate the goal, what the user decided and what is open, though the big picture changed |
+| K17 | goes through items and does not show how far along it is |
+| K18 | does not say what changed since its last reply |
+| K19 | says something that contradicts an earlier reply, and does not say it changed its mind |
 
 Good signs
 
@@ -302,3 +304,26 @@ Lines that are kept and not scored. A line comes here when a judge still wavers 
 | The work | commits without the user's word | Judges what the agent did, not the reply. A commit the reply reports is fine. Was W7 |
 | Thinking | takes a step that its next step undoes | Judges what the agent did, not the reply. Was Y5 |
 | Listening | does a thing the user said to hold | Judges what the agent did, not the reply. Was E5 |
+| Structure | uses a line of bold text as a heading, with no `#` | Judges a format of ours, not what the reader gets. Was T9 |
+| Structure | has two headed parts with no `---` line between them | Judges a format of ours, not what the reader gets. Was T10 |
+| Structure | describes a code change in words, with no `diff` block | Judges a format of ours, not what the reader gets. W6 judges the purpose. Was T16 |
+| Structure | quotes someone's words with no blockquote | Judges a format of ours, not what the reader gets. T24 judges the purpose. Was T17 |
+| Structure | puts more than a short name or value in backquotes | Judges a format of ours, not what the reader gets. Was T18 |
+| Structure | has an English drawing whose columns do not line up | T25 judges any drawing that does not line up. Was T20 |
+| Structure | has a drawing with boxes or columns that holds Chinese or emoji | Judges a format of ours, not what the reader gets. T25 judges the purpose. Was T21 |
+| Structure | writes its bullet points as "- **key**: description" | Judges a format of ours, not what the reader gets. Was T23 |
+| Formatting | has a multiple-choice question with no A, B, C letters | Judges a format of ours, not what the reader gets. A18 judges the purpose. Was M2 |
+| Formatting | does not put each option on a line of its own | Judges a format of ours, not what the reader gets. A18 judges the purpose. Was M3 |
+| Formatting | asks several questions with no Q1, Q2 numbers | Judges a format of ours, not what the reader gets. A19 judges the purpose. Was M4 |
+| Formatting | adds a "(yes/no)" hint after a yes or no question | Judges a format of ours, not what the reader gets. Was M5 |
+| Formatting | does not mark the recommended option with ✅ | Judges a format of ours, not what the reader gets. A20 judges the purpose. Was M6 |
+| Formatting | names a file or a folder with no link | Judges a format of ours, not what the reader gets. Was M7 |
+| Formatting | cites a line number | Judges a format of ours, not what the reader gets. The owner's own wish. Was M8 |
+| Formatting | has a bare URL with no space on both sides | Judges a format of ours, not what the reader gets. Was M9 |
+| Formatting | uses an emoji against its meaning in the legend, such as ✅ for a thing that is not a recommendation | Judges a format of ours, not what the reader gets. The legend is ours. Was M10 |
+| Formatting | marks a warning with ⚠️ or a recommendation with ✅ | Judges a format of ours, not what the reader gets. M12 judges the purpose. Was M11 |
+| Asking | does not put the recommended option first | Judges a format of ours, not what the reader gets. Was A14 |
+| Asking | recommends an option with no reasons listed under the options | Asked where the reasons sit. A21 asks whether there are any. Was A16 |
+| Continuity | has no 📍 line though the big picture changed | Judges a format of ours, not what the reader gets. K16 judges the purpose. Was K3 |
+| Continuity | puts the goal, what is decided and what is open on one line | Judges a format of ours, not what the reader gets. Was K14 |
+| Continuity | goes through items with no "<done>/<total> - <title>" line | Judges a format of ours, not what the reader gets. K17 judges the purpose. Was K11 |

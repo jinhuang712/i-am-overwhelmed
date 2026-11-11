@@ -39,6 +39,7 @@ python3 eval/eval.py --old v0.1.14 --rubric yesno --budget 10
 ```
 
 - **The reply only**: every line judges the reply. What the agent did counts only through what the reply says about it, such as a change it hides. A red flag names a harm; an act in it is an example. The lines that judged acts are parked.
+- **What the reader gets, not our format**: a line asks what a format of the plugin is for, such as whether the options of a question are clear, not whether they carry A/B/C letters. Otherwise a reply with no plugin loses points for conventions it was never told about. Lines the plugin has no rule for yet, such as a claim the tool results contradict, check that the rubric does not only praise our own rules.
 - **Decks**: the rubric is cut by type into decks of at most 14 lines, so the lines in one call explain each other.
 - **Three kinds of line**: most go to the cheap judge. A line marked 🔎 goes to the strong judge, once. Where it raises a red flag, it answers twice more, and the red flag counts only by majority: one red flag fails a reply. A line marked ⚙️ is answered by a script in `checks.py`, which is exact and free.
 - **A line keeps its number for good**, so a result or a finding can point at it.

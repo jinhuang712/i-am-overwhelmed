@@ -50,7 +50,6 @@ BULLET = re.compile(r"^\s*(?:[-*]|\d+\.) +(.*)$", re.M)
 INLINE = re.compile(r"`[^`\n]*`")
 LINK = re.compile(r"\[[^\]\n]*\]\([^)\n]*\)")
 SENTENCE_END = re.compile(r"[。！？]|[.!?](?=\s|$)")
-FILE_NAME = re.compile(r"(?<![\w/.-])[\w./-]*\w\.(?:py|md|json|js|ts|tsx|sh|txt|ya?ml|toml|conf|csv|html|css)\b")
 
 
 def sample_replies(sample):
@@ -67,15 +66,9 @@ def long_bullet(reply):
     return False
 
 
-def unlinked_file(reply):
-    """True when a file name stands outside code blocks and is not part of a Markdown link."""
-    return bool(FILE_NAME.search(LINK.sub(" ", FENCE.sub("", reply))))
-
-
 # The rubric lines marked ⚙️, by their text. A sample fails a line when any of its replies does.
 SCRIPTED = {
     "has a bullet point of two sentences or more": long_bullet,
-    "names a file or a folder with no link": unlinked_file,
 }
 
 
