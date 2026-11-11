@@ -8,7 +8,7 @@ import re
 import subprocess
 from pathlib import Path
 
-from run import ISOLATE, clean_env
+from run import ISOLATE, NO_LOG, clean_env
 
 RUBRIC = Path(__file__).parent / "rubric.md"
 CSV_BLOCK = re.compile(r"```csv\n(.*?)```", re.S)
@@ -59,7 +59,7 @@ def judge_task(root, model, effort, budget, cap):
     cost, status = cap, "failed"  # Unknown spend counts as the whole hold.
     try:
         cmd = ["claude", "-p", "--model", model, "--effort", effort,
-               *ISOLATE, "--tools", "",
+               *ISOLATE, *NO_LOG, "--tools", "",
                "--output-format", "json", "--max-budget-usd", f"{cap:.2f}"]
         res = subprocess.run(cmd, cwd=blind, env=clean_env(),
                              input=build_prompt(root), capture_output=True, text=True)

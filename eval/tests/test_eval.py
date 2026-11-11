@@ -143,6 +143,17 @@ class EndToEnd(unittest.TestCase):
                 self.assertIn("--strict-mcp-config", c)
                 self.assertTrue(json.loads(c[c.index("--settings") + 1])["disableAllHooks"])
 
+    def test_a_judge_leaves_no_session_and_a_run_keeps_one(self):
+        for rubric in ("scale", "yesno"):
+            with self.subTest(rubric=rubric), tempfile.TemporaryDirectory() as tmp:
+                evaluate(tmp, 60, "--runs", "1", "--rubric", rubric, cost="0.01", judge_cost="0.01")
+                sessions = calls(tmp)
+                runs = [c for c in sessions if "stream-json" in c]
+                judges = [c for c in sessions if "stream-json" not in c]
+                self.assertTrue(runs and judges)
+                self.assertTrue(all("--no-session-persistence" in c for c in judges))
+                self.assertTrue(all("--no-session-persistence" not in c for c in runs))  # A multi-turn run resumes.
+
     def test_a_plugin_from_outside_the_eval_fails_the_run(self):
         with tempfile.TemporaryDirectory() as tmp, mock.patch.dict(os.environ, {"STUB_FOREIGN": "1"}):
             evaluate(tmp, 20, "--runs", "1")

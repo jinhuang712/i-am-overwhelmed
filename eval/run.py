@@ -22,6 +22,9 @@ SETTINGS = json.dumps({"enabledPlugins": {"i-am-overwhelmed@i-am-overwhelmed": F
                        "disableAllHooks": True, "autoMemoryEnabled": False})
 # No setting source at all, and no MCP server but the ones named: the way spawn-claude starts a child.
 ISOLATE = ["--settings", SETTINGS, "--setting-sources", "", "--strict-mcp-config"]
+# A judge's session is not saved. Every saved session holds the account's email, and a judge
+# is never resumed. A run is saved: a multi-turn task goes on with --resume.
+NO_LOG = ["--no-session-persistence"]
 # One reply may not run past this many output tokens. --max-budget-usd is checked
 # between turns only, so a reply that loops would otherwise run to the model's limit:
 # on 2026-11-10 three chat runs wrote 128,000 tokens each, $2.56 a run against a $0.15 cap.
