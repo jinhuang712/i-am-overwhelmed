@@ -90,8 +90,8 @@ def parse_args():
     a = p.parse_args()
     if a.smoke:
         a.old, a.runs, a.model, a.none = a.new, 1, a.cheap_judge, False
-    if not a.old:
-        p.error("--old is required, except with --smoke")
+    if not a.old and not a.none:
+        p.error("--old is required, except with --smoke or --none")
     if a.budget is None and not a.dry_run:
         p.error("--budget is required for a real run; use --dry-run to see the estimate")
     return a
@@ -102,7 +102,8 @@ def main():
     tasks = json.loads((HERE / "tasks.json").read_text())
     if a.tasks:
         tasks = [t for t in tasks if t["name"] in a.tasks.split(",")]
-    refs = {"new": a.new} if a.smoke else {"old": a.old, "new": a.new}
+    # With --none and no --old, the eval compares the new version with no plugin only.
+    refs = {"old": a.old, "new": a.new} if a.old and not a.smoke else {"new": a.new}
     shas = {arm: short_sha(ref) for arm, ref in refs.items()}
     n_arms = len(refs) + (1 if a.none else 0)
     cost, known = estimate(tasks, a.model, n_arms, a.runs, past_costs(HERE / "results"))
@@ -123,7 +124,7 @@ def main():
     if a.dry_run:
         return
 
-    name = f"{date.today()}-{shas.get('old', 'smoke')}-vs-{shas['new']}-{a.model.removeprefix('claude-')}"
+    name = f"{date.today()}-{shas.get('old', 'smoke' if a.smoke else 'none')}-vs-{shas['new']}-{a.model.removeprefix('claude-')}"
     # Absolute, because each run starts in its own folder: a relative --plugin-dir would point nowhere.
     out = (Path(a.out) if a.out else HERE / "results" / name).resolve()
     raw = out / "raw"
@@ -207,7 +208,8 @@ def main():
     judge_note = (f"{a.cheap_judge} x{a.passes} on rubric-yesno.md, {a.judge_model} on its 🔎 lines, "
                   f"x{FLAG_PASSES} where it raises a red flag"
                   if a.rubric == "yesno" else a.judge_model)
-    head = (f"# Eval {name}\n\n- old: `{a.old}` ({shas['old']})\n- new: `{a.new}` ({shas['new']})\n"
+    head = (f"# Eval {name}\n\n" + (f"- old: `{a.old}` ({shas['old']})\n" if "old" in shas else "")
+            + f"- new: `{a.new}` ({shas['new']})\n"
             f"{'- none: no plugin' + chr(10) if a.none else ''}"
             f"- model: {a.model}, effort {a.effort}, judge {judge_note}\n- runs: {counts}\n"
             f"- spent: ${budget.spent:.2f} of ${a.budget:.2f}\n")

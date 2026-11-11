@@ -20,6 +20,10 @@ python3 eval/eval.py --old <git ref> --new HEAD --budget <usd>
 
 `--budget` is required. `--model`, `--effort`, `--judge-model`, `--runs`, `--tasks` and `-j` are optional; `--help` lists them.
 
+`--none` adds an arm with no plugin. With `--none` and no `--old`, the eval compares the new version with no plugin alone.
+
+Runs that already exist can be reused: copy their folders, such as `raw/<task>/none-1/`, into the results folder before the run. A run with its `done.json` is kept, and a higher `--runs` adds new ones next to it.
+
 Results go to `eval/results/<date>-<old>-vs-<new>-<model>/`: `report.md`, `ledger.jsonl`, and scores and mappings per task. `raw/` holds the runs and is git-ignored.
 
 ## Two rubrics

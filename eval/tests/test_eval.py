@@ -194,6 +194,16 @@ class EndToEnd(unittest.TestCase):
                 self.assertTrue(judges)
                 self.assertEqual(set(judges), {"no"})
 
+    def test_no_plugin_against_the_new_version_alone(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            cmd = [sys.executable, str(HERE / "eval.py"), "--new", "HEAD", "--none", "--tasks", "chat-en",
+                   "--runs", "1", "-j", "1", "--out", str(Path(tmp) / "out"), "--budget", "20"]
+            r = subprocess.run(cmd, env=stub_env(tmp), capture_output=True, text=True)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            arms = sorted(e["arm"] for e in ledger(tmp) if e["kind"] == "run")
+            self.assertEqual(arms, ["new", "none"])
+            self.assertNotIn("- old:", (Path(tmp) / "out" / "report.md").read_text())
+
     def test_the_plugin_path_is_absolute(self):
         with tempfile.TemporaryDirectory() as tmp:
             evaluate(tmp, 20, "--runs", "1")
