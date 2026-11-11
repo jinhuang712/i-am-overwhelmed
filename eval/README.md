@@ -45,6 +45,7 @@ python3 eval/eval.py --old v0.1.14 --rubric yesno --budget 10
 - **The bar**: no red flag in the new arm, and "clean" at most 2 points under the old arm. Two points is what one pass of the judge moves a reply by.
 - **Read a deck, not a line**: one line's answer moves between runs. A deck's count and the whole score are steady.
 - **Check the rubric itself** with `python3 eval/rubric_check.py --dry-run`. It judges replies that are already on disk, several times, and reports for every line how stable it is and how often it fires.
+- **Check the red flags** with `python3 eval/flag_check.py --dry-run`. One red flag fails a reply, so each red flag is checked against real replies whose answer the owner gave: ones that do the harm, and ones that only look like it. The cases live in `eval/flag-cases/`, which git ignores.
 - `yesno` will become the default when its lines have been checked for wrong hits and misses.
 
 ## Reading a report

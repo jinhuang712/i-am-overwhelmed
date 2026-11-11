@@ -9,6 +9,9 @@ plugin/evals/results/
 # Kept local, not published (experiment archive)
 .local/
 
+# Red flag cases: real replies and the owner's answers
+eval/flag-cases/
+
 # Eval raw output: runs, arms, blind samples
 eval/results/*/raw/
 __pycache__/

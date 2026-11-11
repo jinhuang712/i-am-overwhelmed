@@ -51,6 +51,7 @@ assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
 - [YES] Run `python3 eval/eval.py --smoke` before a full run, under a small approved budget.
 - [YES] Run `python3 -m unittest discover eval/tests` after changing the eval. It costs nothing.
 - [YES] Run `python3 eval/rubric_check.py` after changing `eval/rubric-yesno.md`. It judges only the decks that changed.
+- [YES] Run `python3 eval/flag_check.py` after changing a red flag line. Its cases are real replies whose answer the owner gave.
 - [YES] Treat eval scores as samples. Read the judge's quotes as well as the totals.
 - [NO] Never spend on a real run without an approved budget.
 - [NO] Never let a task's words do a rule's work, such as "keep it simple" or "you decide".

@@ -58,13 +58,18 @@ else:
 '''
 
 
-def evaluate(tmp, budget, *extra, cost="0.10", judge_cost="0.10", sleep="0"):
+def stub_env(tmp, cost="0.10", judge_cost="0.10", sleep="0"):
+    """The environment of a run whose `claude` is the stub."""
     stub = Path(tmp) / "bin"
     stub.mkdir(exist_ok=True)
     (stub / "claude").write_text(STUB)
     (stub / "claude").chmod(stat.S_IRWXU)
-    env = {**os.environ, "PATH": f"{stub}:{os.environ['PATH']}", "STUB_LOG": str(Path(tmp) / "log"),
-           "STUB_COST": cost, "STUB_JUDGE_COST": judge_cost, "STUB_SLEEP": sleep}
+    return {**os.environ, "PATH": f"{stub}:{os.environ['PATH']}", "STUB_LOG": str(Path(tmp) / "log"),
+            "STUB_COST": cost, "STUB_JUDGE_COST": judge_cost, "STUB_SLEEP": sleep}
+
+
+def evaluate(tmp, budget, *extra, cost="0.10", judge_cost="0.10", sleep="0"):
+    env = stub_env(tmp, cost, judge_cost, sleep)
     cmd = [sys.executable, str(HERE / "eval.py"), "--old", "HEAD", "--new", "HEAD", "--tasks", "chat-en",
            "--runs", "4", "-j", "1", "--out", str(Path(tmp) / "out"), *extra]
     if budget is not None:
@@ -379,6 +384,34 @@ class YesNo(unittest.TestCase):
     def test_no_red_flag_no_more_strong_passes(self):
         count, _ = self.strong_flag_run(times=0)
         self.assertEqual(count, 1)
+
+
+class FlagCheck(unittest.TestCase):
+    def check(self, tmp, *extra):
+        cases = Path(tmp) / "cases"
+        cases.mkdir()
+        (cases / "r.md").write_text("USER TURN 1: hi\n\n=== FINAL REPLY (turn-1) ===\n- answer\n")
+        (cases / "cases.json").write_text(json.dumps([{"name": "c1", "reply": "r.md", "expect": {"H3": "N"}}]))
+        cmd = [sys.executable, str(HERE / "flag_check.py"), "--cases", str(cases), *extra]
+        return subprocess.run(cmd, env=stub_env(tmp, judge_cost="0.01"), capture_output=True, text=True)
+
+    def test_a_right_answer_passes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            r = self.check(tmp, "--budget", "5")
+            self.assertEqual(r.returncode, 0, r.stderr)
+            self.assertIn("1 of 1 right", r.stdout)
+
+    def test_a_wrong_red_flag_fails(self):
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.dict(os.environ, {"STUB_FLAG": "H3"}):
+            r = self.check(tmp, "--budget", "5")
+            self.assertEqual(r.returncode, 1, r.stderr)
+            self.assertIn("BAD c1 H3: expected N, got Y", r.stdout)
+
+    def test_a_dry_run_calls_nothing(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            r = self.check(tmp, "--dry-run")
+            self.assertEqual(r.returncode, 0, r.stderr)
+            self.assertEqual(calls(tmp), [])
 
 
 class Parsing(unittest.TestCase):
