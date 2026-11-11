@@ -25,7 +25,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 from budget import Budget  # noqa: E402
-from yesno import CHEAP_CAP, FLAG_PASSES, PER_CALL, RUBRIC, STRONG_CAP, for_judges, judge_task, read_decks  # noqa: E402
+from yesno import CHEAP_CAP, FLAG_PASSES, RUBRIC, STRONG_CAP, for_judges, judge_task, read_decks  # noqa: E402
 
 CASES = Path(__file__).parent / "flag-cases"
 
@@ -67,13 +67,14 @@ def main():
         p.error("--budget is required for a real run; use --dry-run to see the plan")
     cases_dir = Path(a.cases).resolve()
     cases = json.loads((cases_dir / "cases.json").read_text())
-    print(f"plan: {len(cases)} cases, at most ${most(a.passes):.2f} each before the cache; "
-          f"{a.passes} passes of {a.cheap_judge}, {a.judge_model} on 🔎 lines (one sample a call of {PER_CALL})")
+    print(f"plan: {len(cases)} cases, at most ${most(a.passes):.2f} each before the cache: "
+          f"{a.cheap_judge} x{a.passes}, {a.judge_model} on the 🔎 lines")
     budget = None if a.dry_run else Budget(a.budget, cases_dir / "work" / "ledger.jsonl")
     rows = check(cases_dir, a.cheap_judge, a.judge_model, a.passes, budget)
     wrong = [r for r in rows if r[2] != r[3]]
     for case, line, want, got in rows:
-        print(f"{'ok ' if want == got else 'BAD'} {case} {line}: expected {want}, got {got}")
+        mark = "to judge" if budget is None else "ok " if want == got else "BAD"
+        print(f"{mark} {case} {line}: expected {want}" + (f", got {got}" if budget else ""))
     if budget:
         print(f"{len(rows) - len(wrong)} of {len(rows)} right. Spent ${budget.spent:.2f} of ${a.budget:.2f}")
     sys.exit(1 if wrong and budget else 0)
