@@ -421,19 +421,23 @@ class YesNo(unittest.TestCase):
             column = csv[0].split(",").index("H3")
             return len(strong), [row.split(",")[column] for row in csv[1:]]
 
+    def strong_calls(self):
+        """Calls the strong judge gets for one batch: one per part of its deck."""
+        return len(yesno.for_judges(yesno.read_decks(yesno.RUBRIC.read_text()))[1])
+
     def test_a_red_flag_the_strong_judge_raises_once_does_not_count(self):
         count, answers = self.strong_flag_run(times=1)
-        self.assertEqual(count, yesno.FLAG_PASSES)
+        self.assertEqual(count, self.strong_calls() + yesno.FLAG_PASSES - 1)  # Only the part that holds H3 again.
         self.assertEqual(answers, ["N", "N"])
 
     def test_a_red_flag_the_strong_judge_keeps_raising_counts(self):
         count, answers = self.strong_flag_run(times=99)
-        self.assertEqual(count, yesno.FLAG_PASSES)
+        self.assertEqual(count, self.strong_calls() + yesno.FLAG_PASSES - 1)
         self.assertEqual(answers, ["Y", "Y"])
 
     def test_no_red_flag_no_more_strong_passes(self):
         count, _ = self.strong_flag_run(times=0)
-        self.assertEqual(count, 1)
+        self.assertEqual(count, self.strong_calls())
 
 
 class FlagCheck(unittest.TestCase):
