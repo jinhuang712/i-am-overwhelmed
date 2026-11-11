@@ -13,7 +13,7 @@ Where things stand
 - Everything since 0.1.14 is committed on `master` and nothing is pushed. The owner said to wait with the push and with a release.
 - The rules changed in about 25 places since 0.1.14. `[Unreleased]` in `CHANGELOG.md` has every change.
 - `eval/rubric-yesno.md` is the new rubric, a draft: 123 lines in eleven decks, 14 lines parked. It judges the reply only: the 8 lines on what the agent did are parked. A red flag names a harm.
-- The clean baseline ran on 2026-11-11 with it: `results/2026-11-11-f97c872-vs-94c87e5-opus-5-5` (not committed). Clean: no plugin 89.0%, 0.1.14 91.1%, 94c87e5 91.5%.
+- The clean baseline ran on 2026-11-11 with it: `results/2026-11-11-f97c872-vs-94c87e5-opus-5-5`. Clean: no plugin 89.0%, 0.1.14 91.1%, 94c87e5 91.5%.
 - A smoke run of all 19 tasks came through on Haiku for $0.17.
 - 43 unit tests pass: `python3 -m unittest discover eval/tests`.
 
