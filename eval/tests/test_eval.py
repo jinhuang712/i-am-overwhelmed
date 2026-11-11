@@ -122,7 +122,8 @@ class EndToEnd(unittest.TestCase):
             self.assertTrue(any("stream-json" in c for c in sessions))  # runs
             self.assertTrue(any("stream-json" not in c for c in sessions))  # judges
             for c in sessions:
-                self.assertEqual(c[c.index("--setting-sources") + 1], "project,local")
+                self.assertEqual(c[c.index("--setting-sources") + 1], "")
+                self.assertIn("--strict-mcp-config", c)
                 self.assertTrue(json.loads(c[c.index("--settings") + 1])["disableAllHooks"])
 
     def test_a_plugin_from_outside_the_eval_fails_the_run(self):

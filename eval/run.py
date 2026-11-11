@@ -19,7 +19,8 @@ REPO = Path(__file__).resolve().parents[1]
 # replies answered it, and two named the owner's company from a skill's name.
 SETTINGS = json.dumps({"enabledPlugins": {"i-am-overwhelmed@i-am-overwhelmed": False},
                        "disableAllHooks": True, "autoMemoryEnabled": False})
-ISOLATE = ["--settings", SETTINGS, "--setting-sources", "project,local"]
+# No setting source at all, and no MCP server but the ones named: the way spawn-claude starts a child.
+ISOLATE = ["--settings", SETTINGS, "--setting-sources", "", "--strict-mcp-config"]
 # One reply may not run past this many output tokens. --max-budget-usd is checked
 # between turns only, so a reply that loops would otherwise run to the model's limit:
 # on 2026-11-10 three chat runs wrote 128,000 tokens each, $2.56 a run against a $0.15 cap.
