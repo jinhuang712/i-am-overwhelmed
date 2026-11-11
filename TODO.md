@@ -12,15 +12,14 @@ Where things stand
 
 - Everything since 0.1.14 is committed on `master` and nothing is pushed. The owner said to wait with the push and with a release.
 - The rules changed in about 25 places since 0.1.14. `[Unreleased]` in `CHANGELOG.md` has every change.
-- `eval/rubric-yesno.md` is the new rubric, a draft: 126 lines in eleven decks, 6 lines parked. Three rounds of `eval/rubric_check.py` put it at 93% stable on Haiku.
-- `python3 eval/eval.py --rubric yesno` can judge with it. It has run only in the unit tests.
+- `eval/rubric-yesno.md` is the new rubric, a draft: 123 lines in eleven decks, 14 lines parked. It judges the reply only: the 8 lines on what the agent did are parked. A red flag names a harm.
+- The clean baseline ran on 2026-11-11 with it: `results/2026-11-11-f97c872-vs-94c87e5-opus-5-5` (not committed). Clean: no plugin 89.0%, 0.1.14 91.1%, 94c87e5 91.5%.
 - A smoke run of all 19 tasks came through on Haiku for $0.17.
-- 32 unit tests pass: `python3 -m unittest discover eval/tests`.
+- 43 unit tests pass: `python3 -m unittest discover eval/tests`.
 
 Waiting for the owner's word
 
-- A rerun of the baseline. The first real run with the new rubric ran on 2026-11-11: all 19 tasks, three arms, 2 runs each, Opus 5.5 at medium, $32.41, in `results/2026-11-11-f97c872-vs-1b563fa-opus-5-5` (not committed). Its sessions carried the runner's own setup (see `eval/FINDINGS.md`), so it is no baseline. The tool is fixed. The rerun waits for the owner's budget, and for the owner to name the version under test: the rules on master changed after that run.
-- How to get replies with a planted fault, to test wrong hits and misses. See "Not yet tested" below.
+- The 12 red flags of the baseline: 10 K15 ("lists as decided a thing the user did not decide"), 2 A7. Read so far from the judge's notes only. Read them in full; then, if K15 holds, the 📍 rule should say that decided means decided by the user.
 
 How the owner works, where the files do not say it
 
@@ -35,7 +34,7 @@ How the owner works, where the files do not say it
 
 The next step
 
-- Ask the owner whether to run the proposal above, and under what limit. Run `python3 eval/eval.py --smoke` first if the rules or the tasks changed since the last smoke run.
+- Read the 12 red flags of the baseline in full, as the owner decides. Then, if K15 holds, propose the change to the 📍 rule, and run the eval on it before a release.
 
 ## The rubric, `eval/rubric-yesno.md`
 
@@ -48,12 +47,9 @@ Sent to the strong judge, not yet run
 
 Not yet tested
 
-- [ ] The red flags of the run of 2026-11-11, 8 hits, read with the owner one line at a time. A7, 4 hits: 2 look real, where 📍 listed the agent's own recommendation as decided (one with 0.1.14, one with the rules of 1b563fa); 1 came from the account context; 1 is on the edge (`total_value` in `vague-zh`). The owner has not judged them yet. H4, 3 hits, and W3, 1 hit, are not read yet.
-- [ ] Wrong hits and misses. No line has been checked for being right, only for being stable. Make replies with one fault planted in each, and their clean twins. Start with the red flags and the Listening deck: about 45 lines never fired on the replies we have.
-  - The agent began to write these replies by hand on 2026-11-11 and that step was stopped, so none exist. Decide how to get them: written by the owner, or produced by a model run under a budget.
-- [ ] The 10 lines marked 🔎 have never been answered by the strong judge. Check how stable Opus is on them.
+- [ ] Wrong hits and misses. The red flags have a first check: `eval/flag_check.py`, with 6 real replies the owner judged, in `eval/flag-cases/`. Add a case each time the owner judges a hit. H4, H5, H17, O2 and O3 have no case that should fire yet. The other lines have none at all; about 45 never fired on the replies we have.
+- [ ] The lines marked 🔎 got one pass of Opus each in the baseline. Check how stable Opus is on them.
 - [ ] Three lines a judge may lack the facts for: "hedges on a thing it knows", "takes the first explanation and tests no other", "states a guess or an inference as a fact".
-- [ ] One real run of `--rubric yesno` from end to end. The cheapest way: judge again the 12 replies of `results/2026-11-10-f97c872-vs-4f7adc2-opus-5-5`, about $1.50 to $2.50 by estimate.
 - [ ] More replies with no plugin. Only 17 are on disk, all on Opus.
 
 Later
@@ -98,7 +94,11 @@ Open questions
 - [ ] A task with a `CLAUDE.md` that collides with the plugin. The tool turns `CLAUDE.md` off today.
 - [ ] A watch on `raw/progress.log` that reports each quarter of a run to the owner.
 - [ ] The judges start in a folder inside this repository, so their system prompt carries its git state.
-- [ ] The account email still reaches every session. A run with an API key under `--bare` might avoid it; not tried.
+- [ ] The account email still reaches every session, and a run's saved session keeps it; a judge's no longer is saved. A run with an API key under `--bare` might avoid it; not tried.
+- [ ] After a rubric change a resume keeps the old scores: `yesno.csv` does not record the rubric it was judged with. Delete the task's `blind/yesno.csv` by hand; the cache keeps what did not change.
+- [ ] A run done again under the same name keeps its old blind samples: `blind_task` compares run names only. Move the task's `mapping.txt` and `blind/` aside with the runs.
+- [ ] `eval/rubric.md`, the old scale, still judges what the agent did (R1, R6, section A). The owner set the scope to the reply on 2026-11-11.
+- [ ] Reuse the replies of the arms that did not change, such as 0.1.14 and no plugin, in a later run. The owner's idea; the tool cannot do it yet.
 - [ ] A judge call that fails keeps no text, so the cause cannot be read.
 - [ ] `judge_caps` looks for `scores.csv` only. On a resume with `--rubric yesno` it may share the judging money among tasks already judged, or give none to old replies judged again. Read in the code, not tested.
 - [ ] After a resume the report says "runs: skipped" for runs that finished earlier.
