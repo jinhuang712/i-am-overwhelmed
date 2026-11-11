@@ -16,7 +16,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from checks import scripted_answer
-from run import ISOLATE, NO_LOG, clean_env
+from run import ISOLATE, NO_LOG, clean_env, judge_folder
 
 RUBRIC = Path(__file__).parent / "rubric-yesno.md"
 DECK_MAX = 14  # Lines one call may hold. 14 was stable in the experiment of 2026-11-10.
@@ -129,7 +129,7 @@ def ask(deck, samples, k, model, cap, cache, budget):
     try:
         cmd = ["claude", "-p", "--model", model, "--effort", "medium", *ISOLATE, *NO_LOG,
                "--tools", "", "--output-format", "json", "--max-budget-usd", f"{cap:.2f}"]
-        res = subprocess.run(cmd, cwd=cache, env=clean_env(), input=text,
+        res = subprocess.run(cmd, cwd=judge_folder(), env=clean_env(), input=text,
                              capture_output=True, text=True)
         try:
             data = json.loads(res.stdout)

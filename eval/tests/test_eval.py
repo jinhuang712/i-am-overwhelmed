@@ -22,10 +22,10 @@ import yesno  # noqa: E402
 STUB = r'''#!/usr/bin/env python3
 import fcntl, json, os, re, subprocess, sys, time
 prompt = sys.stdin.read()
-if os.environ.get("STUB_GIT") and "stream-json" in sys.argv:  # Is the run's folder inside a repository?
+if os.environ.get("STUB_GIT"):  # Does the session start inside a repository? One line per run or judge.
     inside = subprocess.run(["git", "rev-parse"], capture_output=True).returncode == 0
     with open(os.environ["STUB_GIT"], "a") as f:
-        f.write(("yes" if inside else "no") + "\n")
+        f.write(("run " if "stream-json" in sys.argv else "judge ") + ("yes" if inside else "no") + "\n")
 time.sleep(float(os.environ.get("STUB_SLEEP", "0")))
 with open(os.environ["STUB_LOG"], "a") as f:
     f.write(json.dumps(sys.argv[1:]) + "\n")
@@ -179,8 +179,20 @@ class EndToEnd(unittest.TestCase):
             seen = Path(tmp) / "git"
             with mock.patch.dict(os.environ, {"STUB_GIT": str(seen)}):
                 evaluate(tmp, 20, "--runs", "1")
-            self.assertEqual(seen.read_text().split(), ["no", "no"])
+            runs = [line.split()[1] for line in seen.read_text().splitlines() if line.startswith("run ")]
+            self.assertEqual(runs, ["no", "no"])
             self.assertEqual(list((Path(tmp) / "out" / "raw" / "chat-en").glob("*/work")), [])
+
+    def test_a_judge_starts_outside_any_repository(self):
+        for rubric in ("scale", "yesno"):
+            with self.subTest(rubric=rubric), tempfile.TemporaryDirectory() as tmp:
+                subprocess.run(["git", "init", "-q", tmp])  # The results folder sits inside a repository.
+                seen = Path(tmp) / "git"
+                with mock.patch.dict(os.environ, {"STUB_GIT": str(seen)}):
+                    evaluate(tmp, 60, "--runs", "1", "--rubric", rubric, cost="0.01", judge_cost="0.01")
+                judges = [line.split()[1] for line in seen.read_text().splitlines() if line.startswith("judge ")]
+                self.assertTrue(judges)
+                self.assertEqual(set(judges), {"no"})
 
     def test_the_plugin_path_is_absolute(self):
         with tempfile.TemporaryDirectory() as tmp:

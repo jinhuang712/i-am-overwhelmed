@@ -93,7 +93,6 @@ Open questions
 - [ ] The cap of 16,000 output tokens a reply has not been seen to stop a reply.
 - [ ] A task with a `CLAUDE.md` that collides with the plugin. The tool turns `CLAUDE.md` off today.
 - [ ] A watch on `raw/progress.log` that reports each quarter of a run to the owner.
-- [ ] The judges start in a folder inside this repository, so their system prompt carries its git state.
 - [ ] The account email still reaches every session, and a run's saved session keeps it; a judge's no longer is saved. A run with an API key under `--bare` might avoid it; not tried.
 - [ ] `eval/rubric.md`, the old scale, still judges what the agent did (R1, R6, section A). The owner set the scope to the reply on 2026-11-11.
 - [ ] Reuse the replies of the arms that did not change, such as 0.1.14 and no plugin, in a later run. The owner's idea; the tool cannot do it yet.

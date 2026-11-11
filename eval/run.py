@@ -52,6 +52,16 @@ def fence_off(work):
         subprocess.run(git + args, capture_output=True)
 
 
+def judge_folder():
+    """The folder a judge starts in: empty, outside any git repository, the same for every call.
+
+    A judge in a folder of this repository had its git state in the system prompt.
+    """
+    folder = Path(tempfile.gettempdir()) / "i-am-overwhelmed-judge"
+    folder.mkdir(exist_ok=True)
+    return folder
+
+
 def chat_folder():
     """Make an empty folder outside any git repository, for a chat run.
 
