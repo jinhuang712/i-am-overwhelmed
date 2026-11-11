@@ -20,7 +20,7 @@ from score import summary_yesno  # noqa: E402
 import yesno  # noqa: E402
 
 STUB = r'''#!/usr/bin/env python3
-import json, os, re, subprocess, sys, time
+import fcntl, json, os, re, subprocess, sys, time
 prompt = sys.stdin.read()
 if os.environ.get("STUB_GIT") and "stream-json" in sys.argv:  # Is the run's folder inside a repository?
     inside = subprocess.run(["git", "rev-parse"], capture_output=True).returncode == 0
@@ -36,9 +36,13 @@ if "json" in sys.argv and "stream-json" not in sys.argv:
     rows = [l + value * (columns.count(",")) for l in labels]
     flag = os.environ.get("STUB_FLAG")  # Say Y on this line in the first STUB_FLAG_TIMES calls that hold it.
     if flag and flag in columns.split(","):
-        seen = os.environ["STUB_LOG"] + ".flag"
-        n = int(open(seen).read()) if os.path.exists(seen) else 0
-        open(seen, "w").write(str(n + 1))
+        with open(os.environ["STUB_LOG"] + ".flag", "a+") as seen:  # Calls run in parallel: count under a lock.
+            fcntl.flock(seen, fcntl.LOCK_EX)
+            seen.seek(0)
+            n = int(seen.read() or 0)
+            seen.seek(0)
+            seen.truncate()
+            seen.write(str(n + 1))
         if n < int(os.environ.get("STUB_FLAG_TIMES", "999")):
             cols = columns.split(",")[1:]
             rows = [l + "".join(",Y" if c == flag else value for c in cols) for l in labels]
