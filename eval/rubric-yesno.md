@@ -70,7 +70,7 @@ Bad signs
 | C8 | leaves a part of the question with no answer, and does not say so |
 | C9 | answers a question the user did not ask, in place of the one asked |
 | C10 | does not answer the question in its first one or two sentences |
-| C11 | is much longer than the question needs |
+| C11 | 🔎 is much longer than the question needs |
 | C12 | goes into depth on several things at once |
 
 ## 3. Structure
@@ -138,10 +138,7 @@ Bad signs
 | L7 | uses a metaphor or a simile where a plain statement would do |
 | L8 | asks a rhetorical question and then answers it |
 | L9 | apologises or praises in a full sentence |
-| L11 | hides a verb in a noun, such as "make a decision" for "decide" |
-| L12 | has a sentence with no subject or no verb |
-| L13 | makes a claim with nothing to check it by: no number, no name, no how it works |
-| L14 | gives a number with nothing to compare it with |
+| L14 | gives a number with no other number to compare it with, such as the value before or a limit |
 | L15 | pads its sentences with words that carry nothing |
 | L16 | uses a technical term the user may not know, and says nothing about what it means |
 | L17 | lectures the user or talks down to them |
@@ -327,3 +324,6 @@ Lines that are kept and not scored. A line comes here when a judge still wavers 
 | Continuity | has no 📍 line though the big picture changed | Judges a format of ours, not what the reader gets. K16 judges the purpose. Was K3 |
 | Continuity | puts the goal, what is decided and what is open on one line | Judges a format of ours, not what the reader gets. Was K14 |
 | Continuity | goes through items with no "<done>/<total> - <title>" line | Judges a format of ours, not what the reader gets. K17 judges the purpose. Was K11 |
+| Wording | hides a verb in a noun, such as "make a decision" for "decide" | 14 of 20 stable on Haiku, and it fired twice. Was L11 |
+| Wording | has a sentence with no subject or no verb | 13 of 20 stable on Haiku. It fired on 8 of 14 replies with the plugin and on none without: the plugin's bullets and drawings hold phrases. Was L12 |
+| Wording | makes a claim with nothing to check it by: no number, no name, no how it works | 13 of 20 stable on Haiku, and it fired twice. Was L13 |
