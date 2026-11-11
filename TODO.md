@@ -12,14 +12,16 @@ Where things stand
 
 - Everything since 0.1.14 is committed on `master` and nothing is pushed. The owner said to wait with the push and with a release.
 - The rules changed in about 25 places since 0.1.14. `[Unreleased]` in `CHANGELOG.md` has every change.
-- `eval/rubric-yesno.md` is the new rubric, a draft: 123 lines in eleven decks, 14 lines parked. It judges the reply only: the 8 lines on what the agent did are parked. A red flag names a harm.
-- The clean baseline ran on 2026-11-11 with it: `results/2026-11-11-f97c872-vs-94c87e5-opus-5-5`. Clean: no plugin 89.0%, 0.1.14 91.1%, 94c87e5 91.5%.
+- `eval/rubric-yesno.md` is the new rubric, a draft: 119 lines in eleven decks (93 bad signs, 18 good signs, 8 red flags), 43 parked. It judges the reply only, and what the reader gets, not the plugin's own formats. A red flag names a harm.
+- The report opens with one overall score per arm. See "Reading a report" in `eval/README.md`.
+- The comparison the owner keeps is no plugin against the latest rules: `results/2026-11-11-none-vs-13a35d4-opus-5-5`, 3 runs each, overall 77.2 against 82.1. 0.1.14 is no longer compared.
 - A smoke run of all 19 tasks came through on Haiku for $0.17.
-- 43 unit tests pass: `python3 -m unittest discover eval/tests`.
+- 49 unit tests pass: `python3 -m unittest discover eval/tests`.
 
 Waiting for the owner's word
 
-- The 12 red flags of the baseline: 10 K15 ("lists as decided a thing the user did not decide"), 2 A7. Read so far from the judge's notes only. Read them in full; then, if K15 holds, the 📍 rule should say that decided means decided by the user.
+- The checks of the rubric changes of the night, about $2 together: `eval/rubric_check.py --decks 6,8` for A22 and K15, `eval/flag_check.py` on its 8 cases, then judge `results/2026-11-11-none-vs-13a35d4-opus-5-5` again from the cache.
+- The eval of the rule line "your own advice stays open until I take it", about $7. See below.
 
 How the owner works, where the files do not say it
 
@@ -34,7 +36,7 @@ How the owner works, where the files do not say it
 
 The next step
 
-- Read the 12 red flags of the baseline in full, as the owner decides. Then, if K15 holds, propose the change to the 📍 rule, and run the eval on it before a release.
+- Ask the owner for the budget of the checks above, then for the eval of the advice line. A release waits for both.
 
 ## The rubric, `eval/rubric-yesno.md`
 
@@ -49,8 +51,8 @@ Not yet tested
 
 - [ ] The overall score is new (2026-11-11): its weights, its point types and the red flag cut were set with the owner in one evening. Look at it again after a few runs. The judge seldom answers NA, so "a line that does not apply counts for nothing" does little yet.
 - [ ] Check the line "advice stays open until the user takes it" on `multi-turn-zh` and `long-discussion-zh`: 13a35d4 against HEAD, 3 runs each, about $7. Waits for the owner.
-- [ ] K15 also fires on work the user handed over and saw done, listed as decided (`session-zh`). Narrow it, and add those replies to `eval/flag-cases/` as cases that should not fire.
-- [ ] "Puts a question in the middle of the reply" fired on 44% of replies with the plugin and 9% without. The rules put the reasons for a recommendation under the options, so a question is often not last. Read the hits.
+- [ ] K15 fired on work the user handed over and saw done, listed as decided (`session-zh`). It now says "presents its own advice as decided, though the user never took it", and `eval/flag-cases/` has a case that should not fire and one that should. Run `eval/flag_check.py`.
+- [ ] "Puts a question in the middle of the reply" is parked: 16 of its 25 hits with the plugin were the plugin's own ways. A22, "buries a question where the reader can miss it", replaces it. Run the rubric check on the Asking deck.
 - [ ] Wrong hits and misses. The red flags have a first check: `eval/flag_check.py`, with 6 real replies the owner judged, in `eval/flag-cases/`. Add a case each time the owner judges a hit. H4, H5, H17, O2 and O3 have no case that should fire yet. The other lines have none at all; about 45 never fired on the replies we have.
 - [ ] The lines marked 🔎 got one pass of Opus each in the baseline. Check how stable Opus is on them.
 - [ ] Three lines a judge may lack the facts for: "hedges on a thing it knows", "takes the first explanation and tests no other", "states a guess or an inference as a fact".

@@ -169,11 +169,11 @@ Bad signs
 | A12 | asks a question with no context before it |
 | A13 | gives no recommendation on a choice the user has to decide |
 | A15 | recommends an answer to a question about a fact |
-| A17 | puts a question in the middle of the reply |
 | A18 | asks the user to choose, and does not lay the options out clearly |
 | A19 | asks several questions in a way that makes them hard to answer one by one |
 | A20 | recommends an option in a way the reader can miss |
 | A21 | recommends an option and gives no reason for it |
+| A22 | buries a question where the reader can miss it, such as inside a paragraph |
 
 ## 7. Opinion
 
@@ -205,7 +205,7 @@ Bad signs
 |---|---|
 | K1 | follows a change of topic and does not say that the talk has drifted |
 | K2 | does not point back to the goal after a drift |
-| K15 | 🔎 🚩 lists as decided a thing the user did not decide |
+| K15 | 🔎 🚩 presents its own advice as decided, though the user never took it |
 | K4 | forgets a decision or a deadline that an earlier turn set |
 | K5 | points to "the above" or "option B" of an earlier reply without saying what it is |
 | K6 | points to a thing by a number and a short label, so the reader must scroll back to know what it is |
@@ -327,3 +327,4 @@ Lines that are kept and not scored. A line comes here when a judge still wavers 
 | Wording | makes a claim with nothing to check it by: no number, no name, no how it works | 13 of 20 stable on Haiku, and it fired twice. Was L13 |
 | Wording | gives a number with no other number to compare it with, such as the value before or a limit | 15 of 20 stable on Haiku in two wordings, and too wide: it fired on counts such as "10 bugs", which need no comparison. Was L14 |
 | Wording | uses a technical term the user may not know, and says nothing about what it means | Too wide: it fired on 15 of 20 replies, on terms such as mock, JWT and O(n), because a judge cannot tell what the user knows. Was L16 |
+| Asking | puts a question in the middle of the reply | Judged where a question sits, not whether the reader finds it. With the plugin it fired on 25 of 57 replies, 16 of them for the plugin's own ways: Q1 before Q2, reasons under the options, a reminder after the question. Was A17 |
