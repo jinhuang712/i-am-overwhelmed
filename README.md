@@ -26,7 +26,7 @@ You are tired, you are doing three other things, and you skim. This plugin makes
 - **Less to read**: the answer comes first, and the detail waits until you ask for it.
 - **No late surprises**: what is broken, guessed or unverified is said now, not found later.
 
-**It changes the work, too.** The plugin sets only the output style, and its rules are about the reply. In daily use, the agent's behavior changed more than I expected. These are my impressions, not measurements:
+**The work feels different, too.** The plugin sets only the output style, and its rules are about the reply. Yet with it, the agent feels like this:
 
 - **More honest**: it says what it did not check. Here the benchmark agrees: 70% of replies, against 18%.
 - **Checks before it acts**: it investigates before it reasons or changes anything.
@@ -77,7 +77,7 @@ Claude Code
 └── hooks, skills, tools       untouched
 ```
 
-Its rules are about how Claude talks with you, and leave the engineering to Claude Code's own instructions. The work changes anyway: see [What you get](#-what-you-get). It is a set of instructions, so expect most replies to follow it, not all.
+Its rules are about how Claude talks with you, and leave the engineering to Claude Code's own instructions. The work still feels different: see [What you get](#-what-you-get). It is a set of instructions, so expect most replies to follow it, not all.
 
 That is one file per tool. For Claude Code it is [`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md), the plugin's output style, with `force-for-plugin` and `keep-coding-instructions`, so it stays after compaction and keeps Claude Code's own instructions. For Codex it is [`codex/AGENTS.md`](codex/AGENTS.md), the same rules without the Claude Code parts.
 
