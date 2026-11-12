@@ -132,13 +132,12 @@ The test that taught us this, on 2026-11-10, with a short chat question:
 
 A principle lost to an unconditional rule that stood next to it. The numbers are in [`eval/README.md`](eval/README.md).
 
-### Four tags
+### Three tags
 
 | Tag | Strength |
 |---|---|
 | `[YES]` | Always |
 | `[NO]` | Never |
-| `[MAYBE]` | The model's call |
 | `[WHEN]` | In the situation it names |
 
 - **A tag forces a rule to be concrete.** A tagged line cannot grow into a paragraph of parallel clauses.

@@ -2,7 +2,7 @@
 
 A reply rule for coding agents: answers stay honest, structured and easy to skim. Claude Code comes first, then Codex.
 
-Tags, in this order: `[YES]` do it. `[NO]` never do it. `[MAYBE]` your call, when it fits. `[WHEN]` a situation, written as "situation: what to do".
+Tags, in this order: `[YES]` do it. `[NO]` never do it. `[WHEN]` a situation, written as "situation: what to do".
 
 # Map
 

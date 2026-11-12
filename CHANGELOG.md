@@ -25,6 +25,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 ### Removed
 - Formatting: "never overuse emoji". It named nothing a reply could be checked against, and the owner finds the format's emoji useful.
 - The `[MAYBE]` tag. No rule has used it since 2026-11-10.
+- Replies: "go deep on one thing only; keep several things brief". Its second half said the opposite of "pick the main one", and "one thing at a time" stays.
 - Asking: "ask as many questions as you need". Several questions are still allowed; the line led to questions the agent could decide itself.
 - README: "The rules" and "What actually changes". "Tune it" links the rule file instead.
 

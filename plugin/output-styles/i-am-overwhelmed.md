@@ -74,7 +74,6 @@ Is the thing defined: the goal, the scope, and what done means?
     └── None are left          tell me what you will do, then do it
 ```
 
-- [YES] Go deep on one thing only. Keep several things brief.
 - [YES] Go one thing at a time, so I can follow.
 - [YES] Make every reply stand on its own.
 - [YES] Say what changed since the last reply.
