@@ -18,9 +18,9 @@ Where things stand
 - `rubric_check.py` now judges the 20 replies of its last round, so a round costs only the decks that changed. `--strong` checks the 🔎 lines on Opus.
 - 55 unit tests pass: `python3 -m unittest discover eval/tests`.
 
-Waiting for the owner's word, each with its dry run of 2026-11-12
+Paid runs, held for the next release (see "Eval" in `CLAUDE.md`: one eval per release, on a settled rubric)
 
-- The checks of the rubric changes of 2026-11-11, about $5 of new money together. Each tool counts the money its ledger already holds against `--budget`, so the numbers below are totals:
+- First settle the rubric, about $1.45 of new money. Each tool counts its ledger against `--budget`, so the numbers are totals:
   - A22 and K15 on the rubric check: 60 Haiku calls, about $0.15 on top of $2.81 spent.
     ```
     python3 eval/rubric_check.py --decks 6,8 --budget 3.50
@@ -29,10 +29,11 @@ Waiting for the owner's word, each with its dry run of 2026-11-12
     ```
     python3 eval/flag_check.py --budget 3.50
     ```
-  - The benchmark judged again from the cache: 171 Haiku and 57 Opus calls, about $3 to $4 on top of $16.39. The 🔎 deck changed, so every Opus call is new.
-    ```
-    python3 eval/eval.py --new 13a35d4 --none --model claude-opus-5-5 --rubric yesno --runs 3 --out eval/results/2026-11-11-none-vs-13a35d4-opus-5-5 --budget 21.50
-    ```
+- Then one benchmark of the release's rules against no plugin, with the 57 runs with no plugin reused: $11.38 for the 57 new runs, and about $5 for judging.
+  ```
+  python3 eval/eval.py --new HEAD --none --model claude-opus-5-5 --rubric yesno --runs 3 --reuse eval/results/2026-11-11-none-vs-13a35d4-opus-5-5 --budget 20
+  ```
+- Dropped on 2026-11-12: judging the benchmark of 13a35d4 again. No decision rested on it.
 
 How the owner works, where the files do not say it
 
@@ -46,10 +47,11 @@ How the owner works, where the files do not say it
 - Reply in the owner's language. The owner often reads on a phone: send a file when asked to show one.
 - One thing and one question a reply. Long replies with several parts and several questions read as a mess to the owner ("有点乱"); the owner asks for a summary when they do.
 - Compare against no plugin. The owner stopped comparing with 0.1.14 on 2026-11-11.
+- The owner counts reruns as waste: $188 of evals by 2026-11-12, at least $66 of it on runs and judging done again. Propose the smallest step, and name the decision a paid run can change.
 
 The next step
 
-- Ask the owner for the budget of the checks above. Propose $6.
+- No paid run now. Collect the rule changes for the next release: the language rule and the line on the agent's advice, each reviewed by the owner on its own. Then the paid runs above, in their order.
 
 ## The rubric, `eval/rubric-yesno.md`
 

@@ -54,6 +54,9 @@ assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
 - [YES] Run `python3 eval/flag_check.py` after changing a red flag line. Its cases are real replies whose answer the owner gave.
 - [YES] Treat eval scores as samples. Read the judge's quotes as well as the totals.
 - [NO] Never spend on a real run without an approved budget.
+- [YES] Before a paid run, name the decision its result can change. With no such decision, do not run it.
+- [NO] Never eval a single rule change. Collect the changes and run one eval per release.
+- [NO] Never judge with a rubric that is still changing. Settle the rubric first, then run the benchmark.
 - [NO] Never let a task's words do a rule's work, such as "keep it simple" or "you decide".
 - [YES] Make a task ask one thing, unless it tests a message that asks several.
 - [YES] Give a task that makes the agent want to read files the `agent` kind and a fixture.
