@@ -13,6 +13,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Eval: `rubric_check.py --strong` checks the 🔎 lines on the strong judge.
 
 ### Changed
+- Replies: a thing is decided only when the user agreed on it in words; the line no longer echoes the 📍 template.
 - README: the examples come from the benchmark of 2026-11-11, the first run of each side, on Opus 5.5. The English README drops the CI example, which the eval has in Chinese only.
 - Eval: the rubric check judges the replies of its last round; a failed judge call keeps what it said; a dry run says what a resume keeps.
 

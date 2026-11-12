@@ -51,7 +51,7 @@ How the owner works, where the files do not say it
 
 The next step
 
-- No paid run now. Collect the rule changes for the next release: the language rule (in) and the line on the agent's advice (a draft), each reviewed by the owner on its own. Then the paid runs above, in their order.
+- No paid run now. Collect the rule changes for the next release: the language rule and the line on what counts as decided, both in since 2026-11-12. Then the paid runs above, in their order.
 
 ## The rubric, `eval/rubric-yesno.md`
 
@@ -66,7 +66,7 @@ Not yet tested
 
 - [ ] `eval/results/rubric-check/report.md` is of the 127-line rubric. Run the check once on the whole current rubric and commit that report: `python3 eval/rubric_check.py`, 210 Haiku calls with the rest cached, about $0.40.
 - [ ] The overall score is new (2026-11-11): its weights, its point types and the red flag cut were set with the owner in one evening. Look at it again after a few runs. The judge seldom answers NA, so "a line that does not apply counts for nothing" does little yet.
-- [ ] The body of a reply still presents the agent's advice as decided. The line "your own advice stays open" reaches ☑️ only: `long-discussion-zh` kept 2 of 3 hits in the sixth turn, before and after it. See `eval/FINDINGS.md`.
+- [ ] The body of a reply still presented the agent's advice as decided: the line "your own advice stays open" reached ☑️ only, and `long-discussion-zh` kept 2 of 3 hits in the sixth turn. Since 2026-11-12 the line reads "Call a thing decided only when I verbally agreed on it." See in the release eval whether the body keeps to it. See `eval/FINDINGS.md`.
 - [ ] K15 fired on work the user handed over and saw done, listed as decided (`session-zh`). It now says "presents its own advice as decided, though the user never took it", and `eval/flag-cases/` has a case that should not fire and one that should. Run `eval/flag_check.py`.
 - [ ] "Puts a question in the middle of the reply" is parked: 16 of its 25 hits with the plugin were the plugin's own ways. A22, "buries a question where the reader can miss it", replaces it. Run the rubric check on the Asking deck.
 - [ ] Wrong hits and misses. The red flags have a first check: `eval/flag_check.py`, with 8 real replies the owner judged, in `eval/flag-cases/`. Add a case each time the owner judges a hit. H4, H5, H17, O2 and O3 have no case that should fire yet. The other lines have none at all; about 45 never fired on the replies we have.

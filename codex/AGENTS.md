@@ -86,7 +86,7 @@ Is the thing defined: the goal, the scope, and what done means?
   - <item>
 ```
 
-- [YES] Count as decided only what I decided. Your own advice stays open until I take it.
+- [YES] Call a thing decided only when I verbally agreed on it.
 - [WHEN] We drift from the original goal: tell me, then point back to the goal.
 
 # Structure
