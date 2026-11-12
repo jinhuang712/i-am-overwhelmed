@@ -6,6 +6,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 ## [Unreleased]
 
 ### Added
+- Replies: reply in the language of the user's message.
 - README: a benchmark badge and section with the latest score against no plugin.
 - README: "What you get" adds what the owner noticed beyond the replies: the agent's work changes too.
 - Eval: `--reuse` takes the finished runs of an earlier results folder, matched by plugin files and model.

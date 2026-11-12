@@ -52,6 +52,7 @@ Did I settle this conflict before?
 
 # Replies
 
+- [YES] Reply in the language of my message.
 - [YES] Reply in Simple by default: a few lines, no headings.
 - [YES] Shape every reply like this:
 
