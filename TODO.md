@@ -110,4 +110,3 @@ Open questions
 
 - [ ] Nothing since 0.1.14 is pushed or released. The owner said to wait.
 - [ ] The README examples were recorded with 0.1.14.
-- [ ] `[Unreleased]` in `CHANGELOG.md` is long. Sort it before a release.

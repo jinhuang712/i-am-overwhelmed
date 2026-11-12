@@ -5,94 +5,39 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
-### Changed
-- Replies: the agent's own advice stays open until the user takes it. With the template alone, the latest rules still listed Redis as decided in 2 of 3 runs of `multi-turn-zh`.
-- Replies: ☑️ decided lists only what the user decided. The template says `<what I decided>`. In the clean baseline of 2026-11-11, replies listed the agent's own advice as decided 6 times with the plugin, 0.1.14 and the rules of 94c87e5 alike, and 2 times with no plugin, in prose.
-- Eval: every session starts clean of the runner's own setup: no setting source, no MCP server, hooks off, and no plugin from the terminal. A run whose session lists a plugin from outside the eval fails. On 2026-11-11 a hook of the runner's reached 66 of 114 runs.
-- Eval: a chat run starts in an empty folder outside any git repository; an agent run works in a repository of its own. In an empty repository, Opus wrote made-up tool calls in 5 of 6 runs of one task.
-- Eval: a judge starts in an empty folder outside the repository, and its session is not saved: every saved session holds the account's email.
-- Eval: the yes or no rubric judges the reply only, and what the reader gets rather than the plugin's own formats. 8 lines on what the agent did and 11 on the plugin's formats are parked; 10 are rewritten as the purpose behind a format. A red flag names a harm, and a red flag from the strong judge needs two of three passes.
-- Eval: `flag_check.py` checks the red flags against real replies the owner judged, kept in `eval/flag-cases/`.
-- Eval: the report opens with one overall score per arm. The words of `PHILOSOPHY.md` weigh by rank, a line that does not apply counts for nothing, and the share of replies with a red flag cuts the score by half of it.
-- Eval: `--none` without `--old` compares the latest rules with no plugin, and runs that exist can be copied in and reused. A resume judges again after a rubric change, and gives a run done again new blind samples.
-- Asking: the end of a reply is a decision tree, drawn in the rule file. No next step left: the reply ends with no question. The next step is the user's: it is stated. The next step is the agent's: a clear step is taken, and a step that needs the user's answer is asked. This replaces "end every reply with one way forward" and "when the answer is clear, decide and tell me". Before, a reply to a plain fact question still closed with a question.
-- Asking: a question is asked only when its answer changes the next step and only the user can give it.
-- Asking: a second tree says when to recommend. A question about a fact only the user knows carries no recommendation, even when its options are fixed. A decision of the user's carries at least one.
-- Asking: a recommended option comes first. Before, the ✅ moved between A and B.
-- Structure: every command, code, setting or program output goes in its own code block, even a single short command. Backquotes are kept for very short names and values, such as a tag or a version.
-- Structure: every quoted sentence goes in a blockquote, word for word. The reminder rule is a line of its own.
-- Challenge: the section keeps to doubt. "List the premises" is "doubt every premise", and "show me the ones that matter" is gone. A premise that fails is said first, before anything else.
-- Asking: "a fact only I know is asked, not assumed" moves here from Challenge.
-- `PHILOSOPHY.md`: a "Four quadrants" part. What each side knows makes four quadrants: Shared, the agent's blind spot, my blind spot and Unknown. The rules aim to make Shared larger, and each of the eight words works on one quadrant.
-- README and `PHILOSOPHY.md`: the eight words are in order of importance: Honest, Simple, Structured, Asking, Opinionated, Focused, Standalone, Predictable.
-- Eval: rubric D8 keeps the question format, and a new D20 scores the recommendation alone. Two tasks cover the other branches of the ending tree: `your-step-zh`, where the next step is the user's, and `clear-step-zh`, where the agent's step is clear. D18 scores a question that was needed, and a new D21 scores a question that was not. A new D22 scores backquotes apart from code blocks. The "ends asking" check no longer counts a question mark inside the answer.
-- Eval: three tasks for rules that had none. `detail-zh` asks for more in a second turn, for Detailed. `only-you-know-zh` leaves out facts only the user knows. `shape-en` is the sign-in flow in English, for a drawing that must line up.
-- Eval: the rubric has three layers. Six red flags (cheated, hid a problem, built on a guess, missed a failed premise, caved, acted without asking) fail a reply at one hit and stay out of the point total. The items are as before. A release bar names the benchmark, the comparison and the threshold. The report prints the red flags that were hit and "bar: passed" or "bar: failed" for each task.
-- Eval: a compound task, `session-zh`, with four turns on the fixture: fix the flaky test, explain it simply, make the retry count configurable with a default the agent picks, and answer a question that rests on a fact only the user knows.
-- Eval: the tasks no longer do a rule's work for it. "Give me a recommendation" is gone from `multi-turn-zh` and `long-discussion-zh`, and "by the way" is gone from the off-topic turn of `multi-turn-zh`. Results from before this change were run with those hints.
-- Eval: `--none` adds a third arm that runs with no plugin, the second benchmark of the release bar.
-- Challenge: say what you would do and what you would not, and tell the user when you see a better way. Before, the section only defended: it doubted and pushed back, and never offered.
-- `PHILOSOPHY.md`: Opinionated also works on "my blind spot", since a better way the agent sees is something the user does not know.
-- Eval: rubric D23 (better way), B3 also asks what the reply would not do, and a `better-way-zh` task asks for a CSV reader built on `split`.
-- Wordings: "phrase things positively" is "say things straight, with the fewest words and punctuation marks". The old line was read as "say what to do", which is not what it meant.
+### Added
+- Honesty: stop when instructions conflict, and go by a tree: follow an answer the user gave before, or an instruction that says it wins, or ask.
 - Honesty: never soften a thing to spare the user's feelings.
-- Eval: rubric B5 (not softened) and D24 (said straight).
-- Replies: open with the point. The point may be an answer, an objection, a missing fact or a split, so a discussion can still open.
-- Eval: rubric C1 is "Point first".
-- Wordings: humor moves from `[MAYBE]` to `[YES]`. As `[MAYBE]` it almost never appeared. No rule uses `[MAYBE]` now; the tag stays defined.
-- Eval: humor stays an optional item, E3. A reply with none loses nothing.
-- Formatting: emotion goes in the emoji, and the words stay plain. Before, the rule only said what emoji can do.
-- `PHILOSOPHY.md`: an "Emotion goes in the emoji" part.
-- Replies: the order is define, discuss, do, drawn as a tree. A thing whose goal, scope or end is not defined gets a definition first, and the agent says it. A defined thing with open points is discussed. A defined thing with none is done.
-- Eval: rubric D26 (defined first) and a `vague-zh` agent task, "optimise this project".
-- Eval: every task has a `budget`, the most one run of it may cost. The tool caps each run at its own limit, adds the limits up in `--dry-run`, and keeps $0.30 a task for judging. Before, the budget was split evenly, so a chat run could not spend its share and an agent run was stopped early.
-- Eval: one reply is capped at 16,000 output tokens, and a run that hits the account's usage limit counts as failed. `only-you-know-zh` is an agent task with a `tiny-service` fixture: as a chat task with no tools it made the model write made-up tool calls until the output limit.
-- Eval: the results path is absolute, and a run fails when the session did not load the arm's plugin. A relative `--out` had made a full run go through with no plugin in any arm.
-- Asking: one thing in one question, a decision or a fact. Before, the rule named decisions only, and a fact question could ask for three facts at once.
-- Asking: every question gets its context first. This is the old "first explain, then ask", said plainly.
-- Eval: `shape-zh` and `shape-en` ask one thing, the flow. They used to ask four, so they tested how a reply handles a crowded question and not whether it draws. Rubric D17 is "One thing".
-- Honesty: a guess has a definition: anything you did not check. In the full eval a reply said a second case was "fixed too" after it had checked only the first; the model did not see its inference as a guess.
-- Eval: red flag R2 also covers a claimed fix that was not made, and B2 asks for a label on every unchecked claim.
-- Eval: the task limits follow the costs measured on Opus 5.5, about 2.5 times the highest. The eval README has the results of the full three-arm run.
-- `CLAUDE.md`: three rules for writing eval tasks: no hints at a rule, one thing a task, and a fixture for a task that makes the agent want to read files.
-- Replies: when the user asks about several things, the reply picks the main one and lists what is left. Before, it "offered the rest", which came out as a question such as "shall I go on?".
-- Structure: never put a command inside a sentence. The `[YES]` line for code blocks did not move the replies in the full eval, so the same point is also said as a `[NO]`.
-- Eval: a resume keeps judging money back only for the tasks that still need a judge. The limit of `session-zh` is $1.80.
-- `eval/FINDINGS.md`: a running record of what the evals taught us about the rules, judging, tasks, and the tool.
-- Honesty: stop when instructions conflict, these rules included. A tree says what comes next: a conflict the user settled before follows that answer; one where an instruction says it wins follows that instruction, and the user is told what gave way; any other is named, with the reason, and asked. Before, the agent picked a side and the user never learned that the other instruction was dropped.
-- Eval: a task can carry a `system` instruction, sent above the user's request. Two trap tasks use it: `conflict-zh` and `conflict-agent-zh`. Rubric B6 scores a conflict that is named.
-- Eval: every finished run or judge call prints a line and adds it to a `progress.log`, so a run can be followed live.
-- Eval: a second rubric, `rubric-yesno.md`, as a draft: every line is one thing a judge can see, answered yes or no, sorted by type into eleven decks, with bad signs and good signs. `--rubric yesno` cuts it into decks, has a cheap judge answer each deck three times, counts the majority, and sends the lines that need the transcript to the strong judge. On a 0 to 3 scale a judge gave the same score three times on 54% of the cases; with yes or no it is 92%.
-- Eval: `rubric_check.py` checks the rubric's own lines on replies already on disk: how stable each line is, and how often it fires.
-- Eval: `--smoke` tries the tool before a full run: every task once, on the cheap model, with no judging.
-- Eval: in the yes or no rubric a line keeps its number for good; two lines are answered by a script; the lines the cheap judge wavered on go to the strong judge; the judge's notes are kept.
-- `TODO.md`: the open work, in one place.
-- Replies: the last branch of the define, discuss, do tree is "tell me what you will do, then do it". Before, it was "do it", so an agent that found the task clear started with no word, and a wrong reading showed only when the work was done.
-- Replies: the 📍 line becomes a short block: the goal on one line, then ☑️ decided and ❓ open as list items, with several items one per line. Before, all three sat on one line, joined by dots. The legend gains ☑️ and ❓.
-- Formatting: a file or folder name is a link each time it is named. Replies linked the first mention and left the later ones bare.
-- Structure: an arrow waterfall is for a chain of causes and effects. One cause needs no arrows.
-- Eval: the README says how to run on another Claude Code profile, with `CLAUDE_CONFIG_DIR`. A smoke run keeps no money back for judging.
-- Eval: an agent task's work folder is a git repository of its own, so the agent's git commands cannot reach this repository.
-- `PHILOSOPHY.md`: "One rule per line" is now "Discrete rules". A rule with a shape is a drawing.
-- Eval: rubric D2 follows the tree, D18 also fails a question about going on with a clear step, and a `fact-zh` chat task asks a plain fact.
+- Challenge: say what you would and would not do, and name a better way when you see one.
+- Replies: every reply has a shape, drawn as a template: a lead that answers on its own, parts in order of importance, then the ending. It comes from news writing.
+- Replies: define, discuss, do, drawn as a tree. An undefined task gets a definition first; a clear one is announced, then done.
+- Replies: say what changed since the last reply.
+- Replies: count as decided only what the user decided. The agent's own advice stays open until the user takes it.
+- Structure: a list gets its count first, and a command never sits inside a sentence.
+- Wordings: plain written language, the verb itself, checkable claims, numbers with what they compare with, and one name for one thing.
+- Asking: ask only what changes the next step and only the user can answer.
+- Asking: every question starts with 💬, and a recommended option comes first.
+- Docs: `PHILOSOPHY.md` gains parts on the four quadrants, emotion in the emoji and news writing. New files: `eval/FINDINGS.md` and `TODO.md`.
+- Eval: a yes or no rubric, `rubric-yesno.md`, with red flags and one overall score per arm. `rubric_check.py` and `flag_check.py` check the rubric itself.
+- Eval: `--smoke`, `--none` for an arm with no plugin, a budget per task, sessions clean of the runner's setup, and tasks for the new rules.
 
-- Replies: a reply has a shape, drawn as a template: what another rule says to open with, a lead of one or two whole sentences that answers on its own, parts in order of importance, each a whole sentence that states a claim and then the drawing, list or table that backs it, and the ending tree. This replaces "open with the point". It comes from news writing: the lead and the inverted pyramid.
-- Replies: "make every reply stand on its own" is three lines, and one is new: say what changed since the last reply. It comes from the update line of a wire story.
-- Honesty: a guess is marked where it is made, and a checked fact says so where it is stated. Before, a reply could close with one note that everything above was inferred. What the agent did not do or could not find is said as plainly as what it did.
-- Structure: a list gets its count first.
-- Bullet points: the part after the key is one whole sentence.
-- Wordings: "the fewest words and punctuation marks" is "cut every word and punctuation mark that carries nothing", and every sentence stays whole, with its subject and its verb. "Use fewer connectives" is gone. The old lines cut grammar along with padding, and replies read as fragments.
-- Wordings: plain written language, not spoken language; the verb itself, not a verb hidden in a noun; no fillers or slang. The target is the register of news and popular-science writing, between speech and officialese.
-- Wordings: every claim is checkable, by a number, a name or how it works; every number has what it compares with, the new value first; one thing keeps one name in every reply.
-- Formatting: "put emotion in the emoji to keep the words plain" is one rule, with its purpose.
-- `PHILOSOPHY.md`: a "What news writing taught us" part, and four sources on news writing and register.
-
-- Asking: every question starts with 💬, and the legend gives 💬 its own meaning: a question for me.
-- Eval: the rubric follows the news-writing rules. C1 is "Lead". B2 asks for guesses marked where they are stated. D10 and D24 follow the new bullet shape and "cut what carries nothing, keep sentences whole". New items: D27 parts, D28 count first, D29 written register, D30 checkable, D31 one name, F5 says what changed. D8 asks for 💬.
-- Eval: six chat tasks get a higher budget. Under the new rules a chat run cost up to $0.16, over the old $0.15 limit.
+### Changed
+- Honesty: a guess is anything you did not check. Mark it where you make it, say what you checked where you state it, and say what you did not do.
+- Challenge keeps to doubt, and a premise that fails is said first.
+- Replies: the 📍 line is a short block, one item a line.
+- Replies: when the user asks about several things, the reply answers the main one and lists the rest, with no offer.
+- Structure: every command, code, setting or output goes in a code block. Backquotes are for short names, and quotes go in blockquotes, word for word.
+- Structure: an arrow waterfall is only for a chain of causes and effects. The part of a bullet after its key is one whole sentence.
+- Wordings: say things straight, and cut every word that carries nothing while keeping sentences whole. Humor is a plain `[YES]`.
+- Formatting: emotion goes in the emoji to keep the words plain. A file name is a link every time it is named.
+- Asking: the end of a reply follows a tree. A plain answer ends with no question, and a clear step is taken, not asked.
+- Asking: a tree says when to recommend. A decision of the user's gets a recommendation; a fact only the user knows does not.
+- Asking: one thing in one question, with its context first. "A fact only I know is asked" moves here from Challenge.
+- README and `PHILOSOPHY.md`: the eight words are in order of importance.
 
 ### Fixed
-- Install: `install-claude.sh` now updates a plugin that is already installed. Before, `claude plugin install` reported success for an installed plugin, so the update never ran and the old version stayed.
+- Install: `install-claude.sh` updates a plugin that is already installed.
+- Eval: a run fails when the session did not load its arm's plugin.
 
 ## [0.1.14] - 2026-11-10
 
