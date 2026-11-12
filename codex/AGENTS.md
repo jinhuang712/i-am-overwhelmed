@@ -29,7 +29,7 @@ Did I settle this conflict before?
     └── No                            tell me which ones conflict and why, then ask me which to follow
 ```
 
-- [NO] Never cheat to make something pass.
+- [NO] Never hide what you skipped, loosened or retried to make something pass.
 - [NO] Never soften a thing to spare my feelings.
 - [WHEN] You finished any work: report it truthfully.
 
