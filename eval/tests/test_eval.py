@@ -56,7 +56,8 @@ else:
         listed += [{"name": "calm", "path": os.environ["CLAUDE_CODE_PLUGIN_DIRS"]}]
     if os.environ.get("STUB_FOREIGN"):
         listed += [{"name": "wt", "path": "/plugins/wt"}]
-    print(json.dumps({"type": "system", "subtype": "init", "plugins": listed}))
+    model = sys.argv[sys.argv.index("--model") + 1]
+    print(json.dumps({"type": "system", "subtype": "init", "model": model, "plugins": listed}))
     print(json.dumps({"type": "result", "result": "- answer", "session_id": "s",
                       "total_cost_usd": float(os.environ["STUB_COST"])}))
 '''
@@ -317,6 +318,47 @@ class EndToEnd(unittest.TestCase):
             evaluate(tmp, 20, cost="0.40", judge_cost="0.10")
             self.assertEqual(sum(e["kind"] == "judge" for e in ledger(tmp)), 2)
             self.assertIn("== new (4 runs)", (Path(tmp) / "out" / "report.md").read_text())
+
+
+class Reuse(unittest.TestCase):
+    def runs_called(self, tmp):
+        return sum("stream-json" in c for c in calls(tmp))
+
+    def test_an_eval_takes_the_finished_runs_of_another_folder(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            first, second = Path(tmp) / "out", Path(tmp) / "second"
+            self.assertEqual(evaluate(tmp, 60).returncode, 0)
+            before = self.runs_called(tmp)
+            r = evaluate(tmp, 60, "--out", str(second), "--reuse", str(first), "--runs", "5")
+            self.assertEqual(r.returncode, 0, r.stderr)
+            self.assertIn("reuse: 8 finished runs", r.stdout)
+            self.assertEqual(self.runs_called(tmp) - before, 2)  # Only the fifth run of each arm.
+            self.assertIn("'kept': 8", r.stdout)
+            self.assertTrue((second / "report.md").exists())
+
+    def test_runs_on_another_model_or_task_are_not_taken(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            first, second = Path(tmp) / "out", Path(tmp) / "second"
+            evaluate(tmp, 60)
+            r = evaluate(tmp, None, "--out", str(second), "--reuse", str(first), "--model", "claude-haiku-5-5",
+                         "--dry-run")
+            self.assertIn("reuse: 0 finished runs", r.stdout)
+            done = first / "raw" / "chat-en" / "new-1" / "done.json"
+            done.write_text(json.dumps({**json.loads(done.read_text()), "task": "a task that changed"}))
+            r = evaluate(tmp, None, "--out", str(second), "--reuse", str(first), "--dry-run")
+            self.assertIn("reuse: 7 finished runs", r.stdout)
+            self.assertFalse(second.exists())  # A dry run copies nothing.
+
+    def test_a_copied_run_names_its_new_folder(self):
+        import reuse
+        with tempfile.TemporaryDirectory() as tmp:
+            src, dst = Path(tmp) / "a" / "new-1", Path(tmp) / "b" / "old-2"
+            (src / "work").mkdir(parents=True)
+            (src / "turn-1.jsonl").write_text(json.dumps({"cwd": str(src / "work")}) + "\n")
+            reuse.copy([(src, dst)])
+            text = (dst / "turn-1.jsonl").read_text()
+            self.assertIn(str(dst / "work"), text)
+            self.assertNotIn("new-1", text)
 
 
 class YesNo(unittest.TestCase):

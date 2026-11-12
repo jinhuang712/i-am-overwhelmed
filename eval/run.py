@@ -7,6 +7,7 @@ the only difference between arms is the plugin directory. Multi-turn tasks conti
 
 Output: RAW/<task>/<arm>-<i>/turn-<k>.jsonl, done.json when the run finished.
 """
+import hashlib
 import json
 import os
 import shutil
@@ -95,6 +96,12 @@ def foreign_plugins(events, plugin_dir):
             if p.get("path") != "builtin" and os.path.realpath(str(p.get("path"))) != own]
 
 
+def task_stamp(task):
+    """A fingerprint of what a task asks. A finished run keeps it, so another eval can tell whether it may reuse the run."""
+    asked = {k: task.get(k) for k in ("kind", "turns", "system", "fixture")}
+    return hashlib.sha1(json.dumps(asked, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+
+
 def run_one(task, arm, plugin_dir, i, raw, model, effort, budget, cap, limit):
     """Return one of: done, skipped, stopped, failed."""
     run_dir = raw / task["name"] / f"{arm}-{i}"
@@ -152,7 +159,8 @@ def run_one(task, arm, plugin_dir, i, raw, model, effort, budget, cap, limit):
                 (run_dir / "error.txt").write_text(str(results[-1].get("subtype")))
                 return status
             session = results[-1]["session_id"]
-        (run_dir / "done.json").write_text(json.dumps({"cost": cost}))
+        (run_dir / "done.json").write_text(json.dumps({"cost": cost, "model": model, "effort": effort,
+                                                       "task": task_stamp(task)}))
         status = "done"
         return status
     finally:

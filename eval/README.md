@@ -22,7 +22,15 @@ python3 eval/eval.py --old <git ref> --new HEAD --budget <usd>
 
 `--none` adds an arm with no plugin. With `--none` and no `--old`, the eval compares the new version with no plugin alone.
 
-Runs that already exist can be reused: copy their folders, such as `raw/<task>/none-1/`, into the results folder before the run. A run with its `done.json` is kept, and a higher `--runs` adds new ones next to it.
+`--reuse <results folder>` takes the finished runs of an earlier eval instead of paying for them again. `--dry-run` says how many it would take.
+
+```bash
+python3 eval/eval.py --old <git ref> --none --reuse eval/results/<folder> --budget <usd>
+```
+
+- **Which runs**: an arm takes the runs of the arm whose plugin has the same files, so the earlier `new` can become this `old`. The arm with no plugin takes the runs with no plugin. A run must be finished and on the same model; where its `done.json` records them, the effort and the task must match too. Runs from before 2026-11-12 record neither.
+- **Where they go**: into the places of this eval that have no finished run, up to `--runs`. A higher `--runs` adds new runs next to them.
+- **Why not copy by hand**: an agent's transcript holds the path of its work folder, which names the arm and the run. `--reuse` writes the new path in; a copy by hand would show the judge the old one.
 
 Results go to `eval/results/<date>-<old>-vs-<new>-<model>/`: `report.md`, `ledger.jsonl`, and scores and mappings per task. `raw/` holds the runs and is git-ignored.
 

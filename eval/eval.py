@@ -5,6 +5,7 @@ Usage:
   python3 eval/eval.py --old REF --dry-run
   python3 eval/eval.py --smoke --budget USD            (try the tool first: every task once, cheap model, no judging)
   python3 eval/eval.py --old REF --none --budget USD   (adds an arm with no plugin)
+  python3 eval/eval.py --old REF --reuse eval/results/<folder> --budget USD   (takes that folder's finished runs)
 
 Every task in tasks.json names the most one run of it may cost, and the limits add
 up to the most the eval can cost. --budget is the limit for the whole eval, judging
@@ -26,6 +27,7 @@ from pathlib import Path
 from blind import blind_task
 from budget import Budget, estimate, past_costs
 from checks import summary as check_summary
+import reuse
 from judge import judge_task
 from run import REPO, run_one
 from yesno import FLAG_PASSES, RUBRIC as YESNO_RUBRIC, judge_task as judge_yesno, judged as yesno_judged, read_decks
@@ -87,6 +89,9 @@ def parse_args():
     p.add_argument("-j", type=int, default=6, help="parallel runs")
     p.add_argument("--seed", type=int, help="fixed shuffle for the blind labels")
     p.add_argument("--out", help="results folder (default derived from refs and model)")
+    p.add_argument("--reuse", action="append", default=[], metavar="FOLDER",
+                   help="a results folder whose finished runs this eval copies in instead of running them again. "
+                        "An arm takes the runs of the arm with the same plugin files, on the same model. Repeatable")
     a = p.parse_args()
     if a.smoke:
         a.old, a.runs, a.model, a.none = a.new, 1, a.cheap_judge, False
@@ -114,7 +119,22 @@ def main():
     judge_sum = judge_each * len(tasks)
     print(f"plan: {calls} runs, {len(tasks)} judge calls, {a.model}")
     print(f"task limits: ${run_sum:.2f} for the runs + ${judge_sum:.2f} for judging = ${run_sum + judge_sum:.2f} at most")
-    print(f"estimate: ${cost:.2f} for the runs, judging extra ({'from past runs' if known else 'rough default, no history'})")
+    name = f"{date.today()}-{shas.get('old', 'smoke' if a.smoke else 'none')}-vs-{shas['new']}-{a.model.removeprefix('claude-')}"
+    # Absolute, because each run starts in its own folder: a relative --plugin-dir would point nowhere.
+    out = (Path(a.out) if a.out else HERE / "results" / name).resolve()
+    raw = out / "raw"
+    pairs = []
+    for folder in a.reuse:
+        source = Path(folder).resolve()
+        if source == out:
+            sys.exit(f"--reuse {folder} is the results folder of this eval")
+        found = reuse.plan(source, refs, a.none, tasks, a.runs, raw, a.model, a.effort, [d for _, d in pairs])
+        print(f"reuse: {len(found)} finished runs from {folder}")
+        pairs += found
+    if pairs:
+        cost *= (calls - len(pairs)) / calls
+    print(f"estimate: ${cost:.2f} for the {calls - len(pairs)} runs left, judging extra "
+          f"({'from past runs' if known else 'rough default, no history'})")
     if a.budget is not None:
         judge_pool = min(judge_sum, a.budget * JUDGE_MAX_SHARE)
         run_pool = a.budget - judge_pool
@@ -124,11 +144,8 @@ def main():
     if a.dry_run:
         return
 
-    name = f"{date.today()}-{shas.get('old', 'smoke' if a.smoke else 'none')}-vs-{shas['new']}-{a.model.removeprefix('claude-')}"
-    # Absolute, because each run starts in its own folder: a relative --plugin-dir would point nowhere.
-    out = (Path(a.out) if a.out else HERE / "results" / name).resolve()
-    raw = out / "raw"
     budget = Budget(a.budget, out / "ledger.jsonl")
+    reuse.copy(pairs)  # A copied run has its done.json, so it is kept like a run of an earlier start.
     arms = {arm: export_arm(ref, raw / "arms" / arm) for arm, ref in refs.items()}
     if a.none:
         arms["none"] = None

@@ -108,7 +108,6 @@ Open questions
 - [ ] A watch on `raw/progress.log` that reports each quarter of a run to the owner.
 - [ ] The account email still reaches every session, and a run's saved session keeps it; a judge's no longer is saved. A run with an API key under `--bare` might avoid it; not tried.
 - [ ] `eval/rubric.md`, the old scale, still judges what the agent did (R1, R6, section A). The owner set the scope to the reply on 2026-11-11.
-- [ ] Reuse is by hand: copy the run folders in, and a higher `--runs` adds new runs next to them. A flag that names the runs to reuse would save the copying.
 
 ## Release and upkeep
 
