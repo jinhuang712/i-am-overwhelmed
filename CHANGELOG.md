@@ -8,9 +8,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 ### Added
 - README: a benchmark badge and section with the latest score against no plugin.
 - README: "What you get" adds what the owner noticed beyond the replies: the agent's work changes too.
+- Eval: `--reuse` takes the finished runs of an earlier results folder, matched by plugin files and model.
+- Eval: `rubric_check.py --strong` checks the 🔎 lines on the strong judge.
 
 ### Changed
 - README: the examples come from the benchmark of 2026-11-11, the first run of each side, on Opus 5.5. The English README drops the CI example, which the eval has in Chinese only.
+- Eval: the rubric check judges the replies of its last round; a failed judge call keeps what it said; a dry run says what a resume keeps.
 
 ### Removed
 - README: "The rules" and "What actually changes". "Tune it" links the rule file instead.
