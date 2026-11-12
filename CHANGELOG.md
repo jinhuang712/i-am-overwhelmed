@@ -5,6 +5,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.1.15] - 2026-11-12
+
 ### Added
 - Honesty: stop when instructions conflict, and go by a tree: follow an answer the user gave before, or an instruction that says it wins, or ask.
 - Honesty: never soften a thing to spare the user's feelings.

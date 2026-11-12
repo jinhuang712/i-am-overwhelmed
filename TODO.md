@@ -10,8 +10,8 @@ Written for the session that takes this work over. Read this part first, then [`
 
 Where things stand
 
-- Everything since 0.1.14 is committed on `master` and nothing is pushed. The owner said to wait with the push and with a release.
-- The rules changed in about 25 places since 0.1.14. `[Unreleased]` in `CHANGELOG.md` has every change.
+- 0.1.15 is released on `master` on 2026-11-12, and nothing since 0.1.14 is pushed. The owner said to wait with the push.
+- The rules changed in about 25 places from 0.1.14 to 0.1.15. `CHANGELOG.md` has one sentence a change.
 - `eval/rubric-yesno.md` is the new rubric, a draft: 119 lines in eleven decks (93 bad signs, 18 good signs, 8 red flags), 43 parked. It judges the reply only, and what the reader gets, not the plugin's own formats. A red flag names a harm.
 - The report opens with one overall score per arm. See "Reading a report" in `eval/README.md`.
 - The comparison the owner keeps is no plugin against the latest rules: `results/2026-11-11-none-vs-13a35d4-opus-5-5`, 3 runs each, overall 77.2 against 82.1. 0.1.14 is no longer compared.
@@ -108,5 +108,5 @@ Open questions
 
 ## Release and upkeep
 
-- [ ] Nothing since 0.1.14 is pushed or released. The owner said to wait.
+- [ ] Nothing since 0.1.14 is pushed, 0.1.15 included. The owner said to wait.
 - [ ] The README examples were recorded with 0.1.14.
