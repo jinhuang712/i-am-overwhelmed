@@ -319,6 +319,7 @@ Where it improves most, as a share of the 57 replies on each side. Lower is bett
 | says what it did not check | 18% | **70%** |
 | makes a warning or a recommendation stand out | 68% | **96%** |
 | names a risk or a limit that is left | 74% | **91%** |
+| has a light touch of humor | 0% | **26%** |
 | writes a flow as text, with no drawing | 42% | **4%** |
 | puts headings on an answer, though nobody asked for more detail | 46% | **0%** |
 | gives a long list with no summary first | 16% | **0%** |
