@@ -131,9 +131,15 @@ def main():
         found = reuse.plan(source, refs, a.none, tasks, a.runs, raw, a.model, a.effort, [d for _, d in pairs])
         print(f"reuse: {len(found)} finished runs from {folder}")
         pairs += found
-    if pairs:
-        cost *= (calls - len(pairs)) / calls
-    print(f"estimate: ${cost:.2f} for the {calls - len(pairs)} runs left, judging extra "
+    arm_names = [*refs, *(["none"] if a.none else [])]
+    kept = sum((raw / t["name"] / f"{arm}-{i}" / "done.json").exists()
+               for t in tasks for arm in arm_names for i in range(1, a.runs + 1))
+    if kept:
+        print(f"kept: {kept} finished runs in {out}, and ${Budget(None, out / 'ledger.jsonl').spent:.2f} "
+              "spent there, which counts against --budget")
+    left = calls - kept - len(pairs)
+    cost *= left / calls
+    print(f"estimate: ${cost:.2f} for the {left} runs left, judging extra "
           f"({'from past runs' if known else 'rough default, no history'})")
     if a.budget is not None:
         judge_pool = min(judge_sum, a.budget * JUDGE_MAX_SHARE)

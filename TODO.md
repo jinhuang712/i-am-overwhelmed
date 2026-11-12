@@ -4,23 +4,35 @@ Open work, kept here so it does not live in one session only. Take a line out wh
 
 The order of work, agreed on 2026-11-11: first make the rubric something we can rely on, then go back to the rules.
 
-## Handoff, 2026-11-11
+## Handoff, 2026-11-12
 
 Written for the session that takes this work over. Read this part first, then [`eval/FINDINGS.md`](eval/FINDINGS.md).
 
 Where things stand
 
-- 0.1.15 is released on `master` on 2026-11-12, and nothing since 0.1.14 is pushed. The owner said to wait with the push.
-- The rules changed in about 25 places from 0.1.14 to 0.1.15. `CHANGELOG.md` has one sentence a change.
-- `eval/rubric-yesno.md` is the new rubric, a draft: 119 lines in eleven decks (93 bad signs, 18 good signs, 8 red flags), 43 parked. It judges the reply only, and what the reader gets, not the plugin's own formats. A red flag names a harm.
-- The report opens with one overall score per arm. See "Reading a report" in `eval/README.md`.
-- The comparison the owner keeps is no plugin against the latest rules: `results/2026-11-11-none-vs-13a35d4-opus-5-5`, 3 runs each, overall 77.2 against 82.1. 0.1.14 is no longer compared.
-- A smoke run of all 19 tasks came through on Haiku for $0.17.
-- 49 unit tests pass: `python3 -m unittest discover eval/tests`.
+- 0.1.15 is released, pushed and tagged `v0.1.15` on 2026-11-12. CI passed, and the owner's profile runs it. `CHANGELOG.md` has one sentence a change.
+- Since then, on `master` and not pushed: the README benchmark, "What you get", examples from the benchmark, and eval tool work. See `[Unreleased]` in `CHANGELOG.md`.
+- The README benchmark is no plugin against the rules of 13a35d4: `results/2026-11-11-none-vs-13a35d4-opus-5-5`, 19 tasks, 3 runs each, overall 77.2 against 82.1. 0.1.14 is no longer compared.
+- `eval/rubric-yesno.md` is a draft: 119 lines in eleven decks (93 bad signs, 18 good signs, 8 red flags), 43 parked. It judges the reply only, and what the reader gets, not the plugin's own formats. A red flag names a harm.
+- `eval.py --reuse <results folder>` takes finished runs from an earlier eval; the benchmark folder covers 114 of the 171 runs of a full run with no plugin.
+- `rubric_check.py` now judges the 20 replies of its last round, so a round costs only the decks that changed. `--strong` checks the 🔎 lines on Opus.
+- 55 unit tests pass: `python3 -m unittest discover eval/tests`.
 
-Waiting for the owner's word
+Waiting for the owner's word, each with its dry run of 2026-11-12
 
-- The checks of the rubric changes of the night, about $2 together: `eval/rubric_check.py --decks 6,8` for A22 and K15, `eval/flag_check.py` on its 8 cases, then judge `results/2026-11-11-none-vs-13a35d4-opus-5-5` again from the cache.
+- The checks of the rubric changes of 2026-11-11, about $5 of new money together. Each tool counts the money its ledger already holds against `--budget`, so the numbers below are totals:
+  - A22 and K15 on the rubric check: 60 Haiku calls, about $0.15 on top of $2.81 spent.
+    ```
+    python3 eval/rubric_check.py --decks 6,8 --budget 3.50
+    ```
+  - The red flag check on its 8 cases: 264 Haiku and 16 Opus calls, about $1.30 on top of $1.33.
+    ```
+    python3 eval/flag_check.py --budget 3.50
+    ```
+  - The benchmark judged again from the cache: 171 Haiku and 57 Opus calls, about $3 to $4 on top of $16.39. The 🔎 deck changed, so every Opus call is new.
+    ```
+    python3 eval/eval.py --new 13a35d4 --none --model claude-opus-5-5 --rubric yesno --runs 3 --out eval/results/2026-11-11-none-vs-13a35d4-opus-5-5 --budget 21.50
+    ```
 
 How the owner works, where the files do not say it
 
@@ -37,28 +49,27 @@ How the owner works, where the files do not say it
 
 The next step
 
-- Ask the owner for the budget of the checks above.
+- Ask the owner for the budget of the checks above. Propose $6.
 
 ## The rubric, `eval/rubric-yesno.md`
 
 Sent to the strong judge, not yet run
 
-- [ ] Three lines stayed weak in every round on Haiku, and each names a fault that matters. They are marked 🔎 now. See how steady Opus is on them:
+- [ ] How steady Opus is on the 🔎 lines. In the baseline each got one pass. `python3 eval/rubric_check.py --strong`: 60 Opus calls, about $3. Three of them stayed weak in every round on Haiku, and each names a fault that matters:
   - "states a guess or an inference as a fact": 15 of 20, twice.
   - "answers a plain fact and still closes with a question": 14 of 20, twice. This is the line behind the ending tree.
   - "makes the same point twice": 13, then 12 of 20. The owner wants the wording kept as it is.
 
 Not yet tested
 
-- [ ] `eval/results/rubric-check/report.md` is of the 127-line rubric. Run the check once on the whole current rubric, about $1, and commit that report.
+- [ ] `eval/results/rubric-check/report.md` is of the 127-line rubric. Run the check once on the whole current rubric and commit that report: `python3 eval/rubric_check.py`, 210 Haiku calls with the rest cached, about $0.40.
 - [ ] The overall score is new (2026-11-11): its weights, its point types and the red flag cut were set with the owner in one evening. Look at it again after a few runs. The judge seldom answers NA, so "a line that does not apply counts for nothing" does little yet.
 - [ ] The body of a reply still presents the agent's advice as decided. The line "your own advice stays open" reaches ☑️ only: `long-discussion-zh` kept 2 of 3 hits in the sixth turn, before and after it. See `eval/FINDINGS.md`.
 - [ ] K15 fired on work the user handed over and saw done, listed as decided (`session-zh`). It now says "presents its own advice as decided, though the user never took it", and `eval/flag-cases/` has a case that should not fire and one that should. Run `eval/flag_check.py`.
 - [ ] "Puts a question in the middle of the reply" is parked: 16 of its 25 hits with the plugin were the plugin's own ways. A22, "buries a question where the reader can miss it", replaces it. Run the rubric check on the Asking deck.
-- [ ] Wrong hits and misses. The red flags have a first check: `eval/flag_check.py`, with 6 real replies the owner judged, in `eval/flag-cases/`. Add a case each time the owner judges a hit. H4, H5, H17, O2 and O3 have no case that should fire yet. The other lines have none at all; about 45 never fired on the replies we have.
-- [ ] The lines marked 🔎 got one pass of Opus each in the baseline. Check how stable Opus is on them.
+- [ ] Wrong hits and misses. The red flags have a first check: `eval/flag_check.py`, with 8 real replies the owner judged, in `eval/flag-cases/`. Add a case each time the owner judges a hit. H4, H5, H17, O2 and O3 have no case that should fire yet. The other lines have none at all; about 45 never fired on the replies we have.
 - [ ] Three lines a judge may lack the facts for: "hedges on a thing it knows", "takes the first explanation and tests no other", "states a guess or an inference as a fact".
-- [ ] More replies with no plugin. Only 17 are on disk, all on Opus.
+- [ ] The rubric check's 20 replies were drawn when 17 replies with no plugin were on disk. 150 are now, all on Opus. `--new-samples` draws again, and the next round then shares no cache and no comparison with the last.
 
 Later
 
@@ -108,4 +119,4 @@ Open questions
 
 ## Release and upkeep
 
-- [ ] Nothing since 0.1.14 is pushed, 0.1.15 included. The owner said to wait.
+- [ ] `master` is ahead of `origin` with the work since 0.1.15. Push when the owner says.

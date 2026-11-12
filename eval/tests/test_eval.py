@@ -336,6 +336,14 @@ class Reuse(unittest.TestCase):
             self.assertIn("'kept': 8", r.stdout)
             self.assertTrue((second / "report.md").exists())
 
+    def test_a_dry_run_counts_the_runs_and_money_a_resume_keeps(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            evaluate(tmp, 60)
+            r = evaluate(tmp, None, "--dry-run", "--runs", "5")
+            self.assertIn("kept: 8 finished runs", r.stdout)
+            self.assertIn(f"${sum(e['cost'] for e in ledger(tmp)):.2f} spent there", r.stdout)
+            self.assertIn("for the 2 runs left", r.stdout)
+
     def test_runs_on_another_model_or_task_are_not_taken(self):
         with tempfile.TemporaryDirectory() as tmp:
             first, second = Path(tmp) / "out", Path(tmp) / "second"

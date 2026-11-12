@@ -122,7 +122,7 @@ task limits: $27.75 for the runs + $5.10 for judging = $32.85 at most
   ```
 
   `rubric_check.py` writes the same kind of line to `results/rubric-check/raw/progress.log`.
-- **Resume is the same command**: finished runs are kept. Their cost stays in `ledger.jsonl`, so the limit applies across both sessions.
+- **Resume is the same command**: finished runs are kept. Their cost stays in `ledger.jsonl`, so the limit applies across both sessions: `--budget` is the total, old money included. `--dry-run` says how many runs are kept and what the ledger already holds.
 - **A resume follows a change**: the scores keep a fingerprint of `rubric-yesno.md`, so after the rubric changes a resume judges again; the answers to decks that did not change come from the cache. A run done again under its old name gets new blind samples: `runs.json` keeps a hash of each run's turns. On 2026-11-11 both had to be done by hand.
 - **More money is a higher `--budget`**: new runs join the old ones, and the task is judged again.
 - **One reply is capped at 16,000 output tokens**: `--max-budget-usd` is checked between turns only. On 2026-11-10 a chat task that wanted tools wrote 128,000 tokens of made-up tool calls in one reply, $2.56 a run against a $0.15 limit. A task that makes the model want to look at files must be an `agent` task with a fixture.
