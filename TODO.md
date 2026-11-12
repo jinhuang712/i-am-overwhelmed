@@ -47,6 +47,7 @@ How the owner works, where the files do not say it
 - Reply in the owner's language. The owner often reads on a phone: send a file when asked to show one.
 - One thing and one question a reply. Long replies with several parts and several questions read as a mess to the owner ("有点乱"); the owner asks for a summary when they do.
 - Compare against no plugin. The owner stopped comparing with 0.1.14 on 2026-11-11.
+- A rule whose fault does not show is not dead weight. The owner keeps it as a backstop: "never use double negatives" and "never soften" stayed on 2026-11-12, though neither side of the benchmark broke them. Do not propose to drop a rule for that reason alone.
 - The owner counts reruns as waste: $188 of evals by 2026-11-12, at least $66 of it on runs and judging done again. Propose the smallest step, and name the decision a paid run can change.
 
 The next step
