@@ -1,0 +1,280 @@
+{"kind": "run", "task": "multi-turn-zh", "arm": "new", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.2140894}
+{"kind": "run", "task": "multi-turn-zh", "arm": "new", "run": 3, "model": "claude-opus-5-5", "status": "done", "cost": 0.23574320000000004}
+{"kind": "run", "task": "multi-turn-zh", "arm": "new", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.2468746}
+{"kind": "run", "task": "long-discussion-zh", "arm": "new", "run": 1, "model": "claude-opus-5-5", "status": "done", "cost": 0.8275708}
+{"kind": "run", "task": "long-discussion-zh", "arm": "new", "run": 2, "model": "claude-opus-5-5", "status": "done", "cost": 0.8792287999999999}
+{"kind": "run", "task": "long-discussion-zh", "arm": "new", "run": 3, "model": "claude-opus-5-5", "status": "done", "cost": 0.7616676}
+{"kind": "judge", "deck": "Honesty", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00244009}
+{"kind": "judge", "deck": "Honesty", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00244189}
+{"kind": "judge", "deck": "Honesty", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00249709}
+{"kind": "judge", "deck": "Honesty", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00257089}
+{"kind": "judge", "deck": "Honesty", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0027700900000000002}
+{"kind": "judge", "deck": "Honesty", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00273319}
+{"kind": "judge", "deck": "Honesty", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00293369}
+{"kind": "judge", "deck": "Honesty", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00287819}
+{"kind": "judge", "deck": "Honesty", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0013517499999999999}
+{"kind": "judge", "deck": "Content", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00236463}
+{"kind": "judge", "deck": "Content", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0013516}
+{"kind": "judge", "deck": "Content", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0017580999999999999}
+{"kind": "judge", "deck": "Content", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00274743}
+{"kind": "judge", "deck": "Content", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00198568}
+{"kind": "judge", "deck": "Content", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00190418}
+{"kind": "judge", "deck": "Content", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0031247300000000005}
+{"kind": "judge", "deck": "Content", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00170174}
+{"kind": "judge", "deck": "Structure (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00258173}
+{"kind": "judge", "deck": "Structure (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0017727799999999998}
+{"kind": "judge", "deck": "Structure (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0018737799999999998}
+{"kind": "judge", "deck": "Structure (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00280533}
+{"kind": "judge", "deck": "Content", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00328574}
+{"kind": "judge", "deck": "Structure (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00191736}
+{"kind": "judge", "deck": "Structure (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00232336}
+{"kind": "judge", "deck": "Structure (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0018054199999999999}
+{"kind": "judge", "deck": "Structure (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0034295300000000005}
+{"kind": "judge", "deck": "Structure (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0038145300000000004}
+{"kind": "judge", "deck": "Structure (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00271053}
+{"kind": "judge", "deck": "Structure (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0034404300000000004}
+{"kind": "judge", "deck": "Structure (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00167312}
+{"kind": "judge", "deck": "Structure (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00227854}
+{"kind": "judge", "deck": "Structure (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00228854}
+{"kind": "judge", "deck": "Structure (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00111168}
+{"kind": "judge", "deck": "Structure (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00242523}
+{"kind": "judge", "deck": "Formatting", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00148823}
+{"kind": "judge", "deck": "Formatting", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0007562000000000001}
+{"kind": "judge", "deck": "Structure (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00193912}
+{"kind": "judge", "deck": "Formatting", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00210563}
+{"kind": "judge", "deck": "Formatting", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0011717}
+{"kind": "judge", "deck": "Formatting", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00069078}
+{"kind": "judge", "deck": "Formatting", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00073034}
+{"kind": "judge", "deck": "Formatting", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00103878}
+{"kind": "judge", "deck": "Formatting", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00189493}
+{"kind": "judge", "deck": "Formatting", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00082284}
+{"kind": "judge", "deck": "Structure (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00265918}
+{"kind": "judge", "deck": "Wording", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00189982}
+{"kind": "judge", "deck": "Wording", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0035125300000000007}
+{"kind": "judge", "deck": "Wording", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00269733}
+{"kind": "judge", "deck": "Wording", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00237132}
+{"kind": "judge", "deck": "Wording", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0030681300000000005}
+{"kind": "judge", "deck": "Wording", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00216996}
+{"kind": "judge", "deck": "Wording", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0029354}
+{"kind": "judge", "deck": "Wording", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0034774}
+{"kind": "judge", "deck": "Wording", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00221946}
+{"kind": "judge", "deck": "Asking (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00248603}
+{"kind": "judge", "deck": "Asking (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0019560899999999997}
+{"kind": "judge", "deck": "Asking (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00189359}
+{"kind": "judge", "deck": "Asking (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00318693}
+{"kind": "judge", "deck": "Asking (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0019226699999999998}
+{"kind": "judge", "deck": "Asking (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0024471700000000002}
+{"kind": "judge", "deck": "Asking (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00279873}
+{"kind": "judge", "deck": "Asking (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00160673}
+{"kind": "judge", "deck": "Asking (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0013912299999999998}
+{"kind": "judge", "deck": "Asking (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0026931299999999997}
+{"kind": "judge", "deck": "Asking (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0019087}
+{"kind": "judge", "deck": "Asking (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0019261999999999999}
+{"kind": "judge", "deck": "Asking (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00196373}
+{"kind": "judge", "deck": "Asking (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0018538399999999998}
+{"kind": "judge", "deck": "Asking (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00244928}
+{"kind": "judge", "deck": "Opinion", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00212753}
+{"kind": "judge", "deck": "Asking (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0015863399999999999}
+{"kind": "judge", "deck": "Opinion", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0010545199999999998}
+{"kind": "judge", "deck": "Asking (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00285878}
+{"kind": "judge", "deck": "Opinion", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0024820299999999997}
+{"kind": "judge", "deck": "Asking (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0036224300000000003}
+{"kind": "judge", "deck": "Opinion", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00192563}
+{"kind": "judge", "deck": "Opinion", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0011216}
+{"kind": "judge", "deck": "Opinion", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0012221}
+{"kind": "judge", "deck": "Opinion", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00225583}
+{"kind": "judge", "deck": "Opinion", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00264233}
+{"kind": "judge", "deck": "Continuity (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00231403}
+{"kind": "judge", "deck": "Continuity (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00256503}
+{"kind": "judge", "deck": "Opinion", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0016506599999999998}
+{"kind": "judge", "deck": "Continuity (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0019296299999999999}
+{"kind": "judge", "deck": "Continuity (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00160857}
+{"kind": "judge", "deck": "Continuity (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0013626499999999998}
+{"kind": "judge", "deck": "Continuity (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0017027099999999999}
+{"kind": "judge", "deck": "Continuity (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00257513}
+{"kind": "judge", "deck": "Continuity (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00237815}
+{"kind": "judge", "deck": "Continuity (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00204871}
+{"kind": "judge", "deck": "Continuity (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00149425}
+{"kind": "judge", "deck": "Continuity (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0037038300000000004}
+{"kind": "judge", "deck": "Continuity (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0022502299999999998}
+{"kind": "judge", "deck": "Continuity (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00238275}
+{"kind": "judge", "deck": "Continuity (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00089133}
+{"kind": "judge", "deck": "The work", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00129853}
+{"kind": "judge", "deck": "Continuity (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00143283}
+{"kind": "judge", "deck": "The work", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00034212}
+{"kind": "judge", "deck": "The work", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0012081300000000002}
+{"kind": "judge", "deck": "The work", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00042162}
+{"kind": "judge", "deck": "Continuity (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00284943}
+{"kind": "judge", "deck": "The work", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00039370000000000003}
+{"kind": "judge", "deck": "Continuity (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0019093899999999997}
+{"kind": "judge", "deck": "Continuity (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0015713899999999998}
+{"kind": "judge", "deck": "The work", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00142083}
+{"kind": "judge", "deck": "The work", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0005137}
+{"kind": "judge", "deck": "The work", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00035426}
+{"kind": "judge", "deck": "The work", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00045126}
+{"kind": "judge", "deck": "Listening", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00065987}
+{"kind": "judge", "deck": "Listening", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0018305300000000001}
+{"kind": "judge", "deck": "Listening", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00086837}
+{"kind": "judge", "deck": "Listening", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00089045}
+{"kind": "judge", "deck": "Listening", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0021176299999999997}
+{"kind": "judge", "deck": "Listening", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0011684499999999997}
+{"kind": "judge", "deck": "Listening", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00099701}
+{"kind": "judge", "deck": "Listening", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00205683}
+{"kind": "judge", "deck": "Listening", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00090601}
+{"kind": "judge", "deck": "Thinking", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00251833}
+{"kind": "judge", "deck": "Thinking", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00158506}
+{"kind": "judge", "deck": "Thinking", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00200206}
+{"kind": "judge", "deck": "Thinking", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00290663}
+{"kind": "judge", "deck": "Thinking", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0029819300000000003}
+{"kind": "judge", "deck": "Checked against the transcript (1/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.0628058}
+{"kind": "judge", "deck": "Thinking", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0032479300000000004}
+{"kind": "judge", "deck": "Thinking", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0032989300000000003}
+{"kind": "judge", "deck": "Thinking", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0020417}
+{"kind": "judge", "deck": "Checked against the transcript (1/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.0491292}
+{"kind": "judge", "deck": "Thinking", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0019126999999999998}
+{"kind": "judge", "deck": "Checked against the transcript (2/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.051341200000000004}
+{"kind": "judge", "deck": "Checked against the transcript (2/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.053313200000000005}
+{"kind": "judge", "deck": "Checked against the transcript (2/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.051965199999999996}
+{"kind": "judge", "deck": "Checked against the transcript (1/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.0612572}
+{"kind": "judge", "deck": "Checked against the transcript (2/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.0137682}
+{"kind": "judge", "deck": "Checked against the transcript (2/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.0142882}
+{"kind": "judge", "deck": "Honesty", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00348283}
+{"kind": "judge", "deck": "Honesty", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00358963}
+{"kind": "judge", "deck": "Honesty", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00363313}
+{"kind": "judge", "deck": "Honesty", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00380163}
+{"kind": "judge", "deck": "Honesty", "model": "claude-haiku-5-5", "status": "done", "cost": 0.004107330000000001}
+{"kind": "judge", "deck": "Honesty", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0046583300000000005}
+{"kind": "judge", "deck": "Honesty", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0046418300000000004}
+{"kind": "judge", "deck": "Honesty", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00488533}
+{"kind": "judge", "deck": "Content", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00167729}
+{"kind": "judge", "deck": "Content", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0038759300000000005}
+{"kind": "judge", "deck": "Honesty", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00272251}
+{"kind": "judge", "deck": "Content", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00254979}
+{"kind": "judge", "deck": "Content", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00478663}
+{"kind": "judge", "deck": "Content", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0029552500000000004}
+{"kind": "judge", "deck": "Content", "model": "claude-haiku-5-5", "status": "done", "cost": 0.005102130000000001}
+{"kind": "judge", "deck": "Content", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00375975}
+{"kind": "judge", "deck": "Content", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0027005}
+{"kind": "judge", "deck": "Content", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0033185000000000003}
+{"kind": "judge", "deck": "Structure (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00483053}
+{"kind": "judge", "deck": "Structure (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00604203}
+{"kind": "judge", "deck": "Structure (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.003934470000000001}
+{"kind": "judge", "deck": "Structure (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00255893}
+{"kind": "judge", "deck": "Structure (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.006151229999999999}
+{"kind": "judge", "deck": "Structure (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0051372300000000004}
+{"kind": "judge", "deck": "Structure (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00412843}
+{"kind": "judge", "deck": "Structure (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00398418}
+{"kind": "judge", "deck": "Structure (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00381318}
+{"kind": "judge", "deck": "Structure (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00232473}
+{"kind": "judge", "deck": "Structure (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00470923}
+{"kind": "judge", "deck": "Structure (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0025512300000000003}
+{"kind": "judge", "deck": "Structure (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0022131900000000003}
+{"kind": "judge", "deck": "Structure (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0047024300000000005}
+{"kind": "judge", "deck": "Formatting", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00299243}
+{"kind": "judge", "deck": "Structure (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00281019}
+{"kind": "judge", "deck": "Structure (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0016134399999999998}
+{"kind": "judge", "deck": "Formatting", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00077239}
+{"kind": "judge", "deck": "Formatting", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00115139}
+{"kind": "judge", "deck": "Structure (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0043329300000000005}
+{"kind": "judge", "deck": "Structure (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00257994}
+{"kind": "judge", "deck": "Formatting", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00121485}
+{"kind": "judge", "deck": "Formatting", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00149585}
+{"kind": "judge", "deck": "Formatting", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0036116300000000002}
+{"kind": "judge", "deck": "Formatting", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00335213}
+{"kind": "judge", "deck": "Formatting", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0018170999999999999}
+{"kind": "judge", "deck": "Formatting", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0020226}
+{"kind": "judge", "deck": "Wording", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00490783}
+{"kind": "judge", "deck": "Wording", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00326101}
+{"kind": "judge", "deck": "Wording", "model": "claude-haiku-5-5", "status": "done", "cost": 0.004583530000000001}
+{"kind": "judge", "deck": "Wording", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00240647}
+{"kind": "judge", "deck": "Wording", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00280251}
+{"kind": "judge", "deck": "Wording", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0019982199999999998}
+{"kind": "judge", "deck": "Wording", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0033564700000000003}
+{"kind": "judge", "deck": "Wording", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00505653}
+{"kind": "judge", "deck": "Wording", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0038062200000000003}
+{"kind": "judge", "deck": "Asking (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00315128}
+{"kind": "judge", "deck": "Asking (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00586573}
+{"kind": "judge", "deck": "Asking (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00587993}
+{"kind": "judge", "deck": "Asking (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00398978}
+{"kind": "judge", "deck": "Asking (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00621643}
+{"kind": "judge", "deck": "Asking (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00510024}
+{"kind": "judge", "deck": "Asking (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00492874}
+{"kind": "judge", "deck": "Asking (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00340549}
+{"kind": "judge", "deck": "Asking (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0045549300000000004}
+{"kind": "judge", "deck": "Asking (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00507643}
+{"kind": "judge", "deck": "Asking (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0031928900000000003}
+{"kind": "judge", "deck": "Asking (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.004257489999999999}
+{"kind": "judge", "deck": "Asking (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00201485}
+{"kind": "judge", "deck": "Asking (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00278685}
+{"kind": "judge", "deck": "Asking (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00589163}
+{"kind": "judge", "deck": "Opinion", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0016192099999999998}
+{"kind": "judge", "deck": "Opinion", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0018197099999999998}
+{"kind": "judge", "deck": "Opinion", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00442583}
+{"kind": "judge", "deck": "Asking (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0035805999999999998}
+{"kind": "judge", "deck": "Asking (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.006086629999999999}
+{"kind": "judge", "deck": "Opinion", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00465553}
+{"kind": "judge", "deck": "Asking (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.004512599999999999}
+{"kind": "judge", "deck": "Opinion", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00209917}
+{"kind": "judge", "deck": "Opinion", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00203217}
+{"kind": "judge", "deck": "Opinion", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00376353}
+{"kind": "judge", "deck": "Opinion", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0015114199999999999}
+{"kind": "judge", "deck": "Opinion", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0018799199999999998}
+{"kind": "judge", "deck": "Continuity (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.006007329999999999}
+{"kind": "judge", "deck": "Continuity (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0033662600000000003}
+{"kind": "judge", "deck": "Continuity (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00331672}
+{"kind": "judge", "deck": "Continuity (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0038927600000000003}
+{"kind": "judge", "deck": "Continuity (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00628103}
+{"kind": "judge", "deck": "Continuity (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00655853}
+{"kind": "judge", "deck": "Continuity (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00453497}
+{"kind": "judge", "deck": "Continuity (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0057632199999999995}
+{"kind": "judge", "deck": "Continuity (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0027219400000000004}
+{"kind": "judge", "deck": "Continuity (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0030899400000000002}
+{"kind": "judge", "deck": "Continuity (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00553143}
+{"kind": "judge", "deck": "Continuity (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.004815130000000001}
+{"kind": "judge", "deck": "Continuity (1/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00505897}
+{"kind": "judge", "deck": "Continuity (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0025529000000000003}
+{"kind": "judge", "deck": "The work", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00255633}
+{"kind": "judge", "deck": "The work", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00059681}
+{"kind": "judge", "deck": "Continuity (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0025469000000000004}
+{"kind": "judge", "deck": "The work", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00086931}
+{"kind": "judge", "deck": "The work", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00265953}
+{"kind": "judge", "deck": "Continuity (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00283465}
+{"kind": "judge", "deck": "Continuity (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.005232130000000001}
+{"kind": "judge", "deck": "The work", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00310603}
+{"kind": "judge", "deck": "The work", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00315353}
+{"kind": "judge", "deck": "The work", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00110977}
+{"kind": "judge", "deck": "The work", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00050652}
+{"kind": "judge", "deck": "The work", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00089952}
+{"kind": "judge", "deck": "Continuity (2/2)", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0033516500000000003}
+{"kind": "judge", "deck": "Listening", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00318083}
+{"kind": "judge", "deck": "Listening", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00120202}
+{"kind": "judge", "deck": "Listening", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0036330299999999998}
+{"kind": "judge", "deck": "Listening", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00196306}
+{"kind": "judge", "deck": "Listening", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00400083}
+{"kind": "judge", "deck": "Listening", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00328253}
+{"kind": "judge", "deck": "Listening", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00175252}
+{"kind": "judge", "deck": "Thinking", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00346213}
+{"kind": "judge", "deck": "Listening", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00195777}
+{"kind": "judge", "deck": "Thinking", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0017382499999999998}
+{"kind": "judge", "deck": "Thinking", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00154975}
+{"kind": "judge", "deck": "Thinking", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0034838300000000003}
+{"kind": "judge", "deck": "Listening", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0014552699999999998}
+{"kind": "judge", "deck": "Thinking", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00176421}
+{"kind": "judge", "deck": "Thinking", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00203071}
+{"kind": "judge", "deck": "Checked against the transcript (1/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.0978572}
+{"kind": "judge", "deck": "Thinking", "model": "claude-haiku-5-5", "status": "done", "cost": 0.0015199599999999999}
+{"kind": "judge", "deck": "Checked against the transcript (1/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.0999052}
+{"kind": "judge", "deck": "Thinking", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00423333}
+{"kind": "judge", "deck": "Checked against the transcript (2/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.0993932}
+{"kind": "judge", "deck": "Checked against the transcript (1/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.0987452}
+{"kind": "judge", "deck": "Checked against the transcript (2/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.1047612}
+{"kind": "judge", "deck": "Thinking", "model": "claude-haiku-5-5", "status": "done", "cost": 0.00269146}
+{"kind": "judge", "deck": "Checked against the transcript (2/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.1016212}
+{"kind": "judge", "deck": "Checked against the transcript (2/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.0154434}
+{"kind": "judge", "deck": "Checked against the transcript (2/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.0201092}
+{"kind": "judge", "deck": "Checked against the transcript (1/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.019473999999999998}
+{"kind": "judge", "deck": "Checked against the transcript (1/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.020834000000000005}
+{"kind": "judge", "deck": "Checked against the transcript (2/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.023488400000000003}
+{"kind": "judge", "deck": "Checked against the transcript (2/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.0234092}
+{"kind": "judge", "deck": "Checked against the transcript (2/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.0240484}
+{"kind": "judge", "deck": "Checked against the transcript (2/2)", "model": "claude-opus-5-5", "status": "done", "cost": 0.0229034}
