@@ -42,7 +42,6 @@ assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
 
 - [YES] Change the output style and `codex/AGENTS.md` together. They differ only in the frontmatter and the question-tools line.
 - [YES] Record every change under `[Unreleased]` in `CHANGELOG.md`.
-- [WHEN] A change alters what a section promises: update "The rules" in both READMEs.
 - [WHEN] A change alters the thinking behind the rules: update `PHILOSOPHY.md`.
 - [WHEN] A change alters the eval's scope: update `eval/rubric.md` and `eval/tasks.json`.
 

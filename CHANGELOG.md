@@ -8,6 +8,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 ### Added
 - README: a benchmark badge and section with the latest score against no plugin.
 
+### Removed
+- README: "The rules" and "What actually changes". "Tune it" links the rule file instead.
+
 ## [0.1.15] - 2026-11-12
 
 ### Added

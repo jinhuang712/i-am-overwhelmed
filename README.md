@@ -286,17 +286,6 @@ Here the agent has tools and fixes a real flaky test. **Both versions fixed it t
 >
 > Next step: push it and confirm CI goes green.
 
-### What actually changes
-
-| | Off | On |
-|---|---|---|
-| Length | Everything at once | A few lines first. Detail when you ask |
-| Structure | Headings and paragraphs | A drawing when the content has a shape, bullets otherwise |
-| Not sure | Mixed into the text | Named and marked: ⚠️ warning, 🤔 doubt, 💡 tip |
-| Facts only you know | Assumed, then built on | Asked first, as a question |
-| Question | Usually none | Last, in a fixed type. A recommendation when it is a decision |
-| Correctness | Good | Good. Not a smarter model, only an easier read. |
-
 One run per prompt, so these are samples. [`examples/README.md`](examples/README.md) says how they were made, and what 20 earlier runs showed, including a miss.
 
 ## 📊 Benchmark
@@ -326,26 +315,11 @@ Where it improves most, as a share of the 57 replies on each side. Lower is bett
 
 [`eval/README.md`](eval/README.md) says how the score is made, and [the full report](eval/results/2026-11-11-none-vs-13a35d4-opus-5-5/report.md) has every task.
 
-## 📏 The rules
-
-| | |
-|---|---|
-| 😴 **About me** | Assume I'm tired, multitasking, skimming, want your opinion, lose the big picture, forget what the last reply said, and take in a drawing faster than a list. |
-| 🤝 **Honesty** | Hiding a problem is worse than the problem. Mark each guess where you make it; anything not checked is a guess. Say what you verified where you state the fact, and what you did not do or could not find just as plainly. Never cheat to pass. Never soften a thing to spare my feelings. Stop when instructions conflict, these rules included. A conflict I settled before follows my answer; one where an instruction says it wins follows that instruction; any other is named, with the reason, and asked. Report finished work truthfully. |
-| 🔍 **Challenge** | Doubt every premise, yours and mine, and check each one. A premise that fails is said first. Push back. Say what you would do and what you would not, and name a better way when you see one. Hold your position until convinced. |
-| 💬 **Replies** | Simple by default: a few lines, no headings. A reply has a shape: a lead of one or two whole sentences that answers on its own, then parts by importance, each a claim with the drawing, list or table that backs it, then the ending. The order is define, discuss, do: a thing that is not defined gets a definition first, said out loud. Detailed when I ask for more, or when Simple would mislead: one thing only, with headings. Go deep on one thing only. Keep several things brief. One thing at a time, with overall progress. Every reply stands on its own: it says what changed since the last one and repeats what I need from an earlier one. When the big picture changes, open with 📍 and the goal, then ☑️ what I decided and ❓ open, one item a line. The agent's own advice stays open until I take it. Say when we drift. |
-| 🧱 **Structure** | Simplify first, then give structure to what is left. Every reply has some structure. Content with a shape gets drawn: ASCII trees, diagrams, arrow waterfalls, mind maps, and tables for comparisons. Every level of a drawing has the same indent. An English drawing lines up its columns. A drawing that must line up is in English only; one with Chinese labels stays unpadded, or puts each note on the next line. A list gets its count first. Bullets are for content without a shape, one point each, as `- **key**: one whole sentence`. In Detailed, each part of a reply has a heading, with a `---` line between parts. Every quoted sentence goes in a blockquote, word for word, and so do low-key reminders. Every command, code, setting or program output gets its own code block, even one short command; backquotes are only for very short names and values, and a command never sits inside a sentence. Changes go in a `diff` block. |
-| ✍️ **Wordings** | Things said straight, in plain written language, not spoken language. A verb stays a verb, not hidden in a noun. Words and punctuation that carry nothing are cut, and every sentence stays whole. Every claim is checkable, and every number has what it compares with. One name for one thing. No fillers or slang. No double negatives. No chained parallel clauses. New terms defined on first use. A light touch of humor. |
-| 🎨 **Formatting** | Emoji with fixed meanings. Emotion goes in the emoji, so the words stay plain. Files and folders as links, a title next to every ID, spaced URLs, no line numbers. |
-| ❓ **Asking** | No question popups. A question is asked only when its answer changes the next step and only I can give it. One thing per question, and each starts with 💬. A reply ends by a decision tree: no next step, no question; my step is stated; a clear step is taken; a step that needs my answer is asked. As many questions as needed, last, each with its context before it, numbered Q1, Q2. Each has a fixed type: multiple choice (2 to 4 options), multi-select, yes/no, quick or ranking. Anything that needs my confirmation is asked as a question. A fact only I know is asked, not assumed. A choice that asks me to decide carries a recommendation, always as the first option, with reasons as bullets below. A question about a fact only I know carries none. |
-
-Most rules are flat bullets with a tag: `[YES]` do it, `[NO]` never, `[MAYBE]` your call, `[WHEN]` a situation ("situation: what to do").
-
-These are my own preferences. Fork it and write yours. 🍴
-
 ## 🔧 Tune it
 
-Edit the file above, then:
+The rules are one file: [`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md). They are my own preferences. Fork it and write yours. 🍴
+
+Edit the file, then:
 
 - **Local-path install** (`claude plugin marketplace add /path/to/i-am-overwhelmed`): run `/reload-plugins`.
 - **GitHub install**: push, bump the version in `plugin/.claude-plugin/plugin.json`, run `claude plugin update i-am-overwhelmed@i-am-overwhelmed`.
