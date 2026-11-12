@@ -65,6 +65,7 @@ Later
 - [ ] The four parked lines: find a wording that holds, or a stronger judge.
 - [ ] "three or more" in the line on chains of cause and effect is a number the agent picked.
 - [ ] Make `yesno` the default rubric once the lines are checked.
+- [ ] A red flag for a reply in a language other than the user's message. The owner named it on 2026-11-12; the rubric has no line for it yet.
 
 ## The rules, for when the rubric is ready
 
@@ -73,6 +74,10 @@ Faults the rubric check showed, on 20 replies
 - [ ] Three or more things in one sentence: 14 of 20, with and without the plugin. The owner read the rule "never chain parallel clauses; split them into bullets" and its wording is right. It is not followed. Look again after an eval.
 - [ ] File and folder names as links: the rule now says "each time you name it". With the plugin, replies linked the first mention only. See after an eval whether the later mentions are linked.
 - [ ] Replies cut too short to follow. No rule is changed for now: the replies that were too short came from a session on the old rules, so nothing points at one line. Three rubric lines watch for it ("a verdict with no reason", "a coined term not explained again", "a number and a short label"). Change a rule only when an eval shows them rising under the new rules.
+
+From the owner, 2026-11-12
+
+- [ ] Reply in the language of the user's message. In `fix-test-zh` the reply with no plugin came back in English in 3 of 3 runs, to a Chinese prompt; the plugin's replies were in Chinese. The owner counts a reply in another language as a red flag. Add the rule to the output style and `codex/AGENTS.md` together.
 
 Conflicts the agent reported in real sessions
 
