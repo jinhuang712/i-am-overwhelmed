@@ -11,12 +11,14 @@ Written for the session that takes this work over. Read this part first, then [`
 Where things stand
 
 - 0.1.15 is released, pushed and tagged `v0.1.15` on 2026-11-12. CI passed, and the owner's profile runs it. `CHANGELOG.md` has one sentence a change.
-- Since then, on `master` and not pushed: the README benchmark, "What you get", examples from the benchmark, and eval tool work. See `[Unreleased]` in `CHANGELOG.md`.
+- Since then, on `master` and not pushed: the README benchmark, "What you get", examples from the benchmark, eval tool work, and ten rule changes. They are listed under "The next step".
+- The rule file has 88 rules. On 2026-11-12 the owner set its boundary: it rules the talk, such as when to ask and when to stop, and leaves how the work is done to the host.
+- The `CHANGELOG.md` is written at a release, from the commits. `[Unreleased]` holds entries up to 2026-11-12; sort them at the next release.
 - The README benchmark is no plugin against the rules of 13a35d4: `results/2026-11-11-none-vs-13a35d4-opus-5-5`, 19 tasks, 3 runs each, overall 77.2 against 82.1. 0.1.14 is no longer compared.
 - `eval/rubric-yesno.md` is a draft: 119 lines in eleven decks (93 bad signs, 18 good signs, 8 red flags), 43 parked. It judges the reply only, and what the reader gets, not the plugin's own formats. A red flag names a harm.
 - `eval.py --reuse <results folder>` takes finished runs from an earlier eval; the benchmark folder covers 114 of the 171 runs of a full run with no plugin.
 - `rubric_check.py` now judges the 20 replies of its last round, so a round costs only the decks that changed. `--strong` checks the 🔎 lines on Opus.
-- 55 unit tests pass: `python3 -m unittest discover eval/tests`.
+- 56 unit tests pass: `python3 -m unittest discover eval/tests`.
 
 Paid runs, held for the next release (see "Eval" in `CLAUDE.md`: one eval per release, on a settled rubric)
 
@@ -49,10 +51,18 @@ How the owner works, where the files do not say it
 - Compare against no plugin. The owner stopped comparing with 0.1.14 on 2026-11-11.
 - A rule whose fault does not show is not dead weight. The owner keeps it as a backstop: "never use double negatives" and "never soften" stayed on 2026-11-12, though neither side of the benchmark broke them. Do not propose to drop a rule for that reason alone.
 - The owner counts reruns as waste: $188 of evals by 2026-11-12, at least $66 of it on runs and judging done again. Propose the smallest step, and name the decision a paid run can change.
+- The README may leave a weak point out. It may not claim what our own numbers contradict. The owner turned down a list of where the plugin does worse ("我们不必如此对自己苛刻"); those numbers go to `eval/FINDINGS.md`.
+- Two short rules are better than one long rule. Remove a line that repeats; do not merge lines.
+- Keep the owner's wording of a rule. Cut around it.
 
 The next step
 
-- No paid run now. Collect the rule changes for the next release: the language rule and the line on what counts as decided, both in since 2026-11-12. Then the paid runs above, in their order.
+- No paid run now, and no hurry for the release. The owner wants the free work first, then a push.
+- Ten rule changes wait for the release eval, all since `v0.1.15`:
+  - Added: "reply in the language of my message".
+  - Reworded: "call a thing decided only when I verbally agreed on it"; "never hide what you skipped, loosened or retried to make something pass", which was "never cheat"; a bare number of any kind needs its title, not only a question number; a decision of the user's gets a recommended answer, which was "at least one option".
+  - Cut: "check each one" after "doubt every premise"; "ask as many questions as you need"; "never overuse emoji"; "go deep on one thing only; keep several things brief"; the `[MAYBE]` tag.
+- Before the release benchmark, settle the eight rubric lines listed under "Not yet tested". Then the paid runs above, in their order.
 
 ## The rubric, `eval/rubric-yesno.md`
 
@@ -113,7 +123,8 @@ Carried over from the evals of 2026-11-10
 - [ ] "Anything you did not check is a guess" held in part: the next run still stated two inferences as facts. No change for now; one run is the evidence, and the rule is plain.
 - [ ] "Never put a command inside a sentence" worked on one task and not on another. No change for now; the wording is not the cause.
 - [ ] A ✅ on a question that can be read as a fact or as a decision. No change; the owner read the tree and kept it.
-- [ ] The rule file grew from 961 words in 0.1.13 to over 1,400, with three trees. Look for lines to remove.
+- [ ] The rule file grew from 961 words in 0.1.13 to 1,775. A pass on 2026-11-12 read every rule against the benchmark's lines and took 91 rules to 88, 1,743 words. Most candidates turned out to be the rubric's problem, not the rule's. See `eval/FINDINGS.md`.
+- [ ] In the release eval, look at what the cuts of 2026-11-12 did: "asks a thing it could decide itself" (8 of 57 before), a yes or no question with no view of the agent's, an item or a step named by its number alone, and how many emoji a reply carries without "never overuse emoji".
 - [ ] Rules against other instructions. Checked on 2026-11-11 against the owner's global CLAUDE.md, this project's, Claude Code's own, and the skills loaded in that session. Two real conflicts, both about the form of a reply: line numbers (the rule says the plugin wins) and a skill that asks with a built-in question tool (not settled). Other skills and other projects were not read.
 
 Open questions
@@ -129,6 +140,10 @@ Open questions
 - [ ] The account email still reaches every session, and a run's saved session keeps it; a judge's no longer is saved. A run with an API key under `--bare` might avoid it; not tried.
 - [ ] `eval/rubric.md`, the old scale, still judges what the agent did (R1, R6, section A). The owner set the scope to the reply on 2026-11-11.
 
+- [ ] A free command for tuning: for a results folder, the lines with the widest gap between the two sides, and the judges' notes on each hit. It was done by hand three times on 2026-11-12 and gave every rule change of that day. The owner put it off.
+
 ## Release and upkeep
 
-- [ ] `master` is ahead of `origin` with the work since 0.1.15. Push when the owner says.
+- [ ] `master` is ahead of `origin` with the work since 0.1.15. The owner pushes when the open free work is done.
+- [ ] Four rules override what the host does: no line numbers, file names as links, spaces at a bare URL, no built-in question tools. The owner counts each as a clear gain; one reason is that AskUserQuestion is slow. `PHILOSOPHY.md` gives no reason for them. Asked twice on 2026-11-12, not answered.
+- [ ] The benchmark's tasks: 17 of 19 are in Chinese, every run is on Opus, and the Codex rules never ran. Weigh this with the release benchmark.
