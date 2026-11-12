@@ -7,6 +7,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 - README: a benchmark badge and section with the latest score against no plugin.
+- README: "What you get" adds what the owner noticed beyond the replies: the agent's work changes too.
 
 ### Removed
 - README: "The rules" and "What actually changes". "Tune it" links the rule file instead.

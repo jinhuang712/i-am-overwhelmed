@@ -26,6 +26,17 @@ You are tired, you are doing three other things, and you skim. This plugin makes
 - **Less to read**: the answer comes first, and the detail waits until you ask for it.
 - **No late surprises**: what is broken, guessed or unverified is said now, not found later.
 
+**It changes the work, too.** The plugin sets only the output style, and its rules are about the reply. In daily use, the agent's behavior changed more than I expected. These are my impressions, not measurements:
+
+- **More honest**: it says what it did not check. Here the benchmark agrees: 70% of replies, against 18%.
+- **Checks before it acts**: it investigates before it reasons or changes anything.
+- **More curious**: it asks more, and thinks one step further.
+- **Pushes back**: it raises objections and offers a better way.
+- **Plans instead of dumping**: it splits a task and plans it, instead of pouring out every conclusion at once.
+- **Feels quicker**: it overthinks less, gets going sooner, and finds the point earlier.
+
+Why, I can only guess, since I cannot see inside the model: a rule on what a reply must say, such as what was checked, may push the model to do what it takes to say it.
+
 ## 📦 Install
 
 **Install for Claude Code**
@@ -66,7 +77,7 @@ Claude Code
 └── hooks, skills, tools       untouched
 ```
 
-It changes how Claude talks with you, and leaves how Claude does the work alone. It is a set of instructions, so expect most replies to follow it, not all.
+Its rules are about how Claude talks with you, and leave the engineering to Claude Code's own instructions. The work changes anyway: see [What you get](#-what-you-get). It is a set of instructions, so expect most replies to follow it, not all.
 
 That is one file per tool. For Claude Code it is [`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md), the plugin's output style, with `force-for-plugin` and `keep-coding-instructions`, so it stays after compaction and keeps Claude Code's own instructions. For Codex it is [`codex/AGENTS.md`](codex/AGENTS.md), the same rules without the Claude Code parts.
 
