@@ -41,7 +41,6 @@ assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
 # Changing Rules
 
 - [YES] Change the output style and `codex/AGENTS.md` together. They differ only in the frontmatter and the question-tools line.
-- [YES] Record every change under `[Unreleased]` in `CHANGELOG.md`.
 - [WHEN] A change alters the thinking behind the rules: update `PHILOSOPHY.md`.
 - [WHEN] A change alters the eval's scope: update `eval/rubric.md` and `eval/tasks.json`.
 
@@ -68,7 +67,7 @@ assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
 
 # Release
 
-- [YES] Bump `plugin/.claude-plugin/plugin.json`, then move `[Unreleased]` to the new version in `CHANGELOG.md`.
+- [YES] Bump `plugin/.claude-plugin/plugin.json`, then write the version's entries in `CHANGELOG.md` from the commits since the last release, one sentence a change.
 - [YES] Name the commit `Release <version>: <summary>`.
 - [YES] Keep one description across `plugin.json`, `marketplace.json` and the output style.
 - [WHEN] A change touches `plugin/` or `.claude-plugin/`: expect the plugin load check in CI.
