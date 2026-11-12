@@ -6,6 +6,7 @@ lines marked ⚙️ are answered by a script in checks.py.
 
 N and NA both mean "the reply did not do it", so an answer is stored as Y or N.
 Every call is cached in the task's blind/ folder: a resume asks only what is missing.
+A call that fails leaves what it said next to the cache, as <hash>.failed.txt.
 """
 import collections
 import hashlib
@@ -131,14 +132,18 @@ def ask(deck, samples, k, model, cap, cache, budget):
                "--tools", "", "--output-format", "json", "--max-budget-usd", f"{cap:.2f}"]
         res = subprocess.run(cmd, cwd=judge_folder(), env=clean_env(), input=text,
                              capture_output=True, text=True)
+        failed = hit.with_suffix(".failed.txt")  # What a failed call said, so its cause can be read.
         try:
             data = json.loads(res.stdout)
         except ValueError:
+            failed.write_text(res.stdout + res.stderr)
             return "failed", None
         cost = data.get("total_cost_usd", cap)
         answers = parse(data.get("result"), [line["id"] for line in deck["lines"]], [s[0] for s in samples])
         if answers is None:
+            failed.write_text(str(data.get("result") or res.stdout))
             return "failed", None
+        failed.unlink(missing_ok=True)
         notes = CSV_BLOCK.sub("", data.get("result") or "").strip()
         hit.write_text(json.dumps({"answers": answers, "notes": notes, "deck": deck["name"]}, ensure_ascii=False))
         return "done", answers

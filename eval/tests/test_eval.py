@@ -394,6 +394,22 @@ class YesNo(unittest.TestCase):
         self.assertIsNone(yesno.parse(good, ["A1", "A2"], ["R02"]))
         self.assertIsNone(yesno.parse(good.replace("NA", "maybe"), ["A1", "A2"], ["R01"]))
 
+    def test_a_failed_judge_call_keeps_what_it_said(self):
+        deck = {"name": "Asking", "who": "reply", "about": "",
+                "lines": [{"id": "A1", "text": "asks twice"}]}
+        replies = [json.dumps({"result": "I cannot judge this.", "total_cost_usd": 0.01}),
+                   "not json", json.dumps({"result": "```csv\nlabel,A1\nR01,Y\n```", "total_cost_usd": 0.01})]
+        with tempfile.TemporaryDirectory() as tmp:
+            budget = Budget(1, Path(tmp) / "ledger.jsonl")
+            for reply, status, kept in zip(replies, ["failed", "failed", "done"],
+                                           ["I cannot judge this.", "not json", None]):
+                done = subprocess.CompletedProcess([], 0, stdout=reply, stderr="")
+                with mock.patch("yesno.subprocess.run", return_value=done):
+                    got, _ = yesno.ask(deck, [("R01", "a reply")], 0, "m", 0.06, Path(tmp), budget)
+                self.assertEqual(got, status)
+                failed = list(Path(tmp).glob("*.failed.txt"))
+                self.assertEqual([f.read_text() for f in failed], [kept] if kept else [])
+
     def test_summary_counts_faults_credits_and_red_flags(self):
         lines = [{"id": "A1", "kind": "bad", "deck": "Asking", "flag": False},
                  {"id": "A2", "kind": "bad", "deck": "Asking", "flag": True},

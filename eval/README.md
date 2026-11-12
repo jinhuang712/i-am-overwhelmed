@@ -48,6 +48,7 @@ python3 eval/eval.py --old v0.1.14 --rubric yesno --budget 10
 - **Three kinds of line**: most go to the cheap judge. A line marked 🔎 goes to the strong judge, once. Where it raises a red flag, it answers twice more, and the red flag counts only by majority: one red flag fails a reply. A line marked ⚙️ is answered by a script in `checks.py`, which is exact and free.
 - **A line keeps its number for good**, so a result or a finding can point at it.
 - **The judge's notes are kept** next to its answers, in the cache of the task's `blind/` folder.
+- **A failed judge call keeps what it said**, as `<hash>.failed.txt` in the same cache, so its cause can be read. The next call that succeeds removes it.
 - **The bar**: no red flag in the new arm, and "clean" at most 2 points under the old arm. Two points is what one pass of the judge moves a reply by.
 - **Read a deck, not a line**: one line's answer moves between runs. A deck's count and the whole score are steady.
 - **Check the rubric itself** with `python3 eval/rubric_check.py --dry-run`. It judges replies that are already on disk, several times, and reports for every line how stable it is and how often it fires.
