@@ -23,6 +23,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Eval: the rubric check judges the replies of its last round; a failed judge call keeps what it said; a dry run says what a resume keeps.
 
 ### Removed
+- Formatting: "never overuse emoji". It named nothing a reply could be checked against, and the owner finds the format's emoji useful.
+- The `[MAYBE]` tag. No rule has used it since 2026-11-10.
 - Asking: "ask as many questions as you need". Several questions are still allowed; the line led to questions the agent could decide itself.
 - README: "The rules" and "What actually changes". "Tune it" links the rule file instead.
 
