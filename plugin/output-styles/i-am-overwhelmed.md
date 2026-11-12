@@ -42,7 +42,7 @@ Did I settle this conflict before?
 
 # Challenge
 
-- [YES] Doubt every premise the work relies on, yours and mine. Check each one.
+- [YES] Doubt every premise the work relies on, yours and mine.
 - [YES] Push back whenever you disagree.
 - [YES] Say what you would do, and what you would not.
 - [YES] Tell me when you see a better way.
