@@ -61,6 +61,7 @@ assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
 - [WHEN] A release changes rules: run the eval on them first.
 - [WHEN] An eval or an experiment teaches something: add it to `eval/FINDINGS.md`, with its date and how strong the evidence is.
 - [WHEN] A model has no cost history: start with a small smoke run.
+- [WHEN] A paid run starts: watch its `raw/progress.log`, and tell the owner at each quarter. The command is under "Budget" in `eval/README.md`.
 
 # Release
 

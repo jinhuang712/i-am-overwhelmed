@@ -102,7 +102,7 @@ The runs then use that profile's login and its usage limit. The eval adds its ow
 
 ## Budget
 
-Every task in [`tasks.json`](tasks.json) has a `budget`: the most one run of it may cost. A one-turn chat run gets $0.10 to $0.20 and the four-turn agent run gets $1.80, so a cheap task cannot starve a costly one. Judging keeps $0.30 for each task. `--dry-run` adds the limits up:
+Every task in [`tasks.json`](tasks.json) has a `budget`: the most one run of it may cost. A one-turn chat run gets $0.10 to $0.20 and the four-turn agent run gets $1.80, so a cheap task cannot starve a costly one. Judging keeps $0.30 for each task, and $0.50 with `--rubric yesno`. `--dry-run` adds the limits up:
 
 ```
 task limits: $27.75 for the runs + $5.10 for judging = $32.85 at most
@@ -111,11 +111,17 @@ task limits: $27.75 for the runs + $5.10 for judging = $32.85 at most
 `--budget` is still the limit for the whole eval. Each limit is about 2.5 times the highest cost measured, and 1.3 times for the costly `session-zh`, on Opus 5.5 in the full run of 2026-11-10. That run, with three arms and one run each, cost about $11 for the runs and $2.50 for judging when nothing went wrong. Set the limits again when the model changes.
 
 
-- **The limit covers everything**: runs and judging. $0.30 a task is kept back for judging, and never more than half the limit.
+- **The limit covers everything**: runs and judging. $0.30 a task is kept back for judging ($0.50 with `--rubric yesno`), and never more than half the limit.
 - **Every call has a cap**: each `claude -p` gets `--max-budget-usd`, and it holds that cap before it starts.
 - **A stop stays usable**: whole rounds run first, so the arms stay balanced. Finished runs still get judged, and the report says the eval is incomplete.
 - **A resume keeps judging money only for open tasks**: a task with all its runs done and judged needs none. Before, a resume kept $0.30 back for every task again, and a costly run could not get its hold.
-- **A run can be followed**: every finished run prints a line and adds it to `raw/progress.log` in the results folder. `tail -f` shows it live.
+- **A run can be followed**: every finished run prints a line and adds it to `raw/progress.log` in the results folder. `tail -f` shows it live. This prints a line at each quarter only, for a watch that reports to the owner:
+
+  ```
+  tail -n 0 -F <results folder>/raw/progress.log | awk -F'[/ ]' '{q = int(4 * $1 / $2); if (q > last) {print; fflush(); last = q}}'
+  ```
+
+  `rubric_check.py` writes the same kind of line to `results/rubric-check/raw/progress.log`.
 - **Resume is the same command**: finished runs are kept. Their cost stays in `ledger.jsonl`, so the limit applies across both sessions.
 - **A resume follows a change**: the scores keep a fingerprint of `rubric-yesno.md`, so after the rubric changes a resume judges again; the answers to decks that did not change come from the cache. A run done again under its old name gets new blind samples: `runs.json` keeps a hash of each run's turns. On 2026-11-11 both had to be done by hand.
 - **More money is a higher `--budget`**: new runs join the old ones, and the task is judged again.
@@ -136,11 +142,19 @@ task limits: $27.75 for the runs + $5.10 for judging = $32.85 at most
 | [`budget.py`](budget.py) | The limit, the ledger and the estimate |
 | [`run.py`](run.py) | One run of a task |
 | [`blind.py`](blind.py) | Blind samples and the label mapping |
-| [`judge.py`](judge.py) | The model judge |
+| [`judge.py`](judge.py) | The model judge for `scale` |
+| [`yesno.py`](yesno.py) | The judges for `yesno`: decks, passes, the strong judge, the cache |
+| [`reuse.py`](reuse.py) | `--reuse`: finished runs from another results folder |
 | [`score.py`](score.py) | Unblinds and summarises the scores |
 | [`checks.py`](checks.py) | Mechanical checks: line references, negations, paragraph-only replies, 📍 anchors, drawings, tables, quotes, headings, replies that end asking, and lines. Free |
 | [`tasks.json`](tasks.json) | The tasks. A task with several `turns` continues one session |
-| [`rubric.md`](rubric.md) | The dimensions |
+| [`rubric.md`](rubric.md) | The dimensions of `scale` |
+| [`rubric-yesno.md`](rubric-yesno.md) | The lines of `yesno`, a draft |
+| [`rubric_check.py`](rubric_check.py) | Checks the rubric: how stable each line is, and how often it fires |
+| [`flag_check.py`](flag_check.py) | Checks the red flags against replies whose answer the owner gave |
+| `flag-cases/` | Those replies and answers, git-ignored |
+| [`FINDINGS.md`](FINDINGS.md) | What the evals taught us |
+| [`results/`](results/) | One folder per eval: report, ledger, scores, mappings. `raw/` is git-ignored |
 | [`fixtures/`](fixtures/) | `many-bugs/`, `free-text-due/`, and their answer keys, kept outside them |
 | [`tests/`](tests/) | Tests with a stub `claude`, so they cost nothing: `python3 -m unittest discover eval/tests` |
 
