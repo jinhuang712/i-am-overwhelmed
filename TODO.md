@@ -10,17 +10,18 @@ Written for the session that takes this work over. Read this part first, then [`
 
 Where things stand
 
-- 0.1.15 is released, pushed and tagged `v0.1.15` on 2026-11-12. CI passed, and the owner's profile runs it. `CHANGELOG.md` has one sentence a change.
-- Since then, on `master` and not pushed: the README benchmark, "What you get", examples from the benchmark, eval tool work, and ten rule changes. They are listed under "The next step".
+- 0.1.16 is released, pushed and tagged `v0.1.16` on 2026-11-12. `CHANGELOG.md` has one sentence a change.
+- The ten rule changes of 0.1.16 went out with no eval. The owner made this exception to "a release changes rules: run the eval on them first": the next benchmark was not urgent, and the owner wants to work with the new rules first.
+- 0.1.16 also has the README benchmark, "What you get", examples from the benchmark, and eval tool work.
 - The rule file has 88 rules. On 2026-11-12 the owner set its boundary: it rules the talk, such as when to ask and when to stop, and leaves how the work is done to the host.
-- The `CHANGELOG.md` is written at a release, from the commits. `[Unreleased]` holds entries up to 2026-11-12; sort them at the next release.
+- The `CHANGELOG.md` is written at a release, from the commits. It has no `[Unreleased]` part.
 - The README benchmark is no plugin against the rules of 13a35d4: `results/2026-11-11-none-vs-13a35d4-opus-5-5`, 19 tasks, 3 runs each, overall 77.2 against 82.1. 0.1.14 is no longer compared.
 - `eval/rubric-yesno.md` is a draft: 119 lines in eleven decks (93 bad signs, 18 good signs, 8 red flags), 43 parked. It judges the reply only, and what the reader gets, not the plugin's own formats. A red flag names a harm.
 - `eval.py --reuse <results folder>` takes finished runs from an earlier eval; the benchmark folder covers 114 of the 171 runs of a full run with no plugin.
 - `rubric_check.py` now judges the 20 replies of its last round, so a round costs only the decks that changed. `--strong` checks the 🔎 lines on Opus.
 - 56 unit tests pass: `python3 -m unittest discover eval/tests`.
 
-Paid runs, held for the next release (see "Eval" in `CLAUDE.md`: one eval per release, on a settled rubric)
+Paid runs, held until the owner names a budget (see "Eval" in `CLAUDE.md`: one eval per release, on a settled rubric). They now measure 0.1.16
 
 - First settle the rubric, about $1.45 of new money. Each tool counts its ledger against `--budget`, so the numbers are totals:
   - A22 and K15 on the rubric check: 60 Haiku calls, about $0.15 on top of $2.81 spent.
@@ -31,7 +32,7 @@ Paid runs, held for the next release (see "Eval" in `CLAUDE.md`: one eval per re
     ```
     python3 eval/flag_check.py --budget 3.50
     ```
-- Then one benchmark of the release's rules against no plugin, with the 57 runs with no plugin reused: $11.38 for the 57 new runs, and about $5 for judging.
+- Then one benchmark of the rules of 0.1.16 against no plugin, with the 57 runs with no plugin reused: $11.38 for the 57 new runs, and about $5 for judging.
   ```
   python3 eval/eval.py --new HEAD --none --model claude-opus-5-5 --rubric yesno --runs 3 --reuse eval/results/2026-11-11-none-vs-13a35d4-opus-5-5 --budget 20
   ```
@@ -58,11 +59,11 @@ How the owner works, where the files do not say it
 The next step
 
 - No paid run now, and no hurry for the release. The owner wants the free work first, then a push.
-- Ten rule changes wait for the release eval, all since `v0.1.15`:
+- The next benchmark measures the ten rule changes of 0.1.16, which no eval has seen:
   - Added: "reply in the language of my message".
   - Reworded: "call a thing decided only when I verbally agreed on it"; "never hide what you skipped, loosened or retried to make something pass", which was "never cheat"; a bare number of any kind needs its title, not only a question number; a decision of the user's gets a recommended answer, which was "at least one option".
   - Cut: "check each one" after "doubt every premise"; "ask as many questions as you need"; "never overuse emoji"; "go deep on one thing only; keep several things brief"; the `[MAYBE]` tag.
-- Before the release benchmark, settle the eight rubric lines listed under "Not yet tested". Then the paid runs above, in their order.
+- Before the next benchmark, settle the eight rubric lines listed under "Not yet tested". Then the paid runs above, in their order.
 
 ## The rubric, `eval/rubric-yesno.md`
 
@@ -77,12 +78,12 @@ Not yet tested
 
 - [ ] `eval/results/rubric-check/report.md` is of the 127-line rubric. Run the check once on the whole current rubric and commit that report: `python3 eval/rubric_check.py`, 210 Haiku calls with the rest cached, about $0.40.
 - [ ] The overall score is new (2026-11-11): its weights, its point types and the red flag cut were set with the owner in one evening. Look at it again after a few runs. The judge seldom answers NA, so "a line that does not apply counts for nothing" does little yet.
-- [ ] The body of a reply still presented the agent's advice as decided: the line "your own advice stays open" reached ☑️ only, and `long-discussion-zh` kept 2 of 3 hits in the sixth turn. Since 2026-11-12 the line reads "Call a thing decided only when I verbally agreed on it." See in the release eval whether the body keeps to it. See `eval/FINDINGS.md`.
+- [ ] The body of a reply still presented the agent's advice as decided: the line "your own advice stays open" reached ☑️ only, and `long-discussion-zh` kept 2 of 3 hits in the sixth turn. Since 2026-11-12 the line reads "Call a thing decided only when I verbally agreed on it." See in the next benchmark whether the body keeps to it. See `eval/FINDINGS.md`.
 - [ ] K15 fired on work the user handed over and saw done, listed as decided (`session-zh`). It now says "presents its own advice as decided, though the user never took it", and `eval/flag-cases/` has a case that should not fire and one that should. Run `eval/flag_check.py`.
 - [ ] "Puts a question in the middle of the reply" is parked: 16 of its 25 hits with the plugin were the plugin's own ways. A22, "buries a question where the reader can miss it", replaces it. Run the rubric check on the Asking deck.
 - [ ] Wrong hits and misses. The red flags have a first check: `eval/flag_check.py`, with 8 real replies the owner judged, in `eval/flag-cases/`. Add a case each time the owner judges a hit. H4, H5, H17, O2 and O3 have no case that should fire yet. The other lines have none at all; about 45 never fired on the replies we have.
 - [ ] Three lines a judge may lack the facts for: "hedges on a thing it knows", "takes the first explanation and tests no other", "states a guess or an inference as a fact".
-- [ ] Eight lines fired on what the rules ask for, or wider than their rule, or on what the owner does not count as a fault. Read on 2026-11-12 from the judges' notes of the benchmark; settle them with the rubric, before the release benchmark:
+- [ ] Eight lines fired on what the rules ask for, or wider than their rule, or on what the owner does not count as a fault. Read on 2026-11-12 from the judges' notes of the benchmark; settle them with the rubric, before the next benchmark:
   - "asks a thing it could decide itself" fired on the question about batches and on the question at a conflict, which the rules ask for: 4 of its 8 hits.
   - "answers a plain fact and still closes with a question" fired where a question of the first turn was still open, since the user's turns are fixed: all 8 hits.
   - "has an option that changes two things at once" fired on options that pack a plan, such as commit and open a pull request.
@@ -110,7 +111,7 @@ Faults the rubric check showed, on 20 replies
 
 From the owner, 2026-11-12
 
-- [ ] The rule "reply in the language of my message" is in since 2026-11-12. See in the release eval whether the replies after tool work keep to it: 3 of 122 turns broke it before the rule. See `eval/FINDINGS.md`.
+- [ ] The rule "reply in the language of my message" is in since 2026-11-12. See in the next benchmark whether the replies after tool work keep to it: 3 of 122 turns broke it before the rule. See `eval/FINDINGS.md`.
 
 Conflicts the agent reported in real sessions
 
@@ -124,7 +125,7 @@ Carried over from the evals of 2026-11-10
 - [ ] "Never put a command inside a sentence" worked on one task and not on another. No change for now; the wording is not the cause.
 - [ ] A ✅ on a question that can be read as a fact or as a decision. No change; the owner read the tree and kept it.
 - [ ] The rule file grew from 961 words in 0.1.13 to 1,775. A pass on 2026-11-12 read every rule against the benchmark's lines and took 91 rules to 88, 1,743 words. Most candidates turned out to be the rubric's problem, not the rule's. See `eval/FINDINGS.md`.
-- [ ] In the release eval, look at what the cuts of 2026-11-12 did: "asks a thing it could decide itself" (8 of 57 before), a yes or no question with no view of the agent's, an item or a step named by its number alone, and how many emoji a reply carries without "never overuse emoji".
+- [ ] In the next benchmark, look at what the cuts of 2026-11-12 did: "asks a thing it could decide itself" (8 of 57 before), a yes or no question with no view of the agent's, an item or a step named by its number alone, and how many emoji a reply carries without "never overuse emoji".
 - [ ] Rules against other instructions. Checked on 2026-11-11 against the owner's global CLAUDE.md, this project's, Claude Code's own, and the skills loaded in that session. Two real conflicts, both about the form of a reply: line numbers (the rule says the plugin wins) and a skill that asks with a built-in question tool (not settled). Other skills and other projects were not read.
 
 Open questions
@@ -144,6 +145,6 @@ Open questions
 
 ## Release and upkeep
 
-- [ ] `master` is ahead of `origin` with the work since 0.1.15. The owner pushes when the open free work is done.
+- [ ] The owner's profile needs `claude plugin update i-am-overwhelmed@i-am-overwhelmed` to run 0.1.16.
 - [ ] Four rules override what the host does: no line numbers, file names as links, spaces at a bare URL, no built-in question tools. The owner counts each as a clear gain; one reason is that AskUserQuestion is slow. `PHILOSOPHY.md` gives no reason for them. Asked twice on 2026-11-12, not answered.
-- [ ] The benchmark's tasks: 17 of 19 are in Chinese, every run is on Opus, and the Codex rules never ran. Weigh this with the release benchmark.
+- [ ] The benchmark's tasks: 17 of 19 are in Chinese, every run is on Opus, and the Codex rules never ran. Weigh this with the next benchmark.
