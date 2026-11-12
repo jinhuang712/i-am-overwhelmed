@@ -88,7 +88,7 @@ Faults the rubric check showed, on 20 replies
 
 From the owner, 2026-11-12
 
-- [ ] Reply in the language of the user's message. In `fix-test-zh` the reply with no plugin came back in English in 3 of 3 runs, to a Chinese prompt; the plugin's replies were in Chinese. The owner counts a reply in another language as a red flag. Add the rule to the output style and `codex/AGENTS.md` together.
+- [ ] Reply in the language of the user's message. In the benchmark, replies came back in English to a Chinese message in 9 of 96 turns with no plugin and 3 of 122 with it, all after tool work. See `eval/FINDINGS.md`. The owner counts a reply in another language as a red flag. Add the rule to the output style and `codex/AGENTS.md` together.
 
 Conflicts the agent reported in real sessions
 
