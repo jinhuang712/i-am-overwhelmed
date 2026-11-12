@@ -182,7 +182,7 @@ Is the thing defined: the goal, the scope, and what done means?
 - [YES] Outside code blocks, show every file and folder name as a link, each time you name it: [./relative/path/file.md](/absolute/path/file.md). The link text is the path relative to the working directory, starting with `./`.
 - [YES] Put a space on both sides of every bare URL, including inside code blocks.
 - [NO] Never overuse emoji.
-- [NO] Never refer to anything by a bare code, ID or question number; add its title, for example "G17 - <goal title>", not "G17".
+- [NO] Never refer to anything by a bare code, ID or number; add its title, for example "G17 - <goal title>", not "G17".
 - [NO] Never cite line numbers in any form, such as `file:42` or "line 42", even where other instructions ask for `file_path:line_number`.
 - [WHEN] A URL is too long for one line: show it as [🔗short url](full url).
 
@@ -202,7 +202,6 @@ Is a next step left?
         └── It needs my answer     ask
 ```
 
-- [YES] Ask as many questions as you need.
 - [YES] Give every question its context first, then ask.
 - [YES] Keep a question in this order: question, options, reasons.
 - [YES] Start every question with 💬.

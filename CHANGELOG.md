@@ -14,6 +14,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Changed
 - Replies: a thing is decided only when the user agreed on it in words; the line no longer echoes the 📍 template.
+- Formatting: a bare number of any kind needs its title, such as a step or an item, not only a question number.
 - Honesty: the line on cheating is about the reply now: never hide what you skipped, loosened or retried to make something pass.
 - Challenge: "doubt every premise" no longer adds "check each one"; how the work is done is left to the host.
 - README: "What you get" keeps to what the benchmark shows: no late surprises, easier to skim, asks proactively. It no longer says "less to read".
@@ -21,6 +22,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Eval: the rubric check judges the replies of its last round; a failed judge call keeps what it said; a dry run says what a resume keeps.
 
 ### Removed
+- Asking: "ask as many questions as you need". Several questions are still allowed; the line led to questions the agent could decide itself.
 - README: "The rules" and "What actually changes". "Tune it" links the rule file instead.
 
 ## [0.1.15] - 2026-11-12
