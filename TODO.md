@@ -58,12 +58,23 @@ How the owner works, where the files do not say it
 
 The next step
 
-- No paid run now, and no hurry for the release. The owner wants the free work first, then a push.
+- No paid run now, and no hurry for one. 0.1.16 is out and pushed; nothing waits to be pushed but this file's last edit.
 - The next benchmark measures the ten rule changes of 0.1.16, which no eval has seen:
   - Added: "reply in the language of my message".
   - Reworded: "call a thing decided only when I verbally agreed on it"; "never hide what you skipped, loosened or retried to make something pass", which was "never cheat"; a bare number of any kind needs its title, not only a question number; a decision of the user's gets a recommended answer, which was "at least one option".
   - Cut: "check each one" after "doubt every premise"; "ask as many questions as you need"; "never overuse emoji"; "go deep on one thing only; keep several things brief"; the `[MAYBE]` tag.
 - Before the next benchmark, settle the eight rubric lines listed under "Not yet tested". Then the paid runs above, in their order.
+
+Left open at the end of 2026-11-12, each with its place below
+
+- The owner's real sessions with 0.1.16. Free, and the only signal that needs no judge. See "Open questions".
+- The eight rubric lines that measure badly. A rewording is free to draft; its check costs about $1.45. See "Not yet tested".
+- The benchmark of 0.1.16, about $16, with what it leaves out: English tasks, Sonnet, Codex. See "Paid runs" and "Release and upkeep".
+- The free command for tuning, which the owner put off. See "The eval tool".
+- The reasons for the four rules that override the host. Asked twice, not answered. See "Release and upkeep".
+- "It fits the topic: open a discussion with me" keeps its vague trigger. The owner wants a thing discussed in full first, and turned down a line in the tree for it ("discuss every one with me, before you do anything"): that goes past what an output style is for.
+- A red flag for a reply in a language other than the user's. See "Later".
+- Not to be done now, by the owner's word or the agent's advice: a list in the README of where the plugin does worse, a source on each line of "The work feels different", a credit line, a shorter README, a `CONTRIBUTING.md`.
 
 ## The rubric, `eval/rubric-yesno.md`
 
@@ -121,7 +132,7 @@ The rules ask the agent to stop and name any instructions that conflict, these r
 
 Carried over from the evals of 2026-11-10
 
-- [ ] "Anything you did not check is a guess" held in part: the next run still stated two inferences as facts. No change for now; one run is the evidence, and the rule is plain.
+- [ ] "Anything you did not check is a guess" held in part: the next run still stated two inferences as facts. No change for now; one run is the evidence, and the rule is plain. In the benchmark of 2026-11-11, "states a guess or an inference as a fact" fired on 7 of 57 replies on each side, such as a branch named with no check of it. No wording to try was found on 2026-11-12.
 - [ ] "Never put a command inside a sentence" worked on one task and not on another. No change for now; the wording is not the cause.
 - [ ] A ✅ on a question that can be read as a fact or as a decision. No change; the owner read the tree and kept it.
 - [ ] The rule file grew from 961 words in 0.1.13 to 1,775. A pass on 2026-11-12 read every rule against the benchmark's lines and took 91 rules to 88, 1,743 words. Most candidates turned out to be the rubric's problem, not the rule's. See `eval/FINDINGS.md`.
@@ -131,7 +142,7 @@ Carried over from the evals of 2026-11-10
 Open questions
 
 - [ ] How much does the plugin help beyond its own formats? On the old rubric it was 65% against 88%. On the draft rubric, on replies that were not matched by task, the two groups were level.
-- [ ] The owner has not yet worked for some days with the rules of 2026-11-10. Scan the real sessions again against the baseline of that morning: trees 7%, replies that end with a question 87%, "simpler" asked 15 times in 4 days.
+- [ ] The owner has not yet worked for some days with one set of rules. 0.1.16 runs in the owner's profile since the evening of 2026-11-12; a session started before that keeps the old rules. After some days, scan the real sessions against the baseline of the morning of 2026-11-10: trees 7%, replies that end with a question 87%, "simpler" asked 15 times in 4 days.
 - [ ] Sonnet and Codex: every eval since 2026-11-10 ran on Opus.
 
 ## The eval tool
@@ -145,6 +156,6 @@ Open questions
 
 ## Release and upkeep
 
-- [ ] The owner's profile needs `claude plugin update i-am-overwhelmed@i-am-overwhelmed` to run 0.1.16.
+- [ ] The owner's profile reads the plugin from this repository's `plugin/` folder (`claude plugin list`). An edit to the rule file here may reach the owner's sessions before a release; when it does was not checked.
 - [ ] Four rules override what the host does: no line numbers, file names as links, spaces at a bare URL, no built-in question tools. The owner counts each as a clear gain; one reason is that AskUserQuestion is slow. `PHILOSOPHY.md` gives no reason for them. Asked twice on 2026-11-12, not answered.
 - [ ] The benchmark's tasks: 17 of 19 are in Chinese, every run is on Opus, and the Codex rules never ran. Weigh this with the next benchmark.
