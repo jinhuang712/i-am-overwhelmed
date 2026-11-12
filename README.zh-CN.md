@@ -77,7 +77,7 @@ Claude Code
 └── hooks, skills, tools       untouched
 ```
 
-它的规则管的是 Claude 怎么和你对话，工程上的事留给 Claude Code 自己的指令。但用起来，干活的感觉也变了，见[你能得到什么](#-你能得到什么)。它是一组指令，所以大多数回复会照做，但不是每一条。
+它的规则管的是 Claude 怎么和你对话，工程上的事留给 Claude Code 自己的指令。它是一组指令，所以大多数回复会照做，但不是每一条。
 
 每个工具一个文件（英文原文）。Claude Code 用 [`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md)，它是插件的输出风格，带 `force-for-plugin` 和 `keep-coding-instructions`，所以压缩上下文后依然有效，也保留了 Claude Code 自己的指令。Codex 用 [`codex/AGENTS.md`](codex/AGENTS.md)，规则相同，去掉了 Claude Code 专属的部分。
 
