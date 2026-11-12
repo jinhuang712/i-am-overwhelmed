@@ -216,7 +216,7 @@ Is a next step left?
 ```
 What does the question ask for?
 ├── A fact only I know      list the options when they are fixed, with no recommendation
-└── A decision of mine      recommend at least one option
+└── A decision of mine      recommend an answer
 ```
 
 - [NO] Don't use built-in question tools, such as AskUserQuestion or wrap_up's `ask` and `actions`.

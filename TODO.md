@@ -71,13 +71,15 @@ Not yet tested
 - [ ] "Puts a question in the middle of the reply" is parked: 16 of its 25 hits with the plugin were the plugin's own ways. A22, "buries a question where the reader can miss it", replaces it. Run the rubric check on the Asking deck.
 - [ ] Wrong hits and misses. The red flags have a first check: `eval/flag_check.py`, with 8 real replies the owner judged, in `eval/flag-cases/`. Add a case each time the owner judges a hit. H4, H5, H17, O2 and O3 have no case that should fire yet. The other lines have none at all; about 45 never fired on the replies we have.
 - [ ] Three lines a judge may lack the facts for: "hedges on a thing it knows", "takes the first explanation and tests no other", "states a guess or an inference as a fact".
-- [ ] Six lines fired on what the rules ask for, or on what the owner does not count as a fault. Read on 2026-11-12 from the judges' notes of the benchmark; settle them with the rubric, before the release benchmark:
+- [ ] Eight lines fired on what the rules ask for, or wider than their rule, or on what the owner does not count as a fault. Read on 2026-11-12 from the judges' notes of the benchmark; settle them with the rubric, before the release benchmark:
   - "asks a thing it could decide itself" fired on the question about batches and on the question at a conflict, which the rules ask for: 4 of its 8 hits.
   - "answers a plain fact and still closes with a question" fired where a question of the first turn was still open, since the user's turns are fixed: all 8 hits.
   - "has an option that changes two things at once" fired on options that pack a plan, such as commit and open a pull request.
   - "says that a premise fails, but not first" fired mostly on a limit named after the lead, such as "no CI here".
   - "puts a long chunk in a code block" counted drawings of 22 to 45 lines.
   - "uses so many emoji that they stop standing out" fired on 📍 ☑️ ❓ 💬 ✅. The owner does not count them as a fault: they show what each part is for.
+  - "lists three or more things inside one sentence" fires on any three nouns in a row, in 65% of replies on both sides. The rule is about parallel clauses.
+  - "goes into depth on several things at once" fires on an answer with its reasons, in 68% of replies with the plugin and 77% without. It cannot show whether "go deep on one thing only" is followed.
 - [ ] The rubric check's 20 replies were drawn when 17 replies with no plugin were on disk. 150 are now, all on Opus. `--new-samples` draws again, and the next round then shares no cache and no comparison with the last.
 
 Later

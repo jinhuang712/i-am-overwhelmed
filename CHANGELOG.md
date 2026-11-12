@@ -14,6 +14,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Changed
 - Replies: a thing is decided only when the user agreed on it in words; the line no longer echoes the 📍 template.
+- Asking: a decision of the user's gets a recommended answer, so a yes or no question carries the agent's view too; it was "at least one option".
 - Formatting: a bare number of any kind needs its title, such as a step or an item, not only a question number.
 - Honesty: the line on cheating is about the reply now: never hide what you skipped, loosened or retried to make something pass.
 - Challenge: "doubt every premise" no longer adds "check each one"; how the work is done is left to the host.
