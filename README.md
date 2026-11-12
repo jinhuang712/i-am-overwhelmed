@@ -312,8 +312,16 @@ The overall score, and the three words it gains most on:
 | Structured | 68.0 | **85.4** |
 | Focused, Standalone | 83.6 | **89.1** |
 
-- **Honest**: 70% of replies say what was not checked, against 18%.
-- **Structured**: 4% of replies leave a flow undrawn, against 42%.
+Where it improves most, as a share of the 57 replies on each side. Lower is better on the last three rows.
+
+| The reply... | Off | On |
+|---|---|---|
+| says what it did not check | 18% | **70%** |
+| makes a warning or a recommendation stand out | 68% | **96%** |
+| names a risk or a limit that is left | 74% | **91%** |
+| writes a flow as text, with no drawing | 42% | **4%** |
+| puts headings on an answer, though nobody asked for more detail | 46% | **0%** |
+| gives a long list with no summary first | 16% | **0%** |
 
 [`eval/README.md`](eval/README.md) says how the score is made, and [the full report](eval/results/2026-11-11-none-vs-13a35d4-opus-5-5/report.md) has every task.
 
