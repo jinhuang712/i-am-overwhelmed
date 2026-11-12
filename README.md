@@ -21,10 +21,10 @@ You are tired, you are doing three other things, and you skim. This plugin makes
 
 ## 🎁 What you get
 
-- **A cleaner context, and less drift**: every reply Claude prints becomes context for the next turn, so short, structured replies keep a long session on track.
-- **Fewer wrong turns**: Claude asks before it assumes, so the work is not built on a guess about you.
-- **Less to read**: the answer comes first, and the detail waits until you ask for it.
-- **No late surprises**: what is broken, guessed or unverified is said now, not found later.
+- **No late surprises**: the reply says now what it did not check and what risk is left.
+- **Easier to skim**: a flow is drawn, a long list gets a summary first, and a short answer gets no headings.
+- **Asks proactively**: Claude asks you more, to avoid the slop that comes from a guess.
+- **A cleaner context**: every reply Claude prints becomes context for the next turn, so structured replies may keep a long session on track.
 
 **The work feels different, too.** The plugin sets only the output style, and its rules are about the reply. Yet with it, the agent feels like this:
 

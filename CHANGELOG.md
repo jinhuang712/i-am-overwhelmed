@@ -16,6 +16,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Replies: a thing is decided only when the user agreed on it in words; the line no longer echoes the 📍 template.
 - Honesty: the line on cheating is about the reply now: never hide what you skipped, loosened or retried to make something pass.
 - Challenge: "doubt every premise" no longer adds "check each one"; how the work is done is left to the host.
+- README: "What you get" keeps to what the benchmark shows: no late surprises, easier to skim, asks proactively. It no longer says "less to read".
 - README: the examples come from the benchmark of 2026-11-11, the first run of each side, on Opus 5.5. The English README drops the CI example, which the eval has in Chinese only.
 - Eval: the rubric check judges the replies of its last round; a failed judge call keeps what it said; a dry run says what a resume keeps.
 
