@@ -3,6 +3,7 @@
 Usage:
   python3 eval/rubric_check.py --dry-run
   python3 eval/rubric_check.py --budget USD [--samples N] [--passes K] [--decks 3,6]
+  python3 eval/rubric_check.py --strong --budget USD   (the 🔎 lines, on the strong judge)
 
 It does not run any task. It takes replies that earlier evals left on disk, in
 eval/results/*/raw/*/blind/, and has a cheap judge answer every line of
@@ -14,7 +15,9 @@ For each line the report gives:
   NA       on how many samples the majority answer was NA
 
 Every answer is kept in a cache, keyed by the deck's text, the samples and the pass.
-After a deck is edited, the same command judges only that deck again.
+After a deck is edited, the same command judges only that deck again. The samples are
+the ones of the last check, listed in raw/samples.txt, so rounds compare the same
+replies; --new-samples draws them again from what is on disk now.
 
 Work files go to eval/results/rubric-check/raw/, which git ignores. Every finished call prints a
 line and adds it to raw/progress.log, so a run can be followed with `tail -f`.
@@ -29,11 +32,12 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from yesno import RUBRIC, ask, read_decks, split_decks  # noqa: E402
+from yesno import RUBRIC, STRONG_CAP, ask, for_judges, read_decks, split_decks  # noqa: E402
 
 HERE = Path(__file__).parent
 RESULTS = HERE / "results"
 OUT = RESULTS / "rubric-check"
+SAMPLES = OUT / "raw" / "samples.txt"
 PER_CALL = 2  # Samples in one judge call.
 CALL_CAP = 0.06  # USD one call may cost.
 
@@ -51,6 +55,19 @@ def all_samples(results=RESULTS):
             if path.exists():
                 found.append({"path": path, "task": task_dir.name, "arm": run.rsplit("-", 1)[0],
                               "model": model, "result": result})
+    return found
+
+
+def saved_samples(path=SAMPLES, results=RESULTS):
+    """The samples of the last check, or None when there is no list or a reply on it is gone."""
+    if not path.exists():
+        return None
+    found = []
+    for line in path.read_text().splitlines():
+        model, arm, task, rel = line.split(" ", 3)
+        if not (results / rel).exists():
+            return None
+        found.append({"path": results / rel, "task": task, "arm": arm, "model": model, "result": rel.split("/")[0]})
     return found
 
 
@@ -117,10 +134,10 @@ class Progress:
                 f.write(line + "\n")
 
 
-def judge(deck, batch, k, model, cache, spend):
+def judge(deck, batch, k, model, cache, spend, cap=CALL_CAP):
     """Return (status, one {id: answer} per sample of the batch)."""
     labelled = [(f"S{n:02d}", s["path"].read_text()) for n, s in enumerate(batch, 1)]
-    status, answers = ask(deck, labelled, k, model, CALL_CAP, cache, spend)
+    status, answers = ask(deck, labelled, k, model, cap, cache, spend)
     return status, [answers[label] for label, _ in labelled] if answers else None
 
 
@@ -177,8 +194,13 @@ def main():
     p.add_argument("--dry-run", action="store_true", help="show the plan, spend nothing")
     p.add_argument("--samples", type=int, default=20)
     p.add_argument("--passes", type=int, default=3)
-    p.add_argument("--model", default="claude-haiku-5-5")
+    p.add_argument("--model", help="the judge (default claude-haiku-5-5, or claude-opus-5-5 with --strong)")
+    p.add_argument("--strong", action="store_true",
+                   help="judge only the 🔎 lines, as one deck the way an eval sends them to the strong judge. "
+                        "The report goes to report-strong.md")
     p.add_argument("--decks", help="numbers of the decks to judge, such as 3,6 (default all)")
+    p.add_argument("--new-samples", action="store_true",
+                   help="draw the samples again from what is on disk, instead of the ones of the last check")
     p.add_argument("-j", type=int, default=8)
     a = p.parse_args()
     if a.budget is None and not a.dry_run:
@@ -188,8 +210,15 @@ def main():
     if a.decks:
         keep = {int(n) for n in a.decks.split(",")}
         whole = [d for n, d in enumerate(whole, 1) if n in keep]
-    decks = split_decks(whole)
-    samples = pick(all_samples(), a.samples)
+    model = a.model or ("claude-opus-5-5" if a.strong else "claude-haiku-5-5")
+    decks = for_judges(whole)[1] if a.strong else split_decks(whole)
+    cap = STRONG_CAP if a.strong else CALL_CAP
+    samples = None if a.new_samples else saved_samples()
+    if samples is not None and len(samples) == a.samples:
+        print(f"samples: the {len(samples)} of the last check")
+    else:
+        samples = pick(all_samples(), a.samples)
+        print(f"samples: {len(samples)} drawn from what is on disk")
     samples.sort(key=lambda s: s["path"].stat().st_size)
     batches = [samples[i:i + PER_CALL] for i in range(0, len(samples), PER_CALL)]
     cache = OUT / "raw" / "cache"
@@ -200,7 +229,7 @@ def main():
     progress = None if a.dry_run else Progress(len(jobs), OUT / "raw" / "progress.log")
 
     def one(j):
-        got = judge(j[0], j[1], j[2], a.model, cache, spend)
+        got = judge(j[0], j[1], j[2], model, cache, spend, cap)
         if progress:
             progress.step(got[0], j[0]["name"], spend)
         return got
@@ -208,10 +237,10 @@ def main():
     with ThreadPoolExecutor(a.j) as ex:
         results = list(ex.map(one, jobs))
     counts = collections.Counter(status for status, _ in results)
-    print(f"plan: {len(decks)} decks x {len(batches)} batches x {a.passes} passes = {len(jobs)} calls, {a.model}")
+    print(f"plan: {len(decks)} decks x {len(batches)} batches x {a.passes} passes = {len(jobs)} calls, {model}")
     print("calls:", dict(counts))
     if spend is None:
-        print(f"to run: {counts['planned']} calls, at most ${counts['planned'] * CALL_CAP:.2f}")
+        print(f"to run: {counts['planned']} calls, at most ${counts['planned'] * cap:.2f}")
         return
 
     index = {id(s): n for n, s in enumerate(samples)}
@@ -222,8 +251,8 @@ def main():
                 for line_id, v in row.items():
                     votes[(line_id, index[id(s)])].append(v)
     rows = summarise(decks, samples, votes, a.passes)
-    (OUT / "report.md").write_text(report(rows, samples, a.passes, a.model, spend.spent))
-    (OUT / "raw" / "samples.txt").write_text("\n".join(
+    (OUT / ("report-strong.md" if a.strong else "report.md")).write_text(report(rows, samples, a.passes, model, spend.spent))
+    SAMPLES.write_text("\n".join(
         f"{s['model']} {s['arm']} {s['task']} {s['path'].relative_to(RESULTS)}" for s in samples) + "\n")
     print(f"spent ${spend.spent:.2f} of ${a.budget:.2f}. Report: {OUT / 'report.md'}")
 

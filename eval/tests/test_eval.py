@@ -361,6 +361,50 @@ class Reuse(unittest.TestCase):
             self.assertNotIn("new-1", text)
 
 
+class RubricCheck(unittest.TestCase):
+    def setUp(self):
+        import rubric_check
+        self.rc = rubric_check
+        self.tmp = tempfile.TemporaryDirectory()
+        self.results = Path(self.tmp.name)
+        blind = self.results / "2026-11-11-x-opus-5-5" / "raw" / "chat-en" / "blind"
+        blind.mkdir(parents=True)
+        for label in ("R01", "R02"):
+            (blind / f"{label}.md").write_text(f"=== FINAL REPLY (turn-1) ===\nreply {label}")
+        (blind.parent / "mapping.txt").write_text("R01 new-1\nR02 none-1\n")
+        self.samples = self.results / "rubric-check" / "raw" / "samples.txt"
+        self.samples.parent.mkdir(parents=True)
+        self.samples.write_text("opus new chat-en 2026-11-11-x-opus-5-5/raw/chat-en/blind/R01.md\n")
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def dry_run(self, *args):
+        rc = self.rc
+        with mock.patch.multiple(rc, RESULTS=self.results, OUT=self.results / "rubric-check", SAMPLES=self.samples), \
+                mock.patch.object(rc.saved_samples, "__defaults__", (self.samples, self.results)), \
+                mock.patch.object(rc.all_samples, "__defaults__", (self.results,)), \
+                mock.patch.object(sys, "argv", ["rubric_check.py", "--dry-run", *args]), \
+                mock.patch("sys.stdout", new_callable=lambda: __import__("io").StringIO()) as out:
+            rc.main()
+        return out.getvalue()
+
+    def test_a_new_round_judges_the_samples_of_the_last_one(self):
+        got = self.rc.saved_samples(self.samples, self.results)
+        self.assertEqual([(s["arm"], s["path"].name) for s in got], [("new", "R01.md")])
+        self.assertIn("samples: the 1 of the last check", self.dry_run("--samples", "1"))
+        self.assertIn("drawn from what is on disk", self.dry_run("--samples", "1", "--new-samples"))
+        next(self.results.glob("*/raw/chat-en/blind/R01.md")).unlink()
+        self.assertIsNone(self.rc.saved_samples(self.samples, self.results))
+
+    def test_strong_judges_only_the_strong_lines_on_the_strong_judge(self):
+        out = self.dry_run("--samples", "1", "--strong")
+        strong = yesno.for_judges(yesno.read_decks(yesno.RUBRIC.read_text()))[1]
+        self.assertIn(f"plan: {len(strong)} decks x 1 batches x 3 passes", out)
+        self.assertIn("claude-opus-5-5", out)
+        self.assertIn(f"at most ${len(strong) * 3 * yesno.STRONG_CAP:.2f}", out)
+
+
 class YesNo(unittest.TestCase):
     def test_the_rubric_reads_into_decks_without_the_parked_lines(self):
         text = yesno.RUBRIC.read_text()
