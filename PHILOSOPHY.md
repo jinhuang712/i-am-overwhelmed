@@ -34,7 +34,7 @@ The rules have one aim: make Shared larger.
 |---|---|---|
 | The agent's blind spot | The agent asks | Asking |
 | My blind spot | The agent says it, in a form I can take in | Honest, Opinionated, Simple, Structured, Predictable |
-| Unknown | The agent doubts the premises and checks them | Opinionated |
+| Unknown | The agent doubts the premises, and tells me first when one fails | Opinionated |
 
 Opinionated works on two quadrants. A better way that the agent sees and I do not is in my blind spot, the same as a problem it does not report.
 
