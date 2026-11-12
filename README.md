@@ -85,219 +85,171 @@ Why it is built this way, and why the rules are written the way they are: [PHILO
 
 ## 👀 See it
 
-Real output, same prompt, plugin off and on. Complete and untrimmed. Every example ran on Sonnet 5.5 (`claude-sonnet-5-5`); the plugin-on ones were recorded on 2026-11-10 with the rules in this repo. Click **Off** to open the reply without the plugin. The raw files are in [`examples/`](examples/).
+Real output, same prompt, plugin off and on. Complete and untrimmed. Each example comes from the benchmark of 2026-11-11, on Claude Opus 5.5 (`claude-opus-5-5`). Click **Off** to open the reply without the plugin. The raw files are in [`examples/`](examples/).
 
 ### "SQLite or Postgres for a URL shortener, ~100 users?"
 
 <details>
 <summary><b>Off</b> (17 lines)</summary>
 
-> **SQLite.**
+> **SQLite.** At ~100 users, it's not close.
 >
-> For about 100 users, a URL shortener is a read-heavy workload with tiny rows. SQLite handles that easily.
+> **Why SQLite fits:**
+> - A URL shortener is mostly reads (redirects), with occasional writes when someone creates a link. SQLite handles that easily, even with thousands of redirects per second.
+> - There's no server to run, secure, or back up separately. It's one file, and you can back it up with `sqlite3 db .backup` or Litestream.
+> - Lookups by slug are a single indexed primary-key read, which takes microseconds.
 >
-> - **Simplicity:** There's no server to run, secure, or back up separately. The database is one file.
-> - **Performance:** Redirect lookups by primary key on a short code take microseconds. With WAL mode on, SQLite handles thousands of reads per second and enough writes for 100 users.
-> - **Cost:** It needs no extra process or memory, so a small VPS is plenty.
+> **Settings worth turning on:**
+> ```sql
+> PRAGMA journal_mode = WAL;     -- concurrent reads during writes
+> PRAGMA busy_timeout = 5000;    -- avoid "database is locked" errors
+> PRAGMA synchronous = NORMAL;   -- safe with WAL, faster
+> ```
 >
-> **Setup tips**
-> - Enable WAL: `PRAGMA journal_mode=WAL;`
-> - Set `PRAGMA busy_timeout=5000;` and `PRAGMA synchronous=NORMAL;`
-> - Make the short code the primary key or put a unique index on it.
-> - Record click counts in a separate table, or batch the updates. That keeps write contention off the redirect path.
-> - Back it up with `sqlite3 db ".backup file"` or Litestream, and don't copy the live file.
+> **When to pick Postgres instead:**
+> - You'll run multiple app servers or containers that all need to write to the same DB. SQLite wants a single host.
+> - Your platform has ephemeral disks, like Heroku or some serverless setups, and no persistent volume.
+> - You expect heavy write-side analytics, such as logging every click with rich metadata at high volume. Even then, batching the inserts usually keeps SQLite fine.
+> - Your team already runs Postgres and a managed instance costs you nothing extra to operate.
 >
-> **When to pick Postgres**
-> - You expect to run multiple app servers writing to the same database.
-> - You expect heavy concurrent writes, such as high-volume click analytics.
-> - Your platform has no persistent disk, as with some serverless setups.
-> - You want Postgres-specific features or a managed database with built-in backups.
->
-> If you outgrow SQLite, migrating a table this simple is easy. Start with SQLite.
+> If you keep your SQL fairly standard, or use an ORM, switching to Postgres later is a small migration.
 
 </details>
 
 **On** (15 lines)
 
-> ✅ **SQLite.** At ~100 users, a shortener is read-heavy and tiny, so SQLite handles it with zero ops.
+> ✅ **SQLite.** At ~100 users, a URL shortener does one indexed lookup per redirect, and SQLite handles thousands of those per second on one file with nothing to run or patch. (Typical figure, not benchmarked here.)
+>
+> Postgres only pays off if you run more than one server or host without a persistent disk:
 >
 > ```
-> Request ──► App ──► SQLite file
->                     (one file, backup = copy)
+> Where does the app run?
+> ├── One server or VM, persistent disk     → SQLite ✅
+> ├── Several app instances                 → Postgres
+> └── Serverless / ephemeral containers     → Postgres (or hosted SQLite, e.g. Turso)
+>     (the file gets wiped on redeploy)
 > ```
 >
-> - **Why**: no separate server to run, patch, or pay for
-> - **Speed**: redirects are simple key lookups, so microseconds
-> - **Setup**: turn on WAL mode (write-ahead log, lets reads and writes overlap) with `PRAGMA journal_mode=WAL;`
-> - **Backups**: use Litestream or a nightly copy
+> 3 tips if you pick SQLite:
 >
-> ⚠️ **Premise to check**: SQLite assumes one app server with a local disk. If you deploy on serverless or run several instances, Postgres fits better.
+> - **WAL mode**: Turn it on so reads keep working while a write is in progress.
+> - **Backups**: Use Litestream, or a nightly copy made with the SQLite backup command. A plain `cp` of a live database file can give you a corrupted copy.
+> - **Exit path**: Keep your SQL plain, and moving to Postgres later is about an afternoon of work. 😄
 >
-> 🤔 **Switch to Postgres if**:
-> - You need multiple app servers
-> - Click analytics produce heavy concurrent writes
-> - You plan to grow well beyond 100 users
+> > If "100 users" means 100 accounts but the short links go viral, the read load still stays small. Redirects are cheap.
 >
-> Q1. Will this run on a single server with a persistent disk?
+> 💬 Will the app run on a single server with a persistent disk?
 
-### "After a user clicks 'Sign in with GitHub' on our site, how do the browser, our backend and GitHub talk to each other, step by step?"
+### "What happens between the browser, our backend and GitHub after a user clicks 'Sign in with GitHub' on our site?"
 
 <details>
-<summary><b>Off</b> (62 lines)</summary>
+<summary><b>Off</b> (50 lines)</summary>
 
-> Here is the standard OAuth 2.0 authorization code flow that "Sign in with GitHub" uses. I haven't looked at your code, so check the details (endpoints, scopes, session handling) against your implementation.
+> I don't see your site's code in this working directory, so this is the standard GitHub OAuth flow (authorization code grant) that almost every "Sign in with GitHub" button uses. If you point me at your auth code, I can map each step to the actual files.
 >
-> ## Step by step
->
-> **1. Browser → your backend: start login**
-> The user clicks the button, which goes to something like `GET /auth/github`.
->
-> **2. Backend → browser: redirect to GitHub**
-> Your backend generates a random `state` value, stores it (in the session or a signed cookie), and replies with a `302` to:
-> ```
-> https://github.com/login/oauth/authorize
->   ?client_id=<your client id>
->   &redirect_uri=https://yoursite.com/auth/github/callback
->   &scope=read:user user:email
->   &state=<random>
-> ```
-> Optionally, it also sends a PKCE `code_challenge`.
->
-> **3. Browser ↔ GitHub: login and consent**
-> The browser follows the redirect. The user logs in to GitHub if needed and approves the requested scopes. Your backend is not involved here, and your site never sees the user's GitHub password.
->
-> **4. GitHub → browser → your backend: callback**
-> GitHub redirects the browser to your `redirect_uri`:
-> ```
-> GET /auth/github/callback?code=<short-lived code>&state=<same state>
-> ```
-> The `code` is single-use and expires quickly, and it is not an access token.
->
-> **5. Backend: verify `state`**
-> Your backend compares the `state` in the URL with the one it stored. If they don't match, it rejects the request. This protects against login CSRF.
->
-> **6. Backend → GitHub: exchange the code for a token** (server to server)
-> ```
-> POST https://github.com/login/oauth/access_token
->   client_id, client_secret, code, redirect_uri  (+ code_verifier if PKCE)
-> ```
-> GitHub responds with an `access_token`. The `client_secret` is sent only here, from your server, never through the browser.
->
-> **7. Backend → GitHub API: fetch the user's identity**
-> ```
-> GET https://api.github.com/user
-> Authorization: Bearer <access_token>
-> ```
-> If you need the email, also call `GET /user/emails`. Use the numeric `id` as the stable identifier, since usernames and emails can change.
->
-> **8. Backend: create or link the local account**
-> Look up the user by GitHub `id`, creating a record if none exists. Then create your own session.
->
-> **9. Backend → browser: log the user in**
-> Your backend sets a session cookie (`HttpOnly`, `Secure`, `SameSite=Lax`) and redirects to your app, for example `302 /dashboard`. From then on the browser authenticates to your backend with that cookie. GitHub is no longer involved unless you store the access token to call its API later.
->
-> ## Diagram
+> ## The flow, step by step
 >
 > ```
-> Browser            Your backend              GitHub
->   | --click------->  |                         |
->   | <--302 + state-- |                         |
->   | ------------------authorize?client_id...-->|
->   | <-----------------login/consent------------>|
->   | <-----------------302 ?code&state----------|
->   | --callback?code&state-->|                  |
->   |                  | --POST access_token---->|
->   |                  | <--access_token---------|
->   |                  | --GET /user------------>|
->   |                  | <--profile--------------|
->   | <--Set-Cookie, 302 /app--|                 |
+> Browser                    Your Backend                     GitHub
+>    |                            |                              |
+> 1  |--- click "Sign in" ------->|                              |
+> 2  |<-- 302 to github.com ------|  (sets state cookie)         |
+> 3  |------------------------- GET /login/oauth/authorize ----->|
+> 4  |<------------------------ login + consent page ------------|
+> 5  |------------------------- user approves ------------------>|
+> 6  |<-- 302 to your callback ?code=...&state=... --------------|
+> 7  |--- GET /callback?code&state ->|                           |
+> 8  |                            |--- POST /login/oauth/access_token -->|
+> 9  |                            |<-- access_token -------------|
+> 10 |                            |--- GET api.github.com/user ->|
+> 11 |                            |<-- profile / emails ---------|
+> 12 |<-- set session cookie, 302 to app                         |
 > ```
 >
-> ## Common pitfalls
-> - Skipping the `state` check.
-> - Treating the email or username as the identity key instead of the GitHub `id`.
-> - Exposing `client_secret` to frontend code.
-> - Using a `redirect_uri` that doesn't exactly match the one registered in the GitHub OAuth app.
-> - Storing the access token unencrypted if you keep it.
+> ### 1–2. Your backend starts the flow
+> The button hits a route like `/auth/github`. The backend:
+> - Generates a random **`state`** value and stores it in a short-lived cookie or the server session (CSRF protection).
+> - Optionally generates a **PKCE** `code_verifier` and derives a `code_challenge`.
+> - Redirects the browser to:
+>   ```
+>   https://github.com/login/oauth/authorize
+>     ?client_id=YOUR_CLIENT_ID
+>     &redirect_uri=https://yoursite.com/auth/github/callback
+>     &scope=read:user user:email
+>     &state=RANDOM
+>     [&code_challenge=...&code_challenge_method=S256]
+>   ```
 >
-> If you'd like, I can point to where each step lives in your codebase. I'd need you to open or point me at the project, since the current directory doesn't contain it.
+> ### 3–5. User authenticates at GitHub
+> This happens entirely between the browser and GitHub. Your site never sees the user's GitHub password or 2FA. If the user has already authorized your app, GitHub may skip the consent screen.
+>
+> ### 6. GitHub redirects back
+> GitHub sends the browser to your `redirect_uri` with a one-time **`code`** (valid ~10 minutes) and the `state` you sent. The `redirect_uri` must match what's registered in your OAuth App settings.
+>
+> ### 7. Callback validation
+> Your backend checks that `state` matches what it stored. If it doesn't, it rejects the request, because that is a possible CSRF or login-injection attempt.
+>
+> ### 8–9. Code to token exchange (server to server)
+> Your backend POSTs to `https://github.com/login/oauth/access_token` with `client_id`, **`client_secret`**, `code`, `redirect_uri` (and `code_verifier` if you use PKCE). GitHub returns an `access_token`. This is the only step where the client secret is used, which is why it has to happen on the backend.
+>
+> ### 10–11. Fetch identity
+> Your backend calls `GET https://api.github.com/user` (and often `/user/emails`, since the primary email may be private) with `Authorization: Bearer <token>`.
+>
+> ### 12. Create your own session
+> Your backend finds or creates a local user, keyed on GitHub's **numeric user `id`** (not username or email, since those can change). It then issues *your* session cookie or JWT and redirects to the app. From this point, your site uses its own session. The GitHub token is only needed again if you call GitHub APIs on the user's behalf. If you do keep it, store it encrypted.
+>
+> ## Things worth checking in your implementation
+> - The `state` is generated, stored, and verified, not just passed through.
+> - The client secret exists only on the server and never in frontend bundles.
+> - Users are identified by GitHub `id`. Auto-linking to existing accounts by email should only happen for verified emails.
+> - Scopes are minimal. `read:user user:email` is usually enough for login.
+> - If it's actually a **GitHub App** instead of an OAuth App, the flow is the same, but tokens expire after 8 hours and come with refresh tokens.
+>
+> Want me to look at your code and trace where each of these steps happens?
 
 </details>
 
-**On** (24 lines)
+**On** (32 lines)
 
-> Here is the standard OAuth 2.0 "authorization code" flow. I'm guessing your site uses it and haven't checked your code.
+> 🤔 I didn't look at your code: the working directory is a temp folder, not your repo. Below is the standard GitHub OAuth web flow, which most "Sign in with GitHub" buttons use. Your site may differ (for example, if it uses Auth0 or NextAuth).
+>
+> **In short:** the browser bounces to GitHub and back with a one-time `code`. Your backend then trades that code, plus its client secret, for an access token, server to server.
 >
 > ```
-> Browser              Backend                GitHub
->    |                    |                      |
-> 1  |--- click --------->|                      |
-> 2  |<-- 302 to GitHub --|                      |
->    |    (client_id, scope, state)              |
-> 3  |------------ login + consent ------------->|
-> 4  |<----------- 302 to /callback -------------|
->    |             (code, state)                 |
-> 5  |--- /callback ----->|                      |
->    |    (code, state)   |                      |
-> 6  |                    |--- code + secret --->|
-> 7  |                    |<-- access_token -----|
-> 8  |                    |--- GET /user ------->|
-> 9  |                    |<-- profile ----------|
-> 10 |<-- session cookie -|                      |
+> Browser                    Your backend                     GitHub
+>    |                            |                              |
+> 1  |-- click "Sign in" -------->|                              |
+>    |                            | make random `state`,         |
+>    |                            | save it in session/cookie    |
+> 2  |<-- 302 redirect -----------|                              |
+>    |    github.com/login/oauth/authorize?client_id&            |
+>    |    redirect_uri&scope&state                               |
+> 3  |---------------------------------------------------------->|
+>    |                     user logs in + approves scopes        |
+> 4  |<-- 302 to redirect_uri?code=XYZ&state=... ----------------|
+> 5  |-- GET /callback?code&state>|                              |
+>    |                            | check state == saved state   |
+> 6  |                            |-- POST /login/oauth/access_token
+>    |                            |   client_id, client_secret, code -->|
+>    |                            |<-- access_token -------------|
+> 7  |                            |-- GET api.github.com/user -->|
+>    |                            |   (+ /user/emails if needed) |
+>    |                            |<-- id, login, email ---------|
+>    |                            | find or create user by GitHub id
+> 8  |<-- Set-Cookie: session ----|                              |
+>    |    redirect to app         |                              |
 > ```
 >
-> - **Steps 1-4**: the browser is only a messenger. It carries redirects between your backend and GitHub.
-> - **Step 6**: the one that matters. The `code` is short-lived and useless alone. Your backend swaps it for a token using `client_secret`, which never reaches the browser ✅
-> - **Step 5**: the backend must check that `state` matches what it issued in step 2. Skipping this opens a CSRF hole (forged login) ⚠️
-> - **Step 10**: your backend creates its own session. GitHub's token usually stays server-side.
+> These 4 points matter most for security:
 >
-> 💡 If your app is a SPA or mobile app with no secret, use PKCE (a one-time proof sent with the code) instead.
+> - **`state`**: a random value that blocks CSRF. A login attacker can't forge the callback without it.
+> - **Client secret**: it lives only on the backend. The browser never sees it or the access token.
+> - **`code`**: it works once and expires in about 10 minutes.
+> - **User identity**: key users by GitHub's numeric `id`, not `login` or email. Users can rename `login`, and emails may be private or unverified.
 >
-> Want me to check your code against these steps, especially the `state` check? Answer yes or no.
+> 💡 If you point me at the repo, I can trace your actual callback handler and check these 4 points against it.
 
-### "CI is red because `test_retry` fails from time to time. Get CI green."
-
-Here the agent has tools and fixes a real flaky test. **Both versions fixed it the right way**: mocked the sleep, kept a meaningful assertion, skipped nothing. The difference is the report.
-
-<details>
-<summary><b>Off</b> (4 lines)</summary>
-
-> I fixed the flaky `test_retry`, and it passed 200 runs in a row locally. I haven't seen CI itself go green, and I haven't committed anything.
->
-> **Cause:** the test asserted that real elapsed time was under 0.03s. `call_with_retry` sleeps a random time up to 0.02s after the first failure and up to 0.04s after the second. Two retries can therefore take up to 0.06s, so the test failed whenever the random delays added up past 0.03s.
->
-> **Fix:** in `tests/test_retry.py`, `time.sleep` is now mocked in both tests. `test_retry` checks that exactly two sleeps happen, the first at most 0.02s and the second at most 0.04s. `retry.py` is unchanged.
->
-> `call_with_retry` also sleeps after the final failed attempt, which is wasted time before it re-raises. I left that alone because it's outside what you asked for.
-
-</details>
-
-**On** (16 lines)
-
-> 🎉 `test_retry` is fixed. It passed 30 runs out of 30, where before it failed in 5 of 6. I only ran the tests locally, since I can't see your CI.
->
-> The test asserted that the whole call finishes in under 0.03s of real time. The retry code sleeps a random 0–0.02s, then 0–0.04s, which averages about 0.03s. So the test failed most runs by design.
->
-> I left [./retry.py](/tmp/work/retry.py) alone because its backoff is correct.
->
-> The fix is in [./tests/test_retry.py](/tmp/work/tests/test_retry.py). It no longer waits on the clock:
->
-> ```diff
-> -        start = time.monotonic()
-> -        self.assertEqual(call_with_retry(f), "ok")
-> -        self.assertLess(time.monotonic() - start, 0.03)
-> +        with mock.patch("retry.time.sleep") as sleep:
-> +            self.assertEqual(call_with_retry(f), "ok")
-> +        # delay i must be within [0, base_delay * 2**i]
-> ```
->
-> - **Patched sleep**: `time.sleep` is mocked, so the tests also run faster.
-> - **Bounds check**: the test now checks that the two delays stay within their backoff limits. That's a stronger check than the old time limit.
-> - **Other test**: I patched sleep in `test_gives_up` too.
->
-> Next step: push it and confirm CI goes green.
-
-One run per prompt, so these are samples. [`examples/README.md`](examples/README.md) says how they were made, and what 20 earlier runs showed, including a miss.
+Each prompt shows the first of three runs, not the best, so these are samples. [`examples/README.md`](examples/README.md) says where they come from, and what 20 earlier runs showed, including a miss.
 
 ## 📊 Benchmark
 

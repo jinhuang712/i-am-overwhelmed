@@ -9,6 +9,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - README: a benchmark badge and section with the latest score against no plugin.
 - README: "What you get" adds what the owner noticed beyond the replies: the agent's work changes too.
 
+### Changed
+- README: the examples come from the benchmark of 2026-11-11, the first run of each side, on Opus 5.5. The English README drops the CI example, which the eval has in Chinese only.
+
 ### Removed
 - README: "The rules" and "What actually changes". "Tune it" links the rule file instead.
 

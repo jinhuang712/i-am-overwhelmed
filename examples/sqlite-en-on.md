@@ -1,20 +1,21 @@
-✅ **SQLite.** At ~100 users, a shortener is read-heavy and tiny, so SQLite handles it with zero ops.
+✅ **SQLite.** At ~100 users, a URL shortener does one indexed lookup per redirect, and SQLite handles thousands of those per second on one file with nothing to run or patch. (Typical figure, not benchmarked here.)
+
+Postgres only pays off if you run more than one server or host without a persistent disk:
 
 ```
-Request ──► App ──► SQLite file
-                    (one file, backup = copy)
+Where does the app run?
+├── One server or VM, persistent disk     → SQLite ✅
+├── Several app instances                 → Postgres
+└── Serverless / ephemeral containers     → Postgres (or hosted SQLite, e.g. Turso)
+    (the file gets wiped on redeploy)
 ```
 
-- **Why**: no separate server to run, patch, or pay for
-- **Speed**: redirects are simple key lookups, so microseconds
-- **Setup**: turn on WAL mode (write-ahead log, lets reads and writes overlap) with `PRAGMA journal_mode=WAL;`
-- **Backups**: use Litestream or a nightly copy
+3 tips if you pick SQLite:
 
-⚠️ **Premise to check**: SQLite assumes one app server with a local disk. If you deploy on serverless or run several instances, Postgres fits better.
+- **WAL mode**: Turn it on so reads keep working while a write is in progress.
+- **Backups**: Use Litestream, or a nightly copy made with the SQLite backup command. A plain `cp` of a live database file can give you a corrupted copy.
+- **Exit path**: Keep your SQL plain, and moving to Postgres later is about an afternoon of work. 😄
 
-🤔 **Switch to Postgres if**:
-- You need multiple app servers
-- Click analytics produce heavy concurrent writes
-- You plan to grow well beyond 100 users
+> If "100 users" means 100 accounts but the short links go viral, the read load still stays small. Redirects are cheap.
 
-Q1. Will this run on a single server with a persistent disk?
+💬 Will the app run on a single server with a persistent disk?

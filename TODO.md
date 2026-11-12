@@ -109,4 +109,3 @@ Open questions
 ## Release and upkeep
 
 - [ ] Nothing since 0.1.14 is pushed, 0.1.15 included. The owner said to wait.
-- [ ] The README examples were recorded with 0.1.14.

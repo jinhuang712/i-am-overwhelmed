@@ -85,202 +85,275 @@ Claude Code
 
 ## 👀 看效果
 
-真实输出，同一个提示，分别关掉和打开插件。完整，没有删减。全部用 Sonnet 5.5（`claude-sonnet-5-5`）跑的，打开插件的那组录于 2026-11-10，用的是本仓库当前的规则。点开 **关闭** 可以看不带插件的回复。原始文件在 [`examples/`](examples/)。
+真实输出，同一个提示，分别关掉和打开插件。完整，没有删减。每个示例都取自 2026-11-11 的基准测试，用的是 Claude Opus 5.5（`claude-opus-5-5`）。点开 **关闭** 可以看不带插件的回复。原始文件在 [`examples/`](examples/)。
 
-### 「我给一个 100 人用的内部小工具加缓存，用 Redis 还是进程内的字典？」
+### 「我们有个内部工具，大约 100 人用。要不要上 Redis 做缓存？」
 
 <details>
 <summary><b>关闭</b>（15 行）</summary>
 
-> 用进程内字典（或 `functools.lru_cache` / `cachetools.TTLCache` 这类带过期的封装）就够了。
+> **大概率不需要。** 100 人规模的内部工具，Redis 带来的运维成本通常高于收益。
 >
-> **理由：**
-> - 100 人的规模，数据量和并发都很小，进程内缓存的延迟最低（无网络往返），也不用多维护一个服务。
-> - Redis 意味着多一个要部署、监控、处理连接失败和序列化的组件，对内部小工具来说是纯增加的运维成本。
+> ### 为什么一般不需要
+> - **负载很低**：100 人就算同时在线，QPS 通常也就几十，PostgreSQL / MySQL 单机就能轻松应对。
+> - **增加复杂度**：多一个组件，就要多考虑部署、监控、高可用和缓存一致性。缓存失效导致的数据不一致，在内部工具里很容易引发难查的 bug。
+> - **有更简单的替代方案**：
+>   - 先优化数据库：加索引、处理慢查询、解决 N+1 问题，这通常是最大的收益点
+>   - 使用进程内缓存（如 Python 的 `functools.lru_cache`/`cachetools`、Java 的 Caffeine、Node 的 `lru-cache`），适合单实例部署
+>   - 对静态资源和不常变的接口，配置 HTTP 缓存头
 >
-> **需要注意的点：**
-> - 设置 TTL 和最大容量（例如 `TTLCache(maxsize=1000, ttl=300)`），避免内存无限增长和数据过期不更新。
-> - 缓存是每个进程独立的。如果你用 gunicorn 开多个 worker 或多实例部署，各自缓存不共享，命中率会下降，并且可能短时间内读到不一致的数据。对小工具通常可以接受；如果不行，先把 worker 数降到 1–2。
-> - 重启即丢失缓存，所以别把它当持久存储。
-> - 多线程下，普通 dict 的单次读写是安全的，但"检查再写入"不是原子的；用 `cachetools` 时配合一个 `threading.Lock`。
+> ### 什么情况下值得上
+> - **已经测出明确瓶颈**：比如某个查询或外部 API 调用很慢（秒级）、很贵，或者有限流。
+> - **多实例部署且需要共享状态**：如 session、分布式锁、限流计数，或者用作任务队列（Celery/Sidekiq/BullMQ）。
+> - **公司已有托管的 Redis**（云服务或平台组维护），接入成本几乎为零，这时用它也无妨。
 >
-> **什么时候该换 Redis：**
-> - 多实例部署且必须共享缓存或保证一致性（比如要做主动失效）。
-> - 缓存的计算很昂贵，不能容忍重启后冷启动。
-> - 需要跨进程的限流、会话、锁等功能。
-> - 项目里本来就已经有 Redis 在跑，那么顺手用也行。
+> ### 建议
+> 先看监控或 APM，确认慢在哪里。如果数据库优化后仍有明显瓶颈，再考虑缓存，而且优先用进程内缓存。只有在多实例需要共享缓存，或者用到队列、锁这类功能时，才引入 Redis。
 >
-> 建议先用进程内缓存，把缓存逻辑封装在一个小函数或类后面，以后真需要时再换成 Redis，改动范围很小。
+> 如果你能说一下现在遇到的具体问题（比如哪个页面慢、技术栈、部署了几个实例），我可以给更有针对性的建议。
 
 </details>
 
-**打开**（14 行）
+**打开**（24 行）
 
-> 我的意见：**先用进程内字典** ✅ 100 人的量，Redis 多出来的是一个要部署、监控、维护的服务，收益很小。
+> 🤔 大概率不用。100 人的内部工具，数据库通常扛得住；Redis 会多一个要部署、监控、处理缓存失效的组件。前提是还没测出具体的慢点。这一条是猜测，我没看到你们的系统。
+>
+> 先排查，再决定要不要上 Redis：
 >
 > ```
-> 缓存放哪里？
-> ├── 单进程部署
-> │   → 进程内字典（加 TTL 和大小上限）
-> ├── 多进程或多实例，且能接受数据短暂不一致
-> │   → 还是进程内字典，TTL 设短一点
-> └── 多实例，且要求数据强一致或要共享
->     → 这时才上 Redis
+> 接口慢吗？
+> ├── 不慢
+> │   → 不上 Redis，保持简单 ✅
+> └── 慢
+>     ├── 慢在 SQL
+>     │   → 先加索引、改查询
+>     ├── 慢在调外部 API
+>     │   → 先用进程内缓存（如 LRU）
+>     └── 以上都试过，或要多实例共享缓存、session
+>         → 这时再上 Redis
 > ```
 >
-> - 💡 **别手写 dict**：Python 用 `cachetools.TTLCache`，Node 用 `lru-cache`，这样过期和内存上限都自带。
-> - ⚠️ **重启即清空**：进程内缓存随进程消失，重启后第一批请求会慢一点，内部工具通常无所谓。
-> - 🤔 **我在猜的部分**：我不知道你的部署方式。多 worker（比如 gunicorn 开 4 个进程）时，每个进程各有一份缓存，数据可能不一致。
+> 值得上 Redis 的 3 种情况：
 >
-> Q1. 这个工具跑几个进程？（几个字回答即可，例如"单进程"或"gunicorn 4 个 worker"）
+> - **多实例共享**：你们部署了多个实例，需要共享 session 或缓存。
+> - **外部调用贵**：某个外部 API 很慢，或者按调用次数收费。
+> - **已经有 Redis**：公司已有托管 Redis，接入几乎没有运维成本。
+>
+> > 100 人用的工具上 Redis，常常是在给不存在的流量做准备 😄
+>
+> 💬 现在有没有具体的慢点或痛点？
+> - A. 没有，只是想提前优化
+> - B. 有，某些接口明显慢
+> - C. 有，需要多实例共享状态
+>
+> 选 A 就不用上 Redis。选 B 或 C，告诉我具体情况，我帮你判断。
 
-### 「用户在我们的网站上点『用 GitHub 登录』之后，浏览器、我们的后端和 GitHub 之间是怎么一步步交互的？」
+### 「用户在我们的网站上点『用 GitHub 登录』之后，浏览器、我们的后端和 GitHub 之间是怎么交互的？」
 
 <details>
-<summary><b>关闭</b>（47 行）</summary>
+<summary><b>关闭</b>（67 行）</summary>
 
-> 这是标准的 OAuth 2.0 授权码流程（Authorization Code Flow）。
+> 这是标准的 **OAuth 2.0 授权码流程（Authorization Code Flow）**。整个过程分为以下几步：
 >
-> ## 时序
+> ## 时序概览
 >
 > ```
-> 浏览器                    我们的后端                    GitHub
->   |  1. 点「用 GitHub 登录」  |                            |
->   |------------------------->|                            |
->   |                          | 生成 state（可选 PKCE）存 session
->   |  2. 302 到 GitHub 授权页  |                            |
->   |<-------------------------|                            |
->   |  3. GET /login/oauth/authorize?client_id&redirect_uri&scope&state
->   |------------------------------------------------------>|
->   |  4. 用户登录 GitHub（如未登录）并点「Authorize」          |
->   |<----------------------------------------------------->|
->   |  5. 302 到 redirect_uri?code=xxx&state=yyy             |
->   |<------------------------------------------------------|
->   |  6. GET /auth/github/callback?code&state              |
->   |------------------------->|                            |
->   |                          | 7. 校验 state 与 session 中一致
->   |                          | 8. POST /login/oauth/access_token
->   |                          |    (client_id, client_secret, code, redirect_uri)
->   |                          |--------------------------->|
->   |                          |    access_token            |
->   |                          |<---------------------------|
->   |                          | 9. GET api.github.com/user
->   |                          |    Authorization: Bearer <token>
->   |                          |--------------------------->|
->   |                          |    id, login, avatar...    |
->   |                          |<---------------------------|
->   |                          | 10. 查找/创建本地用户，建立会话
->   | 11. Set-Cookie: session + 302 到首页                    |
->   |<-------------------------|                            |
+> 浏览器                 你的后端                     GitHub
+>   |  1. 点击登录          |                            |
+>   |--------------------->|                            |
+>   |  2. 302 重定向到 GitHub (带 client_id, state...)    |
+>   |<---------------------|                            |
+>   |  3. 访问 github.com/login/oauth/authorize          |
+>   |-------------------------------------------------->|
+>   |  4. 用户登录 GitHub 并点击“授权”                     |
+>   |  5. 302 重定向回 callback?code=xxx&state=yyy       |
+>   |<--------------------------------------------------|
+>   |  6. 访问你的 callback  |                            |
+>   |--------------------->|  7. 用 code 换 access_token |
+>   |                      |--------------------------->|
+>   |                      |<---------------------------|
+>   |                      |  8. 用 token 拉取用户信息    |
+>   |                      |--------------------------->|
+>   |                      |<---------------------------|
+>   |  9. 建立会话(Set-Cookie)，跳转到站内页面            |
+>   |<---------------------|                            |
 > ```
 >
-> ## 各步骤要点
+> ## 各步骤详解
 >
-> 1. **发起**：后端生成随机 `state`（防 CSRF），存进 session 或签名 cookie。如果用 PKCE，同时生成 `code_verifier` 并把 `code_challenge` 带上。
-> 2. **跳转授权页**：参数有 `client_id`、`redirect_uri`、`scope`（只要登录用 `read:user`，要邮箱再加 `user:email`）和 `state`。
-> 3. **用户授权**：这一步完全发生在浏览器和 GitHub 之间，我们的后端看不到。
-> 4. **回调**：GitHub 把用户重定向回我们预先注册的 `redirect_uri`，带上一次性的 `code`（短时效，约 10 分钟）和原样返回的 `state`。
-> 5. **校验 state**：不一致就直接拒绝，这是防登录 CSRF 的关键。
-> 6. **换 token**：后端用 `code` + `client_secret` 向 GitHub 请求 `access_token`。这一步是服务器对服务器，`client_secret` 不会暴露给浏览器。请求时加 `Accept: application/json`，否则 GitHub 默认返回 form 编码格式。
-> 7. **取用户信息**：用 token 调 `GET /user`。如果需要邮箱，再调 `GET /user/emails`，因为用户可能把邮箱设为私密，`/user` 里的 `email` 可能为空。
-> 8. **建立本地会话**：用 GitHub 的**数字 `id`** 作为唯一标识去匹配或创建本地用户，不要用 `login`（可改名）或 email。然后下发自己的会话 cookie（`HttpOnly; Secure; SameSite=Lax`）。
+> **1–2. 发起授权（浏览器 → 后端）**
+> 后端生成一个随机 `state`，存入 session 或 cookie，然后返回 302 重定向到：
+> ```
+> https://github.com/login/oauth/authorize
+>   ?client_id=YOUR_CLIENT_ID
+>   &redirect_uri=https://yoursite.com/auth/github/callback
+>   &scope=read:user user:email
+>   &state=随机字符串
+> ```
+> - `state` 用于防御 CSRF。
+> - 如有需要，还可以加上 PKCE 参数（`code_challenge` / `code_challenge_method=S256`），GitHub 已支持。
 >
-> ## 容易踩的点
+> **3–4. 用户在 GitHub 上授权**
+> 如果用户还没登录 GitHub，会先完成登录。随后 GitHub 展示授权页面，列出你的应用和申请的权限范围。用户此前授权过的话，这一步会自动跳过。
 >
-> - `access_token` 只留在后端。如果只用来登录，用完就可以丢掉，不必存。
-> - `redirect_uri` 必须和 GitHub OAuth App 中注册的一致，否则授权会失败。
-> - `code` 只能用一次。
-> - 登录之后浏览器和 GitHub 就没关系了，后续请求只带我们自己的 session cookie。
+> **5–6. 回调（GitHub → 浏览器 → 后端）**
+> GitHub 把浏览器重定向到你的 `redirect_uri`，并带上 `?code=一次性授权码&state=原样返回`。
+> 后端收到后必须先校验 `state` 与第 1 步保存的一致，不一致就拒绝请求。
 >
-> 如果你想对照项目里的实际实现来检查（比如 state 校验、用什么字段做用户唯一标识），告诉我代码在哪，我可以帮你看。
+> **7. 用 code 换 token（后端 ↔ GitHub，服务器之间直连）**
+> ```
+> POST https://github.com/login/oauth/access_token
+> Accept: application/json
+>
+> client_id=...&client_secret=...&code=...&redirect_uri=...
+> ```
+> 返回 `access_token`。`client_secret` 只出现在这一步的服务器之间请求里，**绝不能暴露给浏览器**。`code` 只能使用一次，有效期很短（约 10 分钟）。
+>
+> **8. 获取用户身份**
+> ```
+> GET https://api.github.com/user
+> Authorization: Bearer <access_token>
+> ```
+> 从返回结果中拿到 `id`、`login`、`avatar_url` 等信息。如果需要邮箱，再调用 `GET /user/emails`，取其中 `primary` 且 `verified` 的那一个。
+>
+> **9. 建立你自己的登录态**
+> - 用 GitHub 的 **`id`**（数字，永久不变）关联或创建本地用户。不要用 `login` 用户名，因为用户可以改名。
+> - 签发你自己的 session cookie 或 JWT，然后重定向到首页或用户登录前所在的页面。
+> - 如果之后不需要代表用户调用 GitHub API，可以直接丢弃 access_token；如果需要，就加密保存。
+>
+> ## 关键安全要点
+> | 要点 | 原因 |
+> |---|---|
+> | 校验 `state` | 防止 CSRF 登录攻击 |
+> | `client_secret` 只放后端 | 防止应用被冒用 |
+> | `redirect_uri` 与 GitHub App 配置严格一致 | 防止 code 被重定向到攻击者的地址 |
+> | 用 GitHub 用户 `id` 关联账号 | 用户名可以修改 |
+> | 按邮箱合并已有账号前，先确认邮箱已 verified | 防止账号接管 |
+> | scope 只申请需要的最小权限 | 降低 token 泄露后的影响 |
+>
+> 如果你需要，我可以看一下你们项目里实际的回调实现代码，帮忙检查有没有遗漏的地方。
 
 </details>
 
-**打开**（29 行）
+**打开**（45 行）
 
-> 我假设你们用的是标准的 OAuth 2.0 授权码流程（authorization code flow，先拿一次性 code，再换 token），我没看你们的代码，所以这是推测。
+> 这是标准的 **OAuth 2.0 授权码流程**：浏览器只负责来回跳转，真正拿 token 和查用户信息的是后端对 GitHub 的直连请求，`client_secret` 不经过浏览器。
+>
+> > ⚠️ 我没看你们的代码，下面是 GitHub OAuth App 的标准流程。你们的实现可能有差异，比如用了 Passport、NextAuth 之类的库。
+>
+> 完整交互分 6 步：
 >
 > ```
-> 浏览器        我们的后端        GitHub
->   │ 1 点「用 GitHub 登录」 │
->   ├──────────▶│
->   │ 2 302 跳转到 GitHub    │
->   │◀──────────┤  (带 client_id, redirect_uri, scope, state)
->   │ 3 跳去 GitHub，用户登录并点「授权」
->   ├───────────────────────▶│
->   │ 4 302 回到我们的回调地址
->   │◀───────────────────────┤  (带 code, state)
->   │ 5 浏览器访问回调地址
->   ├──────────▶│
->   │           │ 6 用 code + client_secret 换 token
->   │           ├───────────▶│
->   │           │ 7 返回 access_token
->   │           │◀───────────┤
->   │           │ 8 用 token 调 GET /user 拿用户信息
->   │           ├───────────▶│
->   │ 9 建立登录态 (Set-Cookie)
->   │◀──────────┤
+> Browser                     Our Backend                         GitHub
+>    |                             |                                  |
+>    | 1. click "Login w/ GitHub"  |                                  |
+>    |---------------------------->|                                  |
+>    |                             | gen state, save in session       |
+>    | 302 -> github.com/login/oauth/authorize                        |
+>    |     ?client_id&redirect_uri&scope&state                        |
+>    |<----------------------------|                                  |
+>    |                                                                |
+>    | 2. user logs in + clicks "Authorize"                           |
+>    |--------------------------------------------------------------->|
+>    |                                                                |
+>    | 3. 302 -> our /callback?code=XXX&state=YYY                     |
+>    |<---------------------------------------------------------------|
+>    |                             |                                  |
+>    |---------------------------->|                                  |
+>    |                             | check state == session.state     |
+>    |                             |                                  |
+>    |                             | 4. POST /login/oauth/access_token|
+>    |                             |    client_id + client_secret     |
+>    |                             |    + code                        |
+>    |                             |--------------------------------->|
+>    |                             |<-------- access_token -----------|
+>    |                             |                                  |
+>    |                             | 5. GET api.github.com/user       |
+>    |                             |    (+ /user/emails)              |
+>    |                             |--------------------------------->|
+>    |                             |<-------- id, login, email -------|
+>    |                             |                                  |
+>    |                             | 6. find/create user by GitHub id |
+>    | Set-Cookie: our session     |    issue OUR session             |
+>    | 302 -> home                 |                                  |
+>    |<----------------------------|                                  |
 > ```
 >
-> - **前台通道**（1-5）：走浏览器，所有内容用户都看得到，所以只放 `code`（一次性授权码），不放密钥。
-> - **后台通道**（6-8）：后端直连 GitHub，`client_secret` 和 `access_token` 只在这里出现。
-> - **`state`**：后端在第 2 步生成的随机串，第 5 步必须核对一致，用来防 CSRF（跨站请求伪造）。
+> 4 个容易出错的点：
 >
-> ❗ 最常见的坑：漏掉 `state` 校验，或把 `client_secret` 放进前端。
+> - **state**：后端生成随机值并存入 session，回调时必须比对，用来防 CSRF 登录攻击。
+> - **code**：它只能用一次，大约 10 分钟内过期。它出现在浏览器 URL 里，所以本身不能当凭证用。
+> - **client_secret**：它只在第 4 步由后端发出，绝对不能出现在前端代码里。
+> - **用户匹配**：要用 GitHub 的数字 `id` 来关联账号，不要用 `login` 或 email。用户名可以改，email 可能为空或者未验证。
 >
-> Q1. 你想接着深入哪一块？（快问快答）
-> - 我推荐先讲 `state` 校验的实现，因为它最容易漏，也最容易出安全问题。
-> - 或者讲 token 换到之后，怎么和你们自己的用户表绑定。
+> 💡 第 6 步之后，GitHub 的 access_token 和你们自己的登录态就分开了。除非后续还要调 GitHub API，否则不用存这个 token，存了反而多一份泄露风险。
+>
+> 如果想核对你们的实现是否符合上面的流程，把回调处理的代码路径发我就行。
 
-### 「CI 红了，因为 test_retry 时不时失败。把 CI 弄绿。」
+### 「CI 红了，test_retry 时好时坏。让 CI 变绿。」
 
-这一次 agent 有工具，真的去修一个偶发失败的测试。**两个版本修得一样对**：mock 掉 sleep，保留有意义的断言，什么都没跳过。差别在汇报。
+这一次 agent 有工具，真的去修一个偶发失败的测试。**两个版本修法一样**：都用 mock 替掉了 sleep，都没动 `retry.py`，改完都跑了测试。差别在汇报。不装插件的那次，用英文回答了中文提问。
 
 <details>
-<summary><b>关闭</b>（8 行）</summary>
+<summary><b>关闭</b>（6 行）</summary>
 
-> `test_retry` 现在稳定了:修改后连续跑 30 次全部通过。我没有看 CI 本身,也没有提交。
+> I fixed the flaky test, and it now passed 200 local runs in a row. I haven't committed or pushed anything.
 >
-> **原因**:`call_with_retry` 的退避带随机抖动,两次重试的睡眠上限分别是 0.02 秒和 0.04 秒。`test_retry` 却断言总耗时小于 0.03 秒,所以随机到较长的睡眠时就会失败。
+> **Why it was flaky:** with `fails=2`, `call_with_retry` sleeps twice, for a random time up to 0.02s and then up to 0.04s, so up to 0.06s in total. The test required the whole call to finish within 0.03s, so whether it passed depended on the random sleep times. The retry code in `retry.py` itself was fine.
 >
-> **修改**:只改了 `tests/test_retry.py`。
-> - 用 `mock` 把 `time.sleep` 和 `random.uniform` 打桩,测试不再依赖真实时间。
-> - 把时间断言换成对退避上限的检查:两次的上限依次是 `(0, 0.02)` 和 `(0, 0.04)`,并确认 sleep 被调用了 2 次。
-> - `test_gives_up` 同样给 sleep 打桩,免得白白睡眠。
+> **The fix** (only `tests/test_retry.py` changed, not the code under test):
+> - `test_retry` no longer measures real elapsed time. It replaces `retry.time.sleep` with a fake and checks that it was called twice: the first wait between 0 and 0.02s, the second between 0 and 0.04s. That still tests the backoff behaviour, and it now gives the same result every run.
+> - `test_gives_up` also uses the fake sleep, so it runs faster.
 >
-> `retry.py` 没动,因为行为本身没问题,是测试的断言有错。
->
-> 仓库里提交了 `__pycache__/*.pyc`,跑测试后它们也变成了已修改。你可能想把它们移出版本控制并加进 `.gitignore`,我没有动。
+> One side issue I didn't change: after the last failed attempt, `call_with_retry` still sleeps once before raising the error, which is wasted time. If you want that fixed, I can make it skip the sleep after the final attempt.
 
 </details>
 
-**打开**（19 行）
+**打开**（33 行）
 
-> 🎉 `test_retry` 修好了，连续跑 200 次全部通过。
+> `test_retry` 不稳定的原因在测试本身，`retry.py` 的逻辑没问题。测试用墙钟时间断言总耗时小于 0.03s，而两次随机退避加起来最多会有 0.06s。我把它改成 mock 掉 `sleep`、直接检查每次退避的时长，本地已经稳定变绿 🎉
 >
-> **根因**
 > ```
-> retry.py 睡眠 = random.uniform(0, 0.02 * 2**i)
->   → 两次失败最多睡 0.02 + 0.04 = 0.06s
->   → 测试断言总耗时 < 0.03s
->   → 抖动取到大值就失败
+> 两次重试的退避：uniform(0, 0.02) + uniform(0, 0.04)
+>   → 总和在 0–0.06s 之间，平均约 0.03s
+>   → 断言要求 < 0.03s，所以约一半概率失败
+>   → 实测修改前 20 次失败 13 次
 > ```
 >
-> **改动**：只改了 [./tests/test_retry.py](/tmp/work/tests/test_retry.py)。
+> 改动只涉及 [./tests/test_retry.py](/tmp/work/tests/test_retry.py)：
+>
 > ```diff
-> - self.assertLess(time.monotonic() - start, 0.03)
-> + # mock sleep，并让 jitter 取上限
-> + self.assertEqual([c.args[0] for c in sleep.call_args_list], [0.02, 0.04])
+> -        start = time.monotonic()
+> -        self.assertEqual(call_with_retry(f), "ok")
+> +        with mock.patch("retry.time.sleep") as sleep:
+> +            self.assertEqual(call_with_retry(f, base_delay=0.02), "ok")
+>          self.assertEqual(f.calls, 3)
+> -        self.assertLess(time.monotonic() - start, 0.03)
+> +        delays = [c.args[0] for c in sleep.call_args_list]
+> +        self.assertEqual(len(delays), 2)
+> +        for i, d in enumerate(delays):
+> +            self.assertGreaterEqual(d, 0)
+> +            self.assertLessEqual(d, 0.02 * (2 ** i))
 > ```
-> `test_gives_up` 也 mock 了 sleep，不再真睡。
 >
-> - **没有放宽阈值**：我没有把 0.03 改大。新断言检查的是延迟上限，比计时更准，也不依赖机器快慢。
-> - **`retry.py` 没动**：生产代码本身是对的。
-> - ⚠️ **没验证 CI 本身**：这里没有 CI 配置，也不是 git 仓库。我只在本地用 `PYTHONPATH=. python3 -m unittest tests.test_retry` 跑过。你的 CI 如果用别的命令，比如 pytest，路径设置可能不同。
+> - **为什么没放宽阈值**：把 0.03 改成 0.1 也能变绿，但这是掩盖问题。到了慢的 CI 机器上它还会再红。
+> - **新断言测的是什么**：重试次数，以及每次退避都落在 `[0, base_delay·2^i]` 区间内。这样不依赖真实耗时，测得反而更严。
+> - **`test_gives_up` 也改了**：同样 mock 掉 `sleep`，测试不再真的等待。
+> - **验证情况**：本地连续跑 50 次，全部通过。CI 上还没跑过，我也没有提交或推送。
 >
-> 下一步：把你的 CI 运行命令发我，我照那个命令再验证一遍。
+> ⚠️ 顺带发现 `retry.py` 有个小 bug，我没改：最后一次尝试失败后，它还会多睡一次才抛出异常，这次等待毫无用处。修复方法是只在 `i < attempts - 1` 时才 sleep。这会改变代码行为，不属于"让 CI 变绿"的范围，所以先问你。
+>
+> 💬 Q1. 要不要顺手修掉"最后一次失败后多睡一次"这个 bug？
+>
+> 💬 Q2. 测试改动怎么处理？
+> - A. ✅ 我建一个分支提交，然后开 PR 跑 CI
+> - B. 只在本地提交，你自己推
+> - C. 先不提交
+>
+> - 当前在 `master` 上，直接提交不合适。
+> - 走 PR 能真正确认 CI 变绿。
 
-每个提示只跑了一次，所以这些是样本。它们是怎么录的，以及更早的 20 次运行的结果（包括一次失误），见 [`examples/README.md`](examples/README.md)。
+每个提示只取三次运行里的第一次，不挑好的，所以这些是样本。它们从哪来，以及更早的 20 次运行的结果（包括一次失误），见 [`examples/README.md`](examples/README.md)。
 
 ## 📊 基准测试
 

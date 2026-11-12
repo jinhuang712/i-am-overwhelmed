@@ -1,28 +1,37 @@
-Here is the standard OAuth 2.0 "authorization code" flow. I'm guessing your site uses it and haven't checked your code.
+🤔 I didn't look at your code: the working directory is a temp folder, not your repo. Below is the standard GitHub OAuth web flow, which most "Sign in with GitHub" buttons use. Your site may differ (for example, if it uses Auth0 or NextAuth).
+
+**In short:** the browser bounces to GitHub and back with a one-time `code`. Your backend then trades that code, plus its client secret, for an access token, server to server.
 
 ```
-Browser              Backend                GitHub
-   |                    |                      |
-1  |--- click --------->|                      |
-2  |<-- 302 to GitHub --|                      |
-   |    (client_id, scope, state)              |
-3  |------------ login + consent ------------->|
-4  |<----------- 302 to /callback -------------|
-   |             (code, state)                 |
-5  |--- /callback ----->|                      |
-   |    (code, state)   |                      |
-6  |                    |--- code + secret --->|
-7  |                    |<-- access_token -----|
-8  |                    |--- GET /user ------->|
-9  |                    |<-- profile ----------|
-10 |<-- session cookie -|                      |
+Browser                    Your backend                     GitHub
+   |                            |                              |
+1  |-- click "Sign in" -------->|                              |
+   |                            | make random `state`,         |
+   |                            | save it in session/cookie    |
+2  |<-- 302 redirect -----------|                              |
+   |    github.com/login/oauth/authorize?client_id&            |
+   |    redirect_uri&scope&state                               |
+3  |---------------------------------------------------------->|
+   |                     user logs in + approves scopes        |
+4  |<-- 302 to redirect_uri?code=XYZ&state=... ----------------|
+5  |-- GET /callback?code&state>|                              |
+   |                            | check state == saved state   |
+6  |                            |-- POST /login/oauth/access_token
+   |                            |   client_id, client_secret, code -->|
+   |                            |<-- access_token -------------|
+7  |                            |-- GET api.github.com/user -->|
+   |                            |   (+ /user/emails if needed) |
+   |                            |<-- id, login, email ---------|
+   |                            | find or create user by GitHub id
+8  |<-- Set-Cookie: session ----|                              |
+   |    redirect to app         |                              |
 ```
 
-- **Steps 1-4**: the browser is only a messenger. It carries redirects between your backend and GitHub.
-- **Step 6**: the one that matters. The `code` is short-lived and useless alone. Your backend swaps it for a token using `client_secret`, which never reaches the browser ✅
-- **Step 5**: the backend must check that `state` matches what it issued in step 2. Skipping this opens a CSRF hole (forged login) ⚠️
-- **Step 10**: your backend creates its own session. GitHub's token usually stays server-side.
+These 4 points matter most for security:
 
-💡 If your app is a SPA or mobile app with no secret, use PKCE (a one-time proof sent with the code) instead.
+- **`state`**: a random value that blocks CSRF. A login attacker can't forge the callback without it.
+- **Client secret**: it lives only on the backend. The browser never sees it or the access token.
+- **`code`**: it works once and expires in about 10 minutes.
+- **User identity**: key users by GitHub's numeric `id`, not `login` or email. Users can rename `login`, and emails may be private or unverified.
 
-Want me to check your code against these steps, especially the `state` check? Answer yes or no.
+💡 If you point me at the repo, I can trace your actual callback handler and check these 4 points against it.

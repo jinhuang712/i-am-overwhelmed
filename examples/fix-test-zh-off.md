@@ -1,12 +1,9 @@
-`test_retry` 现在稳定了:修改后连续跑 30 次全部通过。我没有看 CI 本身,也没有提交。
+I fixed the flaky test, and it now passed 200 local runs in a row. I haven't committed or pushed anything.
 
-**原因**:`call_with_retry` 的退避带随机抖动,两次重试的睡眠上限分别是 0.02 秒和 0.04 秒。`test_retry` 却断言总耗时小于 0.03 秒,所以随机到较长的睡眠时就会失败。
+**Why it was flaky:** with `fails=2`, `call_with_retry` sleeps twice, for a random time up to 0.02s and then up to 0.04s, so up to 0.06s in total. The test required the whole call to finish within 0.03s, so whether it passed depended on the random sleep times. The retry code in `retry.py` itself was fine.
 
-**修改**:只改了 `tests/test_retry.py`。
-- 用 `mock` 把 `time.sleep` 和 `random.uniform` 打桩,测试不再依赖真实时间。
-- 把时间断言换成对退避上限的检查:两次的上限依次是 `(0, 0.02)` 和 `(0, 0.04)`,并确认 sleep 被调用了 2 次。
-- `test_gives_up` 同样给 sleep 打桩,免得白白睡眠。
+**The fix** (only `tests/test_retry.py` changed, not the code under test):
+- `test_retry` no longer measures real elapsed time. It replaces `retry.time.sleep` with a fake and checks that it was called twice: the first wait between 0 and 0.02s, the second between 0 and 0.04s. That still tests the backoff behaviour, and it now gives the same result every run.
+- `test_gives_up` also uses the fake sleep, so it runs faster.
 
-`retry.py` 没动,因为行为本身没问题,是测试的断言有错。
-
-仓库里提交了 `__pycache__/*.pyc`,跑测试后它们也变成了已修改。你可能想把它们移出版本控制并加进 `.gitignore`,我没有动。
+One side issue I didn't change: after the last failed attempt, `call_with_retry` still sleeps once before raising the error, which is wasted time. If you want that fixed, I can make it skip the sleep after the final attempt.

@@ -1,22 +1,21 @@
-**SQLite.**
+**SQLite.** At ~100 users, it's not close.
 
-For about 100 users, a URL shortener is a read-heavy workload with tiny rows. SQLite handles that easily.
+**Why SQLite fits:**
+- A URL shortener is mostly reads (redirects), with occasional writes when someone creates a link. SQLite handles that easily, even with thousands of redirects per second.
+- There's no server to run, secure, or back up separately. It's one file, and you can back it up with `sqlite3 db .backup` or Litestream.
+- Lookups by slug are a single indexed primary-key read, which takes microseconds.
 
-- **Simplicity:** There's no server to run, secure, or back up separately. The database is one file.
-- **Performance:** Redirect lookups by primary key on a short code take microseconds. With WAL mode on, SQLite handles thousands of reads per second and enough writes for 100 users.
-- **Cost:** It needs no extra process or memory, so a small VPS is plenty.
+**Settings worth turning on:**
+```sql
+PRAGMA journal_mode = WAL;     -- concurrent reads during writes
+PRAGMA busy_timeout = 5000;    -- avoid "database is locked" errors
+PRAGMA synchronous = NORMAL;   -- safe with WAL, faster
+```
 
-**Setup tips**
-- Enable WAL: `PRAGMA journal_mode=WAL;`
-- Set `PRAGMA busy_timeout=5000;` and `PRAGMA synchronous=NORMAL;`
-- Make the short code the primary key or put a unique index on it.
-- Record click counts in a separate table, or batch the updates. That keeps write contention off the redirect path.
-- Back it up with `sqlite3 db ".backup file"` or Litestream, and don't copy the live file.
+**When to pick Postgres instead:**
+- You'll run multiple app servers or containers that all need to write to the same DB. SQLite wants a single host.
+- Your platform has ephemeral disks, like Heroku or some serverless setups, and no persistent volume.
+- You expect heavy write-side analytics, such as logging every click with rich metadata at high volume. Even then, batching the inserts usually keeps SQLite fine.
+- Your team already runs Postgres and a managed instance costs you nothing extra to operate.
 
-**When to pick Postgres**
-- You expect to run multiple app servers writing to the same database.
-- You expect heavy concurrent writes, such as high-volume click analytics.
-- Your platform has no persistent disk, as with some serverless setups.
-- You want Postgres-specific features or a managed database with built-in backups.
-
-If you outgrow SQLite, migrating a table this simple is easy. Start with SQLite.
+If you keep your SQL fairly standard, or use an ORM, switching to Postgres later is a small migration.

@@ -1,29 +1,24 @@
 # Examples
 
-The raw outputs behind the before-and-after in the main README. Nothing is edited or trimmed, with two exceptions. In the two plugin-on `fix-test` files, the path of the temporary folder is shortened to `/tmp/work`. In `sqlite-en-on.md`, a "(yes/no)" hint after the question is removed by hand, because the rule that drops it came after the recording.
+The raw outputs behind the before-and-after in the main README. Nothing is edited or trimmed, with one exception: in `fix-test-zh-on.md`, the path of the run's work folder is shortened to `/tmp/work`, so its links do not open.
 
-## How they were made
+## Where they come from
 
-- **Off**: the plugin disabled with `claude -p --settings '{"enabledPlugins":{"i-am-overwhelmed@i-am-overwhelmed":false}}'`. **On**: the plugin enabled.
-- Both sides ran with `CLAUDE_CODE_DISABLE_CLAUDE_MDS=1`, so no `CLAUDE.md` file adds rules. The only difference is the plugin.
-- `sqlite-en-*`, `redis-zh-*`, `login-en-*`, `login-zh-*`: one question each, run with `--tools ""`.
-- `fix-test-*`: the task "CI is red because `test_retry` fails from time to time. Get CI green." (in Chinese for `zh`), in a copy of [`fixture/`](fixture/) with `--permission-mode bypassPermissions` (the 2026-11-10 runs used `--permission-mode auto`). The fixture's `test_retry` fails about 47% of runs.
-- Model and plugin version, by file:
+- Every file is the final reply of run 1 of 3 from the benchmark of 2026-11-11, on Claude Opus 5.5 (`claude-opus-5-5`), effort medium: [`eval/results/2026-11-11-none-vs-13a35d4-opus-5-5/`](../eval/results/2026-11-11-none-vs-13a35d4-opus-5-5/). Its `raw/` folder stays local.
+- Run 1 is taken every time, so no reply is picked for looking good.
+- **Off** is the eval's arm with no plugin, and **On** the arm with it. Both start clean of the runner's own setup; see "Budget" in [`eval/README.md`](../eval/README.md).
 
-| Files | Model | Plugin version | Runs |
-|---|---|---|---|
-| `sqlite-en-off.md`, `redis-zh-off.md`, `fix-test-en-off.md`, `fix-test-zh-off.md` | Sonnet 5.5 (`claude-sonnet-5-5`) | plugin disabled | 1 each |
-| `login-en-off.md`, `login-zh-off.md` | Sonnet 5.5 (`claude-sonnet-5-5`) | plugin disabled | 1 each, recorded 2026-11-10 |
-| `sqlite-en-on.md`, `redis-zh-on.md`, `fix-test-en-on.md`, `fix-test-zh-on.md`, `login-en-on.md`, `login-zh-on.md` | Sonnet 5.5 (`claude-sonnet-5-5`), passed with `--model` | the rules after 0.1.13, loaded with `--plugin-dir` | 1 each, recorded 2026-11-10 |
-| `repeat/`, `first-batch/` | Sonnet 5.5 | 0.1.1 | see below |
+| Files | Eval task |
+|---|---|
+| `sqlite-en-*` | `chat-en` |
+| `login-en-*` | `shape-en` |
+| `redis-zh-*` | `chat-zh` |
+| `login-zh-*` | `shape-zh` |
+| `fix-test-zh-*` | `fix-test-zh`, an agent task on a small repository with a flaky test |
 
-## Which runs the README shows
-
-- Each of the six plugin-on examples is a single run from 2026-11-10, re-recorded after the rules changed. The `sqlite`, `redis` and `fix-test` off examples are the earlier single runs.
-- The `repeat/` and `first-batch/` files below were recorded with 0.1.1 and not re-run.
-- The plugin-on `fix-test` files contain links into the temporary folder the run used, shown as `/tmp/work`, so those links do not open.
-- In both plugin-on `fix-test` runs I checked the changed test myself: it mocks the sleep, keeps real assertions, and passed 30 runs of 30.
-- The first batch of the `fix-test` task is in [`first-batch/`](first-batch/). I did not use it in the README, because in it the plugin-on run to the Chinese prompt answered in English (see below).
+- In `fix-test-zh`, both sides mocked the sleep, left `retry.py` alone and ran the tests after the change. The reply with no plugin is in English in all 3 runs, though the prompt is Chinese.
+- The eval has the agent task in Chinese only, so the English README shows none.
+- The `repeat/` and `first-batch/` files below were recorded on Sonnet 5.5 with 0.1.1, and not re-run.
 
 ## Repeat: 5 runs per cell
 
