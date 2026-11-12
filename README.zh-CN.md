@@ -6,7 +6,7 @@
 
 **一套不让你过载的回复规则**
 
-![license](https://img.shields.io/badge/license-MIT-green) ![version](https://img.shields.io/github/v/tag/jinhuang712/i-am-overwhelmed?label=version)
+![license](https://img.shields.io/badge/license-MIT-green) ![version](https://img.shields.io/github/v/tag/jinhuang712/i-am-overwhelmed?label=version) [![benchmark](https://img.shields.io/badge/benchmark-82.1%20vs%2077.2%20without-blue)](#-基准测试)
 
 你很累，同时在做三件别的事，只想扫一眼。这个插件让 Claude 照着这样的读者来回复。它的回复是：
 
@@ -281,6 +281,24 @@ Claude Code
 | 正确性 | 不错 | 不错。不是更聪明，只是更好读。 |
 
 每个提示只跑了一次，所以这些是样本。它们是怎么录的，以及更早的 20 次运行的结果（包括一次失误），见 [`examples/README.md`](examples/README.md)。
+
+## 📊 基准测试
+
+装了插件，回复得 **82.1** 分（满分 100）；不装，得 **77.2** 分。评分模型给两边各打了 57 条回复：19 个任务，每个跑 3 次，模型是 Claude Opus 5.5，日期 2026-11-11。
+
+总分，以及提升最大的三项：
+
+| | 关闭 | 打开 |
+|---|---|---|
+| **总分** | 77.2 | **82.1** |
+| Honest（诚实） | 58.1 | **75.0** |
+| Structured（有结构） | 68.0 | **85.4** |
+| Focused、Standalone（聚焦、能单独读懂） | 83.6 | **89.1** |
+
+- **诚实**：70% 的回复说明了哪些没核实，不装插件只有 18%。
+- **有结构**：只有 4% 的回复把流程写成文字、没画图，不装插件是 42%。
+
+分数怎么算，见 [`eval/README.md`](eval/README.md)；每个任务的结果，见[完整报告](eval/results/2026-11-11-none-vs-13a35d4-opus-5-5/report.md)。
 
 ## 📏 规则
 

@@ -6,7 +6,7 @@
 
 **A reply rule that keeps answers easy to read and structured, stays honest, and avoids overwhelming you.**
 
-![license](https://img.shields.io/badge/license-MIT-green) ![version](https://img.shields.io/github/v/tag/jinhuang712/i-am-overwhelmed?label=version)
+![license](https://img.shields.io/badge/license-MIT-green) ![version](https://img.shields.io/github/v/tag/jinhuang712/i-am-overwhelmed?label=version) [![benchmark](https://img.shields.io/badge/benchmark-82.1%20vs%2077.2%20without-blue)](#-benchmark)
 
 You are tired, you are doing three other things, and you skim. This plugin makes Claude reply for that reader. Its replies are:
 
@@ -298,6 +298,24 @@ Here the agent has tools and fixes a real flaky test. **Both versions fixed it t
 | Correctness | Good | Good. Not a smarter model, only an easier read. |
 
 One run per prompt, so these are samples. [`examples/README.md`](examples/README.md) says how they were made, and what 20 earlier runs showed, including a miss.
+
+## 📊 Benchmark
+
+With the plugin, replies score **82.1** of 100; without it, **77.2**. A judge model scored 57 replies on each side: 19 tasks, 3 runs each, on Claude Opus 5.5, 2026-11-11.
+
+The overall score, and the three words it gains most on:
+
+| | Off | On |
+|---|---|---|
+| **Overall** | 77.2 | **82.1** |
+| Honest | 58.1 | **75.0** |
+| Structured | 68.0 | **85.4** |
+| Focused, Standalone | 83.6 | **89.1** |
+
+- **Honest**: 70% of replies say what was not checked, against 18%.
+- **Structured**: 4% of replies leave a flow undrawn, against 42%.
+
+[`eval/README.md`](eval/README.md) says how the score is made, and [the full report](eval/results/2026-11-11-none-vs-13a35d4-opus-5-5/report.md) has every task.
 
 ## 📏 The rules
 
