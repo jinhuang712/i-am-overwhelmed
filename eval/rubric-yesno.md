@@ -88,7 +88,6 @@ Bad signs
 | T5 | compares items across the same attributes with no table |
 | T6 | ⚙️ has a bullet point of two sentences or more |
 | T7 | has a table cell that holds a sentence |
-| T8 | has headings though the user did not ask for more detail |
 | T11 | puts a command inside a sentence |
 | T12 | shows code outside a code block |
 | T13 | shows a setting outside a code block |
@@ -211,8 +210,8 @@ Bad signs
 | K6 | points to a thing by a number and a short label, so the reader must scroll back to know what it is |
 | K7 | uses a coined term or a short name with no definition |
 | K8 | uses a term it coined in an earlier reply and does not say again what it means |
-| K9 | gives many items with no summary first |
-| K10 | gives many items and does not ask whether to go one by one or in batches |
+| K20 | has many items to give and goes into more than the main one |
+| K21 | has many items to give and does not list the ones it left |
 | K12 | covers more than the agreed item or batch in one reply |
 | K16 | does not restate the goal, what the user decided and what is open, though the big picture changed |
 | K17 | goes through items and does not show how far along it is |
@@ -328,3 +327,6 @@ Lines that are kept and not scored. A line comes here when a judge still wavers 
 | Wording | gives a number with no other number to compare it with, such as the value before or a limit | 15 of 20 stable on Haiku in two wordings, and too wide: it fired on counts such as "10 bugs", which need no comparison. Was L14 |
 | Wording | uses a technical term the user may not know, and says nothing about what it means | Too wide: it fired on 15 of 20 replies, on terms such as mock, JWT and O(n), because a judge cannot tell what the user knows. Was L16 |
 | Asking | puts a question in the middle of the reply | Judged where a question sits, not whether the reader finds it. With the plugin it fired on 25 of 57 replies, 16 of them for the plugin's own ways: Q1 before Q2, reasons under the options, a reminder after the question. Was A17 |
+| Structure | has headings though the user did not ask for more detail | The rule changed on 2026-11-13: a reply may have headings by default. T22 still credits the headings of a reply that goes deeper. Was T8 |
+| Continuity | gives many items with no summary first | The rule changed on 2026-11-13: the reply goes into the main item and lists the others. K20 and K21 judge that. Was K9 |
+| Continuity | gives many items and does not ask whether to go one by one or in batches | The rule changed on 2026-11-13, as for K9. Was K10 |
