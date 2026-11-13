@@ -28,6 +28,7 @@ assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
 
 - [YES] Keep rules discrete: one rule per line, with its tag.
 - [WHEN] A rule has a shape, such as branching decisions: draw it, as the rule file asks of a reply.
+- [YES] Open every section of the rule file with one sentence that says why its rules are there. The rules follow.
 - [YES] Give a drawn rule its own heading at the end of its section, with no tag. Before the drawing, say in one sentence why it is there, then what to do with it.
 - [YES] Keep rules agent-neutral, except where a host needs its own line.
 - [YES] Write rules in our own words. ASD-STE100 is the inspiration.

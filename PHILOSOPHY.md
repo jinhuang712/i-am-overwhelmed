@@ -151,7 +151,7 @@ The definition had a cost that the line counts did not show. To stay inside "a f
 
 Each rule is a unit of its own. Most are one line. A rule with a shape is a drawing: the end of a reply is a decision tree, because a tree is easier to follow than the same branches in sentences, for the reader and for the model.
 
-A drawn rule has its own heading and no tag. One sentence before it says why it is there, and then what to do with it. Until 2026-11-13 each drawing hung from a one-line `[YES]`, such as "End a reply by this tree:". A tree holds as much as three to five rules, and on the page it weighed as much as one bullet between two others. The change is for the reader of the file; no reply was run to measure it.
+Every section opens with one sentence that says why its rules are there, in the reader's own voice, and the rules follow. A drawn rule has its own heading and no tag. One sentence before it says why it is there, and then what to do with it. Until 2026-11-13 each drawing hung from a one-line `[YES]`, such as "End a reply by this tree:". A tree holds as much as three to five rules, and on the page it weighed as much as one bullet between two others. The change is for the reader of the file; no reply was run to measure it.
 
 - **The file is sent with every request**, so every line has a cost. It must stay short.
 - **One rule can be added, removed, compared and tested alone.** The eval's rubric and the changelog both follow the rules one by one.
