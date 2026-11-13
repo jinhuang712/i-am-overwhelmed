@@ -1,6 +1,6 @@
 # Eval: compare versions of the style
 
-A repeatable A/B, kept as a tool: run the same tasks against two versions of the plugin, blind the replies, have a model judge score them with [`rubric.md`](rubric.md), then unblind.
+A repeatable A/B, kept as a tool: run the same tasks against two versions of the plugin, blind the replies, have model judges answer the yes or no lines of [`rubric-yesno.md`](rubric-yesno.md), then unblind.
 
 What the evals have taught us is in [`FINDINGS.md`](FINDINGS.md).
 
@@ -34,43 +34,46 @@ python3 eval/eval.py --old <git ref> --none --reuse eval/results/<folder> --budg
 
 Results go to `eval/results/<date>-<old>-vs-<new>-<model>/`: `report.md`, `ledger.jsonl`, and scores and mappings per task. `raw/` holds the runs and is git-ignored.
 
-## Two rubrics
+## The rubric
 
-`--rubric` picks how the replies are judged.
-
-| | `scale`, the default | `yesno` |
-|---|---|---|
-| File | [`rubric.md`](rubric.md) | [`rubric-yesno.md`](rubric-yesno.md), a draft |
-| A line | a quality, scored 0 to 3 | one thing a judge can see, answered yes or no |
-| Judge | one strong judge, one pass | a cheap judge, three passes on each deck, the majority counts. The lines marked 🔎 go to the strong judge |
-| Stable over three passes | 54% to 58% on Opus | 92% on Haiku, with N and NA as one answer |
-| The report gives | the share of points | "clean": the share of bad signs a reply does not show; the credits; the faults by deck |
+[`rubric-yesno.md`](rubric-yesno.md) is the rubric, and the command judges with it unless told otherwise:
 
 ```
-python3 eval/eval.py --old v0.1.14 --rubric yesno --budget 10
+python3 eval/eval.py --old v0.1.14 --budget 10
 ```
 
-- **The reply only**: every line judges the reply. What the agent did counts only through what the reply says about it, such as a change it hides. A red flag names a harm; an act in it is an example. The lines that judged acts are parked.
-- **What the reader gets, not our format**: a line asks what a format of the plugin is for, such as whether the options of a question are clear, not whether they carry A/B/C letters. Otherwise a reply with no plugin loses points for conventions it was never told about. Lines the plugin has no rule for yet, such as a claim the tool results contradict, check that the rubric does not only praise our own rules.
-- **Decks**: the rubric is cut by type into decks of at most 14 lines, so the lines in one call explain each other.
-- **Three kinds of line**: most go to the cheap judge. A line marked 🔎 goes to the strong judge, once. Where it raises a red flag, it answers twice more, and the red flag counts only by majority: one red flag fails a reply. A line marked ⚙️ is answered by a script in `checks.py`, which is exact and free.
-- **A line keeps its number for good**, so a result or a finding can point at it.
+The file itself says how it works, in four short parts before its lines:
+
+| Part | What it holds |
+|---|---|
+| Formats | the six formats of a line or a number, who answers each, and what a yes means |
+| How to write a line | the tests a new line must pass, such as one thing, in 25 words at most |
+| Families | the eleven decks, the word of `PHILOSOPHY.md` each belongs to, and the word's weight |
+| The score | how answers become points, a quality, a score, and the bar for a release |
+
+What the tool does with it:
+
+- **Decks**: a deck of at most 14 lines goes to the cheap judge three times, and the majority counts. A longer deck is cut in equal parts.
+- **Strong lines**: the lines marked 🔎 go to the strong judge, once. Where it raises a red flag, it answers twice more, and the red flag counts only by majority.
+- **Scripted lines**: the lines marked ⚙️ are answered by a script in `checks.py`. The tests fail when a scripted line has no script.
+- **The families are checked**: the tests fail when the table of families in the rubric and the weights in `score.py` differ, or when a line has more than 25 words.
 - **The judge's notes are kept** next to its answers, in the cache of the task's `blind/` folder.
 - **A failed judge call keeps what it said**, as `<hash>.failed.txt` in the same cache, so its cause can be read. The next call that succeeds removes it.
-- **The bar**: no red flag in the new arm, and "clean" at most 2 points under the old arm. Two points is what one pass of the judge moves a reply by.
-- **Read a deck, not a line**: one line's answer moves between runs. A deck's count and the whole score are steady.
 - **Check the rubric itself** with `python3 eval/rubric_check.py --dry-run`. It judges replies that are already on disk, several times, and reports for every line how stable it is and how often it fires. Each round judges the replies of the last one, listed in `results/rubric-check/raw/samples.txt`, so rounds compare alike and unchanged decks come from the cache; `--new-samples` draws again. `--strong` judges the 🔎 lines the way an eval sends them, on the strong judge, into `report-strong.md`.
 - **Check the red flags** with `python3 eval/flag_check.py --dry-run`. One red flag fails a reply, so each red flag is checked against real replies whose answer the owner gave: ones that do the harm, and ones that only look like it. The cases live in `eval/flag-cases/`, which git ignores.
-- `yesno` will become the default when its lines have been checked for wrong hits and misses.
+
+`--rubric scale` judges with [`rubric.md`](rubric.md), a 0 to 3 scale that is frozen since 2026-11-13: one strong judge, one pass, and the same score three times on 54% to 58% of its lines. It was the default until that day. Use it only to read or repeat an eval from before it.
 
 ## Reading a report
 
-With `--rubric yesno` the report opens with **Overall**: one score per arm, and one per word of [`PHILOSOPHY.md`](../PHILOSOPHY.md).
+The report opens with two parts, and a section for each task follows.
 
-- **Quality**: each word's share of the points its lines could give, weighed by the word's rank: Honest 8, Simple 7, Structured 6, Asking 5, Opinionated 4, Focused and Standalone 5 together, Predictable 1. A line that does not apply (NA) counts for nothing.
-- **Points**: a bad sign avoided is 1. A good sign is 1 when it shows and nothing when it does not, except "says what it checked" and "says what it did not check", worth 2 and missed where they apply, and "names a risk that is left" and "says again what the reader needs", missed where they apply.
-- **Score**: quality x (1 - 0.5 x the share of replies with a red flag). One red flag or several in a reply count alike. An arm whose every reply has one keeps half.
-- **Noise**: on 2026-11-11 the same version scored 2.5 points apart in two runs. A smaller gap is no difference.
+- **Overall**: one score per version, and one per word of [`PHILOSOPHY.md`](../PHILOSOPHY.md). The rubric says how a score is counted, under "The score".
+- **Old against new**: the gap in quality between the two versions, with a 90% interval; the tasks that went up and down; and the lines whose count differs by 3 replies or more.
+  - The interval comes from drawing the tasks again 2,000 times. It says how far the gap would move with other tasks of the same kind.
+  - An interval that holds 0 shows no difference. A gap under 2.5 points is no difference either: the same version scored that far apart in two runs on 2026-11-11.
+  - The table of lines says where a difference comes from. One line's answer moves between runs, so read a count as a hint and the judge's notes as the evidence.
+- **A task's section**: "clean", the share of bad signs its replies do not show; the credits; the red flags; the faults by deck; and the measures, under "Checks".
 
 The rest of this section is about the scale rubric.
 
@@ -145,11 +148,11 @@ task limits: $27.75 for the runs + $5.10 for judging = $32.85 at most
 | [`judge.py`](judge.py) | The model judge for `scale` |
 | [`yesno.py`](yesno.py) | The judges for `yesno`: decks, passes, the strong judge, the cache |
 | [`reuse.py`](reuse.py) | `--reuse`: finished runs from another results folder |
-| [`score.py`](score.py) | Unblinds and summarises the scores |
-| [`checks.py`](checks.py) | Mechanical checks: line references, negations, paragraph-only replies, 📍 anchors, drawings, tables, quotes, headings, replies that end asking, and lines. Free |
+| [`score.py`](score.py) | Unblinds the answers and counts them: the overall score, old against new, each task |
+| [`checks.py`](checks.py) | The scripts behind the ⚙️ lines, and the measures: line references, negations, paragraph-only replies, 📍 anchors, drawings, tables, quotes, headings, replies that end asking, and lines. Free |
 | [`tasks.json`](tasks.json) | The tasks. A task with several `turns` continues one session |
-| [`rubric.md`](rubric.md) | The dimensions of `scale` |
-| [`rubric-yesno.md`](rubric-yesno.md) | The lines of `yesno`, a draft |
+| [`rubric-yesno.md`](rubric-yesno.md) | The rubric: its formats, its families, its score and its lines |
+| [`rubric.md`](rubric.md) | The 0 to 3 scale, frozen since 2026-11-13 |
 | [`rubric_check.py`](rubric_check.py) | Checks the rubric: how stable each line is, and how often it fires |
 | [`flag_check.py`](flag_check.py) | Checks the red flags against replies whose answer the owner gave |
 | `flag-cases/` | Those replies and answers, git-ignored |

@@ -16,10 +16,10 @@ Where things stand
 - The rule file has 88 rules. On 2026-11-12 the owner set its boundary: it rules the talk, such as when to ask and when to stop, and leaves how the work is done to the host.
 - The `CHANGELOG.md` is written at a release, from the commits. It has no `[Unreleased]` part.
 - The README benchmark is no plugin against the rules of 13a35d4: `results/2026-11-11-none-vs-13a35d4-opus-5-5`, 19 tasks, 3 runs each, overall 77.2 against 82.1. 0.1.14 is no longer compared.
-- `eval/rubric-yesno.md` is a draft: 118 lines in eleven decks (92 bad signs, 18 good signs, 8 red flags), 46 parked. It judges the reply only, and what the reader gets, not the plugin's own formats. A red flag names a harm.
+- `eval/rubric-yesno.md` is the rubric, and the default of `eval.py`, since 2026-11-13: 118 lines in eleven decks (92 bad signs, 18 good signs, 8 red flags), 49 parked. The file says its formats, how to write a line, its families and its score. It judges the reply only, and what the reader gets, not the plugin's own formats. A red flag names a harm. `eval/rubric.md`, the 0 to 3 scale, is frozen.
 - `eval.py --reuse <results folder>` takes finished runs from an earlier eval; the benchmark folder covers 114 of the 171 runs of a full run with no plugin.
 - `rubric_check.py` now judges the 20 replies of its last round, so a round costs only the decks that changed. `--strong` checks the 🔎 lines on Opus.
-- 56 unit tests pass: `python3 -m unittest discover eval/tests`.
+- 59 unit tests pass: `python3 -m unittest discover eval/tests`.
 
 Paid runs, held until the owner names a budget (see "Eval" in `CLAUDE.md`: one eval per release, on a settled rubric). They now measure 0.1.16
 
@@ -94,22 +94,17 @@ Not yet tested
 - [ ] "Puts a question in the middle of the reply" is parked: 16 of its 25 hits with the plugin were the plugin's own ways. A22, "buries a question where the reader can miss it", replaces it. Run the rubric check on the Asking deck.
 - [ ] Wrong hits and misses. The red flags have a first check: `eval/flag_check.py`, with 8 real replies the owner judged, in `eval/flag-cases/`. Add a case each time the owner judges a hit. H4, H5, H17, O2 and O3 have no case that should fire yet. The other lines have none at all; about 45 never fired on the replies we have.
 - [ ] Three lines a judge may lack the facts for: "hedges on a thing it knows", "takes the first explanation and tests no other", "states a guess or an inference as a fact".
-- [ ] Eight lines fired on what the rules ask for, or wider than their rule, or on what the owner does not count as a fault. Read on 2026-11-12 from the judges' notes of the benchmark; settle them with the rubric, before the next benchmark:
-  - "asks a thing it could decide itself" fired on the question about batches and on the question at a conflict, which the rules ask for: 4 of its 8 hits.
+- [ ] Eight lines fired on what the rules ask for, or wider than their rule, or on what the owner does not count as a fault. Read on 2026-11-12 from the judges' notes of the benchmark. Five were settled on 2026-11-13: "puts a long chunk in a code block" now says "of code or output"; the emoji line and "goes into depth on several things at once" are parked; the line on three things in a sentence now names parallel clauses; the line on a premise now says "a wrong premise of the request". Three are left:
+  - "asks a thing it could decide itself" fired on the question about batches and on the question at a conflict: 4 of its 8 hits. The rules no longer ask about batches since 2026-11-13; the question at a conflict is still asked for.
   - "answers a plain fact and still closes with a question" fired where a question of the first turn was still open, since the user's turns are fixed: all 8 hits.
   - "has an option that changes two things at once" fired on options that pack a plan, such as commit and open a pull request.
-  - "says that a premise fails, but not first" fired mostly on a limit named after the lead, such as "no CI here".
-  - "puts a long chunk in a code block" counted drawings of 22 to 45 lines.
-  - "uses so many emoji that they stop standing out" fired on 📍 ☑️ ❓ 💬 ✅. The owner does not count them as a fault: they show what each part is for.
-  - "lists three or more things inside one sentence" fires on any three nouns in a row, in 65% of replies on both sides. The rule is about parallel clauses.
-  - "goes into depth on several things at once" fires on an answer with its reasons, in 68% of replies with the plugin and 77% without. It cannot show whether "go deep on one thing only" is followed.
 - [ ] The rubric check's 20 replies were drawn when 17 replies with no plugin were on disk. 150 are now, all on Opus. `--new-samples` draws again, and the next round then shares no cache and no comparison with the last.
 
 Later
 
 - [ ] The four parked lines: find a wording that holds, or a stronger judge.
 - [ ] "three or more" in the line on chains of cause and effect is a number the agent picked.
-- [ ] Make `yesno` the default rubric once the lines are checked.
+- [ ] `yesno` is the default rubric since 2026-11-13. It became so before one check had covered every line: the committed report of the rubric check is still of the 127-line rubric.
 - [ ] A red flag for a reply in a language other than the user's message. The owner named it on 2026-11-12; the rubric has no line for it yet.
 
 ## The rules, for when the rubric is ready
@@ -123,7 +118,7 @@ Faults the rubric check showed, on 20 replies
 From the owner, 2026-11-13. The rule changes of this day are on master and not released
 
 - [ ] Length with no limit in the rules. A trial on 2026-11-13 showed chat replies about twice as long as under 0.1.16, and the owner read the longer one as much easier. So the length stays. In the next benchmark, see whether the same holds over all tasks and three runs: `chat-en` and `chat-zh` had 7 to 12 lines under "a few lines".
-- [ ] `eval/rubric-yesno.md`: T8, K9 and K10 said the opposite of the rules of 2026-11-13 and are parked. K20 and K21 judge the new rule: the main item in depth, the others in a list. T2 judges only a flow that branches since the same day: steps in a straight line are a numbered list. No rubric check has run on decks 3 and 8 since; it is paid. `eval/rubric.md` is already changed: C4, G1 and G2.
+- [ ] The rubric was rewritten on 2026-11-13, on the owner's word that the agent may. What changed in the lines: T8, K9, K10, K21, M13 and C12 are parked; K20 judges a reply that goes into more than the main item; C13 (a simple question gets several sections), O7 (one answer to a choice that has others) and T26 (steps in a row drawn as a diagram) are new; T2, T15, L3 and O6 are reworded; T1 is answered by a script. The report has a new part, "Old against new". Read the first report that has it, and see whether the interval and the list of lines say what a reader of the replies would say.
 - [ ] Headings in a Default reply. The owner said a Default reply may have headings, and that they help. The rules now ask for headings in Detailed only, and say nothing for Default. A draft, "a reply of more than one part: give each part a heading", was used for some replies and not agreed. In the trial of 2026-11-13 the model gave a Default reply headings with no rule that asks for them, and the owner liked that reply. A rule may not be needed.
 - [ ] A line that names what was left out. The owner liked a reply that ended with one line on what it had left out. The draft is "name in one line everything you leave out of a reply". Not agreed.
 - [ ] The rule file has no `[WHEN]` since 2026-11-13: 69 tagged rules, 57 `[YES]` and 12 `[NO]`, and 7 drawn rules under their own headings. The last seven were reworded with no eval. In the next benchmark, look at the items their old wording had earned: `diff` blocks stood at 3.0 of 3 under "You changed code or text", and the line now ends "each time you changed code or text". `CLAUDE.md` still writes its own rules with `[WHEN]`; the owner's decision was about the rule file.

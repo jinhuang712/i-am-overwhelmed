@@ -75,6 +75,8 @@ def stub_env(tmp, cost="0.10", judge_cost="0.10", sleep="0"):
 
 def evaluate(tmp, budget, *extra, cost="0.10", judge_cost="0.10", sleep="0"):
     env = stub_env(tmp, cost, judge_cost, sleep)
+    if "--rubric" not in extra:  # The tests of runs, budgets and resumes were written on the scale rubric.
+        extra = ("--rubric", "scale", *extra)
     cmd = [sys.executable, str(HERE / "eval.py"), "--old", "HEAD", "--new", "HEAD", "--tasks", "chat-en",
            "--runs", "4", "-j", "1", "--out", str(Path(tmp) / "out"), *extra]
     if budget is not None:
@@ -440,6 +442,51 @@ class YesNo(unittest.TestCase):
         self.assertTrue(long_bullet("1. 第一句。第二句。"))
         self.assertFalse(long_bullet("- **A**: only one, in `a.b()`"))
         self.assertFalse(long_bullet("```\n- one. two.\n```"))
+        from checks import paragraphs_only
+        self.assertTrue(paragraphs_only("One paragraph.\n\nAnother one."))
+        self.assertFalse(paragraphs_only("A lead.\n\n- a point"))
+        self.assertFalse(paragraphs_only(""))
+
+    def test_the_rubric_and_the_score_name_the_same_families(self):
+        from score import WORDS
+        text = yesno.RUBRIC.read_text()
+        table = text.split("## Families")[1].split("## The score")[0]
+        rows = [[c.strip() for c in r.split("|")[1:-1]] for r in table.splitlines() if r.startswith("| ")][1:]
+        self.assertEqual([(w, int(n), tuple(d.split(", "))) for w, n, d in rows], WORDS)
+        decks = {d["name"] for d in yesno.read_decks(text)}
+        self.assertEqual({deck for _, _, ds in WORDS for deck in ds}, decks)
+
+    def test_every_line_of_the_rubric_is_short(self):
+        lines = [line for d in yesno.read_decks(yesno.RUBRIC.read_text()) for line in d["lines"]]
+        marks = ("🔎", "🚩", "⚙️")
+        long = [line["id"] for line in lines if len([w for w in line["text"].split() if w not in marks]) > 25]
+        self.assertEqual(long, [])
+
+    def test_old_against_new(self):
+        from score import compare_yesno, gap_interval
+        gap, low, high = gap_interval([(50, 60), (50, 60), (50, 60)])
+        self.assertEqual((gap, low, high), (10, 10, 10))
+        gap, low, high = gap_interval([(50, 60), (60, 50), (50, 51), (50, 49)])
+        self.assertTrue(low < 0 < high)
+        lines = [{"id": "C1", "kind": "bad", "deck": "Content", "flag": False, "text": "starts with praise"},
+                 {"id": "H10", "kind": "good", "deck": "Honesty", "flag": False, "text": "says what it checked"}]
+        with tempfile.TemporaryDirectory() as tmp:
+            roots = []
+            for name in ("one", "two"):
+                root = Path(tmp) / name
+                (root / "blind").mkdir(parents=True)
+                (root / "mapping.txt").write_text("R01 old-1\nR02 old-2\nR03 new-1\nR04 new-2\n")
+                (root / "blind" / "yesno-full.csv").write_text("label,C1,H10\nR01,Y,N\nR02,Y,N\nR03,N,Y\nR04,N,Y\n")
+                roots.append(root)
+            text = compare_yesno(roots, lines)
+            self.assertIn("new minus old: +100.0 points", text)
+            self.assertIn("new is higher", text)
+            self.assertIn("tasks: 2 up, 0 down, 0 equal, of 2", text)
+            self.assertIn("| C1 | bad sign | 4 | 0 | starts with praise |", text)
+            self.assertIn("| H10 | good sign | 0 | 4 | says what it checked |", text)
+            (roots[0] / "mapping.txt").write_text("R01 new-1\nR02 new-2\nR03 new-3\nR04 new-4\n")
+            (roots[1] / "mapping.txt").write_text("R01 new-1\nR02 new-2\nR03 new-3\nR04 new-4\n")
+            self.assertEqual(compare_yesno(roots, lines), "")
 
     def test_a_sample_gives_its_replies_without_the_tool_calls(self):
         from checks import sample_replies

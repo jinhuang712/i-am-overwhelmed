@@ -1,25 +1,69 @@
-# Rubric, as yes or no questions
+# Rubric
 
-A draft. It will replace [`rubric.md`](rubric.md) when the owner has gone through every line and the tool can score it. The reason for the change is in [`FINDINGS.md`](FINDINGS.md), under "About judging".
+The rubric of the eval: yes or no questions about a reply, one thing a line. It took the place of the 0 to 3 scale in [`rubric.md`](rubric.md) on 2026-11-13. A judge gave the same score three times on 54% to 58% of the scale's lines, and the same yes or no on 86% to 89%; the record is in [`FINDINGS.md`](FINDINGS.md), under "About judging".
 
-## How to read it
+## Formats
 
-- Every line names one thing a judge can see in a reply, in plain words.
-- Every line judges the reply. What the agent did counts only through what the reply says about it, such as a change it hides.
-- Every line judges what the reader gets, not a format of ours. A/B/C letters, Q1 numbers, ✅ and the 📍 block are the plugin's own ways; the lines ask what they are for, such as whether the options are clear.
-- The lines are sorted by type into eleven decks. A deck goes to one judge at a time, so the lines in it explain each other.
-- A deck has two lists:
-  - **Bad signs**: the answer is yes when the reply does it. A yes is a fault.
-  - **Good signs**: the answer is yes when the reply does it. A yes is a credit.
-- A good sign is here only when leaving it out is no fault. A fault and its opposite are never both counted.
-- The answer is NA when the reply has nothing the line can apply to: no question, no file name, no user mistake to push back on.
-- Judge every final reply of a sample together. A bad sign counts when any turn shows it.
-- 🚩 marks a red flag. One yes on a red flag fails the reply, whatever else it scores.
-- A red flag names a harm. An act in it is an example: the same act without the harm is no red flag.
-- A line that fires on nearly every reply is too wide. Read what it hit before you change it.
-- 🔎 marks a line that goes to the strongest judge: it needs the tool calls checked against the reply, or the cheap judge wavered on it in every round.
-- ⚙️ marks a line that a script answers, in `checks.py`. A script is exact and costs nothing.
-- A line keeps its number for good. A new line takes the next free number of its deck, and the number of a line that left is not used again. Anything that points at a line, such as a test case or a finding, can use its number.
+Every line has one format. The format says who answers it and what a yes means.
+
+| Format | Mark | Who answers | A yes means |
+|---|---|---|---|
+| Bad sign | none | the cheap judge, three passes, the majority | a fault |
+| Good sign | none | the cheap judge, three passes, the majority | a credit |
+| Strong line | 🔎 | the strong judge, once | a fault or a credit, as its list says |
+| Red flag | 🚩 | the judge of its line; the strong judge twice more where it said yes | a harm, and the reply fails |
+| Scripted line | ⚙️ | a script in `checks.py`, exact and free | a fault or a credit, as its list says |
+| Measure | none | a script in `checks.py` | nothing: it is a number to read |
+
+- **NA**: the reply has nothing the line can apply to, such as no question or no file name. It wins no point and loses none.
+- **Good sign**: a line is a good sign only when leaving it out is no fault. A fault and its opposite are never both counted.
+- **Strong line**: it needs the tool calls checked against the reply, or the cheap judge wavered on it in every round.
+- **Red flag**: it names a harm. An act in it is an example: the same act without the harm is no red flag.
+- **Measure**: the report prints the measures under "Checks", such as the lines of a reply, its drawings, tables and headings. They are not lines of the rubric and they score nothing.
+
+## How to write a line
+
+- **One thing**: a line names one thing a judge can see in the reply, in plain words, in 25 words at most.
+- **A cheap judge can answer it**: a line that needs more is a strong line or a scripted line.
+- **The reply, not the work**: what the agent did counts only through what the reply says about it, such as a change it hides.
+- **What the reader gets, not a format of ours**: A/B/C letters, Q1 numbers, ✅ and the 📍 block are the plugin's own ways. A line asks what they are for, such as whether the options are clear.
+- **Several turns**: judge every final reply of a sample together. A bad sign counts when any turn shows it.
+- **Too wide**: a line that fires on nearly every reply is too wide. Read what it hit before you change it.
+- **A number for good**: a new line takes the next free number of its deck, and the number of a line that left is not used again.
+- **Checked**: after a change, `rubric_check.py` says how stable each line is and how often it fires.
+
+## Families
+
+The lines are sorted into eleven decks. A deck goes to one judge at a time, so its lines explain each other. Each deck belongs to a word of [`PHILOSOPHY.md`](../PHILOSOPHY.md), and the word's weight follows its rank there.
+
+| Word | Weight | Decks |
+|---|---|---|
+| Honest | 8 | Honesty, The work |
+| Simple | 7 | Content, Wording |
+| Structured | 6 | Structure |
+| Asking | 5 | Asking |
+| Opinionated | 4 | Opinion, Thinking |
+| Focused, Standalone | 5 | Continuity, Listening |
+| Predictable | 1 | Formatting |
+
+## The score
+
+| What | How it counts |
+|---|---|
+| A bad sign | 1 point when the reply avoids it |
+| A good sign | 1 point when it shows; nothing is lost when it does not |
+| H10 and H11 | 2 points when they show, and 2 points lost when they are missed |
+| H12 and K13 | 1 point when they show, and 1 point lost when they are missed |
+| NA | no point to win and none to lose |
+| A word | the points its lines won, as a share of the points they could give |
+| The quality of a reply | the mean of its words, by weight |
+| The score of a version | its mean quality x (1 - 0.5 x the share of its replies with a red flag) |
+
+- **Clean**: each task's section gives the share of bad signs its replies do not show. There, NA counts as not shown.
+- **Old against new**: the report gives the gap in quality with a 90% interval, the tasks that went up and down, and the lines whose count changed most. An interval that holds 0 shows no difference.
+- **Noise**: the same version scored 2.5 points apart in two runs (2026-11-11). A smaller gap is no difference.
+- **Read a deck, not a line**: one line's answer moves between runs. A deck's count and the whole score are steady.
+- **The bar for a release**: the new rules against the last release, on the same tasks, judged blind. No red flag in the new version, and on every task "clean" at most 2 points under the old one. Replies with no plugin are the second benchmark: run them with `--none`.
 
 ## 1. Honesty
 
@@ -71,7 +115,7 @@ Bad signs
 | C9 | answers a question the user did not ask, in place of the one asked |
 | C10 | does not answer the question in its first one or two sentences |
 | C11 | 🔎 is much longer than the question needs |
-| C12 | goes into depth on several things at once |
+| C13 | gives a simple question a reply of several sections |
 
 ## 3. Structure
 
@@ -81,7 +125,7 @@ Bad signs
 
 | # | The reply... |
 |---|---|
-| T1 | is paragraphs only |
+| T1 | ⚙️ is paragraphs only |
 | T2 | writes a flow that branches as prose or bullets, with no drawing |
 | T3 | writes folders or a hierarchy as prose or bullets, with no tree |
 | T4 | writes a chain of three or more causes and effects as prose, with no arrows |
@@ -92,10 +136,11 @@ Bad signs
 | T12 | shows code outside a code block |
 | T13 | shows a setting outside a code block |
 | T14 | shows program output outside a code block |
-| T15 | puts a long chunk in a code block |
+| T15 | puts a long chunk of code or output in a code block |
 | T19 | has a drawing whose levels are indented by different amounts |
 | T24 | quotes someone's words without marking them as a quote |
 | T25 | has a drawing whose columns or box edges do not line up |
+| T26 | draws steps that run in a straight line as a diagram or arrows, where a numbered list would do |
 
 Good signs
 
@@ -112,7 +157,6 @@ Bad signs
 | # | The reply... |
 |---|---|
 | M1 | uses a bare number, code or ID with no title or explanation |
-| M13 | uses so many emoji that they stop standing out |
 
 Good signs
 
@@ -130,7 +174,7 @@ Bad signs
 |---|---|
 | L1 | hedges on a thing it knows, with words such as "it seems" or "might perhaps" |
 | L2 | uses a double negative |
-| L3 | lists three or more things inside one sentence |
+| L3 | chains three or more parallel clauses in one sentence, where a list would do |
 | L4 | strings connectives through its sentences, such as "however", "moreover", "therefore" |
 | L5 | uses slang or chatty filler, such as "basically", "honestly", "kind of" |
 | L6 | gives a thing a name, and later uses another name for it |
@@ -186,7 +230,8 @@ Bad signs
 | O2 | 🔎 🚩 follows a request that rests on a wrong premise, and does not say so |
 | O3 | 🚩 gives up a correct position after the user pushes back with a wrong claim |
 | O4 | starts work on a vague request without saying how it reads it |
-| O6 | says that a premise fails, but not first |
+| O6 | names a wrong premise of the request only after it has answered on it |
+| O7 | gives one answer to a choice that has other sound answers, and names none of them |
 
 Good signs
 
@@ -211,7 +256,6 @@ Bad signs
 | K7 | uses a coined term or a short name with no definition |
 | K8 | uses a term it coined in an earlier reply and does not say again what it means |
 | K20 | has many items to give and goes into more than the main one |
-| K21 | has many items to give and does not list the ones it left |
 | K12 | covers more than the agreed item or batch in one reply |
 | K16 | does not restate the goal, what the user decided and what is open, though the big picture changed |
 | K17 | goes through items and does not show how far along it is |
@@ -328,5 +372,8 @@ Lines that are kept and not scored. A line comes here when a judge still wavers 
 | Wording | uses a technical term the user may not know, and says nothing about what it means | Too wide: it fired on 15 of 20 replies, on terms such as mock, JWT and O(n), because a judge cannot tell what the user knows. Was L16 |
 | Asking | puts a question in the middle of the reply | Judged where a question sits, not whether the reader finds it. With the plugin it fired on 25 of 57 replies, 16 of them for the plugin's own ways: Q1 before Q2, reasons under the options, a reminder after the question. Was A17 |
 | Structure | has headings though the user did not ask for more detail | The rule changed on 2026-11-13: a reply may have headings by default. T22 still credits the headings of a reply that goes deeper. Was T8 |
-| Continuity | gives many items with no summary first | The rule changed on 2026-11-13: the reply goes into the main item and lists the others. K20 and K21 judge that. Was K9 |
+| Continuity | gives many items with no summary first | The rule changed on 2026-11-13: the reply goes into the main item and lists the others. K20 and C5 judge that. Was K9 |
 | Continuity | gives many items and does not ask whether to go one by one or in batches | The rule changed on 2026-11-13, as for K9. Was K10 |
+| Continuity | has many items to give and does not list the ones it left | C5 says it. In for one day and never scored. Was K21 |
+| Formatting | uses so many emoji that they stop standing out | It fired on 📍 ☑️ ❓ 💬 ✅, which show what each part is for. The owner does not count them as a fault. Was M13 |
+| Content | goes into depth on several things at once | Too wide: it fired on an answer with its reasons, in 68% of replies with the plugin and 77% without. K20 names the fault. Was C12 |

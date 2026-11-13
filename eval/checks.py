@@ -66,9 +66,15 @@ def long_bullet(reply):
     return False
 
 
+def paragraphs_only(reply):
+    """True when a reply has no list, heading, table or code block."""
+    return bool(reply.strip()) and not STRUCTURE.search(reply)
+
+
 # The rubric lines marked ⚙️, by their text. A sample fails a line when any of its replies does.
 SCRIPTED = {
     "has a bullet point of two sentences or more": long_bullet,
+    "is paragraphs only": paragraphs_only,
 }
 
 
@@ -93,7 +99,7 @@ def measure(replies):
     return {
         "line_refs": sum(len(LINE_REF.findall(r)) for r in replies),
         "negations_per_1k": 1000 * sum(len(NEGATION.findall(r)) for r in replies) / chars,
-        "paragraph_only": sum(1 for r in replies if r.strip() and not STRUCTURE.search(r)),
+        "paragraph_only": sum(1 for r in replies if paragraphs_only(r)),
         "anchors": sum(1 for r in replies if ANCHOR.search(r)),
         "drawings": sum(1 for r in replies if drawn(r)),
         "tables": sum(1 for r in replies if TABLE.search(r)),

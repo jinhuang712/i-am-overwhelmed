@@ -31,7 +31,7 @@ import reuse
 from judge import judge_task
 from run import REPO, run_one
 from yesno import FLAG_PASSES, RUBRIC as YESNO_RUBRIC, judge_task as judge_yesno, judged as yesno_judged, read_decks
-from score import overall_yesno, summary as score_summary
+from score import head_yesno, summary as score_summary
 from score import summary_yesno as yesno_summary
 
 HERE = Path(__file__).parent
@@ -76,9 +76,9 @@ def parse_args():
     p.add_argument("--dry-run", action="store_true", help="show the plan and the estimate, spend nothing")
     p.add_argument("--model", default="claude-sonnet-5-5")
     p.add_argument("--effort", default="medium")
-    p.add_argument("--rubric", choices=["scale", "yesno"], default="scale",
-                   help="scale: rubric.md, scored 0 to 3 by one judge. yesno: rubric-yesno.md, cut into decks, "
-                        "answered several times by a cheap judge, with the majority counted")
+    p.add_argument("--rubric", choices=["scale", "yesno"], default="yesno",
+                   help="yesno, the default: rubric-yesno.md, cut into decks, answered several times by a cheap "
+                        "judge, with the majority counted. scale: rubric.md, the frozen 0 to 3 scale, one judge")
     p.add_argument("--judge-model", default="claude-opus-5-5", help="the judge for scale, and for the 🔎 lines of yesno")
     p.add_argument("--cheap-judge", default="claude-haiku-5-5", help="the judge for the decks of yesno")
     p.add_argument("--passes", type=int, default=3, help="yesno: times the cheap judge answers a deck")
@@ -242,7 +242,7 @@ def main():
     if "stopped" in counts:
         head += "- incomplete: the budget stopped some runs\n"
     if a.rubric == "yesno" and scored_roots:
-        head += "\n" + overall_yesno(scored_roots, yesno_lines)
+        head += "\n" + head_yesno(scored_roots, yesno_lines)
     (out / "report.md").write_text(head + "\n" + "\n\n".join(sections) + "\n")
     print(f"spent ${budget.spent:.2f} of ${a.budget:.2f}. Report: {out / 'report.md'}")
 

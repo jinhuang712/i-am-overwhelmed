@@ -9,6 +9,7 @@ points outside E and R, the mean of each dimension, the red flags that were hit,
 whether the new arm clears the release bar in rubric.md.
 """
 import csv
+import random
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -165,6 +166,70 @@ def overall_yesno(roots, lines):
            "| | " + " | ".join(arms) + " |", "|---|" + "---|" * len(arms)]
     out += [f"| {name} | " + " | ".join(cells[a][k] for a in arms) + " |" for k, name in enumerate(names)]
     return "\n".join(out) + "\n"
+
+
+RESAMPLES = 2000  # Draws of the tasks behind the interval of a gap.
+MOVED = 3  # A line is listed when its count differs by this many replies between the two versions.
+
+
+def gap_interval(pairs, seed=0):
+    """Return (gap, low, high): the mean of new minus old over the tasks, and its 90% interval.
+
+    pairs is one (old, new) per task. The interval comes from drawing the tasks again with
+    replacement: it says how far the gap would move with other tasks of the same kind.
+    """
+    rng = random.Random(seed)
+    diffs = [new - old for old, new in pairs]
+    gap = sum(diffs) / len(diffs)
+    means = sorted(sum(rng.choices(diffs, k=len(diffs))) / len(diffs) for _ in range(RESAMPLES))
+    return gap, means[int(0.05 * RESAMPLES)], means[int(0.95 * RESAMPLES) - 1]
+
+
+def compare_yesno(roots, lines, old="old", new="new"):
+    """Old against new over every task, as Markdown: the gap in quality, the tasks, the lines that moved."""
+    weight = {word: w for word, w, _ in WORDS}
+    pairs, names, counts, total = [], [], defaultdict(lambda: {old: 0, new: 0}), {old: 0, new: 0}
+    for root in roots:
+        mapping = dict(line.split() for line in (root / "mapping.txt").read_text().splitlines())
+        quality = defaultdict(list)
+        for row in csv.DictReader((root / "blind" / "yesno-full.csv").read_text().splitlines()):
+            arm = mapping[row["label"]].rsplit("-", 1)[0]
+            words = {w: p / m for w, (p, m) in reply_score(row, lines).items() if m}
+            if arm in total and words:
+                quality[arm].append(sum(weight[w] * s for w, s in words.items()) / sum(weight[w] for w in words))
+                total[arm] += 1
+                for line in lines:
+                    counts[line["id"]][arm] += row.get(line["id"]) == "Y"
+        if quality[old] and quality[new]:
+            pairs.append((100 * sum(quality[old]) / len(quality[old]), 100 * sum(quality[new]) / len(quality[new])))
+            names.append(root.name)
+    if not pairs:
+        return ""
+    gap, low, high = gap_interval(pairs)
+    verdict = "no difference shown" if low <= 0 <= high else ("new is higher" if gap > 0 else "new is lower")
+    up = [n for n, (o, w) in zip(names, pairs) if w > o]
+    down = [n for n, (o, w) in zip(names, pairs) if w < o]
+    out = ["## Old against new", "",
+           f"- gap in quality, new minus old: {gap:+.1f} points, 90% interval {low:+.1f} to {high:+.1f}: {verdict}",
+           f"- tasks: {len(up)} up, {len(down)} down, {len(pairs) - len(up) - len(down)} equal, of {len(pairs)}",
+           f"- down: {', '.join(down) if down else 'none'}", ""]
+    kind = {line["id"]: ("red flag" if line["flag"] else line["kind"] + " sign") for line in lines}
+    text = {line["id"]: line["text"] for line in lines if "text" in line}
+    moved = sorted((i for i, c in counts.items() if abs(c[new] - c[old]) >= MOVED),
+                   key=lambda i: -abs(counts[i][new] - counts[i][old]))
+    if moved:
+        out += [f"Lines whose count differs by {MOVED} replies or more. A count is the replies that said yes.", "",
+                f"| # | kind | old, of {total[old]} | new, of {total[new]} | line |", "|---|---|---|---|---|"]
+        out += [f"| {i} | {kind[i]} | {counts[i][old]} | {counts[i][new]} | {text.get(i, '')} |" for i in moved]
+    else:
+        out.append(f"No line's count differs by {MOVED} replies or more.")
+    return "\n".join(out) + "\n"
+
+
+def head_yesno(roots, lines):
+    """The parts a report opens with: the overall score, then old against new when both were run."""
+    versus = compare_yesno(roots, lines)
+    return overall_yesno(roots, lines) + ("\n" + versus if versus else "")
 
 
 if __name__ == "__main__":

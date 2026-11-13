@@ -1,4 +1,6 @@
-# Rubric
+# Rubric, the 0 to 3 scale
+
+Frozen since 2026-11-13. The rubric of the eval is [`rubric-yesno.md`](rubric-yesno.md). This file stays so that an eval from before that day can be read or repeated with `--rubric scale`. It is not kept up with the rules: D16 and D27 say the opposite of the rules of 2026-11-13, on steps in a row and on the order of the parts.
 
 The rubric has three layers:
 

@@ -17,7 +17,8 @@ install-claude.sh                          the Claude Code installer
 INSTALL.md                                 install steps, written for the agent
 eval/                                      the A/B tool, with a budget
 eval/FINDINGS.md                           what the evals taught us, a running record
-eval/rubric-yesno.md                       the rubric as yes or no lines, a draft
+eval/rubric-yesno.md                       the rubric: yes or no lines, with its formats, families and score
+eval/rubric.md                             the 0 to 3 scale, frozen
 eval/flag-cases/                           real replies with the owner's answer on each red flag, git-ignored
 examples/                                  raw outputs behind the README
 assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
@@ -52,6 +53,9 @@ assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
 - [YES] Run `python3 eval/eval.py --old <ref> --dry-run` before a real run.
 - [YES] Run `python3 eval/eval.py --smoke` before a full run, under a small approved budget.
 - [YES] Run `python3 -m unittest discover eval/tests` after changing the eval. It costs nothing.
+- [YES] Judge with the yes or no rubric, the default. The scale in `eval/rubric.md` is frozen.
+- [YES] Write a rubric line as the rubric's own part "How to write a line" says: one thing a cheap judge can see, in 25 words at most.
+- [YES] Read the lines of a deck before you add one to it. A line that says what another says counts a fault twice.
 - [YES] Run `python3 eval/rubric_check.py` after changing `eval/rubric-yesno.md`. It judges only the decks that changed.
 - [YES] Run `python3 eval/flag_check.py` after changing a red flag line. Its cases are real replies whose answer the owner gave.
 - [YES] Treat eval scores as samples. Read the judge's quotes as well as the totals.
