@@ -63,7 +63,7 @@ Did I settle this conflict before?
 <background>  what I need in mind to follow this reply, or nothing
 <part>        only the kinds that this reply needs; each is a whole sentence that states a claim, then the drawing, list or table that backs it
   first
-    <findings>        what you checked, and what it showed
+    <findings>        what you did or checked, and what it showed
   in between, in any order, the more important first
     <explanation>     how or why, and only what the other kinds leave open
     <push-backs>      where you disagree with me
