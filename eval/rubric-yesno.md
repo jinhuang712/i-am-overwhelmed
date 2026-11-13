@@ -115,7 +115,7 @@ Bad signs
 | C9 | answers a question the user did not ask, in place of the one asked |
 | C10 | does not answer the question in its first one or two sentences |
 | C11 | 🔎 is much longer than the question needs |
-| C13 | gives a simple question a reply of several sections |
+| C13 | puts headings on the answer to a question that one or two sentences could answer |
 
 ## 3. Structure
 
@@ -255,7 +255,6 @@ Bad signs
 | K6 | points to a thing by a number and a short label, so the reader must scroll back to know what it is |
 | K7 | uses a coined term or a short name with no definition |
 | K8 | uses a term it coined in an earlier reply and does not say again what it means |
-| K20 | has many items to give and goes into more than the main one |
 | K12 | covers more than the agreed item or batch in one reply |
 | K16 | does not restate the goal, what the user decided and what is open, though the big picture changed |
 | K17 | goes through items and does not show how far along it is |
@@ -372,8 +371,10 @@ Lines that are kept and not scored. A line comes here when a judge still wavers 
 | Wording | uses a technical term the user may not know, and says nothing about what it means | Too wide: it fired on 15 of 20 replies, on terms such as mock, JWT and O(n), because a judge cannot tell what the user knows. Was L16 |
 | Asking | puts a question in the middle of the reply | Judged where a question sits, not whether the reader finds it. With the plugin it fired on 25 of 57 replies, 16 of them for the plugin's own ways: Q1 before Q2, reasons under the options, a reminder after the question. Was A17 |
 | Structure | has headings though the user did not ask for more detail | The rule changed on 2026-11-13: a reply may have headings by default. T22 still credits the headings of a reply that goes deeper. Was T8 |
-| Continuity | gives many items with no summary first | The rule changed on 2026-11-13: the reply goes into the main item and lists the others. K20 and C5 judge that. Was K9 |
+| Continuity | gives many items with no summary first | The rule changed on 2026-11-13: the reply goes into the main item and lists the others. C5 judges the list. Was K9 |
 | Continuity | gives many items and does not ask whether to go one by one or in batches | The rule changed on 2026-11-13, as for K9. Was K10 |
 | Continuity | has many items to give and does not list the ones it left | C5 says it. In for one day and never scored. Was K21 |
 | Formatting | uses so many emoji that they stop standing out | It fired on 📍 ☑️ ❓ 💬 ✅, which show what each part is for. The owner does not count them as a fault. Was M13 |
-| Content | goes into depth on several things at once | Too wide: it fired on an answer with its reasons, in 68% of replies with the plugin and 77% without. K20 names the fault. Was C12 |
+| Content | goes into depth on several things at once | Too wide: it fired on an answer with its reasons, in 68% of replies with the plugin and 77% without. Was C12 |
+| Continuity | has many items to give and goes into more than the main one | Too wide, like C12: it fired on 16 of 20 replies, 5 of 6 with no plugin, and was stable on 14 of 20. No line judges this fault now. Was K20 |
+| Content | gives a simple question a reply of several sections | 15 of 20 stable, and it fired on 9 of 20. C13 now names what a judge can see: headings, and a question that one or two sentences could answer |

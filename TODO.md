@@ -16,7 +16,7 @@ Where things stand
 - The rule file has 88 rules. On 2026-11-12 the owner set its boundary: it rules the talk, such as when to ask and when to stop, and leaves how the work is done to the host.
 - The `CHANGELOG.md` is written at a release, from the commits. It has no `[Unreleased]` part.
 - The README benchmark is no plugin against the rules of 13a35d4: `results/2026-11-11-none-vs-13a35d4-opus-5-5`, 19 tasks, 3 runs each, overall 77.2 against 82.1. 0.1.14 is no longer compared.
-- `eval/rubric-yesno.md` is the rubric, and the default of `eval.py`, since 2026-11-13: 118 lines in eleven decks (92 bad signs, 18 good signs, 8 red flags), 49 parked. The file says its formats, how to write a line, its families and its score. It judges the reply only, and what the reader gets, not the plugin's own formats. A red flag names a harm. `eval/rubric.md`, the 0 to 3 scale, is frozen.
+- `eval/rubric-yesno.md` is the rubric, and the default of `eval.py`, since 2026-11-13: 117 lines in eleven decks (91 bad signs, 18 good signs, 8 red flags), 51 parked. The file says its formats, how to write a line, its families and its score. It judges the reply only, and what the reader gets, not the plugin's own formats. A red flag names a harm. `eval/rubric.md`, the 0 to 3 scale, is frozen.
 - `eval.py --reuse <results folder>` takes finished runs from an earlier eval; the benchmark folder covers 114 of the 171 runs of a full run with no plugin.
 - `rubric_check.py` now judges the 20 replies of its last round, so a round costs only the decks that changed. `--strong` checks the 🔎 lines on Opus.
 - 59 unit tests pass: `python3 -m unittest discover eval/tests`.
@@ -87,7 +87,7 @@ Sent to the strong judge, not yet run
 
 Not yet tested
 
-- [ ] `eval/results/rubric-check/report.md` is of the 127-line rubric. Run the check once on the whole current rubric and commit that report: `python3 eval/rubric_check.py`, 210 Haiku calls with the rest cached, about $0.40.
+- [ ] The rubric check of 2026-11-13 covers all 117 lines: two rounds on Haiku, $0.70, and 92% of the answers stable. Of the day's lines, C13 is stable on 19 of 20 after one rewording, T26 on 18, O7 on 16, O6 on 20; K20 fired on 16 of 20 and is parked. Ten lines were stable on under 16 of 20 in this round: A3 (12) and Y8 (11) the most, then T4, T13, T15, L3, L6 and Y6 at 15, and the strong lines C11 and A6, which Haiku does not judge in an eval. T15 and L3 were reworded that day and are still weak. One round does not settle a line: look at them again after the next round.
 - [ ] The overall score is new (2026-11-11): its weights, its point types and the red flag cut were set with the owner in one evening. Look at it again after a few runs. The judge seldom answers NA, so "a line that does not apply counts for nothing" does little yet.
 - [ ] The body of a reply still presented the agent's advice as decided: the line "your own advice stays open" reached ☑️ only, and `long-discussion-zh` kept 2 of 3 hits in the sixth turn. Since 2026-11-12 the line reads "Call a thing decided only when I verbally agreed on it." See in the next benchmark whether the body keeps to it. See `eval/FINDINGS.md`.
 - [ ] K15 fired on work the user handed over and saw done, listed as decided (`session-zh`). It now says "presents its own advice as decided, though the user never took it", and `eval/flag-cases/` has a case that should not fire and one that should. Run `eval/flag_check.py`.
@@ -104,7 +104,7 @@ Later
 
 - [ ] The four parked lines: find a wording that holds, or a stronger judge.
 - [ ] "three or more" in the line on chains of cause and effect is a number the agent picked.
-- [ ] `yesno` is the default rubric since 2026-11-13. It became so before one check had covered every line: the committed report of the rubric check is still of the 127-line rubric.
+- [ ] `yesno` is the default rubric since 2026-11-13. It became so before one check had covered every line: one check has covered every line since, on the same day.
 - [ ] A red flag for a reply in a language other than the user's message. The owner named it on 2026-11-12; the rubric has no line for it yet.
 
 ## The rules, for when the rubric is ready
@@ -118,7 +118,7 @@ Faults the rubric check showed, on 20 replies
 From the owner, 2026-11-13. The rule changes of this day are on master and not released
 
 - [ ] Length with no limit in the rules. A trial on 2026-11-13 showed chat replies about twice as long as under 0.1.16, and the owner read the longer one as much easier. So the length stays. In the next benchmark, see whether the same holds over all tasks and three runs: `chat-en` and `chat-zh` had 7 to 12 lines under "a few lines".
-- [ ] The rubric was rewritten on 2026-11-13, on the owner's word that the agent may. What changed in the lines: T8, K9, K10, K21, M13 and C12 are parked; K20 judges a reply that goes into more than the main item; C13 (a simple question gets several sections), O7 (one answer to a choice that has others) and T26 (steps in a row drawn as a diagram) are new; T2, T15, L3 and O6 are reworded; T1 is answered by a script. The report has a new part, "Old against new". Read the first report that has it, and see whether the interval and the list of lines say what a reader of the replies would say.
+- [ ] The rubric was rewritten on 2026-11-13, on the owner's word that the agent may. What changed in the lines: T8, K9, K10, K20, K21, M13 and C12 are parked, so no line judges a reply that goes into more than the main item; C13 (headings on the answer to a question that one or two sentences could answer), O7 (one answer to a choice that has others) and T26 (steps in a row drawn as a diagram) are new; T2, T15, L3 and O6 are reworded; T1 is answered by a script. The report has a new part, "Old against new". Read the first report that has it, and see whether the interval and the list of lines say what a reader of the replies would say.
 - [ ] Headings in a Default reply. The owner said a Default reply may have headings, and that they help. The rules now ask for headings in Detailed only, and say nothing for Default. A draft, "a reply of more than one part: give each part a heading", was used for some replies and not agreed. In the trial of 2026-11-13 the model gave a Default reply headings with no rule that asks for them, and the owner liked that reply. A rule may not be needed.
 - [ ] A line that names what was left out. The owner liked a reply that ended with one line on what it had left out. The draft is "name in one line everything you leave out of a reply". Not agreed.
 - [ ] The rule file has no `[WHEN]` since 2026-11-13: 69 tagged rules, 57 `[YES]` and 12 `[NO]`, and 7 drawn rules under their own headings. The last seven were reworded with no eval. In the next benchmark, look at the items their old wording had earned: `diff` blocks stood at 3.0 of 3 under "You changed code or text", and the line now ends "each time you changed code or text". `CLAUDE.md` still writes its own rules with `[WHEN]`; the owner's decision was about the rule file.
