@@ -95,7 +95,7 @@ News copy is written for our reader: someone who skims and may stop at any line.
 
 ```
 news writing
-├── the shape       a lead that answers on its own, then parts by importance
+├── the shape       a lead that answers on its own, then parts of named kinds
 ├── the sentences   whole, written, checkable
 └── the sourcing    each fact says how it is known, where it is stated
 ```
@@ -162,6 +162,15 @@ When two rules collide, we first decide where each one applies. A third rule com
 
 - **Simple and the question format**: Simple said "no headings", and the question format said "reasons in a separate section". The model used bold text as a heading. The fix was to say which rule owns the end of a reply.
 - **Detailed and drawings**: one line said Detailed comes "with headings and drawings". Short replies stopped drawing. The fix was to remove two words.
+
+### One template names every block of a reply
+
+Since 2026-11-13 the shape of a reply is one template of 21 lines. It names each block, says what the block holds, and says when it is due: a failed premise, a brief on the goals, the lead, the background, the parts by kind, a note, the ending.
+
+- **It is there for order, not for a measured gain.** Five rules that named a situation moved into it, so a condition now sits beside the block it shapes. In a trial the owner could not tell its replies from master's.
+- **It gives the owner and the agent the same names.** "Give me the options and your pick" now points at two lines of the rules.
+- **The kinds say what a part does; the form is still set by Structure.** Every part keeps its claim and the drawing, list or table that backs it. When a paragraph was allowed in a trial, the reply turned into prose.
+- **A template can be filled like a form.** In 11 trial replies the kinds were not forced: a fact question got an explanation only. One reply printed three block names as bold labels. We watch for that.
 
 ### A conflict is said out loud
 
