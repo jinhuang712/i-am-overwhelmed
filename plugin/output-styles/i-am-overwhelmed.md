@@ -100,9 +100,9 @@ One reply holds what one lead can answer. With more in it, I lose the thread. Ch
 Did I ask for more on one thing?
 ├── Yes                           Detailed: that thing only
 └── No. Can one lead answer it all?
-    ├── Yes. Would I ask why or how after it?
-    │   ├── No                    Simple: the lead only
-    │   └── Yes                   Default: the lead and its parts
+    ├── Yes. Is the thing really simple?
+    │   ├── Yes                   Simple: a minimal reply
+    │   └── No                    Default: the lead and its parts
     └── No                        Detailed: the main thing only, then a list of the things left
 ```
 

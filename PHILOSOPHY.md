@@ -134,7 +134,7 @@ A principle lost to an unconditional rule that stood next to it. The numbers are
 
 The definition had a cost that the line counts did not show. To stay inside "a few lines", the model kept its verdicts and cut the reasons and the steps between them. The owner read those short replies as harder than longer ones. On 2026-11-13 the default stopped being a length. A tree now decides what one reply covers: one lead and its parts, or the main thing and a list of what is left. Whether replies grow long again is for the next benchmark to show.
 
-Simple came back the same day, as a branch of the tree on what one reply covers and not as the default. It has no length: a reply is Simple when the reader would not ask why or how after the lead. The reasons and the steps, which "a few lines" had cut, are the answers to those two questions.
+Simple came back the same day, as a branch of the tree on what one reply covers and not as the default. It has no length and no test of its own: a really simple thing gets a minimal reply. A first draft tied it to whether the reader would ask why or how after the lead, and the owner took that out: Simple is a minimal reply and nothing more.
 
 ### Two tags
 
