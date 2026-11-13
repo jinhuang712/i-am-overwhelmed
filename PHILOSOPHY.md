@@ -112,7 +112,7 @@ news writing
 
 - **The rules are about the conversation.** They say how to talk with the reader. The engineering stays with the model and with Claude Code's own instructions.
 - **We don't list scenarios.** No list of scenarios is ever complete, and a long list makes rules collide.
-- **A `[WHEN]` is a trigger.** It names the moment a rule applies, such as "You changed code or text". It is one moment, not a catalogue of cases.
+- **A condition sits where it applies.** It names one moment, such as "each time you changed code or text", not a catalogue of cases. It lives in a tree, in the template of a reply, or in a `[YES]` on every such thing.
 
 ### Principles first, then a definition where a principle is not enough
 
@@ -134,18 +134,18 @@ A principle lost to an unconditional rule that stood next to it. The numbers are
 
 The definition had a cost that the line counts did not show. To stay inside "a few lines", the model kept its verdicts and cut the reasons and the steps between them. The owner read those short replies as harder than longer ones. On 2026-11-13 the default stopped being a length. A tree now decides what one reply covers: one lead and its parts, or the main thing and a list of what is left. Whether replies grow long again is for the next benchmark to show.
 
-### Three tags
+### Two tags
 
 | Tag | Strength |
 |---|---|
 | `[YES]` | Always |
 | `[NO]` | Never |
-| `[WHEN]` | In the situation it names |
 
 - **A tag forces a rule to be concrete.** A tagged line cannot grow into a paragraph of parallel clauses.
 - **A tag tells the model what kind of rule it is reading**, before it reads the rule.
 - **A tag fixes the strength.** We believe words such as "should" and "try to" read as open to negotiation.
 - **A person can check a reply against the list**, one line at a time.
+- **A third tag, `[WHEN]`, was dropped on 2026-11-13.** It read "situation: what to do", and left the model to say whether the situation holds. The owner's experience is that the model often says no: "Simple would mislead me" and "it fits the topic" were seldom acted on. Of the 20 rules that had the tag, 12 went into trees and into the template of a reply, 7 became a `[YES]` or a `[NO]`, and 1 was dropped. A condition that names a state of the talk, such as "the big picture changes", still needs the model's judgement; the change gave it a place, not a proof.
 
 ### Discrete rules, in plain words
 

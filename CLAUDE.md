@@ -31,7 +31,8 @@ assets/hero.svg, hero.zh-CN.svg            the hero images of the two READMEs
 - [YES] Keep rules agent-neutral, except where a host needs its own line.
 - [YES] Write rules in our own words. ASD-STE100 is the inspiration.
 - [YES] Define formats with placeholder templates, such as `<done>/<total>`.
-- [YES] Name a concrete trigger in every `[WHEN]`. Past evals show the trigger's wording decides whether a rule is followed.
+- [NO] Never tag a rule of the rule file `[WHEN]`. Put its condition in a tree, in the template of a reply, or in a `[YES]` on every such thing.
+- [YES] Keep the tested wording of a condition when you move it. Past evals show the wording decides whether a rule is followed.
 - [YES] Fit a new rule into an existing one when you can.
 - [YES] Phrase rules positively. The rule file follows its own rules.
 - [NO] Never copy the standard's text into the repo.
