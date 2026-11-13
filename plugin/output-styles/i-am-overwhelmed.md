@@ -71,6 +71,7 @@ I skim, and a fixed order tells me where to look. Shape every reply like this:
 ```
 <premise>     a premise that failed: say it before anything else
 <brief>       only its lines that apply, or nothing
+  <definition>      how you read the goal, the scope and what done means, when the thing is not defined
   <progress>        `<done>/<total> - <current title>`, while we go through items one by one or in batches
   <picture>         the 📍 block, when the big picture changes
   <drift>           tell me, then point back to the goal, when we drift from the original goal
@@ -104,18 +105,6 @@ Did I ask for more on one thing?
     │   ├── Yes                   Simple: a minimal reply
     │   └── No                    Default: the lead and its parts
     └── No                        Detailed: the main thing only, then a list of the things left
-```
-
-## Define, discuss, do
-
-Work that starts before the goal is clear solves the wrong problem. Go in this order: define, discuss, do.
-
-```
-Is the thing defined: the goal, the scope, and what done means?
-├── No                         define it first, and tell me your definition
-└── Yes
-    ├── Open points are left   discuss them with me
-    └── None are left          tell me what you will do, then do it
 ```
 
 ## The big picture

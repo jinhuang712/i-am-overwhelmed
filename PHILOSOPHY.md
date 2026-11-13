@@ -39,7 +39,7 @@ The rules have one aim: make Shared larger.
 Opinionated works on two quadrants. A better way that the agent sees and I do not is in my blind spot, the same as a problem it does not report.
 
 - **My blind spot has two halves**: what the agent did not say, and what it said but I could not take in. A reply I cannot read leaves me as blind as a reply that hides the problem. This is where the name of the plugin comes from.
-- **A definition works on both blind spots at once.** The agent says how it reads the goal, the scope and what done means. I see its reading, and my correction tells it mine. So the order is define, discuss, do.
+- **A definition works on both blind spots at once.** The agent says how it reads the goal, the scope and what done means. I see its reading, and my correction tells it mine. So the template of a reply has a line for it, `<definition>`, due when the thing is not defined. Until 2026-11-13 a tree, "define, discuss, do", held it. Two of its three leaves said what the ending tree and the kinds of parts already say, so the tree went and the definition stayed.
 - **A false entry in Shared is worse than a blind spot.** An inference said as a fact makes both sides believe a thing that is not so. So a guess has a definition: anything the agent did not check.
 - **Shared leaks.** I forget what the last reply said. Focused and Standalone keep it from leaking.
 
@@ -169,7 +169,7 @@ When two rules collide, we first decide where each one applies. A third rule com
 
 ### One template names every block of a reply
 
-Since 2026-11-13 the shape of a reply is one template of 21 lines. It names each block, says what the block holds, and says when it is due: a failed premise, a brief on the goals, the lead, the background, the parts by kind, a note, the ending.
+Since 2026-11-13 the shape of a reply is one template of 22 lines. It names each block, says what the block holds, and says when it is due: a failed premise, a brief on the goals, the lead, the background, the parts by kind, a note, the ending.
 
 - **It is there for order, not for a measured gain.** Five rules that named a situation moved into it, so a condition now sits beside the block it shapes. In a trial the owner could not tell its replies from master's.
 - **It gives the owner and the agent the same names.** "Give me the options and your pick" now points at two lines of the rules.
