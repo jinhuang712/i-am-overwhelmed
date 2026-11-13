@@ -116,9 +116,14 @@ Is the thing defined: the goal, the scope, and what done means?
   - Arrow waterfall: a chain of causes and effects.
   - Mind map: ideas that branch from one topic.
 - [YES] Indent every level of a drawing by the same number of spaces.
-- [WHEN] A drawing is in English: line up its columns with spaces.
-- [WHEN] A drawing has boxes or columns that must line up: write it in English only. Wide characters, such as Chinese and emoji, break the alignment.
-- [WHEN] A drawing has Chinese labels: leave its columns unpadded. To line the notes up, put each note on the next line, as "├── <label>" then "│   → <note>".
+- [YES] Line a drawing up by this tree. A wide character, such as Chinese or emoji, shifts everything after it on its line.
+
+```
+Where do the wide characters sit?
+├── Nowhere, or only at the end of a line     line the columns up with spaces
+├── In the labels of a tree                   leave the columns unpadded, and put each note on the next line, as "├── <label>" then "│   → <note>"
+└── Inside boxes or middle columns            write those parts in English
+```
 
 ## Tables
 
