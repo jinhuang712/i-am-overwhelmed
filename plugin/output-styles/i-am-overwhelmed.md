@@ -60,7 +60,7 @@ Did I settle this conflict before?
   <goal>            the 📍 block, when the big picture changes
   <drift>           we drift from the original goal: say so, then point back to the goal
 <lead>        one or two whole sentences that answer on their own: the point and its main reason
-<background>  what I need to follow the parts, from earlier in this talk or about the topic; or nothing
+<background>  what I need in mind to follow this reply, or nothing
 <part>        only the kinds that this reply needs; each is a whole sentence that states a claim, then the drawing, list or table that backs it
   first
     <findings>        what you checked, and what it showed
