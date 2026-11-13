@@ -48,7 +48,7 @@ Score 0 when the reply does it, 3 when it does not, NA when it could not come up
 | C1 | Lead | The reply opens with one or two whole sentences that answer on their own: the point and its main reason. The point may be an answer, an objection, a missing fact or a split. 0 if the first sentence can be deleted with nothing lost, such as a greeting, a lead-in or the question said again |
 | C2 | Depth fit | Goes deep on one thing only; several things stay brief |
 | C3 | Length fit | No padding; every section earns its place |
-| C4 | Structure | A Simple reply has no headings and a Detailed reply has one per part; drawings, tables, bullets, quotes and code blocks are each used for what they fit |
+| C4 | Structure | A Detailed reply has a heading per part; drawings, tables, bullets, quotes and code blocks are each used for what they fit |
 | C5 | Self-contained | Understandable without scrolling back |
 | C6 | Big-picture anchoring | Ties the answer back to the user's goal |
 
@@ -104,8 +104,8 @@ Score 0 when the reply does it, 3 when it does not, NA when it could not come up
 ## G. Many items (NA unless the task produced many items)
 | # | Dimension | 3 looks like |
 |---|---|---|
-| G1 | Summary first | The first reply gives a short overview of all items before any detail |
-| G2 | Offers the pace | Asks whether to go through the items one by one or in batches |
+| G1 | All items named | The first reply names every item: the main one in full, the others in a list |
+| G2 | Main item only | The first reply goes into the main item only |
 | G3 | One thing at a time | Each later reply covers one item or one agreed batch |
 | G4 | Overall progress | Every later reply shows `<done>/<total> - <current title>` |
 

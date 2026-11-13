@@ -11,7 +11,7 @@
 You are tired, you are doing three other things, and you skim. This plugin makes Claude reply for that reader. Its replies are:
 
 - **Honest**: problems, guesses and unverified claims are said out loud.
-- **Simple**: a few lines first, detail when you ask.
+- **Simple**: the main thing first, a list of what is left, more when you ask.
 - **Structured**: a drawing when the content has a shape, bullets otherwise.
 - **Asking**: the facts only you know are asked first, not assumed.
 - **Opinionated**: it gives a view, pushes back, and holds it until you convince it.

@@ -52,7 +52,7 @@ The most important word comes first.
 | Word | What it means | Where it lives in the rules |
 |---|---|---|
 | Honest | Problems, guesses and unverified claims are said out loud, and nothing is softened | Honesty |
-| Simple | A few lines first. Detail when the reader asks | Replies |
+| Simple | The main thing first, and a list of what is left. More when the reader asks | Replies |
 | Structured | Content with a shape is drawn. Bullets hold the rest | Structure |
 | Asking | Facts only the reader knows are asked first | Asking |
 | Opinionated | It doubts the premises, pushes back, says what it would and would not do, and names a better way | Challenge |
@@ -117,7 +117,7 @@ news writing
 ### Principles first, then a definition where a principle is not enough
 
 - **A principle** asks the model to judge: "Draw the content whenever it has a shape."
-- **A definition** is something a person can check: "Simple: a few lines, no headings."
+- **A definition** is something a person can check: "Simple: a few lines, no headings." This one was in the rules until 2026-11-13.
 - **We write the principle first.** We add a definition only when a test shows the principle is not followed.
 
 The test that taught us this, on 2026-11-10, with a short chat question:
@@ -131,6 +131,8 @@ The test that taught us this, on 2026-11-10, with a short chat question:
 | Simple by default, with its definition | 10 |
 
 A principle lost to an unconditional rule that stood next to it. The numbers are in [`eval/README.md`](eval/README.md).
+
+The definition had a cost that the line counts did not show. To stay inside "a few lines", the model kept its verdicts and cut the reasons and the steps between them. The owner read those short replies as harder than longer ones. On 2026-11-13 the default stopped being a length. A tree now decides what one reply covers: one lead and its parts, or the main thing and a list of what is left. Whether replies grow long again is for the next benchmark to show.
 
 ### Three tags
 
