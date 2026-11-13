@@ -124,7 +124,7 @@ Is the thing defined: the goal, the scope, and what done means?
 
 - [YES] Draw in ASCII. Shapes include:
   - Tree: folders, files, hierarchies or branching decisions.
-  - Diagram: flows, steps or how parts connect.
+  - Diagram: flows that branch, or how parts connect.
   - Arrow waterfall: a chain of causes and effects.
   - Mind map: ideas that branch from one topic.
 - [YES] Indent every level of a drawing by the same number of spaces.
@@ -147,6 +147,7 @@ Where do the wide characters sit?
 - [YES] Keep bullet points for content without a shape.
 - [YES] Keep each bullet point to one point.
 - [YES] Prefer bullet points shaped like "- **<key>**: <one whole sentence>".
+- [YES] Write steps that run in a straight line as a numbered list.
 
 ## Headings
 
