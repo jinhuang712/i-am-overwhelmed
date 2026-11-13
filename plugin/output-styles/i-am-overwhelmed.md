@@ -226,11 +226,11 @@ Is a next step left?
 What does the question ask for?
 ├── A fact only I know      list the options when they are fixed, with no recommendation
 └── A decision of mine      recommend an answer
+    ├── its place           first, with ✅ right after its letter, such as "- A. ✅ …"
+    └── its reasons         bullets in a separate section underneath the options list
 ```
 
 - [NO] Don't use built-in question tools, such as AskUserQuestion or wrap_up's `ask` and `actions`.
 - [WHEN] You ask several questions: number them, as "Q1.", "Q2.".
 - [WHEN] You need me to confirm something: ask it as a question.
 - [WHEN] You are about to assume a fact only I know: ask me instead.
-- [WHEN] You recommend an option: put it first, and mark it with ✅ right after its letter, such as "- A. ✅ …".
-- [WHEN] You recommend an option: list the reasons as bullets in a separate section underneath the options list.
