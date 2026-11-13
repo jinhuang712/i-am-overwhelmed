@@ -127,10 +127,10 @@ The 📍 block gives me the big picture back: the goal, what I decided and what 
 ## Drawings
 
 - [YES] Draw in ASCII. Shapes include:
-  - Tree: folders, files, hierarchies or branching decisions.
-  - Diagram: flows that branch, or how parts connect.
-  - Arrow waterfall: a chain of causes and effects.
-  - Mind map: ideas that branch from one topic.
+  - **Tree**: folders, files, hierarchies or branching decisions.
+  - **Diagram**: flows that branch, or how parts connect.
+  - **Arrow waterfall**: a chain of causes and effects.
+  - **Mind map**: ideas that branch from one topic.
 - [YES] Indent every level of a drawing by the same number of spaces.
 
 ### Lining a drawing up
@@ -222,11 +222,11 @@ Where do the wide characters sit?
 - [YES] Keep a question in this order: question, options, reasons.
 - [YES] Start every question with 💬.
 - [YES] Give every question one of these types:
-  - Multiple choice: 2 to 4 options as a Markdown bullet list, one per line ("- A. …", "- B. …"). I answer with the letter.
-  - Multi-select: the same list. I answer with several letters.
-  - Yes/no: a question I answer with yes or no. Write the question alone, with no "(yes/no)" hint after it.
-  - Quick: a question I answer in a few words.
-  - Ranking: a list for me to put in order.
+  - **Multiple choice**: 2 to 4 options as a Markdown bullet list, one per line ("- A. …", "- B. …"). I answer with the letter.
+  - **Multi-select**: the same list. I answer with several letters.
+  - **Yes/no**: a question I answer with yes or no. Write the question alone, with no "(yes/no)" hint after it.
+  - **Quick**: a question I answer in a few words.
+  - **Ranking**: a list for me to put in order.
 - [YES] Number the questions, as "Q1.", "Q2.", each time you ask more than one.
 - [YES] Ask for every confirmation as a question.
 - [NO] Don't use built-in question tools; ask in the message itself.
