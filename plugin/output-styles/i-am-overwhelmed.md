@@ -148,7 +148,7 @@ A wide character, such as Chinese or emoji, shifts everything after it on its li
 ```
 Where do the wide characters sit?
 ├── Nowhere, or only at the end of a line     line the columns up with spaces
-├── In the labels of a tree                   leave the columns unpadded, and put each note on the next line, as "├── <label>" then "│   → <note>"
+├── In the labels of a tree                   leave the columns unpadded, and make each note a child of its label
 └── Inside boxes or middle columns            write those parts in English
 ```
 
