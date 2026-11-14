@@ -13,6 +13,7 @@ Where things stand
 - 0.1.16 is released, pushed and tagged `v0.1.16` on 2026-11-12. `CHANGELOG.md` has one sentence a change.
 - The ten rule changes of 0.1.16 went out with no eval. The owner made this exception to "a release changes rules: run the eval on them first": the next benchmark was not urgent, and the owner wants to work with the new rules first.
 - 0.1.16 also has the README benchmark, "What you get", examples from the benchmark, and eval tool work.
+- 0.1.17 is released, pushed and tagged `v0.1.17` on 2026-11-14, with no eval of its rules, nor of the ten rule changes of 0.1.16. The owner chose to release over "a release changes rules: run the eval on them first". The next benchmark now measures both sets in one run: the rules of `HEAD` against no plugin.
 - The rule file has 88 rules. On 2026-11-12 the owner set its boundary: it rules the talk, such as when to ask and when to stop, and leaves how the work is done to the host.
 - The `CHANGELOG.md` is written at a release, from the commits. It has no `[Unreleased]` part.
 - The README benchmark is no plugin against the rules of 13a35d4: `results/2026-11-11-none-vs-13a35d4-opus-5-5`, 19 tasks, 3 runs each, overall 77.2 against 82.1. 0.1.14 is no longer compared.

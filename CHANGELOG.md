@@ -3,6 +3,33 @@
 All notable changes to this project are documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses [Semantic Versioning](https://semver.org/).
 
+## [0.1.17] - 2026-11-14
+
+### Added
+- Replies: one template names every block of a reply, says what each holds and when it is due, and takes in five rules that had a condition of their own: a failed premise, going through items, a changed big picture, drift and a fitting topic.
+- Replies: a tree decides what one reply covers: Detailed, Simple (a minimal reply for a thing that is really simple) or Default.
+- Replies: `<findings>` also holds what the agent did, so the report of finished work has a place.
+- Structure: a tree on where the wide characters sit says how to line a drawing up.
+- Structure: every drawn rule has its own heading at the end of its section, and every section opens with one sentence that says why its rules are there.
+- Eval: `eval/rubric-yesno.md` opens with its formats, how to write a line, its families and its score, and `eval.py` judges with it by default.
+- Eval: the report has a part "Old against new": the quality gap with a 90% interval, the tasks up and down, and the lines whose count moved.
+- Eval: new rubric lines for a simple question answered in several sections, one answer to a choice that has others, and steps in a row drawn as a diagram.
+- Eval: `eval/FINDINGS.md` records the trial of the kinds of parts and the comparison of the rules with tags against the rules without, on Sonnet 5.5.
+
+### Changed
+- Recommending: the tree holds where the pick goes and its reasons, in place of two rules with the same trigger.
+- Structure: steps that run in a straight line are a numbered list, not a drawing.
+- Structure: the lists of shapes and of question types use the bold key.
+- Replies: "call a thing decided only when I verbally agreed on it" moves under the 📍 block, which it is about.
+- Eval: the rubric parks the lines that opposed the new rules or fired on most replies, and the check of all 117 lines is on record.
+- Docs: PHILOSOPHY, `CLAUDE.md` and the READMEs follow the new rules and say why `[WHEN]` went.
+
+### Removed
+- The `[WHEN]` tag: its rules became branches of trees, lines of the template, or `[YES]` and `[NO]`, so the rule file has two tags.
+- Replies: "a few lines", and the rules on a task with many items, on several questions and on "more on one thing", which the tree on what one reply covers now holds.
+- Replies: the "define, discuss, do" tree; the definition is a line of the template.
+- Replies: "put reminders that need no emphasis in a blockquote", which the note in the template already says.
+
 ## [0.1.16] - 2026-11-12
 
 ### Added
