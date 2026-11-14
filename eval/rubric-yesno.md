@@ -115,7 +115,7 @@ Bad signs
 | C9 | answers a question the user did not ask, in place of the one asked |
 | C10 | does not answer the question in its first one or two sentences |
 | C11 | 🔎 is much longer than the question needs |
-| C13 | puts headings on the answer to a question that one or two sentences could answer |
+| C13 | puts more than one heading on the answer to a question that one or two sentences could answer |
 
 ## 3. Structure
 
@@ -377,4 +377,4 @@ Lines that are kept and not scored. A line comes here when a judge still wavers 
 | Formatting | uses so many emoji that they stop standing out | It fired on 📍 ☑️ ❓ 💬 ✅, which show what each part is for. The owner does not count them as a fault. Was M13 |
 | Content | goes into depth on several things at once | Too wide: it fired on an answer with its reasons, in 68% of replies with the plugin and 77% without. Was C12 |
 | Continuity | has many items to give and goes into more than the main one | Too wide, like C12: it fired on 16 of 20 replies, 5 of 6 with no plugin, and was stable on 14 of 20. No line judges this fault now. Was K20 |
-| Content | gives a simple question a reply of several sections | 15 of 20 stable, and it fired on 9 of 20. C13 now names what a judge can see: headings, and a question that one or two sentences could answer |
+| Content | gives a simple question a reply of several sections | 15 of 20 stable, and it fired on 9 of 20. C13 now names what a judge can see: headings, and a question that one or two sentences could answer. On 2026-11-15 C13 began to count more than one heading, because every reply now starts with one heading |

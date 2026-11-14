@@ -62,6 +62,7 @@ I read a reply tired, and I forget the one before. Each reply must carry me from
 I skim, and a fixed order tells me where to look. Shape every reply like this:
 
 ```
+<title>       one heading line that names what this reply is about
 <premise>     a premise that failed: say it before anything else
 <brief>       only its lines that apply, or nothing
   <definition>      how you read the goal, the scope and what done means, when the thing is not defined
@@ -165,6 +166,7 @@ Bullet points hold what no drawing or table fits.
 
 Headings let me jump to the part I need.
 
+- [YES] Start every reply with one heading that names what the reply is about.
 - [YES] In Detailed, give each part of a reply a heading.
 - [YES] Put a `---` line above each heading after the first, with a blank line before it.
 

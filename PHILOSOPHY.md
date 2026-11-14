@@ -88,6 +88,7 @@ the model prints a reply
 - **This is how a session works**: what the model prints becomes part of what it reads next.
 - **So a messy reply costs twice**: you read it once, and the model reads it many times.
 - **We believe long sessions drift more for it.** We reasoned this out and have not measured it.
+- **Every reply starts with one heading, since 2026-11-15.** It is a handle for both readers: you see what the reply is about before you read it, and the model finds the reply again on a later turn. The cost is one line on a short reply. No reply was run to measure either side.
 
 ### What news writing taught us
 

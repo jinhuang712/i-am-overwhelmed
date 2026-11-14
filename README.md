@@ -22,7 +22,7 @@ You are tired, you are doing three other things, and you skim. This plugin makes
 ## 🎁 What you get
 
 - **No late surprises**: the reply says now what it did not check and what risk is left.
-- **Easier to skim**: a flow is drawn, a long list gets a summary first, and a short answer gets no headings.
+- **Easier to skim**: a flow is drawn, a long list gets a summary first, and every reply starts with one heading, and a short answer gets no more.
 - **Asks proactively**: Claude asks you more, to avoid the slop that comes from a guess.
 - **A cleaner context**: every reply Claude prints becomes context for the next turn, so structured replies may keep a long session on track.
 
