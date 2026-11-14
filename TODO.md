@@ -24,10 +24,14 @@ Where things stand
 
 Paid runs, held until the owner names a budget (see "Eval" in `CLAUDE.md`: one eval per release, on a settled rubric). They now measure 0.1.16
 
-- First settle the rubric, about $1.45 of new money. Each tool counts its ledger against `--budget`, so the numbers are totals:
+- First settle the rubric, about $1.60 of new money. Each tool counts its ledger against `--budget`, so the numbers are totals:
   - A22 and K15 on the rubric check: 60 Haiku calls, about $0.15 on top of $2.81 spent.
     ```
     python3 eval/rubric_check.py --decks 6,8 --budget 3.50
+    ```
+  - C13 and T22 on the rubric check, reworded on 2026-11-15 when every reply and every part got a heading: decks 2 and 3, 60 Haiku calls with 30 cached, about $0.15 by the cost of the line above, which is a guess. No judge has seen the new wording.
+    ```
+    python3 eval/rubric_check.py --decks 2,3 --budget 3.50
     ```
   - The red flag check on its 8 cases: 264 Haiku and 16 Opus calls, about $1.30 on top of $1.33.
     ```
