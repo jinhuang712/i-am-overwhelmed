@@ -146,7 +146,7 @@ Good signs
 
 | # | The reply... |
 |---|---|
-| T22 | gives each part a heading when the user asked for more |
+| T22 | gives each part a heading |
 
 ## 4. Formatting
 
@@ -370,7 +370,7 @@ Lines that are kept and not scored. A line comes here when a judge still wavers 
 | Wording | gives a number with no other number to compare it with, such as the value before or a limit | 15 of 20 stable on Haiku in two wordings, and too wide: it fired on counts such as "10 bugs", which need no comparison. Was L14 |
 | Wording | uses a technical term the user may not know, and says nothing about what it means | Too wide: it fired on 15 of 20 replies, on terms such as mock, JWT and O(n), because a judge cannot tell what the user knows. Was L16 |
 | Asking | puts a question in the middle of the reply | Judged where a question sits, not whether the reader finds it. With the plugin it fired on 25 of 57 replies, 16 of them for the plugin's own ways: Q1 before Q2, reasons under the options, a reminder after the question. Was A17 |
-| Structure | has headings though the user did not ask for more detail | The rule changed on 2026-11-13: a reply may have headings by default. T22 still credits the headings of a reply that goes deeper. Was T8 |
+| Structure | has headings though the user did not ask for more detail | The rule changed on 2026-11-13: a reply may have headings by default. T22 still credits the headings of a reply that goes deeper. On 2026-11-15 T22 began to credit the headings of every reply that has parts. Was T8 |
 | Continuity | gives many items with no summary first | The rule changed on 2026-11-13: the reply goes into the main item and lists the others. C5 judges the list. Was K9 |
 | Continuity | gives many items and does not ask whether to go one by one or in batches | The rule changed on 2026-11-13, as for K9. Was K10 |
 | Continuity | has many items to give and does not list the ones it left | C5 says it. In for one day and never scored. Was K21 |

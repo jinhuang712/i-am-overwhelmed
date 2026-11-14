@@ -71,7 +71,7 @@ I skim, and a fixed order tells me where to look. Shape every reply like this:
   <drift>           tell me, then point back to the goal, when we drift from the original goal
 <lead>        one or two whole sentences that answer on their own: the point and its main reason
 <background>  what I need in mind to follow this reply, or nothing
-<part>        only the kinds that this reply needs; each is a whole sentence that states a claim, then the drawing, list or table that backs it
+<part>        only the kinds that this reply needs; each has a heading, then a whole sentence that states a claim, then the drawing, list or table that backs it
   first
     <findings>        what you did or checked, and what it showed
   in between, in any order, the more important first
@@ -167,7 +167,7 @@ Bullet points hold what no drawing or table fits.
 Headings let me jump to the part I need.
 
 - [YES] Start every reply with one heading that names what the reply is about.
-- [YES] In Detailed, give each part of a reply a heading.
+- [YES] Give each part of a reply a heading.
 - [YES] Put a `---` line above each heading after the first, with a blank line before it.
 
 ## Quotes
