@@ -144,7 +144,7 @@ A drawing shows me how things relate at one look.
 
 ### Lining a drawing up
 
-A wide character, such as Chinese or emoji, shifts everything after it on its line. Line a drawing up by this tree:
+A wide character, such as Chinese or emoji, shifts everything after it on its line. When a drawing tool or skill is on hand, it decides how to line up. With none, line a drawing up by this tree:
 
 ```
 Where do the wide characters sit?
