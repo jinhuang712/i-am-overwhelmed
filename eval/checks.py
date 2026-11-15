@@ -6,6 +6,7 @@ Usage:
 import json
 import re
 import sys
+import unicodedata
 from collections import defaultdict
 from pathlib import Path
 
@@ -27,6 +28,65 @@ OPTION = re.compile(r"^[-*] A\. ")
 def drawn(reply):
     """True when a plain code block holds a tree, a diagram or arrows."""
     return any(lang in ("", "text") and DRAWN.search(body) for lang, body in FENCE.findall(reply))
+
+
+# The arms of each box-drawing character: up, down, left, right.
+ARMS = {}
+for chars, arms in (("─━┄┈╌", "lr"), ("│┃┊┆╎", "ud"), ("┌╭", "dr"), ("┐╮", "dl"), ("└╰", "ur"),
+                    ("┘╯", "ul"), ("├", "udr"), ("┤", "udl"), ("┬", "dlr"), ("┴", "ulr"), ("┼", "udlr"),
+                    ("╷", "d"), ("╵", "u")):
+    for ch in chars:
+        ARMS[ch] = arms
+ARROW_DOWN = set("vV▼↓")
+ARROW_UP = set("^▲↑")
+
+
+def width(ch):
+    """The columns a terminal gives a character: two for wide ones such as Chinese, none for marks."""
+    if unicodedata.combining(ch) or unicodedata.category(ch) in ("Mn", "Me", "Cf"):
+        return 0
+    return 2 if unicodedata.east_asian_width(ch) in "WF" else 1
+
+
+def grid(body):
+    """The lines of a drawing as maps from column to character. A wide character fills both its columns."""
+    rows = []
+    for line in body.splitlines():
+        row, col = {}, 0
+        for ch in line:
+            for k in range(width(ch)):
+                row[col + k] = ch
+            col += width(ch)
+        rows.append(row)
+    return rows
+
+
+def joins(arm, other, arrows):
+    """True when an arm meets the matching arm, an arrowhead, or text such as a label on the line."""
+    return arm in ARMS.get(other, "") or other in arrows or (other not in ARMS and not other.isspace())
+
+
+def breaks(body):
+    """The vertical joins of a drawing that miss, counting a wide character as two columns.
+
+    An arm misses when it meets a space, or a line that does not point back. It may meet text:
+    a tree's branches point up at their label, and a label may sit on a line. Arms that leave
+    the drawing are not counted.
+    """
+    rows, missed = grid(body), 0
+    for r, row in enumerate(rows):
+        for c, ch in row.items():
+            arms = ARMS.get(ch, "")
+            if "d" in arms and r + 1 < len(rows):
+                missed += not joins("u", rows[r + 1].get(c, " "), ARROW_DOWN)
+            if "u" in arms and r > 0:
+                missed += not joins("d", rows[r - 1].get(c, " "), ARROW_UP)
+    return missed
+
+
+def misaligned(reply):
+    """True when a drawing of the reply has a vertical join that misses."""
+    return any(lang in ("", "text") and breaks(body) for lang, body in FENCE.findall(reply))
 
 
 def asks(reply):
@@ -102,6 +162,7 @@ def measure(replies):
         "paragraph_only": sum(1 for r in replies if paragraphs_only(r)),
         "anchors": sum(1 for r in replies if ANCHOR.search(r)),
         "drawings": sum(1 for r in replies if drawn(r)),
+        "misaligned": sum(1 for r in replies if misaligned(r)),
         "tables": sum(1 for r in replies if TABLE.search(r)),
         "quotes": sum(1 for r in replies if QUOTE.search(r)),
         "headings": sum(1 for r in replies if HEADING.search(r)),

@@ -13,7 +13,7 @@ HERE = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(HERE))
 
 from budget import Budget, estimate, past_costs  # noqa: E402
-from checks import measure  # noqa: E402
+from checks import breaks, measure  # noqa: E402
 from judge import dimensions, parse_scores  # noqa: E402
 from score import summary as score_summary  # noqa: E402
 from score import summary_yesno  # noqa: E402
@@ -708,6 +708,15 @@ class Parsing(unittest.TestCase):
         self.assertEqual(shaped["headings"], 1)
         self.assertEqual(shaped["ends_asking"], 1)
         self.assertEqual(shaped["lines"], 12)
+
+    def test_breaks_count_a_wide_character_as_two_columns(self):
+        self.assertEqual(breaks("┌──────┐\n│ 陈默 │\n└──────┘"), 0)
+        self.assertGreater(breaks("┌────┐\n│ 陈默 │\n└────┘"), 0)
+        tree = "要上缓存吗？\n├── 不慢\n│   └── 不上 ✅\n└── 慢\n    └── 先查 SQL"
+        self.assertEqual(breaks(tree), 0)
+        self.assertEqual(breaks(" [A] ──┐\n       ├──> [C]\n [B] ──┘"), 0)
+        self.assertGreater(breaks(" [A] ──┐\n        ├──> [C]\n [B] ──┘"), 0)
+        self.assertEqual(measure(["```\n┌────┐\n│ 陈默 │\n└────┘\n```"])["misaligned"], 1)
 
     def write_scores(self, root, rows):
         (root / "blind").mkdir(parents=True)
