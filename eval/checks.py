@@ -13,7 +13,6 @@ from pathlib import Path
 LINE_REF = re.compile(r"[\w./-]+\.\w+:\d+|\b[Ll]ines? \d+|第\s*\d+\s*行")
 NEGATION = re.compile(r"[不没别未]|\b(?:not|no|never|without|cannot)\b|n't\b", re.I)
 STRUCTURE = re.compile(r"^\s*(?:[-*#|]|\d+\.|```)", re.M)
-ANCHOR = re.compile(r"^\s*📍", re.M)
 FENCE = re.compile(r"```(\w*)\n(.*?)```", re.S)
 DRAWN = re.compile(r"[├└│┌┐┘─]|→|↓|->|-->")
 TABLE = re.compile(r"^\|.*\|\s*$", re.M)
@@ -160,7 +159,6 @@ def measure(replies):
         "line_refs": sum(len(LINE_REF.findall(r)) for r in replies),
         "negations_per_1k": 1000 * sum(len(NEGATION.findall(r)) for r in replies) / chars,
         "paragraph_only": sum(1 for r in replies if paragraphs_only(r)),
-        "anchors": sum(1 for r in replies if ANCHOR.search(r)),
         "drawings": sum(1 for r in replies if drawn(r)),
         "misaligned": sum(1 for r in replies if misaligned(r)),
         "tables": sum(1 for r in replies if TABLE.search(r)),

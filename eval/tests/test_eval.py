@@ -700,7 +700,6 @@ class Parsing(unittest.TestCase):
         self.assertEqual(m["line_refs"], 2)
         self.assertGreater(m["negations_per_1k"], 0)
         self.assertEqual(m["paragraph_only"], 1)
-        self.assertEqual(measure(["📍 goal · decided: x · open: y\n- a"])["anchors"], 1)
         shaped = measure(["# Flow\n```\na\n└── b → c\n```\n| x | y |\n> note\nGo on?", "```diff\n- a -> b\n```\nDone."])
         self.assertEqual(shaped["drawings"], 1)
         self.assertEqual(shaped["tables"], 1)

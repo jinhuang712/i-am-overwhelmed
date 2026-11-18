@@ -149,7 +149,7 @@ task limits: $27.75 for the runs + $5.10 for judging = $32.85 at most
 | [`yesno.py`](yesno.py) | The judges for `yesno`: decks, passes, the strong judge, the cache |
 | [`reuse.py`](reuse.py) | `--reuse`: finished runs from another results folder |
 | [`score.py`](score.py) | Unblinds the answers and counts them: the overall score, old against new, each task |
-| [`checks.py`](checks.py) | The scripts behind the ⚙️ lines, and the measures: line references, negations, paragraph-only replies, 📍 anchors, drawings, tables, quotes, headings, replies that end asking, and lines. Free |
+| [`checks.py`](checks.py) | The scripts behind the ⚙️ lines, and the measures: line references, negations, paragraph-only replies, drawings, tables, quotes, headings, replies that end asking, and lines. Free |
 | [`tasks.json`](tasks.json) | The tasks. A task with several `turns` continues one session |
 | [`rubric-yesno.md`](rubric-yesno.md) | The rubric: its formats, its families, its score and its lines |
 | [`rubric.md`](rubric.md) | The 0 to 3 scale, frozen since 2026-11-13 |

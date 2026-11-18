@@ -90,6 +90,23 @@ the model prints a reply
 - **We believe long sessions drift more for it.** We reasoned this out and have not measured it.
 - **Every reply starts with one heading, and every part has one, since 2026-11-15.** A heading is a handle for both readers: you see what a reply or a part is about before you read it, and the model finds it again on a later turn. The owner chose to read easily over a short reply, against the worry that the replies grow longer: the plugin's replies were already longer than the ones with no plugin, and the owner read longer replies as easier. No reply was run to measure either side.
 
+### A recap is attention, not a ledger
+
+Since 2026-11-18 every reply after the first opens with a recap: what my attention should be on now.
+
+```
+a large piece of work               the main line, in every recap
+├── a fork we are on                in the recap
+├── a problem found and left        in a file, not in the recap
+└── a small thing that is done      dropped
+```
+
+- **A ledger grows, and attention moves.** Until that day the 📍 block listed the goal, what I decided and what was open. It grew with the talk, much of it was not what I was on, and at times I did not read it. It also led the agent to list its own advice as decided; see [`eval/FINDINGS.md`](eval/FINDINGS.md).
+- **The books belong in a file.** What is decided and what is open is already in the context, and a file keeps it better than a reply does. Writing that file is how the agent works, which the rules leave alone.
+- **The rule says what the recap is for, and no more.** It sets no length and no list of what to hold, since each named thing invites a line that fills it. The model decides what is live.
+- **When it is due stays fixed: every reply after the first.** A condition that the model must judge is often judged as not met.
+- **We have not measured it.** The owner chose it from use. No reply was run under the line.
+
 ### What news writing taught us
 
 News copy is written for our reader: someone who skims and may stop at any line. We compared replies with Chinese press releases, read how newsrooms write, and read what linguistics says about register. Three things carried over. The format did not.
@@ -148,7 +165,7 @@ Simple came back the same day, as a branch of the tree on what one reply covers 
 - **A tag tells the model what kind of rule it is reading**, before it reads the rule.
 - **A tag fixes the strength.** We believe words such as "should" and "try to" read as open to negotiation.
 - **A person can check a reply against the list**, one line at a time.
-- **A third tag, `[WHEN]`, was dropped on 2026-11-13.** It read "situation: what to do", and left the model to say whether the situation holds. The owner's experience is that the model often says no: "Simple would mislead me" and "it fits the topic" were seldom acted on. Of the 20 rules that had the tag, 12 went into trees and into the template of a reply, 7 became a `[YES]` or a `[NO]`, and 1 was dropped. A condition that names a state of the talk, such as "the big picture changes", still needs the model's judgement; the change gave it a place, not a proof.
+- **A third tag, `[WHEN]`, was dropped on 2026-11-13.** It read "situation: what to do", and left the model to say whether the situation holds. The owner's experience is that the model often says no: "Simple would mislead me" and "it fits the topic" were seldom acted on. Of the 20 rules that had the tag, 12 went into trees and into the template of a reply, 7 became a `[YES]` or a `[NO]`, and 1 was dropped. A condition that names a state of the talk, such as "we drift from the original goal", still needs the model's judgement; the change gave it a place, not a proof.
 
 ### Discrete rules, in plain words
 
