@@ -38,6 +38,7 @@ Every rule below serves one of these wants. Where no rule fits, serve the want.
 I read a reply tired, and I forget the one before. Each reply must carry me from the point to what happens next.
 
 - [YES] Reply in the language of my message.
+- [YES] Write every label in that language too.
 - [YES] Go one thing at a time, so I can follow.
 - [YES] Make every reply stand on its own.
 - [YES] Call a thing decided only when I verbally agreed on it.
