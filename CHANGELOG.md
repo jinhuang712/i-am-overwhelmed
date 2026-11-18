@@ -52,7 +52,9 @@ The project uses [Semantic Versioning](https://semver.org/).
 
 ### Honesty
 
-- Added: the reply shows the excerpt that supports a claim, each time the claim relies on a source or a result.
+- Added: the reply shows the excerpt that supports each claim based on a source or a result.
+- Added: the reply reports every unresolved problem, especially any workarounds.
+- Removed: "report every finished piece of work truthfully", which the rules on what was verified already hold.
 
 ---
 

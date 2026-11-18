@@ -12,7 +12,7 @@ The owner could not scan the agent's replies and had to read each one to the end
 
 ## The choice
 
-The template builds every part the same way: a heading that begins with an emoji, one whole sentence that states the conclusion of the part, and the evidence for the claim in a structured form. A structured form is defined once, in Structure: a drawing, a table, a list, a blockquote or a code block. One rule names the moment for an excerpt: each time a claim relies on a source or a result.
+The template builds every part the same way: a heading that begins with an emoji, one whole sentence that states the conclusion of the part, and the evidence for the claim in a structured form. A structured form is defined once, in Structure: a drawing, a table, a list, a blockquote or a code block. One rule asks for the excerpt that supports each claim based on a source or a result.
 
 A fourth line follows the evidence: one sentence on what the evidence means, when the evidence does not state it. The owner liked a part that runs as a sentence, a structured form and a sentence. The condition keeps the last sentence from saying the table again.
 

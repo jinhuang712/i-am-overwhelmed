@@ -56,6 +56,7 @@ The cost is that a rule cannot carry a nuance. A rule that needs one becomes a t
   - [001: The rule file has two tags and no `[WHEN]`](specs/decisions/001-two-tags-and-no-when.md)
   - [006: A drawn rule has its own heading and no tag](specs/decisions/006-a-drawn-rule-has-its-own-heading.md)
   - [011: Samples stand in a part of their own](specs/decisions/011-samples-stand-in-a-part-of-their-own.md)
+  - [012: One rule closes the omission, and no tree](specs/decisions/012-one-rule-closes-the-omission.md)
 
 ---
 
