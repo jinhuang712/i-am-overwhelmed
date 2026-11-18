@@ -21,7 +21,7 @@
   - No goal measures the reader: what they understood, how fast they decided or what they kept.
   - The owner asked for wants in precise written terms and not in a spoken register.
 
-The owner turned down 6 candidates, so they are raised again only with a new fact: the decision stays with me · the agent shows it understood me · say a thing once · pick up after a break · readable on a phone · a claim that is cheap to check.
+The owner turned down 6 candidates, so they are raised again only with a new fact: the decision stays with me · the agent shows it understood me · say a thing once · pick up after a break · readable on a phone · a claim that is cheap to check. Later that day the owner asked for evidence inside the reply, in the owner's own words, and that point stands under "What lets the reader scan a reply?".
 
 The owner did not answer on 6 more: understand and not only finish reading · remember the conclusion later · see what I had not thought of · have a vague thought made clear · no unfinished thing held in mind · speak loosely and be understood.
 
@@ -36,7 +36,7 @@ The owner did not answer on 6 more: understand and not only finish reading · re
 - next: decide which of the owner's points become rules, and how each is worded
 - related: [PROPOSAL.md](../PROPOSAL.md) names the want as "Grasp the main point"
 
-The owner stated 9 points:
+The owner stated 10 points:
 
 - **Sections**: A reply must have sections, and each section must have a heading.
 - **Emoji on a heading**: A heading needs a mark that helps to scan, such as an emoji. The rules ask for emoji to mark meaning and say nothing about headings.
@@ -47,6 +47,7 @@ The owner stated 9 points:
 - **Condense or structure**: A row of like things becomes one word that names their kind, or a list. The owner's example is "roast meats" in place of four dishes.
 - **Direction before detail**: A reply states the direction in one sentence, such as "cut the number of test cases and remove the dead ones". A long account of each case has a low density of information.
 - **Short sentences**: A long sentence is tiring in a terminal. It runs to the end of the line and wraps, with many marks of punctuation inside.
+- **Evidence in the reply**: A decision maker needs the evidence, so the original text and the output belong in the reply as a blockquote or a code block. The diff is done well and is far from enough.
 
 The four forms the agent tried:
 
@@ -57,12 +58,13 @@ The four forms the agent tried:
 | One heading and bullets with bold keys | sections are needed |
 | Emoji headings with a table, a drawing and a blockquote | much better, and easy to scan |
 
-4 things are open:
+5 things are open:
 
 - Whether the emoji on a heading shows the kind of section with a fixed meaning. The agent asked and the owner did not answer.
 - Why a reply with two or three sections felt like too many. The agent's guess is the count of blocks against the length, and the owner did not confirm it.
 - Whether "say the upper level" is a stance for the philosophy. The owner asked for it three times that day: the merged wants, the one word for a row of things, and the direction before the detail.
 - How to ask for short sentences. A limit of one comma a bullet was tried on 2026-11-03: most bullets broke it and replies read as cramped. In this session 29% of the agent's 596 sentences ran over 40 characters, and 21% had three or more marks inside.
+- How to ask for evidence. Of the rules on quotes, code blocks and diffs, only the diff rule says that a thing must be shown and names its moment: "each time you changed code or text". The others say how to set a thing that is shown.
 
 ---
 
