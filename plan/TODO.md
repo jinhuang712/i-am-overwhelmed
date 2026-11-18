@@ -36,7 +36,7 @@ The owner did not answer on 6 more: understand and not only finish reading · re
 - next: the owner called the talk done on 2026-11-18 and asked how to land it. The agent drafted the rule lines, and the owner has to settle their wording.
 - related: [PROPOSAL.md](../PROPOSAL.md) names the want as "Grasp the main point"
 
-The owner stated 14 points:
+The owner stated 15 points:
 
 - **Sections**: A reply must have sections, and each section must have a heading.
 - **Emoji on a heading**: A heading needs a mark that helps to scan, such as an emoji. The rules ask for emoji to mark meaning and say nothing about headings.
@@ -52,6 +52,7 @@ The owner stated 14 points:
 - **A recap that grows with the task**: On a very long task one sentence is not enough. The recap then shows where the task stands, such as its progress, in a structured form.
 - **No hard sentences**: A sentence with a clause nested inside it is as tiring as a long one.
 - **A rigorous written register**: The agent's style is still close to speech and carries a tone of deference. The owner wants the written register of a rigorous large company. Weaker models show the fault more, and they correct it when told.
+- **A question that stands on its own**: A question that names its options by letter and does not say again what they are sends the owner back up the talk, where the thing is hard to find in a long piece of work.
 
 The four forms the agent tried:
 
