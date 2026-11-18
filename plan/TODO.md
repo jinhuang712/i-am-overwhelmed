@@ -88,7 +88,7 @@ The four forms the agent tried:
 - **Four files to keep in step**: Each edition has an output style and a file for Codex. A test compares the two English files today, and a translation cannot be compared line by line.
 - **The evidence is on the English rules**: Every eval ran the English rules, and 17 of 19 tasks are in Chinese.
 
-The owner also weighed 3 lines for About Me. "Long lines and long sentences tire me" stands without the word "terminal". The owner turned down the lines on deciding with evidence and on density: they say what the agent should do, and About Me holds what the reader is, which lies outside the rules.
+The owner also weighed 3 lines for About Me. "Long lines and long sentences tire me" stands without the word "terminal". The owner turned down the lines on deciding with evidence and on density: they say what the agent should do, and About Me holds what the reader is, which lies outside the rules. The owner also sent "I'm the one who decides" to the tagged rules. One fact stays for About Me, and its wording is open: the owner does not follow every read, run and edit of the agent line by line.
 
 ---
 
