@@ -51,7 +51,7 @@ The owner did not answer on 6 more: understand and not only finish reading · re
 A first comparison ran on 2026-11-18: the task `session-zh`, 4 turns with tools, on Sonnet 5.5 at xhigh effort, one run each with no plugin, with 0.1.18 and with the rebuilt rules. It cost $3.46. One run a side is a sample. The agent read the replies and counted 5 things:
 
 - **An emoji on every heading**: 22 of 22 headings under the rebuilt rules, and 0 of 19 under 0.1.18.
-- **Names of the template printed as labels**: the replies of the first two turns hold bullets that open with "claim" and "证据". The owner does not count them as a fault.
+- **Names of the template printed as labels**: the replies of the first two turns hold bullets that open with "claim" and "证据". The owner does not count them as a fault, and asks that a label be in the language of the reply: "claim" stood in English in a Chinese reply.
 - **No reply names its recap**: the agent first counted this as a fault by searching for the word. The owner holds that a recap needs no such word. Read by what they do, two of the three later replies open on the state of the work or on what needs the owner, and none brings back the main line, a green CI.
 - **Lists of similar items**: 3 sentences with a row of three or more under the rebuilt rules, and 0 under 0.1.18.
 - **Length**: 142 lines against 119 under 0.1.18 and 38 with no plugin. The owner holds that a longer reply is no fault.

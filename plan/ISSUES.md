@@ -199,6 +199,7 @@ The run goes on the owner's second Claude Code profile. It must include `vague-z
   - The line on parallel clauses covers one sentence, and the rule now covers several.
   - No line judges the evidence under a claim, the emoji on a heading, a self-contained question, deferential language or a discussion.
   - Three lines take points for what the owner accepts: one for a reply longer than the question needs, one for more than one heading on a short answer, and one that read the label "claim" as a coined term with no definition.
+  - Five more lines fired on the rebuilt rules alone in the comparison of 2026-11-18, and the owner counts none of the five hits as a fault: a simile, two names for one thing, a chain of causes in prose, a question after the next step and a first explanation with no other tested.
 - found: the rule change of 2026-11-18
 - touches: [3. A condition sits where it applies](../DESIGNS.md#3-a-condition-sits-where-it-applies)
 - next: `rubric_check.py` must run after the change, so the owner names a budget

@@ -245,7 +245,7 @@ The owner stated 19 ways, where the files do not say them:
 - **Reruns**: The owner counts reruns as waste, so propose the smallest step. Evals had cost $188 by 2026-11-12, with at least $66 of it on runs and judging done again.
 - **The README**: It may leave a weak point out, and it may not claim what our own numbers contradict.
 - **Length**: A longer reply is no fault. Never report the length of a reply or its count of lines as a problem, since density is what counts.
-- **Labels**: A label that names a block of the template, such as "claim" above a claim, is no fault.
+- **Labels**: A label that names a block of the template is no fault, as long as it is in the language of the reply. "claim" in a Chinese reply is a fault, and "证据" is not.
 - **Recaps**: Judge a recap by what it does for the reader's attention. A reply needs no word such as "recap" to hold one.
 - **Conflicts**: When an agent reports a conflict between instructions in a real session, write it in the TODO as a `DISCUSSION` and fix the scope of the rules it names.
 
