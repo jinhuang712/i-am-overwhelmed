@@ -8,16 +8,22 @@
 
 ### [P1][DISCUSSION] What does the reader want, in full?
 
-- description: The owner has not settled the list of wants. On 2026-11-18 the owner named five to consider: grasp the main point · keep attention on the right things · not be flooded with information · no brain rot · iterate a discussion fast. The proposal holds only the wants the rule file already states.
+- description: The proposal holds 11 wants since 2026-11-18. The owner confirmed 4 of them in words: the main conclusion first · attention on the right things · control of how much to take in · a discussion that iterates fast. The owner then pointed to the rule file as the source of the rest. The agent read them from it and merged 15 into 11, and the owner has not confirmed the merged list.
 - created: 2026-11-18
+- updated: 2026-11-18
 - status: OPEN
 - found: a talk on whether the rules work, seen from linguistics and the psychology of language
-- blocks: the wants in [PROPOSAL.md](../PROPOSAL.md) and the goals that check them
-- next: the owner says which of the five are wants
-- related: 3 points the agent raised in that talk, none of them agreed:
-  - The rules lower the reader's effort, and nothing in them asks the reader to think. Whether "no brain rot" needs a stance is open.
+- blocks: the goals that check each want
+- next: the owner confirms or corrects the 11 wants in [PROPOSAL.md](../PROPOSAL.md)
+- related: 4 things stayed open in that talk:
+  - "No brain rot" has no stance. The rules lower the reader's effort, and nothing in them asks the reader to think.
+  - "Iterate a discussion fast" is a want with no section of the rule file written for it.
   - No goal measures the reader: what they understood, how fast they decided or what they kept.
-  - Every part has a heading and a line above it, so a mark may stop standing out.
+  - The owner asked for wants in precise written terms and not in a spoken register.
+
+The owner turned down 6 candidates, so they are raised again only with a new fact: the decision stays with me · the agent shows it understood me · say a thing once · pick up after a break · readable on a phone · a claim that is cheap to check.
+
+The owner did not answer on 6 more: understand and not only finish reading · remember the conclusion later · see what I had not thought of · have a vague thought made clear · no unfinished thing held in mind · speak loosely and be understood.
 
 ---
 
