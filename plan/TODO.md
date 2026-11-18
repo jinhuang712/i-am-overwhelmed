@@ -27,6 +27,64 @@ The owner did not answer on 6 more: understand and not only finish reading · re
 
 ---
 
+### [P1][DISCUSSION] What lets the reader scan a reply?
+
+- description: The owner could not scan the agent's replies on 2026-11-18 and had to read each one to the end. In the talk that followed the owner stated what a reply needs. No rule was changed.
+- created: 2026-11-18
+- status: OPEN
+- found: a talk in which the agent tried four forms of reply and the owner said how each one read
+- next: decide which of the owner's points become rules, and how each is worded
+- related: [PROPOSAL.md](../PROPOSAL.md) names the want as "Grasp the main point"
+
+The owner stated 8 points:
+
+- **Sections**: A reply must have sections, and each section must have a heading.
+- **Emoji on a heading**: A heading needs a mark that helps to scan, such as an emoji. The rules ask for emoji to mark meaning and say nothing about headings.
+- **Drawings and tables**: Diagrams, tables and other structured forms matter.
+- **Blockquotes**: A blockquote for what is not the key information makes the rest stand out.
+- **Structure carries the rest**: Honesty and pushing back are hard to see without structure, since reading prose is tiring.
+- **No parallelism**: The owner dislikes all three kinds: parallel clauses in one sentence · the same frame over several sentences · a short antithesis.
+- **Condense or structure**: A row of like things becomes one word that names their kind, or a list. The owner's example is "roast meats" in place of four dishes.
+- **Direction before detail**: A reply states the direction in one sentence, such as "cut the number of test cases and remove the dead ones". A long account of each case has a low density of information.
+
+The four forms the agent tried:
+
+| Form | The owner's reading |
+|---|---|
+| Four to five headed sections with a table and three options | "有点懵" |
+| One heading and paragraphs | like an essay |
+| One heading and bullets with bold keys | sections are needed |
+| Emoji headings with a table, a drawing and a blockquote | much better, and easy to scan |
+
+3 things are open:
+
+- Whether the emoji on a heading shows the kind of section with a fixed meaning. The agent asked and the owner did not answer.
+- Why a reply with two or three sections felt like too many. The agent's guess is the count of blocks against the length, and the owner did not confirm it.
+- Whether "say the upper level" is a stance for the philosophy. The owner asked for it three times that day: the merged wants, the one word for a row of things, and the direction before the detail.
+
+---
+
+### [P1][DISCUSSION] Do the rules fit a talk as well as a report?
+
+- description: The owner asked the agent how it sees the rules as their owner. The agent's view is that the rules make a good standard for a report and a weak one for a talk. The owner called the view mostly right.
+- created: 2026-11-18
+- status: OPEN
+- found: three times that day the owner had to say "let us discuss first" while the agent kept ending on options and on a next step
+- next: discuss it after the structure of a reply is settled
+- related: [How does a reply open a discussion?](#p2discussion-how-does-a-reply-open-a-discussion)
+
+The agent named 5 things, and none is agreed in detail:
+
+- **No branch for a talk**: The tree that ends a reply has "the step is clear" and "it needs my answer". It has no way to stay in a talk.
+- **Coverage by content only**: The tree on what one reply covers looks at how complex the content is, and not at whether the reader waits for a result or thinks a thing through.
+- **Four ways to look back**: The recap, "say what changed", "say again what I need" and the background all look back.
+- **Few rules that cut**: The agent counted six or seven rules that ask for less, in a rough count.
+- **Rules with no want**: A few rules trace to none of the five wants, such as no line numbers and spaces at a bare URL.
+
+The README's benchmark still counts "puts headings on an answer, though nobody asked for more detail" as a fault, at 46% with no plugin and 0% with it. The rules ask for a heading on every part since 0.1.18.
+
+---
+
 ### [P1][DISCUSSION] What ends the rubric checkpoint?
 
 - description: The order of work agreed on 2026-11-11 is to make the rubric something we can rely on and then go back to the rules. No number says when the rubric is reliable enough.
