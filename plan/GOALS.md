@@ -16,7 +16,7 @@ Goals
 │   ├── 70% M1: Replies that say what they did not check — a share of the replies
 │   ├── open M2: Lines of a reply — the length the reader meets
 │   ├── open M3: The owner's real sessions — the signal that needs no judge
-│   ├── 2,298 M4: Words of the rule file — what every request carries
+│   ├── 2,299 M4: Words of the rule file — what every request carries
 │   └── 92% M5: Stable answers of the rubric — how far a judge can be relied on
 └── Constraints
     ├── ✅ R1: The Codex rules match the output style — two places may differ
@@ -162,7 +162,7 @@ What every request carries.
 M4 = words of plugin/output-styles/i-am-overwhelmed.md
 ```
 
-**Last value**: 2,298 words and 77 tagged rules on 2026-11-18, after the rebuild of that day. Before it the file had 2,047 words and 70 rules. It had 961 words in 0.1.13 and 1,743 words in 88 rules on 2026-11-12, and how those two were counted is not on record.
+**Last value**: 2,299 words and 76 tagged rules on 2026-11-18, after the rebuild of that day. Before it the file had 2,047 words and 70 rules. It had 961 words in 0.1.13 and 1,743 words in 88 rules on 2026-11-12, and how those two were counted is not on record.
 
 ---
 

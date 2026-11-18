@@ -1,4 +1,4 @@
-# 009. A talk has its own branch in two trees
+# 009. A discussion has its own branch in two trees
 
 Decided: 2026-11-18
 
@@ -12,7 +12,7 @@ The rules shaped every reply as a report: findings, options, a pick and a questi
 
 ## The choice
 
-The tree on what one reply covers and the tree that ends a reply both ask first: "Are we talking a thing through?" In a talk a reply holds one thought at a time with the agent's view of it, and it leaves the next word to the reader.
+The tree on what one reply covers and the tree that ends a reply both ask first: "Is this a discussion rather than a task?" In a discussion a reply holds one idea at a time with the agent's assessment of it, and it lets the reader respond.
 
 ---
 
@@ -20,11 +20,11 @@ The tree on what one reply covers and the tree that ends a reply both ask first:
 
 2 other ways:
 
-- **A second template for a talk**: one template is the order the reader knows.
+- **A second template for a discussion**: one template is the order the reader knows.
 - **"Discuss every one with me, before you do anything"**: the owner turned it down on 2026-11-12, since it goes past what an output style is for.
 
 ---
 
 ## Consequences
 
-Whether a talk is under way is the model's call, and a condition of that kind is often judged as not met. No reply was run under the branch.
+Whether a discussion is under way is the model's call, and a condition of that kind is often judged as not met. No reply was run under the branch.

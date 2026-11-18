@@ -161,10 +161,10 @@ The run goes on the owner's second Claude Code profile. It must include `vague-z
 - **The recap**: watch for a ledger of what was done, for a recap on a quick question and for a recap that says what `<background>` says.
 - **Three or more things in one sentence**: 14 of 20 replies did it with and without the plugin, and the owner holds the rule's wording to be right.
 - **File names as links**: replies linked the first mention only, and the rule now says "each time you name it".
-- **Heading, claim and evidence**: see whether a claim comes with the quote or the output it rests on.
+- **Heading, claim and evidence**: see whether a claim comes with the excerpt that supports it.
 - **An emoji on every heading**: see whether it tells the kind of part or only decorates.
 - **The recap took in four lines**: see whether a reply still says what changed since the last one.
-- **A branch for a talk**: see whether a reply in a talk ends with no options, and whether a report still ends on its step.
+- **A branch for a discussion**: see whether a reply in a discussion ends with no options, and whether a report still ends on its step.
 - **The register**: see whether "a rigorous technical document" brings stock phrases, and whether apology and praise leave the words.
 
 `<background>` needs a talk of several turns to show where it is due. The owner wants it for a complex matter or for a thing from many replies ago.
@@ -196,7 +196,7 @@ The run goes on the owner's second Claude Code profile. It must include `vague-z
 - why: The rule file was rebuilt on 2026-11-18, and the rubric judges the file as it was.
   - Two lines judge rules that left: one on what changed since the last reply and one on what the reader needs from an earlier reply.
   - The line on parallel clauses covers one sentence, and the rule now covers several.
-  - No line judges the evidence under a claim, the emoji on a heading, a question that stands on its own, deference in words or a talk.
+  - No line judges the evidence under a claim, the emoji on a heading, a self-contained question, deferential language or a discussion.
 - found: the rule change of 2026-11-18
 - touches: [3. A condition sits where it applies](../DESIGNS.md#3-a-condition-sits-where-it-applies)
 - next: `rubric_check.py` must run after the change, so the owner names a budget

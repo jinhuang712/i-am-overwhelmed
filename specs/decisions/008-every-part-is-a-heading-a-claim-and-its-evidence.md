@@ -12,21 +12,23 @@ The owner could not scan the agent's replies and had to read each one to the end
 
 ## The choice
 
-The template builds every part the same way: a heading that opens with an emoji, one whole sentence that gives the direction of the part, and what the claim rests on. Evidence is a quote, an output, a diff, a drawing, a list or a table. Two rules name the moment for it: each time a claim rests on a text, and each time the agent ran something for it.
+The template builds every part the same way: a heading that begins with an emoji, one whole sentence that states the conclusion of the part, and the evidence for the claim in a structured form. A structured form is defined once, in Structure: a drawing, a table, a list, a blockquote or a code block. One rule names the moment for an excerpt: each time a claim relies on a source or a result.
 
 ---
 
 ## Not chosen
 
-4 other ways:
+6 other ways:
 
 - **Twelve new rule lines and no change to the template**: the owner called that a small fix after a long talk.
 - **One heading and paragraphs**: it read like an essay.
 - **One heading and bullets**: the owner holds that a reply needs sections.
 - **A limit on the length of a sentence**: a limit of one comma a bullet was tried on 2026-11-03 and most bullets broke it.
+- **A list of the forms of evidence in the template**: the owner found it too rigid, and one term now stands for them all.
+- **One rule for a quote and one for command output**: evidence is also an edit or a record that a call returned.
 
 ---
 
 ## Consequences
 
-The rule file grew from 2,045 words to 2,298. A rule on what a reply must show may make the agent look into more, which the project accepts. No reply was run under the new template.
+The rule file grew from 2,045 words to 2,299. A rule on what a reply must show may make the agent look into more, which the project accepts. No reply was run under the new template.

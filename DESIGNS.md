@@ -71,7 +71,7 @@ The cost is that a condition about the state of the talk, such as "we drift from
   - [003: A tree decides what one reply covers](specs/decisions/003-a-tree-decides-what-one-reply-covers.md)
   - [004: A recap takes the place of the big picture block](specs/decisions/004-a-recap-takes-the-place-of-the-big-picture-block.md)
   - [008: Every part of a reply is built as a heading, a claim and its evidence](specs/decisions/008-every-part-is-a-heading-a-claim-and-its-evidence.md)
-  - [009: A talk has its own branch in two trees](specs/decisions/009-a-talk-has-its-own-branch.md)
+  - [009: A discussion has its own branch in two trees](specs/decisions/009-a-talk-has-its-own-branch.md)
 
 ---
 
@@ -103,7 +103,7 @@ The cost is that a fault which shows up once gets no rule of its own.
 
 ## 6. The rules are in our own words
 
-The rules say what to do in plain words of our own. They are inspired by ASD-STE100 and copy none of its text. They name no genre: every time "press release" was in the instruction, the model brought the dateline and the PR voice with it. A rule that needs Chinese is written natively in a technical register.
+The rules say what to do in plain words of our own. They use the standard term for a thing and coin no phrase, since the agent is to follow them into a rigorous register. They are inspired by ASD-STE100 and copy none of its text. They name no genre: every time "press release" was in the instruction, the model brought the dateline and the PR voice with it. A rule that needs Chinese is written natively in a technical register.
 
 The cost is that a reader cannot look a rule up in a standard.
 

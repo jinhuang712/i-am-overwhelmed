@@ -17,34 +17,40 @@ The project uses [Semantic Versioning](https://semver.org/).
 
 ### Replies
 
-- Changed: every reply after the first opens with a recap of where the work stands and what your attention should be on now, drawn when the work is long. Before, a reply opened with a 📍 block when the big picture changed: the goal, what you decided and what was open. That block is gone.
-- Changed: every part of a reply is built the same way: a heading with an emoji, one sentence that gives the direction, and the evidence it rests on.
+- Changed: every reply after the first opens with a recap of the current state of the work and what requires your attention, in a structured form when the work is long. Before, a reply opened with a 📍 block when the big picture changed: the goal, what you decided and what was open. That block is gone.
+- Changed: every part of a reply is built the same way: a heading with an emoji, one sentence that states its conclusion, and the evidence for it in a structured form.
 - Changed: the section stands in front of Honesty.
 - Changed: "call a thing decided only when I verbally agreed on it" moves under Replies.
-- Added: a talk has its own branch. The agent gives one thought at a time with its view, and leaves the next word to you.
+- Added: a discussion has its own branch. The agent gives one idea at a time with its assessment, and lets you respond.
 - Removed: "say what changed since the last reply", "say again what I need from an earlier reply", and the background and progress lines of the template. The recap holds them now.
 
 ---
 
 ### Structure
 
-- Added: every heading opens with an emoji that tells what it holds.
-- Added: the reply quotes the text a claim rests on, and shows the output a claim rests on.
+- Added: every heading begins with an emoji that indicates its content.
+- Added: one definition of a structured form: a drawing, a table, a list, a blockquote or a code block.
 
 ---
 
 ### Wordings
 
-- Added: the register of a rigorous technical document, one thing in one sentence, and one word for a row of like things.
-- Added: no clause nested inside a clause, and no apology or praise in words.
-- Changed: the rule against parallel clauses covers parallel sentences too.
+- Added: the register of a rigorous technical document, one idea per sentence, and the category term in place of a list of similar items.
+- Added: no subordinate clause inside another, and no deferential language.
+- Changed: the rule against parallel clauses covers parallel sentences too, and asks for a structured form instead.
 
 ---
 
 ### Asking
 
-- Added: every question stands on its own.
-- Changed: the tree that ends a reply asks first whether we are talking a thing through.
+- Added: every question is self-contained.
+- Changed: the tree that ends a reply asks first whether this is a discussion rather than a task.
+
+---
+
+### Honesty
+
+- Added: the reply shows the excerpt that supports a claim, each time the claim relies on a source or a result.
 
 ---
 

@@ -124,7 +124,7 @@ the model prints a reply
 
 **A recap is attention, not a ledger.**
 
-Every reply after the first opens with a recap: where the work stands and what my attention should be on now.
+Every reply after the first opens with a recap: the current state of the work and what requires my attention.
 
 ```
 a large piece of work               the main line, in every recap
@@ -135,7 +135,7 @@ a large piece of work               the main line, in every recap
 
 6 things hold:
 
-- **A recap grows with the work**: one sentence is too little on a long task, so the recap is drawn then.
+- **A recap grows with the work**: one sentence is too little on a long task, so the recap takes a structured form then.
 - **A ledger grows, and attention moves**: a list of the goal with what was decided and what is open grows with the talk, and much of it is not what I am on.
 - **The books belong in a file**: what is decided and what is open is already in the context, and a file keeps it better than a reply does.
 - **Writing that file is how the agent works**: the rules leave it alone.
@@ -172,8 +172,8 @@ I decide, and I do not follow the agent's work line by line. A long account of e
 3 things follow:
 
 - **Density counts, and length does not**: a long reply is fine when every line carries something.
-- **A row of like things takes one word or a list**: "roast meats" says what four dishes in a row say, and a list holds the members when I need each one.
-- **Evidence is not detail**: detail is the story of the work, and evidence is the few lines a claim rests on.
+- **A list of similar items takes its category term**: "roast meats" says what four dishes in a row say, and a structured form holds the members when I need each one.
+- **Evidence is not detail**: detail is the story of the work, and evidence is the excerpt that supports a claim.
 
 So a claim comes with its evidence, and the story of the work stays out.
 
