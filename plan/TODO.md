@@ -58,7 +58,9 @@ A first comparison ran on 2026-11-18: the task `session-zh`, 4 turns with tools,
 
 The owner read the three sets of replies side by side on 2026-11-18 and called the rebuilt rules much better than the other two, at a glance. The owner has not yet said whether the printed labels count as a fault.
 
-The results are in `eval/results/2026-11-18-9b24f7c-vs-796ebf8-sonnet-5-5/`. Its report scores with a rubric that does not know the rebuilt rules, so the score is not to be read. The finding is owed to `eval/FINDINGS.md`.
+The results are in `eval/results/2026-11-18-9b24f7c-vs-796ebf8-sonnet-5-5/`. The report gives 88.4 to 0.1.18, 76.9 to no plugin and 41.7 to the rebuilt rules. The quality of the rebuilt rules is 83.4, and one red flag halves it: the reply leaves out a problem the agent knew about. The agent checked the transcript and the red flag is real: a way to run the tests failed with an ImportError in the first turn, and no reply names it. The agent with no plugin met the same kind of error and named it, and the agent under 0.1.18 never met it. The agent had told the owner beforehand that the score was not to be read, without reading the report, and that was wrong. Some lines of the rubric do not know the rebuilt rules, and the red flag does not depend on them.
+
+One cause is possible and not shown: the new lines of About Me, "Details overwhelm me" and "I decide from the direction, not from the details", may lead the agent to leave a side finding out. One run cannot say. The finding is owed to `eval/FINDINGS.md`.
 
 ---
 
