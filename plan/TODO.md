@@ -93,42 +93,28 @@ The owner also weighed 3 lines for About Me. "Long lines and long sentences tire
 
 ---
 
-### [P1][DISCUSSION] Where does the boundary run: the reply, the talk or the work?
+### [P2][DISCUSSION] Which lines of the rule file are worded as acts?
 
-- description: On 2026-11-18 the owner asked whether the work had drifted, and said the project is about the quality of a reply and not about teaching the model how to work or changing how it behaves. That is narrower than the boundary of 2026-11-12, which lets the rule file rule the talk, "such as when to ask and when to stop".
+- description: The owner settled the boundary on 2026-11-18: a line is judged by its wording and not by its effect. An audit of that day sorted the 77 units of the rule file by what their wording rules. 71 rule the reply, 5 rule the talk and 1 picks a tool.
 - created: 2026-11-18
 - status: OPEN
-- found: an audit of the rule file and of the drafts of that day against the boundary
-- blocks: the wording of the drafts, and 6 lines that are in the rule file today
-- next: the owner says which boundary holds
+- found: an audit of the rule file against the boundary
+- next: decide whether the lines worded as acts get a wording that rules the reply
+- related: [1. The plugin sets only the output style](../DESIGNS.md#1-the-plugin-sets-only-the-output-style)
 
-The audit sorted the 77 units of the rule file, 70 tagged rules and 7 drawn ones, into 3 zones:
+3 things are open:
 
-| Zone | Holds | Units |
-|---|---|---|
-| The reply | what a reply says and how it is written | 71 |
-| The talk | when to ask, to stop, to act and to push back | 5 |
-| The work | how a thing is looked into or done, and with which tool | 1 |
+- **A line that picks a tool**: "Don't use built-in question tools" names tools, and no doc gives its reason. The file for Codex says the same as "ask in the message itself".
+- **Lines worded as acts**: "Stop when instructions conflict" · "Doubt every premise the work relies on" · "Never assume a fact only I know" · "take it, then report". Their wording is tested, so a new wording needs a reason.
+- **A new line for About Me**: "I don't follow your work line by line" could be read as leave to act with fewer questions. It is not measured.
 
-The 5 units of the talk: the tree on conflicting instructions · "Doubt every premise the work relies on, yours and mine" · "Ask only what changes your next step and only I can answer" · "Never assume a fact only I know. Ask me" · the tree that ends a reply, with its leaf "take it, then report".
+---
 
-The 1 unit of the work is "Don't use built-in question tools", which picks a tool.
+### [P2][IDEA] A free count of what the agent does, by arm
 
-The owner drew the line 4 times before, each time the same way: the work habits left in 0.1.1 · "check each one" and "never cheat" were cut back to the reply in 0.1.16 · "discuss every one with me, before you do anything" was turned down on 2026-11-12 · the ledger of a long task was called a matter of behavior on 2026-11-18.
-
-The drafts of 2026-11-18, 12 rule lines and 4 lines for About Me, all sit in the first zone. One risk is not measured: "I don't follow your work line by line" could be read as leave to act with fewer questions.
-
-The owner then named how the two fit: a rule on what a reply must say also binds what the agent does. The owner saw the agent look into more when it had to be honest. The README holds the same thought as a guess.
-
-The agent counted the tool calls of the benchmark of 2026-11-11 for it: 8 tasks with tools, 3 runs each, Opus 5.5, the rules of `13a35d4`. The mean for one run:
-
-| What the agent did | With the plugin | With no plugin |
-|---|---|---|
-| Read with a shell command | 1.8 | 1.7 |
-| Ran tests | 0.3 | 0.3 |
-| Changed a file | 0.4 | 1.2 |
-
-The plugin's agent changed files a third as often. On `design-flaw-zh`, `many-items-zh` and `vague-zh` it changed nothing, and the agent with no plugin did. It ran tests more on one task only: `session-zh`, 1.7 against 0. The count is rough: a pattern sorted each shell command, and 3 runs a task are a sample. It is owed to `eval/FINDINGS.md`, which the agent has not read in full.
+- description: The eval judges the reply only. A count of the tool calls of each run costs nothing and shows what the rules change in the work: reads, test runs and changed files. The agent did it once by hand for the benchmark of 2026-11-11, with a pattern that sorts each shell command.
+- created: 2026-11-18
+- next: add it to the report's measures, and write the first count into `eval/FINDINGS.md`
 
 ---
 

@@ -181,6 +181,26 @@ Claude Code's [docs](https://code.claude.com/docs/en/output-styles) split the jo
 
 ---
 
+## How does a rule on the reply reach the work?
+
+**A rule says what a reply must hold, and the work changes to meet it.**
+
+A rule never tells the agent what to do before it replies. It says what the reply must state, such as what was checked. To state that truthfully, the agent has to have done it.
+
+The owner saw this in use: an agent that must be honest looks into more before it answers. A count of the tool calls in the benchmark of 2026-11-11 points the same way. It covers 8 tasks with tools and 3 runs a side, and gives the mean for one run:
+
+| What the agent did | With the rules | With none |
+|---|---|---|
+| Read with a shell command | 1.8 | 1.7 |
+| Ran tests | 0.3 | 0.3 |
+| Changed a file | 0.4 | 1.2 |
+
+The agent with the rules changed files a third as often. On a flawed premise and on a vague request it spoke first, and the agent with no rules changed files. It did not read more. The sample is small, and a pattern sorted the commands.
+
+So the boundary is judged by the wording of a rule and not by its effect. A line belongs when it rules the reply, whatever follows in the work.
+
+---
+
 ## How strict is a rule?
 
 **A principle comes first, and a definition comes only when a test shows the principle is not followed.**

@@ -27,11 +27,15 @@ Claude Code
 └── hooks, skills, tools       untouched
 ```
 
+A line is judged by its wording and not by its effect. It belongs when it says what a reply holds or how the talk goes, whatever follows in the work.
+
 The cost is that nothing is guaranteed: most replies follow the rules, and not all.
 
-**Ask**: Can a line of the rule file do it, and is it about the reply?
+**Ask**: Can a line of the rule file do it, and is it worded as a rule for the reply?
 
-- **Stance**: [The rules are about the conversation, and the work stays with the model](PHILOSOPHY.md#what-do-the-rules-leave-alone)
+- **Stance**:
+  - [The rules are about the conversation, and the work stays with the model](PHILOSOPHY.md#what-do-the-rules-leave-alone)
+  - [A rule says what a reply must hold, and the work changes to meet it](PHILOSOPHY.md#how-does-a-rule-on-the-reply-reach-the-work)
 
 ---
 

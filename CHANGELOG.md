@@ -25,6 +25,7 @@ The project uses [Semantic Versioning](https://semver.org/).
 
 - Changed: the docs follow one layout: a proposal, designs, decisions, and a plan folder with goals, a roadmap, issues and a todo. `CLAUDE.md` loads `AGENTS.md`.
 - Removed: `INSTALL.zh-CN.md`. The Chinese README links `INSTALL.md`.
+- Added: `PHILOSOPHY.md` says how a rule on the reply changes what the agent does, with a count of tool calls from the benchmark.
 
 ---
 
