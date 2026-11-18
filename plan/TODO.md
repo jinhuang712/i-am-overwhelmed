@@ -33,10 +33,10 @@ The owner did not answer on 6 more: understand and not only finish reading · re
 - created: 2026-11-18
 - status: OPEN
 - found: a talk in which the agent tried four forms of reply and the owner said how each one read
-- next: decide which of the owner's points become rules, and how each is worded
+- next: the owner called the talk done on 2026-11-18 and asked how to land it. The agent drafted the rule lines, and the owner has to settle their wording.
 - related: [PROPOSAL.md](../PROPOSAL.md) names the want as "Grasp the main point"
 
-The owner stated 10 points:
+The owner stated 12 points:
 
 - **Sections**: A reply must have sections, and each section must have a heading.
 - **Emoji on a heading**: A heading needs a mark that helps to scan, such as an emoji. The rules ask for emoji to mark meaning and say nothing about headings.
@@ -48,6 +48,8 @@ The owner stated 10 points:
 - **Direction before detail**: A reply states the direction in one sentence, such as "cut the number of test cases and remove the dead ones". A long account of each case has a low density of information.
 - **Short sentences**: A long sentence is tiring in a terminal. It runs to the end of the line and wraps, with many marks of punctuation inside.
 - **Evidence in the reply**: A decision maker needs the evidence, so the original text and the output belong in the reply as a blockquote or a code block. The diff is done well and is far from enough.
+- **Density over length**: Length is no problem and the count of lines is no great problem. The largest problem is a low density of information.
+- **A recap that grows with the task**: On a very long task one sentence is not enough. The recap then shows where the task stands, such as its progress, in a structured form.
 
 The four forms the agent tried:
 
