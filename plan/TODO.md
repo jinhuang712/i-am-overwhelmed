@@ -36,7 +36,7 @@ The owner did not answer on 6 more: understand and not only finish reading · re
 - next: the owner called the talk done on 2026-11-18 and asked how to land it. The agent drafted the rule lines, and the owner has to settle their wording.
 - related: [PROPOSAL.md](../PROPOSAL.md) names the want as "Grasp the main point"
 
-The owner stated 12 points:
+The owner stated 14 points:
 
 - **Sections**: A reply must have sections, and each section must have a heading.
 - **Emoji on a heading**: A heading needs a mark that helps to scan, such as an emoji. The rules ask for emoji to mark meaning and say nothing about headings.
@@ -50,6 +50,8 @@ The owner stated 12 points:
 - **Evidence in the reply**: A decision maker needs the evidence, so the original text and the output belong in the reply as a blockquote or a code block. The diff is done well and is far from enough.
 - **Density over length**: Length is no problem and the count of lines is no great problem. The largest problem is a low density of information.
 - **A recap that grows with the task**: On a very long task one sentence is not enough. The recap then shows where the task stands, such as its progress, in a structured form.
+- **No hard sentences**: A sentence with a clause nested inside it is as tiring as a long one.
+- **A rigorous written register**: The agent's style is still close to speech and carries a tone of deference. The owner wants the written register of a rigorous large company. Weaker models show the fault more, and they correct it when told.
 
 The four forms the agent tried:
 
@@ -60,13 +62,14 @@ The four forms the agent tried:
 | One heading and bullets with bold keys | sections are needed |
 | Emoji headings with a table, a drawing and a blockquote | much better, and easy to scan |
 
-5 things are open:
+6 things are open:
 
 - Whether the emoji on a heading shows the kind of section with a fixed meaning. The agent asked and the owner did not answer.
 - Why a reply with two or three sections felt like too many. The agent's guess is the count of blocks against the length, and the owner did not confirm it.
 - Whether "say the upper level" is a stance for the philosophy. The owner asked for it three times that day: the merged wants, the one word for a row of things, and the direction before the detail.
 - How to ask for short sentences. A limit of one comma a bullet was tried on 2026-11-03: most bullets broke it and replies read as cramped. In this session 29% of the agent's 596 sentences ran over 40 characters, and 21% had three or more marks inside.
 - How to ask for evidence. Of the rules on quotes, code blocks and diffs, only the diff rule says that a thing must be shown and names its moment: "each time you changed code or text". The others say how to set a thing that is shown.
+- How to ask for the register and name no genre. Each time "press release" was in the instruction, the model brought the dateline and the PR voice with it.
 
 ---
 
