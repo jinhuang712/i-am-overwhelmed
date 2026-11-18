@@ -41,8 +41,8 @@ The owner did not answer on 6 more: understand and not only finish reading · re
 - **Two rules with an eval behind them left**: "Say what changed since the last reply" went from 0 to 3 on one task in an eval. The recap is meant to hold it.
 - **The format of the progress line left**: It read `<done>/<total> - <current title>`.
 - **A discussion is the model's call**: Both trees ask first "Is this a discussion rather than a task?", and a condition of that kind is often judged as not met.
-- **The file grew by 17%**: It has 2,399 words against 2,045.
-- **The whole file reworded**: On 2026-11-18 the owner had all 73 places that a scan found reworded into a rigorous written register, 76 with three that keep the file consistent. Most were the owner's own wording with an eval behind it, and no eval has seen the new wording.
+- **The file grew by 17%**: It has 2,401 words against 2,045.
+- **The whole file reworded**: On 2026-11-18 the owner had all 73 places that a scan found reworded into a rigorous written register, 79 with six that keep the file consistent. Most were the owner's own wording with an eval behind it, and no eval has seen the new wording.
 - **The sentence after the evidence**: A part may end on one sentence that says what the evidence means. Watch for a sentence that only says the table again.
 - **The samples**: Three samples of faults of style stand at the end of Wordings, some lines away from their rules. Whether they bind is not measured.
 - **The emoji on a heading**: Whether it shows the kind of part with a fixed meaning is open. The agent asked and the owner did not answer.

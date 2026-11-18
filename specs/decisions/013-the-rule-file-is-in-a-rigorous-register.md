@@ -12,7 +12,7 @@ The rules ask the agent for a rigorous written register, and the file itself was
 
 ## The choice
 
-All 73 places were reworded at once, and 3 more that keep the file consistent. The file has no idiom, no figure of speech, no contraction and no "thing" where a term fits. Two blocks of the template got new names: `<push-backs>` is `<objections>`, and `<pick>` is `<recommendation>`. The rules ask for the same as before.
+All 73 places were reworded at once, and 6 more that keep the file consistent. The file has no idiom, no figure of speech, no contraction and no "thing" where a term fits. Two blocks of the template got new names: `<push-backs>` is `<objections>`, and `<pick>` is `<recommendation>`. The rules ask for the same as before.
 
 ---
 
