@@ -93,6 +93,33 @@ The owner also weighed 3 lines for About Me. "Long lines and long sentences tire
 
 ---
 
+### [P1][DISCUSSION] Where does the boundary run: the reply, the talk or the work?
+
+- description: On 2026-11-18 the owner asked whether the work had drifted, and said the project is about the quality of a reply and not about teaching the model how to work or changing how it behaves. That is narrower than the boundary of 2026-11-12, which lets the rule file rule the talk, "such as when to ask and when to stop".
+- created: 2026-11-18
+- status: OPEN
+- found: an audit of the rule file and of the drafts of that day against the boundary
+- blocks: the wording of the drafts, and 6 lines that are in the rule file today
+- next: the owner says which boundary holds
+
+The audit sorted the 77 units of the rule file, 70 tagged rules and 7 drawn ones, into 3 zones:
+
+| Zone | Holds | Units |
+|---|---|---|
+| The reply | what a reply says and how it is written | 71 |
+| The talk | when to ask, to stop, to act and to push back | 5 |
+| The work | how a thing is looked into or done, and with which tool | 1 |
+
+The 5 units of the talk: the tree on conflicting instructions · "Doubt every premise the work relies on, yours and mine" · "Ask only what changes your next step and only I can answer" · "Never assume a fact only I know. Ask me" · the tree that ends a reply, with its leaf "take it, then report".
+
+The 1 unit of the work is "Don't use built-in question tools", which picks a tool.
+
+The owner drew the line 4 times before, each time the same way: the work habits left in 0.1.1 · "check each one" and "never cheat" were cut back to the reply in 0.1.16 · "discuss every one with me, before you do anything" was turned down on 2026-11-12 · the ledger of a long task was called a matter of behavior on 2026-11-18.
+
+The drafts of 2026-11-18, 12 rule lines and 4 lines for About Me, all sit in the first zone. One risk is not measured: "I don't follow your work line by line" could be read as leave to act with fewer questions.
+
+---
+
 ### [P1][DISCUSSION] Do the rules fit a talk as well as a report?
 
 - description: The owner asked the agent how it sees the rules as their owner. The agent's view is that the rules make a good standard for a report and a weak one for a talk. The owner called the view mostly right.
