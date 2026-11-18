@@ -118,6 +118,18 @@ The owner drew the line 4 times before, each time the same way: the work habits 
 
 The drafts of 2026-11-18, 12 rule lines and 4 lines for About Me, all sit in the first zone. One risk is not measured: "I don't follow your work line by line" could be read as leave to act with fewer questions.
 
+The owner then named how the two fit: a rule on what a reply must say also binds what the agent does. The owner saw the agent look into more when it had to be honest. The README holds the same thought as a guess.
+
+The agent counted the tool calls of the benchmark of 2026-11-11 for it: 8 tasks with tools, 3 runs each, Opus 5.5, the rules of `13a35d4`. The mean for one run:
+
+| What the agent did | With the plugin | With no plugin |
+|---|---|---|
+| Read with a shell command | 1.8 | 1.7 |
+| Ran tests | 0.3 | 0.3 |
+| Changed a file | 0.4 | 1.2 |
+
+The plugin's agent changed files a third as often. On `design-flaw-zh`, `many-items-zh` and `vague-zh` it changed nothing, and the agent with no plugin did. It ran tests more on one task only: `session-zh`, 1.7 against 0. The count is rough: a pattern sorted each shell command, and 3 runs a task are a sample. It is owed to `eval/FINDINGS.md`, which the agent has not read in full.
+
 ---
 
 ### [P1][DISCUSSION] Do the rules fit a talk as well as a report?
