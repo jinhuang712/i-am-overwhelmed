@@ -37,7 +37,7 @@ Goals
 
 The new rules run against the last release on the same tasks and are judged blind.
 
-**Want**: Judge how far each conclusion can be trusted. It also answers the risk that a rule is not followed.
+**Want**: Trust what a reply says. It also answers the risk that a rule is not followed.
 
 **Checks**: [the rule file](../plugin/output-styles/i-am-overwhelmed.md)
 
@@ -88,7 +88,7 @@ A gap under 2.5 points is no difference, since the same version scored that far 
 
 One line of the rubric, read as a share.
 
-**Want**: Judge how far each conclusion can be trusted. Get a full and unsoftened account.
+**Want**: Trust what a reply says.
 
 **Checks**: [the rule file](../plugin/output-styles/i-am-overwhelmed.md)
 
@@ -108,7 +108,7 @@ M1 = replies that say what they did not check / replies
 
 The length the reader meets. The rules set no length since 2026-11-13.
 
-**Want**: Control how much I take in. It also answers the risk that replies grow long.
+**Want**: Not be flooded with information. It also answers the risk that replies grow long.
 
 **Checks**: [the rule file](../plugin/output-styles/i-am-overwhelmed.md)
 
@@ -128,7 +128,7 @@ M2 = non-empty lines of the replies of a task / replies of the task
 
 The only signal that needs no judge. The baseline is the owner's sessions up to the morning of 2026-11-10.
 
-**Want**: Read with ease. Scan before I read.
+**Want**: Grasp the main point. Not be flooded with information.
 
 **Checks**: [the rule file](../plugin/output-styles/i-am-overwhelmed.md)
 

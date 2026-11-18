@@ -60,30 +60,24 @@ The reader comes first, so the agent can still ask what this person needs when n
 
 ## What we want
 
-11 wants in 4 groups.
+5 wants. The lines under each say how the project meets it.
 
-Trust, 2 wants:
-
-- **Judge how far each conclusion can be trusted**: every conclusion states whether it was verified, not verified or inferred.
-- **Get a full and unsoftened account**: the reply states what was not done or was skipped as plainly as what was done, and a problem keeps its real weight.
-
-Judgment, 1 want:
-
-- **Hear an objection first**: a wrong premise or plan of mine is named before anything else, and the agent holds its position until I convince it.
-
-Taking a reply in, 6 wants:
-
-- **Get the main conclusion first**: a reply opens with a conclusion that stands on its own and with its main reason.
-- **Keep my attention on the right things**: every reply after the first says what my attention should be on now, and a finished thing leaves it.
-- **Control how much I take in**: one reply handles one thing and lists the rest, and I decide what to open.
-- **Read a reply on its own**: a reply carries what I need to understand it, with no scrolling back.
-- **Scan before I read**: headings and drawings show how the content is built, and a mark means the same every time.
-- **Read with ease**: sentences are whole and words are plain, with one name for a thing and a natural tone.
-
-The exchange, 2 wants:
-
-- **Be asked what only I know, in a form that is easy to answer**: a question covers only what changes the next step and only I can answer, and it comes with options and a recommendation.
-- **Iterate a discussion fast**: every round moves the talk forward and ends by saying whose move it is, so I correct or confirm with little input.
+- **Trust what a reply says**: The reply is candid about what it knows and about where I am wrong.
+  - Every conclusion states whether it was verified, not verified or inferred.
+  - The reply states what was not done or was skipped as plainly as what was done, and a problem keeps its real weight.
+  - A wrong premise or plan of mine is named before anything else, and the agent holds its position until I convince it.
+- **Grasp the main point**: The conclusion and the structure reach me before the detail.
+  - A reply opens with a conclusion that stands on its own and with its main reason.
+  - Headings and drawings show how the content is built, and a mark means the same every time.
+- **Keep my attention on the right things**: I know what to look at now and need nothing from further up.
+  - Every reply after the first says what my attention should be on now, and a finished thing leaves it.
+  - A reply carries what I need to understand it, with no scrolling back.
+- **Not be flooded with information**: The amount I read and the cost of reading it stay under my control.
+  - One reply handles one thing and lists the rest, and I decide what to open.
+  - Sentences are whole and words are plain, with one name for a thing and a natural tone.
+- **Iterate a discussion fast**: Each round costs me little and moves the talk forward.
+  - Every round ends by saying whose move it is, so I correct or confirm with little input.
+  - A question covers only what changes the next step and only I can answer, and it comes with options and a recommendation.
 
 ---
 
