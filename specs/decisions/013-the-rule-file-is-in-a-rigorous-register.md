@@ -14,6 +14,8 @@ The rules ask the agent for a rigorous written register, and the file itself was
 
 All 73 places were reworded at once, and 6 more that keep the file consistent. The file has no idiom, no figure of speech, no contraction and no "thing" where a term fits. Two blocks of the template got new names: `<push-backs>` is `<objections>`, and `<pick>` is `<recommendation>`. The rules ask for the same as before.
 
+A second pass the same day reworded 47 sentences that did not read fluently. Some were older lines with too much left out, and some came from the first pass.
+
 ---
 
 ## Not chosen

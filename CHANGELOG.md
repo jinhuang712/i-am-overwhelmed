@@ -46,6 +46,7 @@ The project uses [Semantic Versioning](https://semver.org/).
 ### All sections
 
 - Changed: the whole rule file is reworded into a rigorous written register, in 79 places. It has no idiom, no figure of speech, no contraction and no "thing" where a term fits. The rules ask for the same as before.
+- Changed: 47 sentences that did not read fluently are reworded, such as the line on tags at the top and the sentence above the objectives.
 - Changed: two blocks of the template have new names. `<push-backs>` is `<objections>`, and `<pick>` is `<recommendation>`.
 
 ---

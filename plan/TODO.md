@@ -41,8 +41,8 @@ The owner did not answer on 6 more: understand and not only finish reading · re
 - **Two rules with an eval behind them left**: "Say what changed since the last reply" went from 0 to 3 on one task in an eval. The recap is meant to hold it.
 - **The format of the progress line left**: It read `<done>/<total> - <current title>`.
 - **A discussion is the model's call**: Both trees ask first "Is this a discussion rather than a task?", and a condition of that kind is often judged as not met.
-- **The file grew by 17%**: It has 2,401 words against 2,045.
-- **The whole file reworded**: On 2026-11-18 the owner had all 73 places that a scan found reworded into a rigorous written register, 79 with six that keep the file consistent. Most were the owner's own wording with an eval behind it, and no eval has seen the new wording.
+- **The file grew by 19%**: It has 2,426 words against 2,045.
+- **The whole file reworded**: On 2026-11-18 the owner had all 73 places that a scan found reworded into a rigorous written register, 79 with six that keep the file consistent. Most were the owner's own wording with an eval behind it, and no eval has seen the new wording. A second pass the same day reworded 47 sentences that did not read fluently, some of them from the first pass. The owner took the agent's drafts without reading each one.
 - **The sentence after the evidence**: A part may end on one sentence that says what the evidence means. Watch for a sentence that only says the table again.
 - **The samples**: Three samples of faults of style stand at the end of Wordings, some lines away from their rules. Whether they bind is not measured.
 - **The emoji on a heading**: Whether it shows the kind of part with a fixed meaning is open. The agent asked and the owner did not answer.
@@ -64,17 +64,6 @@ The results are in `eval/results/2026-11-18-9b24f7c-vs-796ebf8-sonnet-5-5/`. The
 The owner framed it as four cells on 2026-11-18, by what the agent knows and what it says: knows and says · knows and does not say · does not know and says · does not know and does not say. The omission sits in the second cell. The owner holds that the project rules the reply and not the behavior. The first three cells are matters of the reply, and the fourth is a matter of the work. The owner took one rule for the second cell the same day: "Report every unresolved problem, especially any workarounds." Whether it stops such an omission is not measured.
 
 One cause is possible and not shown: the new lines of About Me, "Details overwhelm me" and "I decide from the direction, not from the details", may lead the agent to leave a side finding out. One run cannot say. The finding is owed to `eval/FINDINGS.md`.
-
----
-
-### [P1][DISCUSSION] Which sentences of the rule file are reworded for fluency?
-
-- description: The owner found one sentence of the rule file hard to read, and it was reworded. A scan of the whole file the same day found 45 more sentences that do not read fluently: 21 stilted phrases · 15 sentences with too much left out · 4 repeated words · 3 awkward nouns or collocations · 2 unclear attachments. Some are the owner's older wording, and some came in with the rewording into a rigorous register that day.
-- created: 2026-11-18
-- status: OPEN
-- found: the agent read the whole rule file again on the owner's request
-- evidence: [the scan, with a draft for every place](evidence/fluency-scan-2026-11-18.md)
-- next: the owner reads the drafts and says which to take
 
 ---
 
@@ -116,7 +105,7 @@ One cause is possible and not shown: the new lines of About Me, "Details overwhe
 3 things are open:
 
 - **A line that picks a tool**: "Never use built-in question tools" names tools, and no doc gives its reason. The file for Codex says the same as "ask in the message itself".
-- **Lines worded as acts**: "Stop when instructions conflict" · "Doubt every premise the work relies on" · "Never assume a fact only I know" · "perform it, then report". All four were reworded with the whole file on 2026-11-18 and still name an act.
+- **Lines worded as acts**: "Stop when instructions conflict" · "Question every premise that the work relies on" · "Never assume a fact that only I know" · "perform it, then report". All four were reworded with the whole file on 2026-11-18 and still name an act.
 - **A new line for About Me**: "I don't follow your work line by line" could be read as leave to act with fewer questions. It is not measured.
 
 ---

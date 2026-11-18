@@ -262,7 +262,7 @@ So the boundary is judged by the wording of a rule and not by its effect. A line
 
 **A principle comes first, and a definition comes only when a test shows the principle is not followed.**
 
-A principle asks the model to judge: "Draw the content whenever its structure can be drawn." A definition is something a person can check: "Simple: a few lines, no headings."
+A principle asks the model to judge: "Use a drawing whenever the content has a structure that a drawing can show." A definition is something a person can check: "Simple: a few lines, no headings."
 
 The test that taught us this ran on 2026-11-10 with a short chat question:
 
