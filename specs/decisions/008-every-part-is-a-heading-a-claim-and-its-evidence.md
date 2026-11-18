@@ -31,4 +31,4 @@ The template builds every part the same way: a heading that begins with an emoji
 
 ## Consequences
 
-The rule file grew from 2,045 words to 2,299. A rule on what a reply must show may make the agent look into more, which the project accepts. No reply was run under the new template.
+The rule file grew from 2,045 words to 2,376, with the samples of the same day. A rule on what a reply must show may make the agent look into more, which the project accepts. No reply was run under the new template.

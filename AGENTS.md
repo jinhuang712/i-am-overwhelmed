@@ -232,7 +232,7 @@ The owner stated 16 ways, where the files do not say them:
 - **Budget**: The owner names the budget, so propose a number and wait.
 - **Profile**: Run the evals on the owner's second Claude Code profile, as "Another account" in the eval's handbook says.
 - **One change**: Change one thing at a time, and show the change as git prints it.
-- **Rules**: Improve a rule that exists before you add one, and give a rule no example.
+- **Rules**: Improve a rule that exists before you add one, and keep a sample off the line of a rule.
 - **Short rules**: Two short rules are better than one long rule, so remove a line that repeats and do not merge lines.
 - **The owner's wording**: Keep the owner's wording of a rule, and cut around it.
 - **Backstops**: A rule whose fault does not show is not dead weight, so do not propose to drop a rule for that reason alone.

@@ -37,6 +37,7 @@ The project uses [Semantic Versioning](https://semver.org/).
 
 - Added: the register of a rigorous technical document, one idea per sentence, and the category term in place of a list of similar items.
 - Added: no subordinate clause inside another, and no deferential language.
+- Added: three samples of faults of style, in a part of their own at the end of the section.
 - Changed: the rule against parallel clauses covers parallel sentences too, and asks for a structured form instead.
 
 ---

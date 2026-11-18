@@ -45,7 +45,9 @@ A rule carries `[YES]` for "do it" or `[NO]` for "never do it". A tag forces a r
 
 A rule with a shape, such as branching decisions, is a drawing. It has its own heading at the end of its section and no tag. One sentence before it says why it is there and then what to do with it.
 
-The cost is that a rule cannot carry an example or a nuance. A rule that needs either becomes a tree or is cut.
+A rule carries no sample on its line. Where a fault is easier to show than to describe, a sample stands in a part of its own at the end of the section, which says that it is a sample and not the whole list.
+
+The cost is that a rule cannot carry a nuance. A rule that needs one becomes a tree or is cut.
 
 **Ask**: Is it one line that a person can check a reply against?
 
@@ -53,6 +55,7 @@ The cost is that a rule cannot carry an example or a nuance. A rule that needs e
 - **Decisions**:
   - [001: The rule file has two tags and no `[WHEN]`](specs/decisions/001-two-tags-and-no-when.md)
   - [006: A drawn rule has its own heading and no tag](specs/decisions/006-a-drawn-rule-has-its-own-heading.md)
+  - [011: Samples stand in a part of their own](specs/decisions/011-samples-stand-in-a-part-of-their-own.md)
 
 ---
 

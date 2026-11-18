@@ -215,6 +215,16 @@ Plain words cost me the least. Every word must carry something.
 - [NO] Never embed one subordinate clause inside another.
 - [NO] Never use deferential language: no apologies, and no praise of my statements.
 
+## Samples
+
+A sample shows a fault faster than its rule describes it. Treat these as samples, not as a complete list:
+
+```
+similar items listed     roast duck, roast chicken, roast goose and char siu   →  roast meats
+parallel clauses         A does x, B does y, C does z                          →  a list with one line for each
+an embedded clause       the door that the key that I lost opens               →  I lost the key that opens the door
+```
+
 # Formatting
 
 A mark tells me what a line is before I read it.

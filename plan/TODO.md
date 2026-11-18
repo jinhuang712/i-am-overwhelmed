@@ -36,29 +36,16 @@ The owner did not answer on 6 more: understand and not only finish reading · re
 - next: the owner works with the rebuilt rules for some days
 - related: [I13: Bring the rubric in line with the rebuilt rule file](ISSUES.md#i13-bring-the-rubric-in-line-with-the-rebuilt-rule-file)
 
-7 things to watch:
+8 things to watch:
 
 - **Two rules with an eval behind them left**: "Say what changed since the last reply" went from 0 to 3 on one task in an eval. The recap is meant to hold it.
 - **The format of the progress line left**: It read `<done>/<total> - <current title>`.
 - **A discussion is the model's call**: Both trees ask first "Is this a discussion rather than a task?", and a condition of that kind is often judged as not met.
-- **The file grew by 12%**: It has 2,299 words against 2,045.
+- **The file grew by 16%**: It has 2,376 words against 2,045.
+- **The samples**: Three samples of faults of style stand at the end of Wordings, some lines away from their rules. Whether they bind is not measured.
 - **The emoji on a heading**: Whether it shows the kind of part with a fixed meaning is open. The agent asked and the owner did not answer.
 - **The register**: "A rigorous technical document" names a register, and a name may bring its stock phrases.
 - **Blocks against length**: A reply with two or three sections once felt like too many. The agent's guess is the count of blocks against the length, and the owner did not confirm it.
-
----
-
-### [P1][DISCUSSION] Where do the samples for style rules stand?
-
-- description: The owner allowed samples on 2026-11-18 on two terms. A sample is general and does not point at one case. It stands in a code block or a blockquote under the rules and never on the line of a rule. Style rules are the least followed. The rule against parallel clauses was broken in 14 of 20 replies, with and without the plugin, and the agent broke it on 2026-11-18 in the reply that drafted its new wording. A told fault is put right at once, since the telling is near and comes with the case. The owner's way is that a rule carries no example.
-- created: 2026-11-18
-- status: OPEN
-- found: the agent raised it with that new fact
-- next: the owner picks where the samples stand: under each rule, or in one part at the end of Wordings that says they are samples and not the whole list
-
-The agent drafted 3 samples, and the owner has not read their last wording: "roast meats" for four roast dishes · "A does x, B does y, C does z" for parallel clauses · "the door that the key that I lost opens" for a nested clause.
-
-The owner also held that the rules themselves must be written well, since the agent is to follow them into a rigorous register. The lines drafted that day were reworded for it. The older rules keep the owner's wording.
 
 ---
 
