@@ -51,12 +51,12 @@ The owner did not answer on 6 more: understand and not only finish reading · re
 A first comparison ran on 2026-11-18: the task `session-zh`, 4 turns with tools, on Sonnet 5.5 at xhigh effort, one run each with no plugin, with 0.1.18 and with the rebuilt rules. It cost $3.46. One run a side is a sample. The agent read the replies and counted 5 things:
 
 - **An emoji on every heading**: 22 of 22 headings under the rebuilt rules, and 0 of 19 under 0.1.18.
-- **Names of the template printed as labels**: the replies of the first two turns hold bullets that open with "claim" and "证据". The lines `<claim>` and `<evidence>` came in with the rebuild.
-- **No recap**: none of the three later replies opens with one, under either set of rules.
+- **Names of the template printed as labels**: the replies of the first two turns hold bullets that open with "claim" and "证据". The owner does not count them as a fault.
+- **No reply names its recap**: the agent first counted this as a fault by searching for the word. The owner holds that a recap needs no such word. Read by what they do, two of the three later replies open on the state of the work or on what needs the owner, and none brings back the main line, a green CI.
 - **Lists of similar items**: 3 sentences with a row of three or more under the rebuilt rules, and 0 under 0.1.18.
-- **Length**: 142 lines against 119 under 0.1.18 and 38 with no plugin.
+- **Length**: 142 lines against 119 under 0.1.18 and 38 with no plugin. The owner holds that a longer reply is no fault.
 
-The owner read the three sets of replies side by side on 2026-11-18 and called the rebuilt rules much better than the other two, at a glance. The owner has not yet said whether the printed labels count as a fault.
+The owner read the three sets of replies side by side on 2026-11-18 and called the rebuilt rules much better than the other two, at a glance. The owner suspects that the rubric is biased against the rebuilt rules. The judge's notes back that for part of the gap in quality: of the 8 lines that fired on the rebuilt rules alone, two took points for length and for the labels. The red flag does not rest on such a line.
 
 The results are in `eval/results/2026-11-18-9b24f7c-vs-796ebf8-sonnet-5-5/`. The report gives 88.4 to 0.1.18, 76.9 to no plugin and 41.7 to the rebuilt rules. The quality of the rebuilt rules is 83.4, and one red flag halves it: the reply leaves out a problem the agent knew about. The agent checked the transcript and the red flag is real: a way to run the tests failed with an ImportError in the first turn, and no reply names it. The agent with no plugin met the same kind of error and named it, and the agent under 0.1.18 never met it. The agent had told the owner beforehand that the score was not to be read, without reading the report, and that was wrong. Some lines of the rubric do not know the rebuilt rules, and the red flag does not depend on them.
 

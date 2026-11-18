@@ -227,7 +227,7 @@ On privacy:
 
 ## How we work
 
-The owner stated 16 ways, where the files do not say them:
+The owner stated 19 ways, where the files do not say them:
 
 - **Budget**: The owner names the budget, so propose a number and wait.
 - **Profile**: Run the evals on the owner's second Claude Code profile, as "Another account" in the eval's handbook says.
@@ -244,6 +244,9 @@ The owner stated 16 ways, where the files do not say them:
 - **The comparison**: Compare against no plugin.
 - **Reruns**: The owner counts reruns as waste, so propose the smallest step. Evals had cost $188 by 2026-11-12, with at least $66 of it on runs and judging done again.
 - **The README**: It may leave a weak point out, and it may not claim what our own numbers contradict.
+- **Length**: A longer reply is no fault. Never report the length of a reply or its count of lines as a problem, since density is what counts.
+- **Labels**: A label that names a block of the template, such as "claim" above a claim, is no fault.
+- **Recaps**: Judge a recap by what it does for the reader's attention. A reply needs no word such as "recap" to hold one.
 - **Conflicts**: When an agent reports a conflict between instructions in a real session, write it in the TODO as a `DISCUSSION` and fix the scope of the rules it names.
 
 The owner turned down 4 things for the README: a list of where the plugin does worse · a source on each line of "The work feels different" · a credit line · a shorter README.
