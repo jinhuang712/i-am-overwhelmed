@@ -56,6 +56,8 @@ A first comparison ran on 2026-11-18: the task `session-zh`, 4 turns with tools,
 - **Lists of similar items**: 3 sentences with a row of three or more under the rebuilt rules, and 0 under 0.1.18.
 - **Length**: 142 lines against 119 under 0.1.18 and 38 with no plugin.
 
+The owner read the three sets of replies side by side on 2026-11-18 and called the rebuilt rules much better than the other two, at a glance. The owner has not yet said whether the printed labels count as a fault.
+
 The results are in `eval/results/2026-11-18-9b24f7c-vs-796ebf8-sonnet-5-5/`. Its report scores with a rubric that does not know the rebuilt rules, so the score is not to be read. The finding is owed to `eval/FINDINGS.md`.
 
 ---
