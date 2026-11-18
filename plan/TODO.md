@@ -48,6 +48,16 @@ The owner did not answer on 6 more: understand and not only finish reading · re
 - **The register**: "A rigorous technical document" names a register, and a name may bring its stock phrases.
 - **Blocks against length**: A reply with two or three sections once felt like too many. The agent's guess is the count of blocks against the length, and the owner did not confirm it.
 
+A first comparison ran on 2026-11-18: the task `session-zh`, 4 turns with tools, on Sonnet 5.5 at xhigh effort, one run each with no plugin, with 0.1.18 and with the rebuilt rules. It cost $3.46. One run a side is a sample. The agent read the replies and counted 5 things:
+
+- **An emoji on every heading**: 22 of 22 headings under the rebuilt rules, and 0 of 19 under 0.1.18.
+- **Names of the template printed as labels**: the replies of the first two turns hold bullets that open with "claim" and "证据". The lines `<claim>` and `<evidence>` came in with the rebuild.
+- **No recap**: none of the three later replies opens with one, under either set of rules.
+- **Lists of similar items**: 3 sentences with a row of three or more under the rebuilt rules, and 0 under 0.1.18.
+- **Length**: 142 lines against 119 under 0.1.18 and 38 with no plugin.
+
+The results are in `eval/results/2026-11-18-9b24f7c-vs-796ebf8-sonnet-5-5/`. Its report scores with a rubric that does not know the rebuilt rules, so the score is not to be read. The finding is owed to `eval/FINDINGS.md`.
+
 ---
 
 ### [P2][IDEA] Free counts for style
