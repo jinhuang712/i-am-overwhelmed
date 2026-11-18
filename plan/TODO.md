@@ -73,13 +73,13 @@ The four forms the agent tried:
 
 ---
 
-### [P1][DISCUSSION] How do a Chinese and an English edition of the rules live side by side?
+### [P2][DISCUSSION] How do a Chinese and an English edition of the rules live side by side?
 
 - description: The owner wants the output style as one Chinese file and one English file, with no mix of the two in one file. The owner holds that the rules are the same in any language. The agent had proposed a Chinese part inside the English file, and the owner turned that down.
 - created: 2026-11-18
-- status: OPEN
+- status: HALT
 - found: a talk on why style rules are not followed. The rule file has no Chinese character, and the owner reads replies in Chinese.
-- next: decide how the two editions ship and which one leads
+- next: the owner said on 2026-11-18 that a Chinese edition is not needed for now
 - related: [7. One set of rules serves every agent](../DESIGNS.md#7-one-set-of-rules-serves-every-agent)
 
 3 facts bear on it:
@@ -88,7 +88,7 @@ The four forms the agent tried:
 - **Four files to keep in step**: Each edition has an output style and a file for Codex. A test compares the two English files today, and a translation cannot be compared line by line.
 - **The evidence is on the English rules**: Every eval ran the English rules, and 17 of 19 tasks are in Chinese.
 
-The owner also weighed 3 lines for About Me. "Long lines and long sentences tire me" stands without the word "terminal". The lines on deciding with evidence and on density read as odd to the owner and need a new wording.
+The owner also weighed 3 lines for About Me. "Long lines and long sentences tire me" stands without the word "terminal". The owner turned down the lines on deciding with evidence and on density: they say what the agent should do, and About Me holds what the reader is, which lies outside the rules.
 
 ---
 
