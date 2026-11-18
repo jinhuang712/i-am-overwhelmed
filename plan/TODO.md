@@ -36,7 +36,7 @@ The owner did not answer on 6 more: understand and not only finish reading · re
 - next: decide which of the owner's points become rules, and how each is worded
 - related: [PROPOSAL.md](../PROPOSAL.md) names the want as "Grasp the main point"
 
-The owner stated 8 points:
+The owner stated 9 points:
 
 - **Sections**: A reply must have sections, and each section must have a heading.
 - **Emoji on a heading**: A heading needs a mark that helps to scan, such as an emoji. The rules ask for emoji to mark meaning and say nothing about headings.
@@ -46,6 +46,7 @@ The owner stated 8 points:
 - **No parallelism**: The owner dislikes all three kinds: parallel clauses in one sentence · the same frame over several sentences · a short antithesis.
 - **Condense or structure**: A row of like things becomes one word that names their kind, or a list. The owner's example is "roast meats" in place of four dishes.
 - **Direction before detail**: A reply states the direction in one sentence, such as "cut the number of test cases and remove the dead ones". A long account of each case has a low density of information.
+- **Short sentences**: A long sentence is tiring in a terminal. It runs to the end of the line and wraps, with many marks of punctuation inside.
 
 The four forms the agent tried:
 
@@ -56,11 +57,12 @@ The four forms the agent tried:
 | One heading and bullets with bold keys | sections are needed |
 | Emoji headings with a table, a drawing and a blockquote | much better, and easy to scan |
 
-3 things are open:
+4 things are open:
 
 - Whether the emoji on a heading shows the kind of section with a fixed meaning. The agent asked and the owner did not answer.
 - Why a reply with two or three sections felt like too many. The agent's guess is the count of blocks against the length, and the owner did not confirm it.
 - Whether "say the upper level" is a stance for the philosophy. The owner asked for it three times that day: the merged wants, the one word for a row of things, and the direction before the detail.
+- How to ask for short sentences. A limit of one comma a bullet was tried on 2026-11-03: most bullets broke it and replies read as cramped. In this session 29% of the agent's 596 sentences ran over 40 characters, and 21% had three or more marks inside.
 
 ---
 
