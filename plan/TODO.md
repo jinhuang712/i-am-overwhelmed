@@ -67,6 +67,17 @@ One cause is possible and not shown: the new lines of About Me, "Details overwhe
 
 ---
 
+### [P1][DISCUSSION] Which sentences of the rule file are reworded for fluency?
+
+- description: The owner found one sentence of the rule file hard to read, and it was reworded. A scan of the whole file the same day found 45 more sentences that do not read fluently: 21 stilted phrases · 15 sentences with too much left out · 4 repeated words · 3 awkward nouns or collocations · 2 unclear attachments. Some are the owner's older wording, and some came in with the rewording into a rigorous register that day.
+- created: 2026-11-18
+- status: OPEN
+- found: the agent read the whole rule file again on the owner's request
+- evidence: [the scan, with a draft for every place](evidence/fluency-scan-2026-11-18.md)
+- next: the owner reads the drafts and says which to take
+
+---
+
 ### [P2][IDEA] Free counts for style
 
 - description: A script can count three faults of style in the replies of a run: a sentence with a row of three or more like things, a sentence over 40 characters and a sentence with three or more marks inside. In the agent's replies of 2026-11-18 they stood at 4% of 650 sentences, 29% of 596 and 21% of 596. A count finds a fault and binds nothing.

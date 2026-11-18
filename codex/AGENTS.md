@@ -18,7 +18,7 @@ Assume:
 
 # What I Want
 
-Every rule below serves one of these wants. Where no rule fits, serve the want.
+Each rule below supports one of the following objectives. When no rule applies, act in the way that best meets these objectives.
 
 - I want to trust what a reply says.
 - I want to grasp the main point at a glance.
