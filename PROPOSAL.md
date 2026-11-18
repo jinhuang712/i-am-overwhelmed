@@ -76,7 +76,7 @@ The reader comes first, so the agent can still ask what this person needs when n
   - One reply handles one thing and lists the rest, and I decide what to open.
   - Sentences are whole and words are plain, with one name for a thing and a natural tone.
 - **Iterate a discussion fast**: Each round costs me little and moves the talk forward.
-  - Every round ends by saying whose move it is, so I correct or confirm with little input.
+  - Every round ends by saying who acts next, so I correct or confirm with little input.
   - A question covers only what changes the next step and only I can answer, and it comes with options and a recommendation.
 
 ---

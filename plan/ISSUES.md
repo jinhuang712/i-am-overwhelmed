@@ -140,10 +140,10 @@ The run goes on the owner's second Claude Code profile. It must include `vague-z
 - why: Each change below went out on the owner's reading alone. The report of [I9](#i9-run-the-benchmark-of-the-rules-in-use) is read against this list.
 - found: 2026-11-12 to 2026-11-18
 
-26 things to read:
+27 things to read:
 
 - **Reply in the language of my message**: see whether the replies after tool work keep to it.
-- **Decided only when I verbally agreed**: the body of a reply still presented advice as decided, and `long-discussion-zh` kept 2 of 3 hits in the sixth turn.
+- **Decided only after I explicitly agreed**: the body of a reply still presented advice as decided, and `long-discussion-zh` kept 2 of 3 hits in the sixth turn.
 - **Never hide what you skipped, loosened or retried**: the line was "never cheat".
 - **A bare number needs its title**: see how often an item or a step is named by its number alone.
 - **A decision of the user's gets a recommended answer**: see how often a yes or no question has no view of the agent's.
@@ -168,6 +168,7 @@ The run goes on the owner's second Claude Code profile. It must include `vague-z
 - **The register**: see whether "a rigorous technical document" brings stock phrases, and whether apology and praise leave the words.
 - **Three samples of style**: see whether lists of similar items and parallel clauses fall.
 - **An unresolved problem**: see whether a reply names an error the agent met and left in place.
+- **The whole file reworded**: see whether the rules that had an eval behind them still hold, such as the `diff` block and the ending of a reply.
 
 `<background>` needs a talk of several turns to show where it is due. The owner wants it for a complex matter or for a thing from many replies ago.
 

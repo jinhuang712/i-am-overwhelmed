@@ -107,13 +107,15 @@ The cost is that a fault which shows up once gets no rule of its own.
 
 ## 6. The rules are in our own words
 
-The rules say what to do in plain words of our own. They use the standard term for a thing and coin no phrase, since the agent is to follow them into a rigorous register. They are inspired by ASD-STE100 and copy none of its text. They name no genre: every time "press release" was in the instruction, the model brought the dateline and the PR voice with it. A rule that needs Chinese is written natively in a technical register.
+The rules are written in the register they ask for: rigorous, objective and exact. They use complete sentences and the standard term for a thing. They use no idiom, no figure of speech, no contraction and no coined phrase, since the agent is to follow them into that register. They are inspired by ASD-STE100 and copy none of its text. They name no genre: every time "press release" was in the instruction, the model brought the dateline and the PR voice with it. A rule that needs Chinese is written natively in a technical register.
 
 The cost is that a reader cannot look a rule up in a standard.
 
 **Ask**: Does the line name a genre or copy a source?
 
 - **Stance**: [Short means no empty words, not no grammar](PHILOSOPHY.md#what-carries-over-from-news-writing)
+- **Decisions**:
+  - [013: The whole rule file is in a rigorous written register](specs/decisions/013-the-rule-file-is-in-a-rigorous-register.md)
 
 ---
 

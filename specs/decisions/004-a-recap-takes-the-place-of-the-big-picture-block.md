@@ -31,4 +31,4 @@ The same day the recap took in four lines that looked back: "say what changed si
 
 ## Consequences
 
-No reply was run under the line. "Say what changed" had an eval behind it, and whether the recap carries it is not measured. The rubric still has a line that asks for the goal, what the user decided and what is open. The rule "Call a thing decided only when I verbally agreed on it" stays and moved under Replies.
+No reply was run under the line. "Say what changed" had an eval behind it, and whether the recap carries it is not measured. The rubric still has a line that asks for the goal, what the user decided and what is open. The rule "Treat a matter as decided only after I have explicitly agreed to it" stays and moved under Replies.

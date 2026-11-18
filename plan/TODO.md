@@ -36,12 +36,13 @@ The owner did not answer on 6 more: understand and not only finish reading · re
 - next: the owner works with the rebuilt rules for some days
 - related: [I13: Bring the rubric in line with the rebuilt rule file](ISSUES.md#i13-bring-the-rubric-in-line-with-the-rebuilt-rule-file)
 
-9 things to watch:
+10 things to watch:
 
 - **Two rules with an eval behind them left**: "Say what changed since the last reply" went from 0 to 3 on one task in an eval. The recap is meant to hold it.
 - **The format of the progress line left**: It read `<done>/<total> - <current title>`.
 - **A discussion is the model's call**: Both trees ask first "Is this a discussion rather than a task?", and a condition of that kind is often judged as not met.
-- **The file grew by 17%**: It has 2,386 words against 2,045.
+- **The file grew by 17%**: It has 2,399 words against 2,045.
+- **The whole file reworded**: On 2026-11-18 the owner had all 73 places that a scan found reworded into a rigorous written register, 76 with three that keep the file consistent. Most were the owner's own wording with an eval behind it, and no eval has seen the new wording.
 - **The sentence after the evidence**: A part may end on one sentence that says what the evidence means. Watch for a sentence that only says the table again.
 - **The samples**: Three samples of faults of style stand at the end of Wordings, some lines away from their rules. Whether they bind is not measured.
 - **The emoji on a heading**: Whether it shows the kind of part with a fixed meaning is open. The agent asked and the owner did not answer.
@@ -63,23 +64,6 @@ The results are in `eval/results/2026-11-18-9b24f7c-vs-796ebf8-sonnet-5-5/`. The
 The owner framed it as four cells on 2026-11-18, by what the agent knows and what it says: knows and says · knows and does not say · does not know and says · does not know and does not say. The omission sits in the second cell. The owner holds that the project rules the reply and not the behavior. The first three cells are matters of the reply, and the fourth is a matter of the work. The owner took one rule for the second cell the same day: "Report every unresolved problem, especially any workarounds." Whether it stops such an omission is not measured.
 
 One cause is possible and not shown: the new lines of About Me, "Details overwhelm me" and "I decide from the direction, not from the details", may lead the agent to leave a side finding out. One run cannot say. The finding is owed to `eval/FINDINGS.md`.
-
----
-
-### [P1][DISCUSSION] Are the older rules reworded into the rigorous register?
-
-- description: The owner holds that the rule file must be written in the register it asks for: rigorous, objective and exact. The lines drafted on 2026-11-18 were reworded. A scan of the whole file the same day found 73 more places in older lines: 42 colloquial verbs or idioms · 13 figures of speech · 11 vague nouns such as "thing" · 5 contractions · 2 colloquial names of a block. The file has 222 lines of content.
-- created: 2026-11-18
-- status: OPEN
-- found: the agent read the whole rule file on the owner's request
-- evidence: [the scan, with a draft for every place](evidence/register-scan-2026-11-18.md)
-- next: the owner says how far the rewording goes
-- related: [6. The rules are in our own words](../DESIGNS.md#6-the-rules-are-in-our-own-words)
-
-2 things weigh against a full rewording:
-
-- **The wording is tested**: Most of the 73 places are the owner's own wording, and past evals show that the wording decides whether a rule is followed.
-- **The plain style was chosen**: The rules were written in plain words after a standard for simplified technical English, and the file guards against officialese as well as against speech.
 
 ---
 
@@ -120,8 +104,8 @@ One cause is possible and not shown: the new lines of About Me, "Details overwhe
 
 3 things are open:
 
-- **A line that picks a tool**: "Don't use built-in question tools" names tools, and no doc gives its reason. The file for Codex says the same as "ask in the message itself".
-- **Lines worded as acts**: "Stop when instructions conflict" · "Doubt every premise the work relies on" · "Never assume a fact only I know" · "take it, then report". Their wording is tested, so a new wording needs a reason.
+- **A line that picks a tool**: "Never use built-in question tools" names tools, and no doc gives its reason. The file for Codex says the same as "ask in the message itself".
+- **Lines worded as acts**: "Stop when instructions conflict" · "Doubt every premise the work relies on" · "Never assume a fact only I know" · "perform it, then report". All four were reworded with the whole file on 2026-11-18 and still name an act.
 - **A new line for About Me**: "I don't follow your work line by line" could be read as leave to act with fewer questions. It is not measured.
 
 ---
