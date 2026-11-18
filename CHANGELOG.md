@@ -8,6 +8,13 @@ The project uses [Semantic Versioning](https://semver.org/).
 
 ---
 
+### README
+
+- Changed: "What you get" names what 0.2.0 adds: headings with an emoji, evidence in the reply and a recap.
+- Changed: the examples and the benchmark say that they come from earlier rules. The benchmark row on headings is gone, since the rules now ask for a heading on every part.
+
+---
+
 ## 0.2.0 — 2026-11-18
 
 ---

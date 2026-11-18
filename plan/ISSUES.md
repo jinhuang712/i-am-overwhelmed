@@ -18,7 +18,8 @@ Issues
 │   ├── I9: Run the benchmark of the rules in use
 │   ├── I10: Read the benchmark against the rule changes no eval has seen
 │   ├── I12: Scan the owner's real sessions against the baseline
-│   └── I13: Bring the rubric in line with the rebuilt rule file
+│   ├── I13: Bring the rubric in line with the rebuilt rule file
+│   └── I14: Record the README's examples and benchmark again under 0.2.0
 └── rules
     └── I11: Find out why drift is not said on Sonnet
 ```
@@ -205,3 +206,12 @@ The run goes on the owner's second Claude Code profile. It must include `vague-z
 - found: the rule change of 2026-11-18
 - touches: [3. A condition sits where it applies](../DESIGNS.md#3-a-condition-sits-where-it-applies)
 - next: `rubric_check.py` must run after the change, so the owner names a budget
+
+---
+
+## I14: Record the README's examples and benchmark again under 0.2.0
+
+- type: eval
+- why: Both READMEs show replies recorded with 0.1.15 and a benchmark of the rules of 2026-11-11. Version 0.2.0 rebuilt and reworded the rules, so a reply of today looks different, and each README now says so in a note.
+- found: the wrap-up of 2026-11-18
+- next: the benchmark of [I9](#i9-run-the-benchmark-of-the-rules-in-use) gives the replies and the numbers

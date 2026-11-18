@@ -128,11 +128,10 @@ One cause is possible and not shown: the new lines of About Me, "Details overwhe
 - next: read real talks under the new branch
 - related: [How does a reply open a discussion?](#p2discussion-how-does-a-reply-open-a-discussion)
 
-3 things are left:
+2 things are left:
 
 - **Few rules that cut**: The agent counted six or seven rules that ask for less, in a rough count.
 - **Rules with no want**: A few rules trace to none of the five wants, such as no line numbers and spaces at a bare URL.
-- **The README's benchmark**: It counts "puts headings on an answer, though nobody asked for more detail" as a fault, at 46% with no plugin and 0% with it. The rules ask for a heading on every part since 0.1.18.
 
 ---
 

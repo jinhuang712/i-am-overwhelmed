@@ -22,7 +22,9 @@ You are tired, you are doing three other things, and you skim. This plugin makes
 ## 🎁 What you get
 
 - **No late surprises**: the reply says now what it did not check and what risk is left.
-- **Easier to skim**: a flow is drawn, a long list gets a summary first, and every reply starts with one heading and each of its parts has one, so a short answer gets only the first.
+- **Easier to scan**: every part of a reply has a heading that begins with an emoji, a flow is drawn, and a long list gets a summary first.
+- **Evidence in the reply**: a claim comes with the excerpt or the output that supports it, so you can decide without opening a file.
+- **Attention on what matters**: every reply after the first opens with the state of the work and what requires your attention.
 - **Asks proactively**: Claude asks you more, to avoid the slop that comes from a guess.
 - **A cleaner context**: every reply Claude prints becomes context for the next turn, so structured replies may keep a long session on track.
 
@@ -86,6 +88,8 @@ Why the rules say what they say: [PHILOSOPHY.md](PHILOSOPHY.md). What every rule
 ## 👀 See it
 
 Real output, same prompt, plugin off and on. Complete and untrimmed. Each example comes from the benchmark of 2026-11-11, on Claude Opus 5.5 (`claude-opus-5-5`). Click **Off** to open the reply without the plugin. The raw files are in [`examples/`](examples/).
+
+> The examples were recorded with version 0.1.15. Since 0.2.0 every part of a reply has a heading with an emoji, and a claim comes with its evidence, so a reply of today looks different.
 
 ### "SQLite or Postgres for a URL shortener, ~100 users?"
 
@@ -255,6 +259,8 @@ Each prompt shows the first of three runs, not the best, so these are samples. [
 
 With the plugin, replies score **82.1** of 100; without it, **77.2**. A judge model scored 57 replies on each side: 19 tasks, 3 runs each, on Claude Opus 5.5, 2026-11-11.
 
+> These numbers measure the rules of 2026-11-11. Version 0.2.0 rebuilt the rules and has no benchmark of its own yet.
+
 The overall score, and the three words it gains most on:
 
 | | Off | On |
@@ -264,7 +270,7 @@ The overall score, and the three words it gains most on:
 | Structured | 68.0 | **85.4** |
 | Focused, Standalone | 83.6 | **89.1** |
 
-Where it improves most, as a share of the 57 replies on each side. Lower is better on the last three rows.
+Where it improves most, as a share of the 57 replies on each side. Lower is better on the last two rows.
 
 | The reply... | Off | On |
 |---|---|---|
@@ -273,7 +279,6 @@ Where it improves most, as a share of the 57 replies on each side. Lower is bett
 | names a risk or a limit that is left | 74% | **91%** |
 | has a light touch of humor | 0% | **26%** |
 | writes a flow as text, with no drawing | 42% | **4%** |
-| puts headings on an answer, though nobody asked for more detail | 46% | **0%** |
 | gives a long list with no summary first | 16% | **0%** |
 
 [`eval/README.md`](eval/README.md) says how the score is made, and [the full report](eval/results/2026-11-11-none-vs-13a35d4-opus-5-5/report.md) has every task.

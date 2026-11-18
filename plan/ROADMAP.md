@@ -54,11 +54,12 @@ The rubric was checked on all 117 lines on 2026-11-13. Since then four lines wer
 
 One benchmark runs the rules of `HEAD` against no plugin, and its report is read against every rule change that went out with no eval.
 
-**Delivers** (3):
+**Delivers** (4):
 
 - [I9: Run the benchmark of the rules in use](ISSUES.md#i9-run-the-benchmark-of-the-rules-in-use)
 - [I10: Read the benchmark against the rule changes no eval has seen](ISSUES.md#i10-read-the-benchmark-against-the-rule-changes-no-eval-has-seen)
 - [I11: Find out why drift is not said on Sonnet](ISSUES.md#i11-find-out-why-drift-is-not-said-on-sonnet)
+- [I14: Record the README's examples and benchmark again under 0.2.0](ISSUES.md#i14-record-the-readmes-examples-and-benchmark-again-under-020)
 
 **Exit criteria** (3):
 
