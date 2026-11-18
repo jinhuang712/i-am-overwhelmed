@@ -8,13 +8,13 @@
 
 ### [P1][DISCUSSION] What does the reader want, in full?
 
-- description: The proposal holds 5 wants since 2026-11-18, with 11 ways to meet them under these. The owner confirmed 4 in words: grasp the main point · attention on the right things · not be flooded with information · iterate a discussion fast. The owner named honesty and pushing back as wants hidden in the rule file, and the agent put them under a fifth want, trust. The owner asked to merge upward, and the agent chose which way sits under which want. The owner has not confirmed that.
+- description: The proposal holds 5 wants since 2026-11-18, with 11 ways to meet them under these. The owner confirmed 4 in words: grasp the main point · attention on the right things · not be flooded with information · iterate a discussion fast. The owner named honesty and pushing back as wants hidden in the rule file, and the agent put them under a fifth want, trust. The owner asked to merge upward, and the agent chose which way sits under which want. The owner called the result much better and named no change.
 - created: 2026-11-18
 - updated: 2026-11-18
 - status: OPEN
 - found: a talk on whether the rules work, seen from linguistics and the psychology of language
-- blocks: the goals that check each want
-- next: the owner confirms or corrects the 5 wants in [PROPOSAL.md](../PROPOSAL.md)
+- blocks: a goal for each want, since 3 of the 5 have none of their own
+- next: give each of the 5 wants in [PROPOSAL.md](../PROPOSAL.md) a goal that checks it
 - related: 4 things stayed open in that talk:
   - "No brain rot" has no stance. The rules lower the reader's effort, and nothing in them asks the reader to think.
   - "Iterate a discussion fast" is a want with no section of the rule file written for it.
