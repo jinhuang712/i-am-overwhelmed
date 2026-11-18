@@ -45,7 +45,7 @@ The new rules run against the last release on the same tasks and are judged blin
 
 **Status**: ⬜
 
-The releases 0.1.16, 0.1.17 and 0.1.18 went out with no run of this check, by the owner's choice. [I9: Run the benchmark of the rules in use](ISSUES.md#i9-run-the-benchmark-of-the-rules-in-use) holds the run.
+The releases 0.1.16, 0.1.17, 0.1.18 and 0.2.0 went out with no run of this check, by the owner's choice. [I9: Run the benchmark of the rules in use](ISSUES.md#i9-run-the-benchmark-of-the-rules-in-use) holds the run.
 
 ---
 

@@ -8,6 +8,10 @@ The project uses [Semantic Versioning](https://semver.org/).
 
 ---
 
+## 0.2.0 — 2026-11-18
+
+---
+
 ### About Me
 
 - Added: four facts about the reader: long lines and long sentences tire me, I don't follow your work line by line, details overwhelm me, and I decide from the direction.

@@ -1,6 +1,6 @@
 # Roadmap
 
-**Current checkpoint**: [CP1: The rubric can be relied on](#cp1-the-rubric-can-be-relied-on). 0.1.18 is released since 2026-11-18, and the rule file rebuilt on that day sits on master unreleased. No eval has seen the rules of the last three releases, and no paid run is under way.
+**Current checkpoint**: [CP1: The rubric can be relied on](#cp1-the-rubric-can-be-relied-on). 0.2.0 is released since 2026-11-18 with the rule file rebuilt and reworded on that day. No eval has seen the rules of the last four releases. The full benchmark and the work on the rubric wait until the owner has budget for them.
 
 The order was agreed on 2026-11-11: first make the rubric something we can rely on, then go back to the rules.
 
@@ -78,7 +78,7 @@ One benchmark runs the rules of `HEAD` against no plugin, and its report is read
 
 **Status**: ⬜
 
-The next release ships rules that ran against the last release first. It carries the rebuilt rule file.
+The next release ships rules that ran against the last release first.
 
 **Exit criteria** (3):
 

@@ -124,7 +124,7 @@ Of the lines that were new on 2026-11-13, C13 is stable on 19 of 20 after one re
 ## I9: Run the benchmark of the rules in use
 
 - type: eval
-- why: No eval has seen the rules of 0.1.16, 0.1.17 and 0.1.18, nor the recap. One run measures them together: the rules of `HEAD` against no plugin.
+- why: No eval has seen the rules of 0.1.16, 0.1.17, 0.1.18 and 0.2.0. The last rebuilt and reworded the whole file. One run measures them together: the rules of `HEAD` against no plugin.
 - found: each release since 2026-11-12 went out with no eval, by the owner's choice
 - how: `python3 eval/eval.py --new HEAD --none --model claude-opus-5-5 --rubric yesno --runs 3 --reuse eval/results/2026-11-11-none-vs-13a35d4-opus-5-5 --budget 20`
 - cost: $11.38 for the 57 new runs and about $5 for judging. The 57 runs with no plugin are reused.

@@ -29,7 +29,7 @@ The owner did not answer on 6 more: understand and not only finish reading · re
 
 ### [P1][DISCUSSION] Does the rebuilt rule file read better in real use?
 
-- description: The owner could not scan the agent's replies on 2026-11-18 and stated 15 points on what a reply needs. The rule file was rebuilt for them the same day, with no eval and not released. The owner's own reading in real sessions is the first check.
+- description: The owner could not scan the agent's replies on 2026-11-18 and stated 15 points on what a reply needs. The rule file was rebuilt for them the same day and released as 0.2.0, with no eval. The owner's own reading in real sessions is the first check.
 - created: 2026-11-18
 - status: OPEN
 - found: a talk in which the agent tried four forms of reply and the owner said how each one read
@@ -154,7 +154,7 @@ One cause is possible and not shown: the new lines of About Me, "Details overwhe
 - updated: 2026-11-18
 - status: HALT
 - blocks: [I1](ISSUES.md#i1-check-the-reworded-rubric-lines) · [I2](ISSUES.md#i2-run-the-red-flag-check-on-its-8-cases) · [I3](ISSUES.md#i3-check-how-steady-the-strong-judge-is) · [I9](ISSUES.md#i9-run-the-benchmark-of-the-rules-in-use)
-- next: the owner names a budget. There is no hurry for one.
+- next: the owner names a budget. On 2026-11-18 the owner put the full benchmark and the correction of the rubric off until there is more budget, and said that the rubric may be confused for now and that neither is urgent.
 
 ---
 
