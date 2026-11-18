@@ -81,7 +81,7 @@ Its rules are about how Claude talks with you, and leave the engineering to Clau
 
 That is one file per tool. For Claude Code it is [`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md), the plugin's output style, with `force-for-plugin` and `keep-coding-instructions`, so it stays after compaction and keeps Claude Code's own instructions. For Codex it is [`codex/AGENTS.md`](codex/AGENTS.md), the same rules without the Claude Code parts.
 
-Why it is built this way, and why the rules are written the way they are: [PHILOSOPHY.md](PHILOSOPHY.md).
+Why the rules say what they say: [PHILOSOPHY.md](PHILOSOPHY.md). What every rule must meet: [DESIGNS.md](DESIGNS.md).
 
 ## 👀 See it
 
@@ -286,6 +286,21 @@ Edit the file, then:
 
 - **Local-path install** (`claude plugin marketplace add /path/to/i-am-overwhelmed`): run `/reload-plugins`.
 - **GitHub install**: push, bump the version in `plugin/.claude-plugin/plugin.json`, run `claude plugin update i-am-overwhelmed@i-am-overwhelmed`.
+
+## 📚 Docs
+
+- [PROPOSAL.md](PROPOSAL.md): why the project exists and who it is for.
+- [PHILOSOPHY.md](PHILOSOPHY.md): the stances behind the rules.
+- [DESIGNS.md](DESIGNS.md): the 7 guidelines a rule must meet.
+- [specs/decisions/](specs/decisions/): the choices in force, one file each.
+- [INSTALL.md](INSTALL.md): every way to install, update and remove it.
+- [CHANGELOG.md](CHANGELOG.md): what changed in each release.
+- [plan/GOALS.md](plan/GOALS.md): what we check and the last results.
+- [plan/ROADMAP.md](plan/ROADMAP.md): where the work stands.
+- [plan/ISSUES.md](plan/ISSUES.md): the agreed work.
+- [plan/TODO.md](plan/TODO.md): the open questions and ideas.
+- [eval/README.md](eval/README.md): the eval tool, with [its findings](eval/FINDINGS.md).
+- [AGENTS.md](AGENTS.md): how the work goes here, for an agent.
 
 ## License
 

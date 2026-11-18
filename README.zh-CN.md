@@ -22,7 +22,7 @@
 ## 🎁 你能得到什么
 
 - **不会事后才发现**：回复当场说清哪些没核实、还剩什么风险。
-- **更容易扫读**：流程画成图，长列表先给总结，简短的回答不加标题。
+- **更容易扫读**：流程画成图，长列表先给总结；每条回复以一个标题开头，每个部分也各有标题，所以简短的回答只有开头那一个。
 - **主动提问**：它问得更多，为的是避免不问就动手带来的 slop。
 - **更干净的上下文**：Claude 打印的每条回复都会成为下一轮的上下文，所以回复有结构，长对话可能更不容易跑偏。
 
@@ -62,7 +62,7 @@ curl -fsSL https://raw.githubusercontent.com/jinhuang712/i-am-overwhelmed/master
 Install i-am-overwhelmed by following https://raw.githubusercontent.com/jinhuang712/i-am-overwhelmed/master/INSTALL.md
 ```
 
-细节、注意事项和卸载方法见 [INSTALL.zh-CN.md](INSTALL.zh-CN.md)。
+细节、注意事项和卸载方法见 [INSTALL.md](INSTALL.md)（英文）。
 
 ## 🧱 它是怎么工作的
 
@@ -81,7 +81,7 @@ Claude Code
 
 每个工具一个文件（英文原文）。Claude Code 用 [`plugin/output-styles/i-am-overwhelmed.md`](plugin/output-styles/i-am-overwhelmed.md)，它是插件的输出风格，带 `force-for-plugin` 和 `keep-coding-instructions`，所以压缩上下文后依然有效，也保留了 Claude Code 自己的指令。Codex 用 [`codex/AGENTS.md`](codex/AGENTS.md)，规则相同，去掉了 Claude Code 专属的部分。
 
-为什么这样设计，以及规则为什么这样写，见 [PHILOSOPHY.md](PHILOSOPHY.md)（英文）。
+规则为什么这样说，见 [PHILOSOPHY.md](PHILOSOPHY.md)；每条规则必须满足什么，见 [DESIGNS.md](DESIGNS.md)（均为英文）。
 
 ## 👀 看效果
 
@@ -390,6 +390,23 @@ Claude Code
 
 - **本地路径安装**（`claude plugin marketplace add /path/to/i-am-overwhelmed`）：运行 `/reload-plugins`。
 - **GitHub 安装**：推送，在 `plugin/.claude-plugin/plugin.json` 里升版本号，运行 `claude plugin update i-am-overwhelmed@i-am-overwhelmed`。
+
+## 📚 文档
+
+文档都是英文。
+
+- [PROPOSAL.md](PROPOSAL.md)：项目为什么存在，为谁而做。
+- [PHILOSOPHY.md](PHILOSOPHY.md)：规则背后的立场。
+- [DESIGNS.md](DESIGNS.md)：每条规则必须满足的 7 条准则。
+- [specs/decisions/](specs/decisions/)：仍然有效的决定，一个文件一条。
+- [INSTALL.md](INSTALL.md)：安装、更新和移除的所有方式。
+- [CHANGELOG.md](CHANGELOG.md)：每个版本改了什么。
+- [plan/GOALS.md](plan/GOALS.md)：我们检查什么，以及最近的结果。
+- [plan/ROADMAP.md](plan/ROADMAP.md)：工作进行到哪一步。
+- [plan/ISSUES.md](plan/ISSUES.md)：已经说定要做的工作。
+- [plan/TODO.md](plan/TODO.md)：还没定的问题和想法。
+- [eval/README.md](eval/README.md)：评测工具，以及[它的发现](eval/FINDINGS.md)。
+- [AGENTS.md](AGENTS.md)：写给 agent 的工作方式。
 
 ## 许可
 
