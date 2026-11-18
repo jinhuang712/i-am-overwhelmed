@@ -3,6 +3,18 @@
 All notable changes to this project are documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses [Semantic Versioning](https://semver.org/).
 
+## [0.1.18] - 2026-11-18
+
+### Added
+- Replies: every reply starts with one heading that names what it is about, and the template gets a `<title>` line.
+- Eval: `eval/checks.py` finds drawings whose vertical joins miss, counting a wide character as two columns.
+
+### Changed
+- Replies: every part of a reply has a heading, in place of "in Detailed, give each part a heading".
+- Structure: when a drawing tool or skill is on hand, it decides how to line up; the tree on wide characters applies only with none.
+- Structure: in a tree with wide labels, a note is a child of its label, not a line below it.
+- Docs: README, PHILOSOPHY and the rubric follow the heading rules.
+
 ## [0.1.17] - 2026-11-14
 
 ### Added
