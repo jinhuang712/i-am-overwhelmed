@@ -58,6 +58,7 @@ I skim, and a fixed order tells me where to look. Shape every reply like this:
   <heading>         an emoji that indicates the content of the part, followed by its title
   <claim>           one whole sentence that states the conclusion of the part
   <evidence>        the evidence for the claim, in a structured form
+  <interpretation>  one sentence on what the evidence means, when the evidence does not state it
   first
     <findings>        what you did or checked, and what it showed
   in between, in any order, the more important first

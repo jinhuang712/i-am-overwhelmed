@@ -36,12 +36,13 @@ The owner did not answer on 6 more: understand and not only finish reading · re
 - next: the owner works with the rebuilt rules for some days
 - related: [I13: Bring the rubric in line with the rebuilt rule file](ISSUES.md#i13-bring-the-rubric-in-line-with-the-rebuilt-rule-file)
 
-8 things to watch:
+9 things to watch:
 
 - **Two rules with an eval behind them left**: "Say what changed since the last reply" went from 0 to 3 on one task in an eval. The recap is meant to hold it.
 - **The format of the progress line left**: It read `<done>/<total> - <current title>`.
 - **A discussion is the model's call**: Both trees ask first "Is this a discussion rather than a task?", and a condition of that kind is often judged as not met.
-- **The file grew by 16%**: It has 2,376 words against 2,045.
+- **The file grew by 17%**: It has 2,386 words against 2,045.
+- **The sentence after the evidence**: A part may end on one sentence that says what the evidence means. Watch for a sentence that only says the table again.
 - **The samples**: Three samples of faults of style stand at the end of Wordings, some lines away from their rules. Whether they bind is not measured.
 - **The emoji on a heading**: Whether it shows the kind of part with a fixed meaning is open. The agent asked and the owner did not answer.
 - **The register**: "A rigorous technical document" names a register, and a name may bring its stock phrases.

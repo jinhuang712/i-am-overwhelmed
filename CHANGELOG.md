@@ -18,7 +18,7 @@ The project uses [Semantic Versioning](https://semver.org/).
 ### Replies
 
 - Changed: every reply after the first opens with a recap of the current state of the work and what requires your attention, in a structured form when the work is long. Before, a reply opened with a 📍 block when the big picture changed: the goal, what you decided and what was open. That block is gone.
-- Changed: every part of a reply is built the same way: a heading with an emoji, one sentence that states its conclusion, and the evidence for it in a structured form.
+- Changed: every part of a reply is built the same way: a heading with an emoji, one sentence that states its conclusion, and the evidence for it in a structured form. One more sentence says what the evidence means, where the evidence does not state it.
 - Changed: the section stands in front of Honesty.
 - Changed: "call a thing decided only when I verbally agreed on it" moves under Replies.
 - Added: a discussion has its own branch. The agent gives one idea at a time with its assessment, and lets you respond.

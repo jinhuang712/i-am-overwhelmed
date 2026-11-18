@@ -14,6 +14,8 @@ The owner could not scan the agent's replies and had to read each one to the end
 
 The template builds every part the same way: a heading that begins with an emoji, one whole sentence that states the conclusion of the part, and the evidence for the claim in a structured form. A structured form is defined once, in Structure: a drawing, a table, a list, a blockquote or a code block. One rule names the moment for an excerpt: each time a claim relies on a source or a result.
 
+A fourth line follows the evidence: one sentence on what the evidence means, when the evidence does not state it. The owner liked a part that runs as a sentence, a structured form and a sentence. The condition keeps the last sentence from saying the table again.
+
 ---
 
 ## Not chosen
@@ -31,4 +33,4 @@ The template builds every part the same way: a heading that begins with an emoji
 
 ## Consequences
 
-The rule file grew from 2,045 words to 2,376, with the samples of the same day. A rule on what a reply must show may make the agent look into more, which the project accepts. No reply was run under the new template.
+The rule file grew from 2,045 words to 2,386, with the samples of the same day. A rule on what a reply must show may make the agent look into more, which the project accepts. No reply was run under the new template.
