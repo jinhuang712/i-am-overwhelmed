@@ -66,6 +66,23 @@ One cause is possible and not shown: the new lines of About Me, "Details overwhe
 
 ---
 
+### [P1][DISCUSSION] Are the older rules reworded into the rigorous register?
+
+- description: The owner holds that the rule file must be written in the register it asks for: rigorous, objective and exact. The lines drafted on 2026-11-18 were reworded. A scan of the whole file the same day found 73 more places in older lines: 42 colloquial verbs or idioms · 13 figures of speech · 11 vague nouns such as "thing" · 5 contractions · 2 colloquial names of a block. The file has 222 lines of content.
+- created: 2026-11-18
+- status: OPEN
+- found: the agent read the whole rule file on the owner's request
+- evidence: [the scan, with a draft for every place](evidence/register-scan-2026-11-18.md)
+- next: the owner says how far the rewording goes
+- related: [6. The rules are in our own words](../DESIGNS.md#6-the-rules-are-in-our-own-words)
+
+2 things weigh against a full rewording:
+
+- **The wording is tested**: Most of the 73 places are the owner's own wording, and past evals show that the wording decides whether a rule is followed.
+- **The plain style was chosen**: The rules were written in plain words after a standard for simplified technical English, and the file guards against officialese as well as against speech.
+
+---
+
 ### [P2][IDEA] Free counts for style
 
 - description: A script can count three faults of style in the replies of a run: a sentence with a row of three or more like things, a sentence over 40 characters and a sentence with three or more marks inside. In the agent's replies of 2026-11-18 they stood at 4% of 650 sentences, 29% of 596 and 21% of 596. A count finds a fault and binds nothing.
