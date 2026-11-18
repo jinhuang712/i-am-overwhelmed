@@ -8,10 +8,43 @@ The project uses [Semantic Versioning](https://semver.org/).
 
 ---
 
+### About Me
+
+- Added: four facts about the reader: long lines and long sentences tire me, I don't follow your work line by line, details overwhelm me, and I decide from the direction.
+- Added: a part "What I Want" names the five wants that every rule serves.
+
+---
+
 ### Replies
 
-- Changed: every reply after the first opens with a recap of what your attention should be on now. Before, a reply opened with a 📍 block when the big picture changed: the goal, what you decided and what was open. That block is gone.
+- Changed: every reply after the first opens with a recap of where the work stands and what your attention should be on now, drawn when the work is long. Before, a reply opened with a 📍 block when the big picture changed: the goal, what you decided and what was open. That block is gone.
+- Changed: every part of a reply is built the same way: a heading with an emoji, one sentence that gives the direction, and the evidence it rests on.
+- Changed: the section stands in front of Honesty.
 - Changed: "call a thing decided only when I verbally agreed on it" moves under Replies.
+- Added: a talk has its own branch. The agent gives one thought at a time with its view, and leaves the next word to you.
+- Removed: "say what changed since the last reply", "say again what I need from an earlier reply", and the background and progress lines of the template. The recap holds them now.
+
+---
+
+### Structure
+
+- Added: every heading opens with an emoji that tells what it holds.
+- Added: the reply quotes the text a claim rests on, and shows the output a claim rests on.
+
+---
+
+### Wordings
+
+- Added: the register of a rigorous technical document, one thing in one sentence, and one word for a row of like things.
+- Added: no clause nested inside a clause, and no apology or praise in words.
+- Changed: the rule against parallel clauses covers parallel sentences too.
+
+---
+
+### Asking
+
+- Added: every question stands on its own.
+- Changed: the tree that ends a reply asks first whether we are talking a thing through.
 
 ---
 
@@ -26,6 +59,7 @@ The project uses [Semantic Versioning](https://semver.org/).
 - Changed: the docs follow one layout: a proposal, designs, decisions, and a plan folder with goals, a roadmap, issues and a todo. `CLAUDE.md` loads `AGENTS.md`.
 - Removed: `INSTALL.zh-CN.md`. The Chinese README links `INSTALL.md`.
 - Added: `PHILOSOPHY.md` says how a rule on the reply changes what the agent does, with a count of tool calls from the benchmark.
+- Added: `PHILOSOPHY.md` says that structure carries the other wants, and that the direction comes before the detail.
 
 ---
 

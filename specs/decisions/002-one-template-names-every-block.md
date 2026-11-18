@@ -12,7 +12,7 @@ Five rules each named a situation of their own: a failed premise, going through 
 
 ## The choice
 
-The shape of a reply is one template of 22 lines. It names each block, says what the block holds and says when it is due: a title, a failed premise, a brief, the lead, the background, the parts by kind, a note and the ending.
+The shape of a reply is one template. It names each block, says what the block holds and says when it is due: a title, a failed premise, a brief, the lead, the parts by kind, a note and the ending.
 
 The line `<definition>` holds how the agent reads the goal, the scope and what done means. It is due when the thing is not defined.
 

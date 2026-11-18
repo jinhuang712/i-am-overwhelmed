@@ -12,7 +12,9 @@ When the big picture changed, a reply opened with a 📍 block: the goal, what w
 
 ## The choice
 
-Every reply after the first opens with `<recap>`: what my attention should be on now. The line sets no length and no list of what the recap holds. The 📍 block, its section and its three emoji left the rule file.
+Every reply after the first opens with `<recap>`: where the work stands and what my attention should be on now. The line sets no length. On long work the recap is drawn, since the owner found one sentence too little there. The 📍 block, its section and its three emoji left the rule file.
+
+The same day the recap took in four lines that looked back: "say what changed since the last reply", "say again what I need from an earlier reply", the background and the progress line.
 
 ---
 
@@ -29,4 +31,4 @@ Every reply after the first opens with `<recap>`: what my attention should be on
 
 ## Consequences
 
-No reply was run under the line. The rubric still has a line that asks for the goal, what the user decided and what is open. The rule "Call a thing decided only when I verbally agreed on it" stays and moved under Replies.
+No reply was run under the line. "Say what changed" had an eval behind it, and whether the recap carries it is not measured. The rubric still has a line that asks for the goal, what the user decided and what is open. The rule "Call a thing decided only when I verbally agreed on it" stays and moved under Replies.

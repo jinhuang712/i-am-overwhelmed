@@ -1,6 +1,6 @@
 # Roadmap
 
-**Current checkpoint**: [CP1: The rubric can be relied on](#cp1-the-rubric-can-be-relied-on). 0.1.18 is released since 2026-11-18, and the recap change sits on master unreleased. No eval has seen the rules of the last three releases, and no paid run is under way.
+**Current checkpoint**: [CP1: The rubric can be relied on](#cp1-the-rubric-can-be-relied-on). 0.1.18 is released since 2026-11-18, and the rule file rebuilt on that day sits on master unreleased. No eval has seen the rules of the last three releases, and no paid run is under way.
 
 The order was agreed on 2026-11-11: first make the rubric something we can rely on, then go back to the rules.
 
@@ -22,9 +22,9 @@ Roadmap
 
 **Status**: 🟨
 
-The rubric was checked on all 117 lines on 2026-11-13. Since then four lines were reworded, the recap changed what one line asks for, and ten lines still waver. The paid checks wait for a budget.
+The rubric was checked on all 117 lines on 2026-11-13. Since then four lines were reworded, the rule file was rebuilt, and ten lines still waver. The paid checks wait for a budget.
 
-**Delivers** (8):
+**Delivers** (9):
 
 - [I1: Check the reworded rubric lines](ISSUES.md#i1-check-the-reworded-rubric-lines)
 - [I2: Run the red flag check on its 8 cases](ISSUES.md#i2-run-the-red-flag-check-on-its-8-cases)
@@ -34,6 +34,7 @@ The rubric was checked on all 117 lines on 2026-11-13. Since then four lines wer
 - [I6: Bring the rubric in line with the recap](ISSUES.md#i6-bring-the-rubric-in-line-with-the-recap)
 - [I7: Write a red flag for a reply in another language](ISSUES.md#i7-write-a-red-flag-for-a-reply-in-another-language)
 - [I8: Make the bar of the table of lines a share of the replies](ISSUES.md#i8-make-the-bar-of-the-table-of-lines-a-share-of-the-replies)
+- [I13: Bring the rubric in line with the rebuilt rule file](ISSUES.md#i13-bring-the-rubric-in-line-with-the-rebuilt-rule-file)
 
 **Exit criteria** (1):
 
@@ -77,7 +78,7 @@ One benchmark runs the rules of `HEAD` against no plugin, and its report is read
 
 **Status**: ⬜
 
-The next release ships rules that ran against the last release first. It carries the recap.
+The next release ships rules that ran against the last release first. It carries the rebuilt rule file.
 
 **Exit criteria** (3):
 

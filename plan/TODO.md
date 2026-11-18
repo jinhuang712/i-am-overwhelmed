@@ -17,60 +17,53 @@
 - next: give each of the 5 wants in [PROPOSAL.md](../PROPOSAL.md) a goal that checks it
 - related: 4 things stayed open in that talk:
   - "No brain rot" has no stance. The rules lower the reader's effort, and nothing in them asks the reader to think.
-  - "Iterate a discussion fast" is a want with no section of the rule file written for it.
+  - The rule file names the 5 wants since 2026-11-18. "Iterate a discussion fast" got a branch for a talk in two trees and no section of its own.
   - No goal measures the reader: what they understood, how fast they decided or what they kept.
   - The owner asked for wants in precise written terms and not in a spoken register.
 
-The owner turned down 6 candidates, so they are raised again only with a new fact: the decision stays with me · the agent shows it understood me · say a thing once · pick up after a break · readable on a phone · a claim that is cheap to check. Later that day the owner asked for evidence inside the reply, in the owner's own words, and that point stands under "What lets the reader scan a reply?".
+The owner turned down 6 candidates, so they are raised again only with a new fact: the decision stays with me · the agent shows it understood me · say a thing once · pick up after a break · readable on a phone · a claim that is cheap to check. Later that day the owner asked for evidence inside the reply, in the owner's own words, and it became two rules on evidence.
 
 The owner did not answer on 6 more: understand and not only finish reading · remember the conclusion later · see what I had not thought of · have a vague thought made clear · no unfinished thing held in mind · speak loosely and be understood.
 
 ---
 
-### [P1][DISCUSSION] What lets the reader scan a reply?
+### [P1][DISCUSSION] Does the rebuilt rule file read better in real use?
 
-- description: The owner could not scan the agent's replies on 2026-11-18 and had to read each one to the end. In the talk that followed the owner stated what a reply needs. No rule was changed.
+- description: The owner could not scan the agent's replies on 2026-11-18 and stated 15 points on what a reply needs. The rule file was rebuilt for them the same day, with no eval and not released. The owner's own reading in real sessions is the first check.
 - created: 2026-11-18
 - status: OPEN
 - found: a talk in which the agent tried four forms of reply and the owner said how each one read
-- next: the owner called the talk done on 2026-11-18 and asked how to land it. The agent drafted the rule lines, and the owner has to settle their wording.
-- related: [PROPOSAL.md](../PROPOSAL.md) names the want as "Grasp the main point"
+- next: the owner works with the rebuilt rules for some days
+- related: [I13: Bring the rubric in line with the rebuilt rule file](ISSUES.md#i13-bring-the-rubric-in-line-with-the-rebuilt-rule-file)
 
-The owner stated 15 points:
+7 things to watch:
 
-- **Sections**: A reply must have sections, and each section must have a heading.
-- **Emoji on a heading**: A heading needs a mark that helps to scan, such as an emoji. The rules ask for emoji to mark meaning and say nothing about headings.
-- **Drawings and tables**: Diagrams, tables and other structured forms matter.
-- **Blockquotes**: A blockquote for what is not the key information makes the rest stand out.
-- **Structure carries the rest**: Honesty and pushing back are hard to see without structure, since reading prose is tiring.
-- **No parallelism**: The owner dislikes all three kinds: parallel clauses in one sentence · the same frame over several sentences · a short antithesis.
-- **Condense or structure**: A row of like things becomes one word that names their kind, or a list. The owner's example is "roast meats" in place of four dishes.
-- **Direction before detail**: A reply states the direction in one sentence, such as "cut the number of test cases and remove the dead ones". A long account of each case has a low density of information.
-- **Short sentences**: A long sentence is tiring in a terminal. It runs to the end of the line and wraps, with many marks of punctuation inside.
-- **Evidence in the reply**: A decision maker needs the evidence, so the original text and the output belong in the reply as a blockquote or a code block. The diff is done well and is far from enough.
-- **Density over length**: Length is no problem and the count of lines is no great problem. The largest problem is a low density of information.
-- **A recap that grows with the task**: On a very long task one sentence is not enough. The recap then shows where the task stands, such as its progress, in a structured form.
-- **No hard sentences**: A sentence with a clause nested inside it is as tiring as a long one.
-- **A rigorous written register**: The agent's style is still close to speech and carries a tone of deference. The owner wants the written register of a rigorous large company. Weaker models show the fault more, and they correct it when told.
-- **A question that stands on its own**: A question that names its options by letter and does not say again what they are sends the owner back up the talk, where the thing is hard to find in a long piece of work.
+- **Two rules with an eval behind them left**: "Say what changed since the last reply" went from 0 to 3 on one task in an eval. The recap is meant to hold it.
+- **The format of the progress line left**: It read `<done>/<total> - <current title>`.
+- **A talk is the model's call**: Both trees ask first "Are we talking a thing through?", and a condition of that kind is often judged as not met.
+- **The file grew by 12%**: It has 2,298 words against 2,045.
+- **The emoji on a heading**: Whether it shows the kind of part with a fixed meaning is open. The agent asked and the owner did not answer.
+- **The register**: "A rigorous technical document" names a register, and a name may bring its stock phrases.
+- **Blocks against length**: A reply with two or three sections once felt like too many. The agent's guess is the count of blocks against the length, and the owner did not confirm it.
 
-The four forms the agent tried:
+---
 
-| Form | The owner's reading |
-|---|---|
-| Four to five headed sections with a table and three options | "有点懵" |
-| One heading and paragraphs | like an essay |
-| One heading and bullets with bold keys | sections are needed |
-| Emoji headings with a table, a drawing and a blockquote | much better, and easy to scan |
+### [P1][DISCUSSION] May a style rule carry an example?
 
-6 things are open:
+- description: Style rules are the least followed. The rule against parallel clauses was broken in 14 of 20 replies, with and without the plugin, and the agent broke it on 2026-11-18 in the reply that drafted its new wording. A told fault is put right at once, since the telling is near and comes with the case. The owner's way is that a rule carries no example.
+- created: 2026-11-18
+- status: OPEN
+- found: the agent raised it with that new fact, and the owner did not answer
+- next: the owner says whether a style rule may carry one pair of before and after
 
-- Whether the emoji on a heading shows the kind of section with a fixed meaning. The agent asked and the owner did not answer.
-- Why a reply with two or three sections felt like too many. The agent's guess is the count of blocks against the length, and the owner did not confirm it.
-- Whether "say the upper level" is a stance for the philosophy. The owner asked for it three times that day: the merged wants, the one word for a row of things, and the direction before the detail.
-- How to ask for short sentences. A limit of one comma a bullet was tried on 2026-11-03: most bullets broke it and replies read as cramped. In this session 29% of the agent's 596 sentences ran over 40 characters, and 21% had three or more marks inside.
-- How to ask for evidence. Of the rules on quotes, code blocks and diffs, only the diff rule says that a thing must be shown and names its moment: "each time you changed code or text". The others say how to set a thing that is shown.
-- How to ask for the register and name no genre. Each time "press release" was in the instruction, the model brought the dateline and the PR voice with it.
+---
+
+### [P2][IDEA] Free counts for style
+
+- description: A script can count three faults of style in the replies of a run: a sentence with a row of three or more like things, a sentence over 40 characters and a sentence with three or more marks inside. In the agent's replies of 2026-11-18 they stood at 4% of 650 sentences, 29% of 596 and 21% of 596. A count finds a fault and binds nothing.
+- created: 2026-11-18
+- next: add the counts to the measures of the report
+- related: a limit of one comma a bullet was tried on 2026-11-03, and most bullets broke it
 
 ---
 
@@ -88,8 +81,6 @@ The four forms the agent tried:
 - **A forced style belongs to a plugin**: Claude Code's docs say `force-for-plugin` applies a style "whenever the plugin is enabled" and overrides the user's choice. They do not say what happens when one plugin forces two styles.
 - **Four files to keep in step**: Each edition has an output style and a file for Codex. A test compares the two English files today, and a translation cannot be compared line by line.
 - **The evidence is on the English rules**: Every eval ran the English rules, and 17 of 19 tasks are in Chinese.
-
-The owner also weighed 3 lines for About Me. "Long lines and long sentences tire me" stands without the word "terminal". The owner turned down the lines on deciding with evidence and on density: they say what the agent should do, and About Me holds what the reader is, which lies outside the rules. The owner also sent "I'm the one who decides" to the tagged rules. The owner then chose two lines for About Me: "Long lines and long sentences tire me." and "I don't follow your work line by line." The owner asked for a third, on the lines of "Details overwhelm me": too much detail keeps the owner from deciding, and a direction is easier to decide on, since the owner knows their own goals, non-goals, thoughts and wants best. The owner chose two lines for it: "Details overwhelm me." and "I decide from the direction, not from the details." About Me so gains 4 lines. The owner then asked whether the talk had drifted from the project, which is about the quality of a reply and not about how the model works.
 
 ---
 
@@ -118,24 +109,21 @@ The owner also weighed 3 lines for About Me. "Long lines and long sentences tire
 
 ---
 
-### [P1][DISCUSSION] Do the rules fit a talk as well as a report?
+### [P2][DISCUSSION] What else keeps the rules from fitting a talk?
 
-- description: The owner asked the agent how it sees the rules as their owner. The agent's view is that the rules make a good standard for a report and a weak one for a talk. The owner called the view mostly right.
+- description: The agent's view as owner is that the rules make a good standard for a report and a weak one for a talk, and the owner called it mostly right. On 2026-11-18 both trees got a first question, "Are we talking a thing through?", and four lines that looked back became one recap.
 - created: 2026-11-18
+- updated: 2026-11-18
 - status: OPEN
 - found: three times that day the owner had to say "let us discuss first" while the agent kept ending on options and on a next step
-- next: discuss it after the structure of a reply is settled
+- next: read real talks under the new branch
 - related: [How does a reply open a discussion?](#p2discussion-how-does-a-reply-open-a-discussion)
 
-The agent named 5 things, and none is agreed in detail:
+3 things are left:
 
-- **No branch for a talk**: The tree that ends a reply has "the step is clear" and "it needs my answer". It has no way to stay in a talk.
-- **Coverage by content only**: The tree on what one reply covers looks at how complex the content is, and not at whether the reader waits for a result or thinks a thing through.
-- **Four ways to look back**: The recap, "say what changed", "say again what I need" and the background all look back.
 - **Few rules that cut**: The agent counted six or seven rules that ask for less, in a rough count.
 - **Rules with no want**: A few rules trace to none of the five wants, such as no line numbers and spaces at a bare URL.
-
-The README's benchmark still counts "puts headings on an answer, though nobody asked for more detail" as a fault, at 46% with no plugin and 0% with it. The rules ask for a heading on every part since 0.1.18.
+- **The README's benchmark**: It counts "puts headings on an answer, though nobody asked for more detail" as a fault, at 46% with no plugin and 0% with it. The rules ask for a heading on every part since 0.1.18.
 
 ---
 

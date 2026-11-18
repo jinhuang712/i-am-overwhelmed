@@ -10,7 +10,7 @@ Some lines below are tested and some are beliefs. A belief is marked with "we be
 
 **The reader comes before any rule.**
 
-The rules serve one reader, with 7 traits:
+The rules serve one reader, with 11 traits:
 
 - They are tired or overloaded.
 - They are doing other things at the same time.
@@ -19,6 +19,10 @@ The rules serve one reader, with 7 traits:
 - They lose track of the bigger picture.
 - They forget what the last reply said.
 - They take in a drawing faster than a list.
+- Long lines and long sentences tire them.
+- They do not follow the agent's work line by line.
+- Details overwhelm them.
+- They decide from the direction, not from the details.
 
 The rule file starts with this reader, before any rule. A rule covers the cases we thought of. The reader covers the rest: when no rule fits, the model can still ask what this person needs.
 
@@ -120,7 +124,7 @@ the model prints a reply
 
 **A recap is attention, not a ledger.**
 
-Every reply after the first opens with a recap: what my attention should be on now.
+Every reply after the first opens with a recap: where the work stands and what my attention should be on now.
 
 ```
 a large piece of work               the main line, in every recap
@@ -129,13 +133,49 @@ a large piece of work               the main line, in every recap
 └── a small thing that is done      dropped
 ```
 
-5 things hold:
+6 things hold:
 
+- **A recap grows with the work**: one sentence is too little on a long task, so the recap is drawn then.
 - **A ledger grows, and attention moves**: a list of the goal with what was decided and what is open grows with the talk, and much of it is not what I am on.
 - **The books belong in a file**: what is decided and what is open is already in the context, and a file keeps it better than a reply does.
 - **Writing that file is how the agent works**: the rules leave it alone.
 - **The rule says what the recap is for and no more**: each named thing invites a line that fills it, so the model decides what is live.
 - **We have not measured it**: the owner chose it from use, and no reply was run under the line.
+
+---
+
+## What carries the other wants?
+
+**Structure carries the rest.**
+
+Honesty and pushing back do their work only when I can see where they are. In prose I have to read every line to find the one guess or the one objection, and reading prose is tiring. A heading with a mark, a drawing, a table and a blockquote each tell me what a line is before I read it.
+
+The owner read four forms of the same kind of reply on 2026-11-18:
+
+| Form | The owner's reading |
+|---|---|
+| Four to five headed sections with a table and three options | too much at once |
+| One heading and paragraphs | like an essay |
+| One heading and bullets with bold keys | sections are needed |
+| Headings with an emoji beside a table, a drawing and a blockquote | easy to scan |
+
+So most of the rules are about form. Form is the carrier of the other wants and not a want of its own.
+
+---
+
+## What does a decision need?
+
+**The upper level comes first: the direction before the detail, and the kind before its members.**
+
+I decide, and I do not follow the agent's work line by line. A long account of each case leaves the summing up to me, and its density is low. One sentence that gives the direction does that work for me, such as "cut the number of test cases and remove the dead ones".
+
+3 things follow:
+
+- **Density counts, and length does not**: a long reply is fine when every line carries something.
+- **A row of like things takes one word or a list**: "roast meats" says what four dishes in a row say, and a list holds the members when I need each one.
+- **Evidence is not detail**: detail is the story of the work, and evidence is the few lines a claim rests on.
+
+So a claim comes with its evidence, and the story of the work stays out.
 
 ---
 

@@ -70,6 +70,8 @@ The cost is that a condition about the state of the talk, such as "we drift from
   - [002: One template names every block of a reply](specs/decisions/002-one-template-names-every-block.md)
   - [003: A tree decides what one reply covers](specs/decisions/003-a-tree-decides-what-one-reply-covers.md)
   - [004: A recap takes the place of the big picture block](specs/decisions/004-a-recap-takes-the-place-of-the-big-picture-block.md)
+  - [008: Every part of a reply is built as a heading, a claim and its evidence](specs/decisions/008-every-part-is-a-heading-a-claim-and-its-evidence.md)
+  - [009: A talk has its own branch in two trees](specs/decisions/009-a-talk-has-its-own-branch.md)
 
 ---
 
@@ -94,6 +96,8 @@ The cost is that a fault which shows up once gets no rule of its own.
 **Ask**: Which line that exists can hold it?
 
 - **Stance**: [A reply is also context](PHILOSOPHY.md#who-else-reads-a-reply)
+- **Decisions**:
+  - [010: The rule file names the reader's five wants](specs/decisions/010-the-rule-file-names-five-wants.md)
 
 ---
 
